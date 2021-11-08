@@ -51,6 +51,7 @@
 #include "Gameplay/Components/JumpBehaviour.h"
 #include "Gameplay/Components/RenderComponent.h"
 #include "Gameplay/Components/MaterialSwapBehaviour.h"
+#include "Gameplay/Components/MoveBehaviour.h"
 
 // Physics
 #include "Gameplay/Physics/RigidBody.h"
@@ -253,6 +254,7 @@ int main() {
 	ComponentManager::RegisterType<MaterialSwapBehaviour>();
 	ComponentManager::RegisterType<TriggerVolumeEnterBehaviour>();
 	ComponentManager::RegisterType<SimpleCameraControl>();
+	ComponentManager::RegisterType<MoveBehaviour>();
 
 	// GL states, we'll enable depth testing and backface fulling
 	glEnable(GL_DEPTH_TEST);
@@ -368,6 +370,8 @@ int main() {
 			// Attach a plane collider that extends infinitely along the X/Y axis
 			RigidBody::Sptr physics = plane->Add<RigidBody>(/*static by default*/);
 			physics->AddCollider(BoxCollider::Create(glm::vec3(50.0f, 50.0f, 1.0f)))->SetPosition({0,0,-1});
+
+
 		}
 
 		
@@ -388,6 +392,15 @@ int main() {
 			// Add a dynamic rigid body to this monkey
 			RigidBody::Sptr physics = monkey1->Add<RigidBody>(RigidBodyType::Dynamic);
 			physics->AddCollider(ConvexMeshCollider::Create());
+
+			//MoveBehaviour::Sptr behaviour = monkey1->Add<MoveBehaviour>();
+			//behaviour->MoveSpeed = glm::vec3(1.0f, 0.0f, 0.0f);
+
+			MaterialSwapBehaviour::Sptr matSwap = monkey1->Add<MaterialSwapBehaviour>();
+			matSwap->EnterMaterial = monkeyMaterial;
+			matSwap->ExitMaterial = boxMaterial;
+			matSwap->SetRenderer(renderer);
+
 		}
 
 		GameObject::Sptr monkey2 = scene->CreateGameObject("Complex Object");
@@ -402,8 +415,13 @@ int main() {
 			renderer->SetMaterial(boxMaterial);
 
 			// This is an example of attaching a component and setting some parameters
-			RotatingBehaviour::Sptr behaviour = monkey2->Add<RotatingBehaviour>();
-			behaviour->RotationSpeed = glm::vec3(0.0f, 0.0f, -90.0f);
+			//MoveBehaviour::Sptr behaviour = monkey2->Add<MoveBehaviour>();
+			//behaviour->MoveSpeed = glm::vec3(1.0f, 0.0f, 0.0f);
+
+			TriggerVolume::Sptr volume = monkey2->Add<TriggerVolume>();
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0f, 1.0f, 1.0f));
+			collider->SetPosition(glm::vec3(0.0f, 0.0f, 0.5f));
+			volume->AddCollider(collider);
 		}
 
 		// Kinematic rigid bodies are those controlled by some outside controller

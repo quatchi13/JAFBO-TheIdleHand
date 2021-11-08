@@ -11,9 +11,18 @@ MaterialSwapBehaviour::MaterialSwapBehaviour() :
 MaterialSwapBehaviour::~MaterialSwapBehaviour() = default;
 
 void MaterialSwapBehaviour::OnEnteredTrigger(const Gameplay::Physics::TriggerVolume::Sptr& trigger) {
-	if (_renderer && EnterMaterial) {
-		_renderer->SetMaterial(EnterMaterial);
-	}
+
+		if (trigger->GetGameObject()->Has<RenderComponent>())
+		{
+			
+			trigger->GetGameObject()->Get<RenderComponent>()->SetMaterial(EnterMaterial);
+		}
+		
+		if (_renderer && EnterMaterial) {
+			_renderer->SetMaterial(EnterMaterial);
+		}
+	
+	
 	LOG_INFO("Entered trigger: {}", trigger->GetGameObject()->Name);
 }
 
@@ -29,6 +38,11 @@ void MaterialSwapBehaviour::Awake() {
 }
 
 void MaterialSwapBehaviour::RenderImGui() { }
+
+void MaterialSwapBehaviour::SetRenderer(RenderComponent::Sptr render)
+{
+	_renderer = render;
+}
 
 nlohmann::json MaterialSwapBehaviour::ToJson() const {
 	return {

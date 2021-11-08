@@ -17,18 +17,19 @@ public:
 
 	Gameplay::Material::Sptr        EnterMaterial;
 	Gameplay::Material::Sptr        ExitMaterial;
-
+	
 	// Inherited from IComponent
 
 	virtual void OnEnteredTrigger(const std::shared_ptr<Gameplay::Physics::TriggerVolume>& trigger) override;
 	virtual void OnLeavingTrigger(const std::shared_ptr<Gameplay::Physics::TriggerVolume>& trigger) override;
 	virtual void Awake() override;
 	virtual void RenderImGui() override;
+	virtual void SetRenderer(RenderComponent::Sptr);
 	virtual nlohmann::json ToJson() const override;
 	static MaterialSwapBehaviour::Sptr FromJson(const nlohmann::json& blob);
 	MAKE_TYPENAME(MaterialSwapBehaviour);
 
 protected:
-
 	RenderComponent::Sptr _renderer;
+	
 };

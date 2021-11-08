@@ -10,6 +10,7 @@ TriggerVolumeEnterBehaviour::~TriggerVolumeEnterBehaviour() = default;
 
 void TriggerVolumeEnterBehaviour::OnTriggerVolumeEntered(const std::shared_ptr<Gameplay::Physics::RigidBody>& body)
 {
+	body->GetGameObject()->Get<RenderComponent>();
 	LOG_INFO("Body has entered our trigger volume: {}", body->GetGameObject()->Name);
 	_playerInTrigger = true;
 }
