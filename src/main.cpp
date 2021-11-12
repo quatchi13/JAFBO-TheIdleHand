@@ -52,7 +52,9 @@
 #include "Gameplay/Components/RenderComponent.h"
 #include "Gameplay/Components/MaterialSwapBehaviour.h"
 #include "Gameplay/Components/MoveBehaviour.h"
-
+#include "Gameplay/Components/InteractableObjectBehaviour.h"
+#include "Gameplay/Components/SkinManager.h"
+#include "Gameplay/Components/CharacterController.h"
 
 
 
@@ -258,7 +260,9 @@ int main() {
 	ComponentManager::RegisterType<TriggerVolumeEnterBehaviour>();
 	ComponentManager::RegisterType<SimpleCameraControl>();
 	ComponentManager::RegisterType<MoveBehaviour>();
-
+	ComponentManager::RegisterType<InteractableObjectBehaviour>();
+	ComponentManager::RegisterType<SkinManager>();
+	ComponentManager::RegisterType<CharacterController>();
 
 	
 
@@ -293,12 +297,12 @@ int main() {
 		});
 
 		//Meshes
-		MeshResource::Sptr BedMesh = ResourceManager::CreateAsset<MeshResource>("Bed.obj");
-		MeshResource::Sptr darkLampMesh = ResourceManager::CreateAsset<MeshResource>("DarkLamp.obj");
-		MeshResource::Sptr lightLampMesh = ResourceManager::CreateAsset<MeshResource>("LightLamp.obj");
-		MeshResource::Sptr monkeyMesh = ResourceManager::CreateAsset<MeshResource>("Monkey.obj");
-		MeshResource::Sptr nightstandMesh = ResourceManager::CreateAsset<MeshResource>("Nightstand.obj");
-		
+		MeshResource::Sptr BedMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Bed.obj");
+		MeshResource::Sptr darkLampMesh = ResourceManager::CreateAsset<MeshResource>("meshes/DarkLamp.obj");
+		MeshResource::Sptr lightLampMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LightLamp.obj");
+		MeshResource::Sptr monkeyMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Monkey.obj");
+		MeshResource::Sptr nightstandMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Nightstand.obj");
+		MeshResource::Sptr theHandMesh = ResourceManager::CreateAsset<MeshResource>("meshes/hand.obj");
 		
 
 		//Textures
@@ -313,6 +317,7 @@ int main() {
 		Texture2D::Sptr    monkeyTex = ResourceManager::CreateAsset<Texture2D>("textures/monkey-uvMap.png");
 		Texture2D::Sptr    pentagramPosterTex = ResourceManager::CreateAsset<Texture2D>("textures/PentagramPoster.png");
 		Texture2D::Sptr    rightWallTex = ResourceManager::CreateAsset<Texture2D>("textures/RightWall.png");
+		Texture2D::Sptr    rewardSkin = ResourceManager::CreateAsset<Texture2D>("textures/forggyBonds.png");
 
 		// Here we'll load in the cubemap, as well as a special shader to handle drawing the skybox
 		TextureCube::Sptr testCubemap = ResourceManager::CreateAsset<TextureCube>("cubemaps/ocean/ocean.jpg");
@@ -395,12 +400,12 @@ int main() {
 			missingMaterial->Shininess = 0.1f;
 		}
 
-		Material::Sptr monkeyMaterial = ResourceManager::CreateAsset<Material>();
+		Material::Sptr rewardMaterial = ResourceManager::CreateAsset<Material>();
 		{
-			monkeyMaterial->Name = "Monkey";
-			monkeyMaterial->MatShader = reflectiveShader;
-			monkeyMaterial->Texture = monkeyTex;
-			monkeyMaterial->Shininess = 0.5f;
+			rewardMaterial->Name = "Reward Material";
+			rewardMaterial->MatShader = reflectiveShader;
+			rewardMaterial->Texture = rewardSkin;
+			rewardMaterial->Shininess = 0.5f;
 		}
 
 		Material::Sptr pentagramPosterMaterial = ResourceManager::CreateAsset<Material>();
@@ -440,7 +445,7 @@ int main() {
 		GameObject::Sptr camera = scene->CreateGameObject("Main Camera");
 		{
 			camera->SetPostion(glm::vec3(8.0f, 8.0f, 15.0f));
-			camera->LookAt(glm::vec3(-7.5f, -7.5f, 0.0f));		
+			camera->LookAt(glm::vec3(-7.5f, -7.5f, 4.0f));		
 
 			Camera::Sptr cam = camera->Add<Camera>();
 			// Make sure that the camera is set as the scene's main camera!
@@ -514,29 +519,40 @@ int main() {
 			renderer->SetMesh(nightstandMesh);
 			renderer->SetMaterial(missingMaterial);
 
-			// Attach a plane collider that extends infinitely along the X/Y axis
+			// give nightstand a physics collider
 			RigidBody::Sptr physics = nightstand->Add<RigidBody>(/*static by default*/);
-			physics->AddCollider(BoxCollider::Create(glm::vec3(50.0f, 50.0f, 1.0f)))->SetPosition({ 0,0,-1 });
+			physics->AddCollider(BoxCollider::Create(glm::vec3(1.0f, 1.0f, 1.0f)))->SetPosition({ 0,0,0 });
 			nightstand->SetPostion(glm::vec3(-8.5f, -2.0f, 0.0f));
-			nightstand->SetRotation(glm::vec3(90.0f, 0.0f, 0.0f));
 
-			/*HandSkinManager::Sptr skin = nightstand->Add<HandSkinManager>();
-			skin->AddNewSkin(missingMaterial);
-			skin->AddWindowPointer(window);*/
-		}
-
-		GameObject::Sptr trigger = scene->CreateGameObject("Trigger");
-		{
-			TriggerVolume::Sptr volume = trigger->Add<TriggerVolume>();
-			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(3.0f, 3.0f, 1.0f));
-			collider->SetPosition(glm::vec3(0.0f, 0.0f, 0.5f));
+			TriggerVolume::Sptr volume = nightstand->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5f);
+			collider->SetPosition(glm::vec3(0.f, 0.f, 0.f));
 			volume->AddCollider(collider);
 
-			trigger->Add<TriggerVolumeEnterBehaviour>();
-
-
+			InteractableObjectBehaviour::Sptr iBhviour = nightstand->Add<InteractableObjectBehaviour>();
+			iBhviour->AddRewardMaterial(rewardMaterial);
 		}
 
+
+		GameObject::Sptr hand = scene->CreateGameObject("Idle Hand");
+		{
+			hand->SetPostion(glm::vec3(0.f, 0.f, 2.f));
+			
+			//allows the hand to be rendered
+			RenderComponent::Sptr renderer = hand->Add<RenderComponent>();
+			renderer->SetMesh(theHandMesh);
+			renderer->SetMaterial(missingMaterial);
+
+			//make hand dynamic so that we can move it and it can interact with triggers
+			RigidBody::Sptr physics = hand->Add<RigidBody>(RigidBodyType::Dynamic);
+			physics->AddCollider(ConvexMeshCollider::Create());
+
+			CharacterController::Sptr controller = hand->Add<CharacterController>();
+
+			//add a skin manager to the hand so that we can change its appearance at will
+			SkinManager::Sptr skinSwapper = hand->Add<SkinManager>();
+		}
+		
 		//Object Smaples
 		/*
 		GameObject::Sptr monkey1 = scene->CreateGameObject("Monkey 1");
@@ -614,7 +630,7 @@ int main() {
 		// Save the scene to a JSON file
 		scene->Save("scene.json");
 	}
-
+	
 
 	// We'll use this to allow editing the save/load path
 	// via ImGui, note the reserve to allocate extra space

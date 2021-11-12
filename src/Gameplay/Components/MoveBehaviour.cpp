@@ -6,7 +6,7 @@
 #include "Utils/JsonGlmHelpers.h"
 
 void MoveBehaviour::Update(float deltaTime) {
-	
+
 	GetGameObject()->SetPostion(GetGameObject()->GetPosition() + MoveSpeed * deltaTime);
 }
 
@@ -18,12 +18,11 @@ nlohmann::json MoveBehaviour::ToJson() const {
 	return {
 		{ "moveSpeed",  GlmToJson(MoveSpeed) }
 	};
-	
 }
 
 MoveBehaviour::Sptr MoveBehaviour::FromJson(const nlohmann::json& data) {
 	MoveBehaviour::Sptr result = std::make_shared<MoveBehaviour>();
 	result->MoveSpeed = ParseJsonVec3(data["moveSpeed"]);
-	
+
 	return result;
 }

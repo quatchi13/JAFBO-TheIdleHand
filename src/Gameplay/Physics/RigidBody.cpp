@@ -151,6 +151,8 @@ namespace Gameplay::Physics {
 		return _type;
 	}
 
+
+
 	void RigidBody::PhysicsPreStep(float dt) {
 		// Update any dirty state that may have changed
 		_HandleStateDirty();
