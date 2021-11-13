@@ -55,6 +55,7 @@
 #include "Gameplay/Components/InteractableObjectBehaviour.h"
 #include "Gameplay/Components/SkinManager.h"
 #include "Gameplay/Components/CharacterController.h"
+#include "Gameplay/Components/MainMenu.h"
 
 
 
@@ -332,7 +333,7 @@ int main() {
 	ComponentManager::RegisterType<InteractableObjectBehaviour>();
 	ComponentManager::RegisterType<SkinManager>();
 	ComponentManager::RegisterType<CharacterController>();
-
+	ComponentManager::RegisterType<MainMenu>();
 	
 
 	// GL states, we'll enable depth testing and backface fulling
@@ -503,6 +504,26 @@ int main() {
 			physics->AddCollider(BoxCollider::Create(glm::vec3(50.0f, 50.0f, 1.0f)))->SetPosition({ 0,0,-1 });
 			rWall->SetPostion(glm::vec3(-9.5f, -2.0f, 7.5f));
 			rWall->SetRotation(glm::vec3(-90.0f, 0.0f, -90.0f));
+
+		}
+
+		GameObject::Sptr screen = scene->CreateGameObject("Screen");
+		{
+			// Make a big tiled mesh
+			MeshResource::Sptr tiledMesh = ResourceManager::CreateAsset<MeshResource>();
+			tiledMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(10.0f, 20.0f)));
+			tiledMesh->GenerateMesh();
+
+			// Create and attach a RenderComponent to the object to draw our mesh
+			RenderComponent::Sptr renderer = screen->Add<RenderComponent>();
+			renderer->SetMesh(tiledMesh);
+			renderer->SetMaterial(rightWallMaterial);
+
+			screen->SetPostion(glm::vec3(4.7f, 5.1f, 12.8f));
+			screen->SetRotation(glm::vec3(0.0f, 63.0f, 45.0f));
+
+			MainMenu::Sptr menu = screen->Add<MainMenu>();
+
 
 		}
 
