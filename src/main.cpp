@@ -220,6 +220,75 @@ bool DrawLightImGui(const Scene::Sptr& scene, const char* title, int ix) {
 	return result;
 }
 
+
+/// <summary>
+/// Creates a material that can be applied to objects
+/// </summary>
+/// <param name="matName">: the name of your material </param>
+/// <param name="matShader">: the shader being used to render the material (currently basic or reflective)</param>
+/// <param name="matTex">: the texture being used in the material</param>
+/// <param name="shine">: the shininess of the material (0.0: not shiny at all, 1.0: shiny)</param>
+/// <returns>a material with all of these components</returns>
+Material::Sptr MakeMaterial(std::string matName, Shader::Sptr matShader, Texture2D::Sptr matTex, float shine) {
+	Material::Sptr mat = ResourceManager::CreateAsset<Material>();
+	{
+		mat->Name = matName;
+		mat->MatShader = matShader;
+		mat->Texture = matTex;
+		mat->Shininess = shine;
+	}
+	return mat;
+}
+
+/// <summary>
+/// Creates an interactable GameObject
+/// </summary>
+/// <param name="interactableName">: the name of the GameObject</param>
+/// <param name="interactableMesh">: the mesh that will be rendered for the GameObject</param>
+/// <param name="interactableMat">: the material that will be rendered for the GameObject</param>
+/// <param name="reward">: the material that will be sent to the Skin Manager</param>
+/// <param name="interactablePos">: the position of the GameObject</param>
+/// <param name="interactableRot">: the rotation of the GameObject (defaults to none)</param>
+/// <param name="interactableScale">: the scale of the GameObject(defaults to none)</param>
+/// <param name="interactableRange">: the range from which the object can be interacted with (defaults to 1.5)</param>
+/// <param name="colliderOffset">: the offset of the interaction space, relative to the GameObject's position (defaults to none)</param>
+/// <returns> An interactable Game Object with the above specifications</returns>
+GameObject::Sptr MakeInteractableObject(
+	std::string interactableName, MeshResource::Sptr interactableMesh, Material::Sptr interactableMat, 
+	Material::Sptr reward, glm::vec3 interactablePos, glm::vec3 interactableRot = glm::vec3(0.f, 0.f, 0.f), 
+	glm::vec3 interactableScale = glm::vec3(1.f, 1.f, 1.f), float interactableRange = 1.5, 
+	glm::vec3 colliderOffset = glm::vec3(0.f, 0.f, 0.f)) {
+	GameObject::Sptr interactable = scene->CreateGameObject(interactableName);
+	{
+		//gives the object a position, rotation, and scale
+		interactable->SetPostion(interactablePos);
+		interactable->SetRotation(interactableRot);
+		interactable->SetScale(interactableScale);
+		
+		//lets us render the object 
+		RenderComponent::Sptr renderer = interactable->Add<RenderComponent>();
+		renderer->SetMesh(interactableMesh);
+		renderer->SetMaterial(interactableMat);
+
+		//gives the object a physics body which will allow for collisions and other fun stuff
+		RigidBody::Sptr physicsBody = interactable->Add<RigidBody>();
+		physicsBody->AddCollider(ConvexMeshCollider::Create());
+		
+		//gives the object a trigger with its own collider
+		TriggerVolume::Sptr volume = interactable->Add<TriggerVolume>();
+		SphereCollider::Sptr collider = SphereCollider::Create(interactableRange);
+		collider->SetPosition(colliderOffset);
+		volume->AddCollider(collider);
+
+		//give the object behaviours that are activated when the object is interacted with
+		//(this is the stuff that registers and displays interactions when they occurr)
+		InteractableObjectBehaviour::Sptr behaviourOnInteraction = interactable->Add<InteractableObjectBehaviour>();
+		behaviourOnInteraction->AddRewardMaterial(reward);
+	}
+
+	return interactable;
+}
+
 int main() {
 	Logger::Init(); // We'll borrow the logger from the toolkit, but we need to initialize it
 
@@ -336,93 +405,18 @@ int main() {
 		scene->SetSkyboxRotation(glm::rotate(MAT4_IDENTITY, glm::half_pi<float>(), glm::vec3(1.0f, 0.0f, 0.0f)));
 
 		//Materials
-		Material::Sptr bleedingPosterMaterial = ResourceManager::CreateAsset<Material>();
-		{
-			bleedingPosterMaterial->Name = "Bleeding Poster";
-			bleedingPosterMaterial->MatShader = basicShader;
-			bleedingPosterMaterial->Texture = bleedingPosterTex;
-			bleedingPosterMaterial->Shininess = 0.1f;
-		}
-		
-		Material::Sptr boxMaterial = ResourceManager::CreateAsset<Material>();
-		{
-			boxMaterial->Name = "Box";
-			boxMaterial->MatShader = basicShader; 
-			boxMaterial->Texture = boxTexture;
-			boxMaterial->Shininess = 0.1f;  
-		}	
+		Material::Sptr bleedingPosterMaterial = MakeMaterial("Bleeding Poster", basicShader,  bleedingPosterTex, 0.1f);
+		Material::Sptr boxMaterial = MakeMaterial("Box", basicShader, boxTexture, 0.1f);
+		Material::Sptr darkLampMaterial = MakeMaterial("Dark Lamp", basicShader, darkLampTex, 0.1f);
+		Material::Sptr drumstickPosterMaterial = MakeMaterial("Drumstick Poster", basicShader, drumstickPosterTex, 0.1f);
+		Material::Sptr floorMaterial = MakeMaterial("Floor", basicShader, floorTex, 0.1f);
+		Material::Sptr leftWallMaterial = MakeMaterial("Left Wall", basicShader, leftWallTex, 0.1f);
+		Material::Sptr lightLampMaterial = MakeMaterial("Light Lamp", basicShader, lightLampTex, 0.1f);
+		Material::Sptr missingMaterial = MakeMaterial("Missing Texture", basicShader, missingTex, 0.1f);
+		Material::Sptr rewardMaterial = MakeMaterial("Reward Material", reflectiveShader, rewardSkin, 0.5);
+		Material::Sptr pentagramPosterMaterial = MakeMaterial("Pentagram Poster", basicShader, pentagramPosterTex, 0.1f);
+		Material::Sptr rightWallMaterial = MakeMaterial("Right Wall", basicShader, rightWallTex, 0.1f);
 
-		Material::Sptr darkLampMaterial = ResourceManager::CreateAsset<Material>();
-		{
-			darkLampMaterial->Name = "Dark Lamp";
-			darkLampMaterial->MatShader = basicShader;
-			darkLampMaterial->Texture = darkLampTex;
-			darkLampMaterial->Shininess = 0.1f;
-		}
-
-		Material::Sptr drumstickPosterMaterial = ResourceManager::CreateAsset<Material>();
-		{
-			drumstickPosterMaterial->Name = "Drumstick Poster";
-			drumstickPosterMaterial->MatShader = basicShader;
-			drumstickPosterMaterial->Texture = drumstickPosterTex;
-			drumstickPosterMaterial->Shininess = 0.1f;
-		}
-
-		Material::Sptr floorMaterial = ResourceManager::CreateAsset<Material>();
-		{
-			floorMaterial->Name = "Floor";
-			floorMaterial->MatShader = basicShader;
-			floorMaterial->Texture = floorTex;
-			floorMaterial->Shininess = 0.1f;
-		}
-
-		Material::Sptr leftWallMaterial = ResourceManager::CreateAsset<Material>();
-		{
-			leftWallMaterial->Name = "Left Wall";
-			leftWallMaterial->MatShader = basicShader;
-			leftWallMaterial->Texture = leftWallTex;
-			leftWallMaterial->Shininess = 0.1f;
-		}
-
-		Material::Sptr lightLampMaterial = ResourceManager::CreateAsset<Material>();
-		{
-			lightLampMaterial->Name = "Light Lamp";
-			lightLampMaterial->MatShader = basicShader;
-			lightLampMaterial->Texture = lightLampTex;
-			lightLampMaterial->Shininess = 0.1f;
-		}
-
-		Material::Sptr missingMaterial = ResourceManager::CreateAsset<Material>();
-		{
-			missingMaterial->Name = "Missing Texture";
-			missingMaterial->MatShader = basicShader;
-			missingMaterial->Texture = missingTex;
-			missingMaterial->Shininess = 0.1f;
-		}
-
-		Material::Sptr rewardMaterial = ResourceManager::CreateAsset<Material>();
-		{
-			rewardMaterial->Name = "Reward Material";
-			rewardMaterial->MatShader = reflectiveShader;
-			rewardMaterial->Texture = rewardSkin;
-			rewardMaterial->Shininess = 0.5f;
-		}
-
-		Material::Sptr pentagramPosterMaterial = ResourceManager::CreateAsset<Material>();
-		{
-			pentagramPosterMaterial->Name = "Pentagram Poster";
-			pentagramPosterMaterial->MatShader = basicShader;
-			pentagramPosterMaterial->Texture = pentagramPosterTex;
-			pentagramPosterMaterial->Shininess = 0.1f;
-		}
-
-		Material::Sptr rightWallMaterial = ResourceManager::CreateAsset<Material>();
-		{
-			rightWallMaterial->Name = "Right Wall";
-			rightWallMaterial->MatShader = basicShader;
-			rightWallMaterial->Texture = rightWallTex;
-			rightWallMaterial->Shininess = 0.1f;
-		}
 
 		// Create some lights for our scene
 		scene->Lights.resize(3);
@@ -512,28 +506,11 @@ int main() {
 
 		}
 
-		GameObject::Sptr nightstand = scene->CreateGameObject("Nightstand");
-		{
-			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = nightstand->Add<RenderComponent>();
-			renderer->SetMesh(nightstandMesh);
-			renderer->SetMaterial(missingMaterial);
-
-			// give nightstand a physics collider
-			RigidBody::Sptr physics = nightstand->Add<RigidBody>(/*static by default*/);
-			physics->AddCollider(BoxCollider::Create(glm::vec3(1.0f, 1.0f, 1.0f)))->SetPosition({ 0,0,0 });
-			nightstand->SetPostion(glm::vec3(-8.5f, -2.0f, 0.0f));
-
-			TriggerVolume::Sptr volume = nightstand->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5f);
-			collider->SetPosition(glm::vec3(0.f, 0.f, 0.f));
-			volume->AddCollider(collider);
-
-			InteractableObjectBehaviour::Sptr iBhviour = nightstand->Add<InteractableObjectBehaviour>();
-			iBhviour->AddRewardMaterial(rewardMaterial);
-		}
+		//set up interactable GameObjects
+		GameObject::Sptr nightstand = MakeInteractableObject("Nightstand", nightstandMesh, missingMaterial, rewardMaterial, glm::vec3(-8.5f, -2.0f, 0.0f));
 
 
+		//set up the hand
 		GameObject::Sptr hand = scene->CreateGameObject("Idle Hand");
 		{
 			hand->SetPostion(glm::vec3(0.f, 0.f, 2.f));
@@ -552,74 +529,6 @@ int main() {
 			//add a skin manager to the hand so that we can change its appearance at will
 			SkinManager::Sptr skinSwapper = hand->Add<SkinManager>();
 		}
-		
-		//Object Smaples
-		/*
-		GameObject::Sptr monkey1 = scene->CreateGameObject("Monkey 1");
-		{
-			// Set position in the scene
-			monkey1->SetPostion(glm::vec3(1.5f, 0.0f, 1.0f));
-
-			// Add some behaviour that relies on the physics body
-			monkey1->Add<JumpBehaviour>();
-
-			// Create and attach a renderer for the monkey
-			RenderComponent::Sptr renderer = monkey1->Add<RenderComponent>();
-			renderer->SetMesh(monkeyMesh);
-			renderer->SetMaterial(monkeyMaterial);
-
-			// Add a dynamic rigid body to this monkey
-			RigidBody::Sptr physics = monkey1->Add<RigidBody>(RigidBodyType::Dynamic);
-			physics->AddCollider(ConvexMeshCollider::Create());
-
-			//MoveBehaviour::Sptr behaviour = monkey1->Add<MoveBehaviour>();
-			//behaviour->MoveSpeed = glm::vec3(1.0f, 0.0f, 0.0f);
-
-			MaterialSwapBehaviour::Sptr matSwap = monkey1->Add<MaterialSwapBehaviour>();
-			matSwap->EnterMaterial = monkeyMaterial;
-			matSwap->ExitMaterial = boxMaterial;
-			matSwap->SetRenderer(renderer);
-
-		}
-
-		GameObject::Sptr monkey2 = scene->CreateGameObject("Complex Object");
-		{
-			// Set and rotation position in the scene
-			monkey2->SetPostion(glm::vec3(-1.5f, 0.0f, 1.0f));
-			monkey2->SetRotation(glm::vec3(90.0f, 0.0f, 0.0f));
-
-			// Add a render component
-			RenderComponent::Sptr renderer = monkey2->Add<RenderComponent>();
-			renderer->SetMesh(monkeyMesh);
-			renderer->SetMaterial(boxMaterial);
-
-			// This is an example of attaching a component and setting some parameters
-			//MoveBehaviour::Sptr behaviour = monkey2->Add<MoveBehaviour>();
-			//behaviour->MoveSpeed = glm::vec3(1.0f, 0.0f, 0.0f);
-
-			TriggerVolume::Sptr volume = monkey2->Add<TriggerVolume>();
-			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0f, 1.0f, 1.0f));
-			collider->SetPosition(glm::vec3(0.0f, 0.0f, 0.5f));
-			volume->AddCollider(collider);
-		}
-		
-
-		// Kinematic rigid bodies are those controlled by some outside controller
-		// and ONLY collide with dynamic objects
-		RigidBody::Sptr physics = monkey2->Add<RigidBody>(RigidBodyType::Kinematic);
-		physics->AddCollider(ConvexMeshCollider::Create());
-
-		// Create a trigger volume for testing how we can detect collisions with objects!
-		GameObject::Sptr trigger = scene->CreateGameObject("Trigger"); 
-		{
-			TriggerVolume::Sptr volume = trigger->Add<TriggerVolume>();
-			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(3.0f, 3.0f, 1.0f));
-			collider->SetPosition(glm::vec3(0.0f, 0.0f, 0.5f));
-			volume->AddCollider(collider);
-
-			trigger->Add<TriggerVolumeEnterBehaviour>();
-		}
-		*/
 
 		// Call scene awake to start up all of our components
 		scene->Window = window;
