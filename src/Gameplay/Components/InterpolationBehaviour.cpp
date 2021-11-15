@@ -204,6 +204,7 @@ nlohmann::json InterpolationBehaviour::ToJson() const {
 	result["is_looping"] = _loopTransform;
 	result["current_index"] = _currentTransformIndex;
 	result["num_of_transforms"] = _amountOfTransforms;
+	return result;
 }
 
 InterpolationBehaviour::Sptr InterpolationBehaviour::FromJson(const nlohmann::json& data) {
