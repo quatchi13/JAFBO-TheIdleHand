@@ -1,7 +1,5 @@
 #include "Gameplay/Components/MoveBehaviour.h"
-
 #include "Gameplay/GameObject.h"
-
 #include "Utils/ImGuiHelper.h"
 #include "Utils/JsonGlmHelpers.h"
 

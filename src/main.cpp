@@ -56,6 +56,7 @@
 #include "Gameplay/Components/SkinManager.h"
 #include "Gameplay/Components/CharacterController.h"
 #include "Gameplay/Components/MainMenu.h"
+#include "Gameplay/Components/InterpolationBehaviour.h"
 
 
 
@@ -290,6 +291,33 @@ GameObject::Sptr MakeInteractableObject(
 	return interactable;
 }
 
+/// <summary>
+/// Creates a static game object that does absolutely nothing :)
+/// </summary>
+/// <param name="oName: ">the identifiable name for our object</param>
+/// <param name="oMesh: ">our object's mesh</param>
+/// <param name="oMaterial: ">our object's material</param>
+/// <param name="position: ">the position of the object</param>
+/// <param name="rotation: ">the rotation of the object</param>
+/// <param name="scale: ">the scale of the object</param>
+/// <returns>a game object with the above specifications</returns>
+GameObject::Sptr MakeStaticObject(std::string oName, MeshResource::Sptr oMesh, Material::Sptr oMaterial, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale) {
+	GameObject::Sptr staticObj = scene->CreateGameObject(oName);
+	{
+		staticObj->SetPostion(position);
+		staticObj->SetRotation(rotation);
+		staticObj->SetScale(scale);
+
+		RenderComponent::Sptr renderer = staticObj->Add<RenderComponent>();
+		renderer->SetMesh(oMesh);
+		renderer->SetMaterial(oMaterial);
+
+		RigidBody::Sptr physicsBody = staticObj->Add<RigidBody>();
+		physicsBody->AddCollider(ConvexMeshCollider::Create());
+	}
+	return staticObj;
+}
+
 int main() {
 	Logger::Init(); // We'll borrow the logger from the toolkit, but we need to initialize it
 
@@ -334,6 +362,7 @@ int main() {
 	ComponentManager::RegisterType<SkinManager>();
 	ComponentManager::RegisterType<CharacterController>();
 	ComponentManager::RegisterType<MainMenu>();
+	ComponentManager::RegisterType<InterpolationBehaviour>();
 	
 
 	// GL states, we'll enable depth testing and backface fulling
@@ -529,6 +558,41 @@ int main() {
 
 		//set up interactable GameObjects
 		GameObject::Sptr nightstand = MakeInteractableObject("Nightstand", nightstandMesh, missingMaterial, rewardMaterial, glm::vec3(-8.5f, -2.0f, 0.0f));
+
+
+
+		GameObject::Sptr shroomba = scene->CreateGameObject("Shroomba");
+		{
+			shroomba->SetPostion(glm::vec3(2.f, 2.f, 2.f));
+			
+			RenderComponent::Sptr renderer = shroomba->Add<RenderComponent>();
+			renderer->SetMesh(monkeyMesh);
+			renderer->SetMaterial(missingMaterial);
+			
+			RigidBody::Sptr physics = shroomba->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(ConvexMeshCollider::Create());
+
+			InterpolationBehaviour::Sptr interpolator = shroomba->Add<InterpolationBehaviour>();
+			interpolator->StartPushNewBehaviour("active");
+			interpolator->AddKeyFrame(TRANSLATION, 2.0, glm::vec3(2.f, 2.f, 2.f));
+			interpolator->AddKeyFrame(ROTATION, 2.0, glm::vec3(0.f, 0.f, 0.f));
+			interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
+
+			interpolator->AddKeyFrame(TRANSLATION, 2.0, glm::vec3(2.f, 6.f, 2.f));
+			interpolator->AddKeyFrame(ROTATION, 2.0, glm::vec3(0.f, 0.f, -90.f));
+			interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
+
+			interpolator->AddKeyFrame(TRANSLATION, 2.0, glm::vec3(6.f, 6.f, 2.f));
+			interpolator->AddKeyFrame(ROTATION, 2.0, glm::vec3(0.f, 0.f, -180.f));
+			interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
+
+			interpolator->AddKeyFrame(TRANSLATION, 2.0, glm::vec3(6.f, 2.f, 2.f));
+			interpolator->AddKeyFrame(ROTATION, 2.0, glm::vec3(0.f, 0.f, -270.f));
+			interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
+			interpolator->EndPushNewBehaviour();
+
+			interpolator->ToggleBehaviour("active", Non_Repeating);
+		}
 
 
 		//set up the hand
