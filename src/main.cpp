@@ -402,7 +402,7 @@ int main() {
 		MeshResource::Sptr monkeyMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Monkey.obj");
 		MeshResource::Sptr nightstandMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Nightstand.obj");
 		MeshResource::Sptr theHandMesh = ResourceManager::CreateAsset<MeshResource>("meshes/hand.obj");
-		
+		MeshResource::Sptr shroombaMesh = ResourceManager::CreateAsset<MeshResource>("meshes/shroomba.obj");
 
 		//Textures
 		Texture2D::Sptr    bleedingPosterTex = ResourceManager::CreateAsset<Texture2D>("textures/BleedingPoster.png");
@@ -417,6 +417,7 @@ int main() {
 		Texture2D::Sptr    pentagramPosterTex = ResourceManager::CreateAsset<Texture2D>("textures/PentagramPoster.png");
 		Texture2D::Sptr    rightWallTex = ResourceManager::CreateAsset<Texture2D>("textures/RightWall.png");
 		Texture2D::Sptr    rewardSkin = ResourceManager::CreateAsset<Texture2D>("textures/forggyBonds.png");
+		Texture2D::Sptr    shroomTex = ResourceManager::CreateAsset<Texture2D>("textures/Shroomba.png");
 
 		// Here we'll load in the cubemap, as well as a special shader to handle drawing the skybox
 		TextureCube::Sptr testCubemap = ResourceManager::CreateAsset<TextureCube>("cubemaps/ocean/ocean.jpg");
@@ -446,6 +447,7 @@ int main() {
 		Material::Sptr rewardMaterial = MakeMaterial("Reward Material", reflectiveShader, rewardSkin, 0.5);
 		Material::Sptr pentagramPosterMaterial = MakeMaterial("Pentagram Poster", basicShader, pentagramPosterTex, 0.1f);
 		Material::Sptr rightWallMaterial = MakeMaterial("Right Wall", basicShader, rightWallTex, 0.1f);
+		Material::Sptr shroombaMaterial = MakeMaterial("Shroomba Material", basicShader, shroomTex, 0.1f);
 
 
 		// Create some lights for our scene
@@ -566,32 +568,64 @@ int main() {
 			shroomba->SetPostion(glm::vec3(2.f, 2.f, 2.f));
 			
 			RenderComponent::Sptr renderer = shroomba->Add<RenderComponent>();
-			renderer->SetMesh(monkeyMesh);
-			renderer->SetMaterial(missingMaterial);
+			renderer->SetMesh(shroombaMesh);
+			renderer->SetMaterial(shroombaMaterial);
 			
 			RigidBody::Sptr physics = shroomba->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(ConvexMeshCollider::Create());
 
 			InterpolationBehaviour::Sptr interpolator = shroomba->Add<InterpolationBehaviour>();
-			interpolator->StartPushNewBehaviour("active");
-			interpolator->AddKeyFrame(TRANSLATION, 2.0, glm::vec3(2.f, 2.f, 2.f));
-			interpolator->AddKeyFrame(ROTATION, 2.0, glm::vec3(0.f, 0.f, 0.f));
-			interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
+			interpolator->StartPushNewBehaviour("patrol");
+			interpolator->AddKeyFrame(TRANSLATION, 4.0, glm::vec3(4.5f, 4.5f, 0.2f));
+			interpolator->AddKeyFrame(TRANSLATION, 4.0, glm::vec3(4.5f, -8.5f, 0.2f));
+			interpolator->AddKeyFrame(TRANSLATION, 1.2, glm::vec3(-8.5f, -8.5f, 0.2f));
+			interpolator->AddKeyFrame(TRANSLATION, 0.3, glm::vec3(-8.5f, -4.3f, 0.2f));
+			interpolator->AddKeyFrame(TRANSLATION, 0.6, glm::vec3(-6.75f, -4.3f, 0.2f));
+			interpolator->AddKeyFrame(TRANSLATION, 0.3, glm::vec3(-6.75f, 0.15f, 0.2f));
+			interpolator->AddKeyFrame(TRANSLATION, 1.2, glm::vec3(-8.5f, 0.15f, 0.2f));
+			interpolator->AddKeyFrame(TRANSLATION, 4.0, glm::vec3(-8.5f, 4.5f, 0.2f));
 
-			interpolator->AddKeyFrame(TRANSLATION, 2.0, glm::vec3(2.f, 6.f, 2.f));
-			interpolator->AddKeyFrame(ROTATION, 2.0, glm::vec3(0.f, 0.f, -90.f));
+			interpolator->AddKeyFrame(ROTATION, 8.0, glm::vec3(0.f, 0.f, 0.f));
+			interpolator->AddKeyFrame(ROTATION, 8.0, glm::vec3(0.f, 0.f, -360.f));
+			
 			interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
-
-			interpolator->AddKeyFrame(TRANSLATION, 2.0, glm::vec3(6.f, 6.f, 2.f));
-			interpolator->AddKeyFrame(ROTATION, 2.0, glm::vec3(0.f, 0.f, -180.f));
-			interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
-
-			interpolator->AddKeyFrame(TRANSLATION, 2.0, glm::vec3(6.f, 2.f, 2.f));
-			interpolator->AddKeyFrame(ROTATION, 2.0, glm::vec3(0.f, 0.f, -270.f));
 			interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
 			interpolator->EndPushNewBehaviour();
 
-			interpolator->ToggleBehaviour("active", Non_Repeating);
+			interpolator->StartPushNewBehaviour("spin");
+			interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(4.f, 4.f, 0.2f));
+			interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(4.f, 4.f, 0.2f));
+			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 0.f));
+			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 360.f));
+			interpolator->AddKeyFrame(SCALE, 1.0, glm::vec3(1.0, 1.0, 1.0));
+			interpolator->AddKeyFrame(SCALE, 1.0, glm::vec3(1.0, 1.0, 1.0));
+			interpolator->EndPushNewBehaviour();
+
+			interpolator->StartPushNewBehaviour("dance");
+			interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(3.f, 3.f, 0.2f));
+			interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(3.f, 3.f, 0.1f));
+			interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(3.f, 3.f, 0.2f));
+			interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(3.f, 3.f, 0.1f));
+			interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
+			interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(2.5, 1.3, 0.5));
+			interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
+			interpolator->AddKeyFrame(SCALE, 1.0, glm::vec3(2.5, 1.3, 0.5));
+			interpolator->AddKeyFrame(SCALE, 1.0, glm::vec3(1.0, 1.0, 1.0));
+			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 0.f));
+			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 360.f));
+			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 0.f));
+			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 360.f));
+			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 0.f));
+			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 360.f));
+			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 0.f));
+			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 360.f));
+			interpolator->EndPushNewBehaviour();
+
+
+			interpolator->PauseOrResumeCurrentBehaviour();
+
+
+			//interpolator->ToggleBehaviour("active", Non_Repeating);
 		}
 
 

@@ -106,7 +106,7 @@ protected:
 	int _amountOfTransforms;
 	bool _loopTransform;
 	bool _isRunning;
-
+	int cooldown;
 
 private:
 	//these variables are used during initiation 

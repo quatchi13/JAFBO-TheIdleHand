@@ -1,9 +1,9 @@
 #include "Gameplay/Components/InterpolationBehaviour.h"
-
 #include "Gameplay/GameObject.h"
-
 #include "Utils/ImGuiHelper.h"
 #include "Utils/JsonGlmHelpers.h"
+#include "Gameplay/Scene.h"
+#include "GLFW/glfw3.h"
 
 InterpolationBehaviour::InterpolationBehaviour():IComponent() {
 	//we will assume that the first behaviour pushed is the one to use, 
@@ -12,6 +12,7 @@ InterpolationBehaviour::InterpolationBehaviour():IComponent() {
 	_loopTransform = true;
 	_isRunning = true;
 	_amountOfTransforms = 0;
+	cooldown = 0;
 }
 
 
@@ -56,9 +57,35 @@ void InterpolationBehaviour::PauseOrResumeCurrentBehaviour() {
 }
 
 void InterpolationBehaviour::Update(float deltaTime) {
+	if (!cooldown) {
+		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_SPACE) == GLFW_PRESS) {
+			PauseOrResumeCurrentBehaviour();
+			cooldown = 30;
+		}
+		else if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_1) == GLFW_PRESS) {
+			ToggleBehaviour("patrol", Repeating);
+			cooldown = 30;
+		}
+		else if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_2) == GLFW_PRESS) {
+			ToggleBehaviour("spin", Repeating);
+			cooldown = 30;
+		}
+		else if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_3) == GLFW_PRESS) {
+			ToggleBehaviour("dance", Non_Repeating);
+			cooldown = 30;
+		}
+	}
+	else {
+		cooldown--;
+	}
+	
+	
 	if (_isRunning) {
 		InterpolationManager(deltaTime);
 	}
+
+
+
 }
 
 /// <summary>
