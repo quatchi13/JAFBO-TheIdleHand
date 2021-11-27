@@ -396,34 +396,23 @@ int main() {
 		});
 
 		//Meshes
-		MeshResource::Sptr BedMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Bed.obj");
-		MeshResource::Sptr darkLampMesh = ResourceManager::CreateAsset<MeshResource>("meshes/DarkLamp.obj");
-		MeshResource::Sptr lightLampMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LightLamp.obj");
-		MeshResource::Sptr monkeyMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Monkey.obj");
 		MeshResource::Sptr nightstandMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Nightstand.obj");
 		MeshResource::Sptr theHandMesh = ResourceManager::CreateAsset<MeshResource>("meshes/hand.obj");
 		MeshResource::Sptr shroombaMesh = ResourceManager::CreateAsset<MeshResource>("meshes/shroomba.obj");
+		MeshResource::Sptr bedroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/megaBedroom.obj");
 
 		//Textures
-		Texture2D::Sptr    bleedingPosterTex = ResourceManager::CreateAsset<Texture2D>("textures/BleedingPoster.png");
-		Texture2D::Sptr    boxTexture = ResourceManager::CreateAsset<Texture2D>("textures/box-diffuse.png");
-		Texture2D::Sptr    darkLampTex = ResourceManager::CreateAsset<Texture2D>("textures/DarkLamp.png");
-		Texture2D::Sptr    drumstickPosterTex = ResourceManager::CreateAsset<Texture2D>("textures/DrumstickPoster.png");
-		Texture2D::Sptr    floorTex = ResourceManager::CreateAsset<Texture2D>("textures/Floor.png");
-		Texture2D::Sptr    leftWallTex = ResourceManager::CreateAsset<Texture2D>("textures/LeftWall.png");
-		Texture2D::Sptr    lightLampTex = ResourceManager::CreateAsset<Texture2D>("textures/LightLamp.png");
 		Texture2D::Sptr    missingTex = ResourceManager::CreateAsset<Texture2D>("textures/MissingTexture.png");
-		Texture2D::Sptr    monkeyTex = ResourceManager::CreateAsset<Texture2D>("textures/monkey-uvMap.png");
-		Texture2D::Sptr    pentagramPosterTex = ResourceManager::CreateAsset<Texture2D>("textures/PentagramPoster.png");
 		Texture2D::Sptr    rightWallTex = ResourceManager::CreateAsset<Texture2D>("textures/RightWall.png");
 		Texture2D::Sptr    rewardSkin = ResourceManager::CreateAsset<Texture2D>("textures/forggyBonds.png");
 		Texture2D::Sptr    shroomTex = ResourceManager::CreateAsset<Texture2D>("textures/Shroomba.png");
+		Texture2D::Sptr    bedroomTex = ResourceManager::CreateAsset<Texture2D>("textures/MegaText.png");
 
 		// Here we'll load in the cubemap, as well as a special shader to handle drawing the skybox
 		TextureCube::Sptr testCubemap = ResourceManager::CreateAsset<TextureCube>("cubemaps/ocean/ocean.jpg");
 		Shader::Sptr      skyboxShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
 			{ ShaderPartType::Vertex, "shaders/skybox_vert.glsl" },
-			{ ShaderPartType::Fragment, "shaders/skybox_frag.glsl" }
+			{ ShaderPartType::Fragment, "shaders/skybox_frag.glsl" }//kjkj
 		});   
 		 
 		// Create an empty scene
@@ -436,19 +425,11 @@ int main() {
 		scene->SetSkyboxRotation(glm::rotate(MAT4_IDENTITY, glm::half_pi<float>(), glm::vec3(1.0f, 0.0f, 0.0f)));
 
 		//Materials
-		Material::Sptr bleedingPosterMaterial = MakeMaterial("Bleeding Poster", basicShader,  bleedingPosterTex, 0.1f);
-		Material::Sptr boxMaterial = MakeMaterial("Box", basicShader, boxTexture, 0.1f);
-		Material::Sptr darkLampMaterial = MakeMaterial("Dark Lamp", basicShader, darkLampTex, 0.1f);
-		Material::Sptr drumstickPosterMaterial = MakeMaterial("Drumstick Poster", basicShader, drumstickPosterTex, 0.1f);
-		Material::Sptr floorMaterial = MakeMaterial("Floor", basicShader, floorTex, 0.1f);
-		Material::Sptr leftWallMaterial = MakeMaterial("Left Wall", basicShader, leftWallTex, 0.1f);
-		Material::Sptr lightLampMaterial = MakeMaterial("Light Lamp", basicShader, lightLampTex, 0.1f);
 		Material::Sptr missingMaterial = MakeMaterial("Missing Texture", basicShader, missingTex, 0.1f);
 		Material::Sptr rewardMaterial = MakeMaterial("Reward Material", reflectiveShader, rewardSkin, 0.5);
-		Material::Sptr pentagramPosterMaterial = MakeMaterial("Pentagram Poster", basicShader, pentagramPosterTex, 0.1f);
 		Material::Sptr rightWallMaterial = MakeMaterial("Right Wall", basicShader, rightWallTex, 0.1f);
 		Material::Sptr shroombaMaterial = MakeMaterial("Shroomba Material", basicShader, shroomTex, 0.1f);
-
+		Material::Sptr bedroomMaterial = MakeMaterial("Bedroom Material", basicShader, bedroomTex, 0.2f);
 
 		// Create some lights for our scene
 		scene->Lights.resize(3);
@@ -478,63 +459,15 @@ int main() {
 			scene->MainCamera = cam;
 		}
 
-		// Set up all our sample objects
-		GameObject::Sptr floor = scene->CreateGameObject("Floor");
+
+		GameObject::Sptr bedroomObject = scene->CreateGameObject("Bedroom Object");
 		{
-			// Make a big tiled mesh
-			MeshResource::Sptr tiledMesh = ResourceManager::CreateAsset<MeshResource>();
-			tiledMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(15.0f)));
-			tiledMesh->GenerateMesh();
+			bedroomObject->SetPostion(glm::vec3(0.f, 0.0f, 0.0f));
 
 			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = floor->Add<RenderComponent>();
-			renderer->SetMesh(tiledMesh);
-			renderer->SetMaterial(floorMaterial);
-
-			// Attach a plane collider that extends infinitely along the X/Y axis
-			RigidBody::Sptr physics = floor->Add<RigidBody>(/*static by default*/);
-			physics->AddCollider(BoxCollider::Create(glm::vec3(50.0f, 50.0f, 1.0f)))->SetPosition({0,0,-1});
-			floor->SetPostion(glm::vec3(-2.0f, -2.0f, 0.0f));
-
-		}
-
-		GameObject::Sptr lWall = scene->CreateGameObject("LeftWall");
-		{
-			// Make a big tiled mesh
-			MeshResource::Sptr tiledMesh = ResourceManager::CreateAsset<MeshResource>();
-			tiledMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(15.0f, 15.0f)));
-			tiledMesh->GenerateMesh();
-
-			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = lWall->Add<RenderComponent>();
-			renderer->SetMesh(tiledMesh);
-			renderer->SetMaterial(leftWallMaterial);
-
-			// Attach a plane collider that extends infinitely along the X/Y axis
-			RigidBody::Sptr physics = lWall->Add<RigidBody>(/*static by default*/);
-			physics->AddCollider(BoxCollider::Create(glm::vec3(50.0f, 50.0f, 1.0f)))->SetPosition({ 0,0,-1 });
-			lWall->SetPostion(glm::vec3(-2.0f, -9.5f, 7.5f));
-			lWall->SetRotation(glm::vec3(-90.0f, 0.0f, 0.0f));
-
-		}
-
-		GameObject::Sptr rWall = scene->CreateGameObject("RightWall");
-		{
-			// Make a big tiled mesh
-			MeshResource::Sptr tiledMesh = ResourceManager::CreateAsset<MeshResource>();
-			tiledMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(15.0f, 15.0f)));
-			tiledMesh->GenerateMesh();
-
-			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = rWall->Add<RenderComponent>();
-			renderer->SetMesh(tiledMesh);
-			renderer->SetMaterial(rightWallMaterial);
-
-			// Attach a plane collider that extends infinitely along the X/Y axis
-			RigidBody::Sptr physics = rWall->Add<RigidBody>(/*static by default*/);
-			physics->AddCollider(BoxCollider::Create(glm::vec3(50.0f, 50.0f, 1.0f)))->SetPosition({ 0,0,-1 });
-			rWall->SetPostion(glm::vec3(-9.5f, -2.0f, 7.5f));
-			rWall->SetRotation(glm::vec3(-90.0f, 0.0f, -90.0f));
+			RenderComponent::Sptr renderer = bedroomObject->Add<RenderComponent>();
+			renderer->SetMesh(bedroomMesh);
+			renderer->SetMaterial(bedroomMaterial);
 
 		}
 
