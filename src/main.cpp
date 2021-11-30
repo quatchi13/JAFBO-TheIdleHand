@@ -57,7 +57,9 @@
 #include "Gameplay/Components/CharacterController.h"
 #include "Gameplay/Components/MainMenu.h"
 #include "Gameplay/Components/InterpolationBehaviour.h"
-
+#include "Gameplay/Components/MorphRenderComponent.h"
+#include "Gameplay/Components/MorphAnimationManager.h"
+#include "Gameplay/Components/Pointer.h"
 
 
 // Physics
@@ -110,7 +112,7 @@ GLFWwindow* window;
 // The current size of our window in pixels
 glm::ivec2 windowSize = glm::ivec2(800, 800);
 // The title of our GLFW window
-std::string windowTitle = "INFR-1350U";
+std::string windowTitle = "The Idle Hand";
 
 // using namespace should generally be avoided, and if used, make sure it's ONLY in cpp files
 using namespace Gameplay;
@@ -263,7 +265,7 @@ GameObject::Sptr MakeInteractableObject(
 	GameObject::Sptr interactable = scene->CreateGameObject(interactableName);
 	{
 		//gives the object a position, rotation, and scale
-		interactable->SetPostion(interactablePos);
+		interactable->SetPosition(interactablePos);
 		interactable->SetRotation(interactableRot);
 		interactable->SetScale(interactableScale);
 		
@@ -304,7 +306,7 @@ GameObject::Sptr MakeInteractableObject(
 GameObject::Sptr MakeStaticObject(std::string oName, MeshResource::Sptr oMesh, Material::Sptr oMaterial, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale) {
 	GameObject::Sptr staticObj = scene->CreateGameObject(oName);
 	{
-		staticObj->SetPostion(position);
+		staticObj->SetPosition(position);
 		staticObj->SetRotation(rotation);
 		staticObj->SetScale(scale);
 
@@ -363,7 +365,10 @@ int main() {
 	ComponentManager::RegisterType<CharacterController>();
 	ComponentManager::RegisterType<MainMenu>();
 	ComponentManager::RegisterType<InterpolationBehaviour>();
-	
+	ComponentManager::RegisterType<MorphRenderComponent>();
+	ComponentManager::RegisterType<MorphAnimationManager>();
+	ComponentManager::RegisterType<Pointer>();
+
 
 	// GL states, we'll enable depth testing and backface fulling
 	glEnable(GL_DEPTH_TEST);
@@ -382,7 +387,6 @@ int main() {
 		scene->Awake();
 	} 
 	else {
-		// This time we'll have 2 different shaders, and share data between both of them using the UBO
 		// This shader will handle reflective materials
 		Shader::Sptr reflectiveShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
 			{ ShaderPartType::Vertex, "shaders/vertex_shader.glsl" },  
@@ -395,11 +399,31 @@ int main() {
 			{ ShaderPartType::Fragment, "shaders/frag_blinn_phong_textured.glsl" }
 		});
 
+		//This shader handles morph animations (use at own risk!)
+		Shader::Sptr morphShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
+			{ShaderPartType::Vertex, "shaders/morph_vert.glsl"},
+			{ ShaderPartType::Fragment, "shaders/frag_blinn_phong_textured.glsl" }
+		});
+
 		//Meshes
-		MeshResource::Sptr nightstandMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Nightstand.obj");
 		MeshResource::Sptr theHandMesh = ResourceManager::CreateAsset<MeshResource>("meshes/hand.obj");
-		MeshResource::Sptr shroombaMesh = ResourceManager::CreateAsset<MeshResource>("meshes/shroomba.obj");
 		MeshResource::Sptr bedroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/megaBedroom.obj");
+		MeshResource::Sptr bbPosterMesh = ResourceManager::CreateAsset<MeshResource>("meshes/boyband_poster.obj");
+		MeshResource::Sptr shroombaFrame0 = ResourceManager::CreateAsset<MeshResource>("animated meshes/shroomba/shroombaMesh-0.obj");
+		MeshResource::Sptr shroombaFrame1 = ResourceManager::CreateAsset<MeshResource>("animated meshes/shroomba/shroombaMesh-1.obj");
+		MeshResource::Sptr shroombaFrame2 = ResourceManager::CreateAsset<MeshResource>("animated meshes/shroomba/shroombaMesh-2.obj");
+		MeshResource::Sptr shroombaFrame3 = ResourceManager::CreateAsset<MeshResource>("animated meshes/shroomba/shroombaMesh-3.obj");
+		MeshResource::Sptr radioFrame0 = ResourceManager::CreateAsset<MeshResource>("animated meshes/radio/radioMesh-0.obj");
+		MeshResource::Sptr radioFrame1 = ResourceManager::CreateAsset<MeshResource>("animated meshes/radio/radioMesh-1.obj");
+		MeshResource::Sptr radioFrame2 = ResourceManager::CreateAsset<MeshResource>("animated meshes/radio/radioMesh-2.obj");
+		MeshResource::Sptr radioFrame3 = ResourceManager::CreateAsset<MeshResource>("animated meshes/radio/radioMesh-3.obj");
+		MeshResource::Sptr radioFrame4 = ResourceManager::CreateAsset<MeshResource>("animated meshes/radio/radioMesh-4.obj");
+		MeshResource::Sptr radioFrame5 = ResourceManager::CreateAsset<MeshResource>("animated meshes/radio/radioMesh-5.obj");
+		MeshResource::Sptr radioFrame6 = ResourceManager::CreateAsset<MeshResource>("animated meshes/radio/radioMesh-6.obj");
+		MeshResource::Sptr homeworkFrame0 = ResourceManager::CreateAsset<MeshResource>("animated meshes/homework/homeworkMesh-0.obj");
+		MeshResource::Sptr homeworkFrame1 = ResourceManager::CreateAsset<MeshResource>("animated meshes/homework/homeworkMesh-1.obj");
+		MeshResource::Sptr homeworkFrame2 = ResourceManager::CreateAsset<MeshResource>("animated meshes/homework/homeworkMesh-2.obj");
+
 
 		//Textures
 		Texture2D::Sptr    missingTex = ResourceManager::CreateAsset<Texture2D>("textures/MissingTexture.png");
@@ -407,12 +431,19 @@ int main() {
 		Texture2D::Sptr    rewardSkin = ResourceManager::CreateAsset<Texture2D>("textures/forggyBonds.png");
 		Texture2D::Sptr    shroomTex = ResourceManager::CreateAsset<Texture2D>("textures/Shroomba.png");
 		Texture2D::Sptr    bedroomTex = ResourceManager::CreateAsset<Texture2D>("textures/MegaText.png");
+		Texture2D::Sptr    radioTex = ResourceManager::CreateAsset<Texture2D>("textures/Radio.png");
+		Texture2D::Sptr    homeworkTex = ResourceManager::CreateAsset<Texture2D>("textures/Homework.png");
+		Texture2D::Sptr    bbPosterTex = ResourceManager::CreateAsset<Texture2D>("textures/Poster.png");
+		Texture2D::Sptr    menuTex = ResourceManager::CreateAsset<Texture2D>("textures/Menu.png");
+		Texture2D::Sptr    menuPointerTex = ResourceManager::CreateAsset<Texture2D>("textures/MenuPointer.png");
+		Texture2D::Sptr    listTex = ResourceManager::CreateAsset<Texture2D>("textures/List.png");
+		Texture2D::Sptr    lineTex = ResourceManager::CreateAsset<Texture2D>("textures/Line.png");
 
 		// Here we'll load in the cubemap, as well as a special shader to handle drawing the skybox
 		TextureCube::Sptr testCubemap = ResourceManager::CreateAsset<TextureCube>("cubemaps/ocean/ocean.jpg");
 		Shader::Sptr      skyboxShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
 			{ ShaderPartType::Vertex, "shaders/skybox_vert.glsl" },
-			{ ShaderPartType::Fragment, "shaders/skybox_frag.glsl" }//kjkj
+			{ ShaderPartType::Fragment, "shaders/skybox_frag.glsl" }
 		});   
 		 
 		// Create an empty scene
@@ -428,8 +459,16 @@ int main() {
 		Material::Sptr missingMaterial = MakeMaterial("Missing Texture", basicShader, missingTex, 0.1f);
 		Material::Sptr rewardMaterial = MakeMaterial("Reward Material", reflectiveShader, rewardSkin, 0.5);
 		Material::Sptr rightWallMaterial = MakeMaterial("Right Wall", basicShader, rightWallTex, 0.1f);
-		Material::Sptr shroombaMaterial = MakeMaterial("Shroomba Material", basicShader, shroomTex, 0.1f);
+		Material::Sptr shroombaMaterial = MakeMaterial("Shroomba Material", morphShader, shroomTex, 0.1f);
 		Material::Sptr bedroomMaterial = MakeMaterial("Bedroom Material", basicShader, bedroomTex, 0.2f);
+		Material::Sptr radioMaterial = MakeMaterial("Radio Material", morphShader, radioTex, 0.1f);
+		Material::Sptr homeworkMaterial = MakeMaterial("Homework Material", morphShader, homeworkTex, 0.1f);
+		Material::Sptr bbPosterMaterial = MakeMaterial("Boyband Poster Material", basicShader, bbPosterTex, 0.1f);
+		Material::Sptr menuMaterial = MakeMaterial("Menu Material", basicShader, menuTex, 0.1f);
+		Material::Sptr menuPointerMaterial = MakeMaterial("Menu Pointer Material", basicShader, menuPointerTex, 0.1f);
+		Material::Sptr listMaterial = MakeMaterial("List Material", basicShader, listTex, 0.1f);
+		Material::Sptr lineMaterial = MakeMaterial("Line Material", basicShader, lineTex, 0.1f);
+
 
 		// Create some lights for our scene
 		scene->Lights.resize(3);
@@ -451,7 +490,7 @@ int main() {
 		// Set up the scene's camera
 		GameObject::Sptr camera = scene->CreateGameObject("Main Camera");
 		{
-			camera->SetPostion(glm::vec3(8.0f, 8.0f, 15.0f));
+			camera->SetPosition(glm::vec3(8.0f, 8.0f, 15.0f));
 			camera->LookAt(glm::vec3(-7.5f, -7.5f, 4.0f));		
 
 			Camera::Sptr cam = camera->Add<Camera>();
@@ -462,7 +501,7 @@ int main() {
 
 		GameObject::Sptr bedroomObject = scene->CreateGameObject("Bedroom Object");
 		{
-			bedroomObject->SetPostion(glm::vec3(0.f, 0.0f, 0.0f));
+			bedroomObject->SetPosition(glm::vec3(0.f, 0.0f, 0.0f));
 
 			// Create and attach a RenderComponent to the object to draw our mesh
 			RenderComponent::Sptr renderer = bedroomObject->Add<RenderComponent>();
@@ -474,98 +513,162 @@ int main() {
 		GameObject::Sptr screen = scene->CreateGameObject("Screen");
 		{
 			// Make a big tiled mesh
-			MeshResource::Sptr tiledMesh = ResourceManager::CreateAsset<MeshResource>();
-			tiledMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(10.0f, 20.0f)));
-			tiledMesh->GenerateMesh();
+			MeshResource::Sptr menuMesh = ResourceManager::CreateAsset<MeshResource>();
+			menuMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(18.0f, 10.0f)));
+			menuMesh->GenerateMesh();
 
 			// Create and attach a RenderComponent to the object to draw our mesh
 			RenderComponent::Sptr renderer = screen->Add<RenderComponent>();
-			renderer->SetMesh(tiledMesh);
-			renderer->SetMaterial(rightWallMaterial);
+			renderer->SetMesh(menuMesh);
+			renderer->SetMaterial(menuMaterial);
 
-			screen->SetPostion(glm::vec3(4.7f, 5.1f, 12.8f));
-			screen->SetRotation(glm::vec3(0.0f, 63.0f, 45.0f));
+			screen->SetPosition(glm::vec3(5.0f, 5.34f, 12.8f));
+			screen->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
 
 			MainMenu::Sptr menu = screen->Add<MainMenu>();
-
+			menu->MenuMaterial = menuMaterial;
+			menu->ListMaterial = listMaterial;
 
 		}
 
-		//set up interactable GameObjects
-		GameObject::Sptr nightstand = MakeInteractableObject("Nightstand", nightstandMesh, missingMaterial, rewardMaterial, glm::vec3(-8.5f, -2.0f, 0.0f));
-
-
-
-		GameObject::Sptr shroomba = scene->CreateGameObject("Shroomba");
+		GameObject::Sptr pointer = scene->CreateGameObject("Pointer");
 		{
-			shroomba->SetPostion(glm::vec3(2.f, 2.f, 2.f));
+			// Make a big tiled mesh
+			MeshResource::Sptr pointerMesh = ResourceManager::CreateAsset<MeshResource>();
+			pointerMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(2.0f, 1.0f)));
+			pointerMesh->GenerateMesh();
+
+			// Create and attach a RenderComponent to the object to draw our mesh
+			RenderComponent::Sptr renderer = pointer->Add<RenderComponent>();
+			renderer->SetMesh(pointerMesh);
+			renderer->SetMaterial(menuPointerMaterial);
+
+			pointer->SetPosition(glm::vec3(2.29f, 6.39f, 15.63f));
+			pointer->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
+
+			Pointer::Sptr point = pointer->Add<Pointer>();
+			point->mainmenu = screen->Get<MainMenu>();
+
+		}
+
+		//set up interactable 
+
+
+
+		GameObject::Sptr radio = scene->CreateGameObject("Radio");
+		{
+			radio->SetPosition(glm::vec3(-7.4f, -3.1f, 0.0f));
 			
+			RenderComponent::Sptr renderer = radio->Add<RenderComponent>();
+			renderer->SetMesh(radioFrame0);
+			renderer->SetMaterial(radioMaterial);
+
+			RigidBody::Sptr physics = radio->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(ConvexMeshCollider::Create());
+
+			MorphRenderComponent::Sptr morphRenderer = radio->Add<MorphRenderComponent>(radioFrame0);
+
+			MorphAnimationManager::Sptr animator = radio->Add<MorphAnimationManager>();
+			animator->AddAnim(std::vector<Gameplay::MeshResource::Sptr>{radioFrame1, radioFrame2, radioFrame3, radioFrame4, radioFrame5, radioFrame6}, 0.5);
+			animator->SetContinuity(true); 
+		}
+
+		GameObject::Sptr homework = scene->CreateGameObject("Homework");
+		{
+			homework->SetPosition(glm::vec3(-5.f, 3.45f, 3.3f));
+
+			RenderComponent::Sptr renderer = homework->Add<RenderComponent>();
+			renderer->SetMesh(homeworkFrame0);
+			renderer->SetMaterial(homeworkMaterial);
+
+			RigidBody::Sptr physics = homework->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(ConvexMeshCollider::Create());
+
+			MorphRenderComponent::Sptr morphRenderer = homework->Add<MorphRenderComponent>(homeworkFrame0);
+
+			MorphAnimationManager::Sptr animator = homework->Add<MorphAnimationManager>();
+			animator->AddAnim(std::vector<Gameplay::MeshResource::Sptr>{homeworkFrame1, homeworkFrame2}, 2.0);
+			animator->SetContinuity(true);
+		}
+
+		GameObject::Sptr shroomba = scene->CreateGameObject("Bedroom Shroomba");
+		{
+			shroomba->SetPosition(glm::vec3(2.f, 2.f, 0.f));
 			RenderComponent::Sptr renderer = shroomba->Add<RenderComponent>();
-			renderer->SetMesh(shroombaMesh);
+			renderer->SetMesh(shroombaFrame0);
 			renderer->SetMaterial(shroombaMaterial);
-			
+
 			RigidBody::Sptr physics = shroomba->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(ConvexMeshCollider::Create());
 
+			MorphRenderComponent::Sptr morphRenderer = shroomba->Add<MorphRenderComponent>(shroombaFrame0);
+
+			MorphAnimationManager::Sptr animator = shroomba->Add<MorphAnimationManager>();
+			animator->AddAnim(std::vector<Gameplay::MeshResource::Sptr>{shroombaFrame1, shroombaFrame2, shroombaFrame3}, 2.4);
+			animator->SetContinuity(true);
+
 			InterpolationBehaviour::Sptr interpolator = shroomba->Add<InterpolationBehaviour>();
-			interpolator->StartPushNewBehaviour("patrol");
-			interpolator->AddKeyFrame(TRANSLATION, 4.0, glm::vec3(4.5f, 4.5f, 0.2f));
-			interpolator->AddKeyFrame(TRANSLATION, 4.0, glm::vec3(4.5f, -8.5f, 0.2f));
-			interpolator->AddKeyFrame(TRANSLATION, 1.2, glm::vec3(-8.5f, -8.5f, 0.2f));
-			interpolator->AddKeyFrame(TRANSLATION, 0.3, glm::vec3(-8.5f, -4.3f, 0.2f));
-			interpolator->AddKeyFrame(TRANSLATION, 0.6, glm::vec3(-6.75f, -4.3f, 0.2f));
-			interpolator->AddKeyFrame(TRANSLATION, 0.3, glm::vec3(-6.75f, 0.15f, 0.2f));
-			interpolator->AddKeyFrame(TRANSLATION, 1.2, glm::vec3(-8.5f, 0.15f, 0.2f));
-			interpolator->AddKeyFrame(TRANSLATION, 4.0, glm::vec3(-8.5f, 4.5f, 0.2f));
-
-			interpolator->AddKeyFrame(ROTATION, 8.0, glm::vec3(0.f, 0.f, 0.f));
-			interpolator->AddKeyFrame(ROTATION, 8.0, glm::vec3(0.f, 0.f, -360.f));
-			
-			interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
-			interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
-			interpolator->EndPushNewBehaviour();
-
-			interpolator->StartPushNewBehaviour("spin");
-			interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(4.f, 4.f, 0.2f));
-			interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(4.f, 4.f, 0.2f));
-			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 0.f));
-			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 360.f));
-			interpolator->AddKeyFrame(SCALE, 1.0, glm::vec3(1.0, 1.0, 1.0));
-			interpolator->AddKeyFrame(SCALE, 1.0, glm::vec3(1.0, 1.0, 1.0));
-			interpolator->EndPushNewBehaviour();
-
-			interpolator->StartPushNewBehaviour("dance");
-			interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(3.f, 3.f, 0.2f));
-			interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(3.f, 3.f, 0.1f));
-			interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(3.f, 3.f, 0.2f));
-			interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(3.f, 3.f, 0.1f));
-			interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
-			interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(2.5, 1.3, 0.5));
-			interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
-			interpolator->AddKeyFrame(SCALE, 1.0, glm::vec3(2.5, 1.3, 0.5));
-			interpolator->AddKeyFrame(SCALE, 1.0, glm::vec3(1.0, 1.0, 1.0));
-			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 0.f));
-			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 360.f));
-			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 0.f));
-			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 360.f));
-			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 0.f));
-			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 360.f));
-			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 0.f));
-			interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 360.f));
-			interpolator->EndPushNewBehaviour();
-
-
-			interpolator->PauseOrResumeCurrentBehaviour();
-
-
-			//interpolator->ToggleBehaviour("active", Non_Repeating);
+				interpolator->StartPushNewBehaviour("patrol");
+				interpolator->AddKeyFrame(TRANSLATION, 4.0, glm::vec3(4.5f, 4.5f, 0.2f));
+				interpolator->AddKeyFrame(TRANSLATION, 4.0, glm::vec3(4.5f, -8.5f, 0.2f));
+				interpolator->AddKeyFrame(TRANSLATION, 1.2, glm::vec3(-8.5f, -8.5f, 0.2f));
+				interpolator->AddKeyFrame(TRANSLATION, 0.3, glm::vec3(-8.5f, -4.3f, 0.2f));
+				interpolator->AddKeyFrame(TRANSLATION, 0.6, glm::vec3(-6.75f, -4.3f, 0.2f));
+				interpolator->AddKeyFrame(TRANSLATION, 0.3, glm::vec3(-6.75f, 0.15f, 0.2f));
+				interpolator->AddKeyFrame(TRANSLATION, 1.2, glm::vec3(-8.5f, 0.15f, 0.2f));
+				interpolator->AddKeyFrame(TRANSLATION, 4.0, glm::vec3(-8.5f, 4.5f, 0.2f));
+				interpolator->AddKeyFrame(ROTATION, 8.0, glm::vec3(0.f, 0.f, 0.f));
+				interpolator->AddKeyFrame(ROTATION, 8.0, glm::vec3(0.f, 0.f, -360.f));
+				interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
+				interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
+				interpolator->EndPushNewBehaviour();
+				interpolator->StartPushNewBehaviour("spin");
+				interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(4.f, 4.f, 0.2f));
+				interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(4.f, 4.f, 0.2f));
+				interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 0.f));
+				interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 360.f));
+				interpolator->AddKeyFrame(SCALE, 1.0, glm::vec3(1.0, 1.0, 1.0));
+				interpolator->AddKeyFrame(SCALE, 1.0, glm::vec3(1.0, 1.0, 1.0));
+				interpolator->EndPushNewBehaviour();
+				interpolator->StartPushNewBehaviour("dance");
+				interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(3.f, 3.f, 0.2f));
+				interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(3.f, 3.f, 0.1f));
+				interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(3.f, 3.f, 0.2f));
+				interpolator->AddKeyFrame(TRANSLATION, 1.0, glm::vec3(3.f, 3.f, 0.1f));
+				interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
+				interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(2.5, 1.3, 0.5));
+				interpolator->AddKeyFrame(SCALE, 2.0, glm::vec3(1.0, 1.0, 1.0));
+				interpolator->AddKeyFrame(SCALE, 1.0, glm::vec3(2.5, 1.3, 0.5));
+				interpolator->AddKeyFrame(SCALE, 1.0, glm::vec3(1.0, 1.0, 1.0));
+				interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 0.f));
+				interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 360.f));
+				interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 0.f));
+				interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 360.f));
+				interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 0.f));
+				interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 360.f));
+				interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 0.f));
+				interpolator->AddKeyFrame(ROTATION, 1.0, glm::vec3(0.f, 0.f, 360.f));
+				interpolator->EndPushNewBehaviour();//ljl
 		}
+
+		GameObject::Sptr boybandPoster = scene->CreateGameObject("Boyband Poster");
+		{
+			boybandPoster->SetPosition(glm::vec3(-9.4f, 3.f, 9.0f));
+
+			RenderComponent::Sptr renderer = boybandPoster->Add<RenderComponent>();
+			renderer->SetMesh(bbPosterMesh);
+			renderer->SetMaterial(bbPosterMaterial);
+
+			RigidBody::Sptr physics = boybandPoster->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(ConvexMeshCollider::Create());
+		}
+
 
 
 		//set up the hand
 		GameObject::Sptr hand = scene->CreateGameObject("Idle Hand");
 		{
-			hand->SetPostion(glm::vec3(0.f, 0.f, 2.f));
+			hand->SetPosition(glm::vec3(0.f, 0.f, 2.f));
 			
 			//allows the hand to be rendered
 			RenderComponent::Sptr renderer = hand->Add<RenderComponent>();
@@ -742,6 +845,8 @@ int main() {
 				}
 			}
 
+			
+
 			// If the material has changed, we need to bind the new shader and set up our material and frame data
 			// Note: This is a good reason why we should be sorting the render components in ComponentManager
 			if (renderable->GetMaterial() != currentMat) {
@@ -760,6 +865,8 @@ int main() {
 			shader->SetUniformMatrix("u_ModelViewProjection", viewProj * object->GetTransform());
 			shader->SetUniformMatrix("u_Model", object->GetTransform());
 			shader->SetUniformMatrix("u_NormalMatrix", glm::mat3(glm::transpose(glm::inverse(object->GetTransform()))));
+
+			if (object->Has<MorphRenderComponent>()) { shader->SetUniform("u_t", object->Get<MorphRenderComponent>()->_t); } 
 
 			// Draw the object
 			renderable->GetMesh()->Draw();

@@ -5,7 +5,7 @@
 #include "Gameplay/Scene.h"
 #include "GLFW/glfw3.h"
 
-InterpolationBehaviour::InterpolationBehaviour():IComponent() {
+InterpolationBehaviour::InterpolationBehaviour() :IComponent() {
 	//we will assume that the first behaviour pushed is the one to use, 
 	//and that it should constantly loop
 	_currentTransformIndex = 0;
@@ -78,8 +78,8 @@ void InterpolationBehaviour::Update(float deltaTime) {
 	else {
 		cooldown--;
 	}
-	
-	
+
+
 	if (_isRunning) {
 		InterpolationManager(deltaTime);
 	}
@@ -100,7 +100,7 @@ void InterpolationBehaviour::InterpolationManager(float deltaTime) {
 	}
 
 	if (completedTransformsTotal < 3) {
-		if (!currentTransform.transformFinished[0])	GetGameObject()->SetPostion(PerformTransformation(deltaTime, 0, currentTransform.animKeys[0]));
+		if (!currentTransform.transformFinished[0])	GetGameObject()->SetPosition(PerformTransformation(deltaTime, 0, currentTransform.animKeys[0]));
 		if (!currentTransform.transformFinished[1])	GetGameObject()->SetRotation(PerformTransformation(deltaTime, 1, currentTransform.animKeys[1]));
 		if (!currentTransform.transformFinished[2])	GetGameObject()->SetScale(PerformTransformation(deltaTime, 2, currentTransform.animKeys[2]));
 	}
@@ -109,7 +109,7 @@ void InterpolationBehaviour::InterpolationManager(float deltaTime) {
 			_isRunning = false;
 			std::cout << "done animation";
 		}
-		
+
 		for (int i = 0; i < 3; i++) {
 			(_allTransforms[_currentTransformIndex]).transformFinished[i] = 0;
 			(_allTransforms[_currentTransformIndex]).transformIndexes[i] = 0;
@@ -154,7 +154,7 @@ glm::vec3 InterpolationBehaviour::PerformTransformation(float deltaTime, int ind
 		else if (currentTransform->transformIndexes[index] > transformKeyFrames.size() - 1) {
 			currentTransform->transformIndexes[index] = 0;
 		}
-		
+
 	}
 
 	//divide time by current duration
@@ -162,7 +162,7 @@ glm::vec3 InterpolationBehaviour::PerformTransformation(float deltaTime, int ind
 	//get p0 and p1
 	p0 = transformKeyFrames[currentTransform->transformIndexes[index]].tFinalPose;
 	p1 = (currentTransform->transformIndexes[index] != transformKeyFrames.size() - 1) ? transformKeyFrames[currentTransform->transformIndexes[index] + 1].tFinalPose : transformKeyFrames[0].tFinalPose;
-	
+
 	//interpolate and return result
 	return LERP(p0, p1, t);
 }
@@ -222,7 +222,7 @@ void InterpolationBehaviour::EndPushNewBehaviour() {
 
 
 void InterpolationBehaviour::RenderImGui() {
-	
+
 }
 
 nlohmann::json InterpolationBehaviour::ToJson() const {
@@ -234,7 +234,7 @@ nlohmann::json InterpolationBehaviour::ToJson() const {
 	return result;
 }
 
-InterpolationBehaviour::Sptr InterpolationBehaviour::FromJson(const nlohmann::json& data) {
+InterpolationBehaviour::Sptr InterpolationBehaviour::FromJson(const nlohmann::json & data) {
 	InterpolationBehaviour::Sptr result = std::make_shared<InterpolationBehaviour>();
 	result->_isRunning = data["is_running"];
 	result->_loopTransform = data["is_looping"];

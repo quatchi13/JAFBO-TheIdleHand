@@ -6,8 +6,8 @@
 MainMenu::MainMenu() :
 	IComponent(),
 	_renderer(nullptr),
-	EnterMaterial(nullptr),
-	ExitMaterial(nullptr)
+	MenuMaterial(nullptr),
+	ListMaterial(nullptr)
 { }
 MainMenu::~MainMenu() = default;
 
@@ -16,11 +16,11 @@ void MainMenu::OnEnteredTrigger(const Gameplay::Physics::TriggerVolume::Sptr& tr
 		if (trigger->GetGameObject()->Has<RenderComponent>())
 		{
 			
-			trigger->GetGameObject()->Get<RenderComponent>()->SetMaterial(EnterMaterial);
+			trigger->GetGameObject()->Get<RenderComponent>()->SetMaterial(MenuMaterial);
 		}
 		
-		if (_renderer && EnterMaterial) {
-			_renderer->SetMaterial(EnterMaterial);
+		if (_renderer && MenuMaterial) {
+			_renderer->SetMaterial(MenuMaterial);
 		}
 	
 	
@@ -28,8 +28,8 @@ void MainMenu::OnEnteredTrigger(const Gameplay::Physics::TriggerVolume::Sptr& tr
 }
 
 void MainMenu::OnLeavingTrigger(const Gameplay::Physics::TriggerVolume::Sptr& trigger) {
-	if (_renderer && ExitMaterial) {
-		_renderer->SetMaterial(ExitMaterial);
+	if (_renderer && ListMaterial) {
+		_renderer->SetMaterial(ListMaterial);
 	}
 	LOG_INFO("Left trigger: {}", trigger->GetGameObject()->Name);
 }
@@ -40,12 +40,46 @@ void MainMenu::Awake() {
 
 void MainMenu::Update(float deltaTime)
 {
-	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_ENTER) == GLFW_PRESS)
+	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_ENTER) == GLFW_PRESS && !onScreen)
 	{
+		onScreen = true;
 		std::cout << "poosh";
-		GetGameObject()->SetPostion(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y, -GetGameObject()->GetPosition().z));
+		GetGameObject()->SetPosition(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y, -GetGameObject()->GetPosition().z));
+		_renderer->SetMaterial(ListMaterial);
 	}
 
+	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_ENTER) == GLFW_RELEASE)
+	{
+		onScreen = false;
+	}
+
+	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_DOWN) == GLFW_PRESS && !onScreen && !downarrow)
+	{
+		downarrow = true;
+		if (select < 4)
+		{
+			select++;
+		}
+	}
+
+	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_DOWN) == GLFW_RELEASE)
+	{
+		downarrow = false;
+	}
+
+	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_UP) == GLFW_PRESS && !onScreen && !uparrow)
+	{
+		uparrow = true;
+		if (select > 1)
+		{
+			select--;
+		}
+	}
+
+	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_UP) == GLFW_RELEASE)
+	{
+		uparrow = false;
+	}
 	
 }
 
@@ -60,14 +94,14 @@ void MainMenu::SetRenderer(RenderComponent::Sptr render)
 
 nlohmann::json MainMenu::ToJson() const {
 	return {
-		{ "enter_material", EnterMaterial != nullptr ? EnterMaterial->GetGUID().str() : "null" },
-		{ "exit_material", ExitMaterial != nullptr ? ExitMaterial->GetGUID().str() : "null" }
+		{ "menu_material", MenuMaterial != nullptr ? MenuMaterial->GetGUID().str() : "null" },
+		{ "list_material", ListMaterial != nullptr ? ListMaterial->GetGUID().str() : "null" }
 	};
 }
 
 MainMenu::Sptr MainMenu::FromJson(const nlohmann::json& blob) {
 	MainMenu::Sptr result = std::make_shared<MainMenu>();
-	result->EnterMaterial = ResourceManager::Get<Gameplay::Material>(Guid(blob["enter_material"]));
-	result->ExitMaterial  = ResourceManager::Get<Gameplay::Material>(Guid(blob["exit_material"]));
+	result->MenuMaterial = ResourceManager::Get<Gameplay::Material>(Guid(blob["menu_material"]));
+	result->ListMaterial  = ResourceManager::Get<Gameplay::Material>(Guid(blob["list_material"]));
 	return result;
 }

@@ -31,6 +31,8 @@ public:
 	/// </summary>
 	const Gameplay::Material::Sptr& GetMaterial() const;
 
+	void SetVAO(VertexArrayObject::Sptr);
+
 	/// <summary>
 	/// Sets this render component's mesh resource, from which the VAO will be retrieved for rendering
 	/// </summary>

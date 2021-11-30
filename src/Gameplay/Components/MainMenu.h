@@ -17,11 +17,16 @@ public:
 	MainMenu();
 	virtual ~MainMenu();
 
-	Gameplay::Material::Sptr        EnterMaterial;
-	Gameplay::Material::Sptr        ExitMaterial;
+	Gameplay::Material::Sptr        MenuMaterial;
+	Gameplay::Material::Sptr        ListMaterial;
 	
 	// Inherited from IComponent
-
+	bool onScreen = false;
+	bool uparrow = false;
+	bool downarrow = false;
+	bool menu = true;
+	bool list = false;
+	int select = 1;
 	virtual void OnEnteredTrigger(const std::shared_ptr<Gameplay::Physics::TriggerVolume>& trigger) override;
 	virtual void OnLeavingTrigger(const std::shared_ptr<Gameplay::Physics::TriggerVolume>& trigger) override;
 	virtual void Awake() override;

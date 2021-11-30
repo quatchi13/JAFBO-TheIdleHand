@@ -50,7 +50,7 @@ struct TFormAnim {
 	int transformIndexes[3]{ 0, 0, 0 };
 	float transformTimes[3]{ 0, 0, 0 };
 	bool transformFinished[3]{ 0, 0, 0 };
-	
+
 	/// <summary>
 	/// constructor for a TFormAnim
 	/// </summary>
@@ -98,7 +98,7 @@ public:
 	void EndPushNewBehaviour();
 
 	MAKE_TYPENAME(InterpolationBehaviour);
-	
+
 protected:
 
 	std::vector<TFormAnim> _allTransforms;
@@ -116,6 +116,3 @@ private:
 	std::vector<TFormFrame> sclFrames;
 	std::string tName;
 };
-
-
-

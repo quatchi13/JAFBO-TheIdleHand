@@ -5,7 +5,7 @@
 
 void MoveBehaviour::Update(float deltaTime) {
 
-	GetGameObject()->SetPostion(GetGameObject()->GetPosition() + MoveSpeed * deltaTime);
+	GetGameObject()->SetPosition(GetGameObject()->GetPosition() + MoveSpeed * deltaTime);
 }
 
 void MoveBehaviour::RenderImGui() {
