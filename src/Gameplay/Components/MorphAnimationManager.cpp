@@ -48,6 +48,9 @@ void MorphAnimationManager::SetContinuity(bool c) {
 	futureContinuity = c;
 }
 
+void MorphAnimationManager::SetIdleIndex(int i) {
+	curIdleIndex = i;
+}
 
 
 
@@ -93,7 +96,7 @@ void MorphAnimationManager::Update(float deltaTime) {
 				}
 				else {
 					animations[currentAnimIndex].done = false;
-					animations[currentAnimIndex].index = 0;
+					animations[currentAnimIndex].index = curIdleIndex;
 					InterpolateMeshes(deltaTime);
 				}
 			}

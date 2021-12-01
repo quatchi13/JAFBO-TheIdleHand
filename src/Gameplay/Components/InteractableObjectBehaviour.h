@@ -5,6 +5,55 @@
 #include "Gameplay/Components/SkinManager.h"
 #include "GLFW/glfw3.h"
 #include "Gameplay/Scene.h"
+#include "Gameplay/Components/MorphAnimationManager.h"
+
+enum FeedbackBehaviour {
+	TEX, 
+	MESH,
+	TRANSFORM,
+	ANIM
+};
+
+class InteractionTForm {
+public:
+	enum tformt {
+		pos,
+		rot,
+		scl
+	};
+	glm::vec3 tform;
+	tformt trnsfrm;
+
+	InteractionTForm(tformt t, glm::vec3 v) {
+		trnsfrm = t;
+		tform = glm::vec3(v);
+	}
+};
+
+class InteractionFeedback {
+public: 
+	InteractionFeedback(Gameplay::Material::Sptr, Gameplay::GameObject::Sptr);
+	InteractionFeedback(Gameplay::MeshResource::Sptr, Gameplay::GameObject::Sptr);
+	InteractionFeedback(std::vector<InteractionTForm>, Gameplay::GameObject::Sptr);
+	InteractionFeedback(int, Gameplay::GameObject::Sptr);
+
+
+
+
+	FeedbackBehaviour b;
+	Gameplay::Material::Sptr _SWAPMAT = nullptr;
+	Gameplay::MeshResource::Sptr _SWAPMESH = nullptr;
+	Gameplay::GameObject::Sptr _TARGET;
+	std::vector<InteractionTForm> _SWAPTRANSFORM;
+	int _SWAPAINDEX;
+
+
+	void SwapMat();
+	void SwapMesh();
+	void SwapTransforms();
+	void SwapAnim();
+};
+
 
 /// <summary>
 /// Gives an object interactivity properties 
@@ -18,6 +67,7 @@ public:
 	virtual ~InteractableObjectBehaviour();
 	//adds a material that can be sent to the hand after an interaction
 	void AddRewardMaterial(Gameplay::Material::Sptr r);
+	void AddFeedbackBehaviour(InteractionFeedback);
 
 	// Inherited from IComponent
 	virtual void Awake() override;
@@ -30,6 +80,9 @@ public:
 	MAKE_TYPENAME(InteractableObjectBehaviour);
 
 protected:
+	void PerformFeedback();
+
+
 	bool _playerInTrigger = false;
 	bool _hasBeenActivated = false;
 
@@ -37,4 +90,6 @@ protected:
 
 	GLFWwindow* _windowPointer;
 	Gameplay::Material::Sptr _rewardMaterial;
+
+	std::vector<InteractionFeedback> feedback;
 };

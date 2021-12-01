@@ -395,7 +395,7 @@ int main() {
 
 		// This shader handles our basic materials without reflections (cause they expensive)
 		Shader::Sptr basicShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
-			{ ShaderPartType::Vertex, "shaders/vertex_shader.glsl" },
+			{ ShaderPartType::Vertex, "shaders/newshader.glsl" },
 			{ ShaderPartType::Fragment, "shaders/frag_blinn_phong_textured.glsl" }
 		});
 
@@ -409,6 +409,8 @@ int main() {
 		MeshResource::Sptr theHandMesh = ResourceManager::CreateAsset<MeshResource>("meshes/hand.obj");
 		MeshResource::Sptr bedroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/megaBedroom.obj");
 		MeshResource::Sptr bbPosterMesh = ResourceManager::CreateAsset<MeshResource>("meshes/boyband_poster.obj");
+		MeshResource::Sptr bbPosterMesh2 = ResourceManager::CreateAsset<MeshResource>("meshes/boyband_poster2.obj");
+		MeshResource::Sptr paintcanMesh = ResourceManager::CreateAsset<MeshResource>("meshes/paintCan.obj");
 		MeshResource::Sptr shroombaFrame0 = ResourceManager::CreateAsset<MeshResource>("animated meshes/shroomba/shroombaMesh-0.obj");
 		MeshResource::Sptr shroombaFrame1 = ResourceManager::CreateAsset<MeshResource>("animated meshes/shroomba/shroombaMesh-1.obj");
 		MeshResource::Sptr shroombaFrame2 = ResourceManager::CreateAsset<MeshResource>("animated meshes/shroomba/shroombaMesh-2.obj");
@@ -423,17 +425,28 @@ int main() {
 		MeshResource::Sptr homeworkFrame0 = ResourceManager::CreateAsset<MeshResource>("animated meshes/homework/homeworkMesh-0.obj");
 		MeshResource::Sptr homeworkFrame1 = ResourceManager::CreateAsset<MeshResource>("animated meshes/homework/homeworkMesh-1.obj");
 		MeshResource::Sptr homeworkFrame2 = ResourceManager::CreateAsset<MeshResource>("animated meshes/homework/homeworkMesh-2.obj");
-
+		MeshResource::Sptr homeworkMessFrame1 = ResourceManager::CreateAsset<MeshResource>("animated meshes/homework/homework2Mesh-1.obj");
+		
 
 		//Textures
+		Texture2D::Sptr    handDefault = ResourceManager::CreateAsset<Texture2D>("textures/Hand.png");
+		Texture2D::Sptr    handMusic = ResourceManager::CreateAsset<Texture2D>("textures/HandMusic.png");
+		Texture2D::Sptr    handHomework = ResourceManager::CreateAsset<Texture2D>("textures/HandHomework.png");
+		Texture2D::Sptr    handShroom = ResourceManager::CreateAsset<Texture2D>("textures/HandShroom1.png");
+		Texture2D::Sptr    handBoyBand = ResourceManager::CreateAsset<Texture2D>("textures/HandBoyBand.png");
+		Texture2D::Sptr    handRainbow = ResourceManager::CreateAsset<Texture2D>("textures/HandRainbow.png");
+		Texture2D::Sptr    spookyRoom = ResourceManager::CreateAsset<Texture2D>("textures/spookyroom.png");
+
 		Texture2D::Sptr    missingTex = ResourceManager::CreateAsset<Texture2D>("textures/MissingTexture.png");
 		Texture2D::Sptr    rightWallTex = ResourceManager::CreateAsset<Texture2D>("textures/RightWall.png");
 		Texture2D::Sptr    rewardSkin = ResourceManager::CreateAsset<Texture2D>("textures/forggyBonds.png");
 		Texture2D::Sptr    shroomTex = ResourceManager::CreateAsset<Texture2D>("textures/Shroomba.png");
 		Texture2D::Sptr    bedroomTex = ResourceManager::CreateAsset<Texture2D>("textures/MegaText.png");
 		Texture2D::Sptr    radioTex = ResourceManager::CreateAsset<Texture2D>("textures/Radio.png");
+		Texture2D::Sptr    radioTex2 = ResourceManager::CreateAsset<Texture2D>("textures/change_radio.png");
 		Texture2D::Sptr    homeworkTex = ResourceManager::CreateAsset<Texture2D>("textures/Homework.png");
 		Texture2D::Sptr    bbPosterTex = ResourceManager::CreateAsset<Texture2D>("textures/Poster.png");
+		Texture2D::Sptr    paintcanTex = ResourceManager::CreateAsset<Texture2D>("textures/PaintCan.png");
 		Texture2D::Sptr    menuTex = ResourceManager::CreateAsset<Texture2D>("textures/Menu.png");
 		Texture2D::Sptr    menuPointerTex = ResourceManager::CreateAsset<Texture2D>("textures/MenuPointer.png");
 		Texture2D::Sptr    listTex = ResourceManager::CreateAsset<Texture2D>("textures/List.png");
@@ -456,14 +469,24 @@ int main() {
 		scene->SetSkyboxRotation(glm::rotate(MAT4_IDENTITY, glm::half_pi<float>(), glm::vec3(1.0f, 0.0f, 0.0f)));
 
 		//Materials
+		Material::Sptr handDefaultMaterial = MakeMaterial("Hand Default", basicShader, handDefault, 0.1);
+		Material::Sptr handMusicMaterial = MakeMaterial("Hand Music", basicShader, handMusic, 0.1);
+		Material::Sptr handHomeworkMaterial = MakeMaterial("Hand Homework", basicShader, handHomework, 0.1);
+		Material::Sptr handBoyBandMaterial = MakeMaterial("Hand BoyBand", basicShader, handBoyBand, 0.1);
+		Material::Sptr handShroomMaterial = MakeMaterial("Hand Shroom", basicShader, handShroom, 0.1);
+		Material::Sptr handRainbowMaterial = MakeMaterial("Hand Rainbow", basicShader, handRainbow, 0.1);
 		Material::Sptr missingMaterial = MakeMaterial("Missing Texture", basicShader, missingTex, 0.1f);
 		Material::Sptr rewardMaterial = MakeMaterial("Reward Material", reflectiveShader, rewardSkin, 0.5);
 		Material::Sptr rightWallMaterial = MakeMaterial("Right Wall", basicShader, rightWallTex, 0.1f);
 		Material::Sptr shroombaMaterial = MakeMaterial("Shroomba Material", morphShader, shroomTex, 0.1f);
 		Material::Sptr bedroomMaterial = MakeMaterial("Bedroom Material", basicShader, bedroomTex, 0.2f);
+		Material::Sptr spookyMaterial = MakeMaterial("Spooky Material", basicShader, spookyRoom, 0.2);
 		Material::Sptr radioMaterial = MakeMaterial("Radio Material", morphShader, radioTex, 0.1f);
+		Material::Sptr radioMaterial2 = MakeMaterial("Radio Material 2", morphShader, radioTex2, 0.1f);
 		Material::Sptr homeworkMaterial = MakeMaterial("Homework Material", morphShader, homeworkTex, 0.1f);
 		Material::Sptr bbPosterMaterial = MakeMaterial("Boyband Poster Material", basicShader, bbPosterTex, 0.1f);
+		Material::Sptr bbPosterMaterial2 = MakeMaterial("Boyband Poster Material 2", basicShader, bbPosterTex, 0.1f);
+		Material::Sptr paintcanMaterial = MakeMaterial("Paint Can Material", basicShader, paintcanTex, 0.1f);
 		Material::Sptr menuMaterial = MakeMaterial("Menu Material", basicShader, menuTex, 0.1f);
 		Material::Sptr menuPointerMaterial = MakeMaterial("Menu Pointer Material", basicShader, menuPointerTex, 0.1f);
 		Material::Sptr listMaterial = MakeMaterial("List Material", basicShader, listTex, 0.1f);
@@ -565,12 +588,22 @@ int main() {
 
 			RigidBody::Sptr physics = radio->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(ConvexMeshCollider::Create());
+			
+			TriggerVolume::Sptr volume = radio->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = radio->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);            
+			interactions->AddFeedbackBehaviour((InteractionFeedback(radioMaterial2, radio)));
 
 			MorphRenderComponent::Sptr morphRenderer = radio->Add<MorphRenderComponent>(radioFrame0);
 
 			MorphAnimationManager::Sptr animator = radio->Add<MorphAnimationManager>();
 			animator->AddAnim(std::vector<Gameplay::MeshResource::Sptr>{radioFrame1, radioFrame2, radioFrame3, radioFrame4, radioFrame5, radioFrame6}, 0.5);
 			animator->SetContinuity(true); 
+			
 		}
 
 		GameObject::Sptr homework = scene->CreateGameObject("Homework");
@@ -584,10 +617,23 @@ int main() {
 			RigidBody::Sptr physics = homework->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(ConvexMeshCollider::Create());
 
+			TriggerVolume::Sptr volume = homework->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = homework->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handHomeworkMaterial);
+			interactions->AddFeedbackBehaviour((InteractionFeedback(1, homework)));
+			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(2.01f, 0.69f, 0.1f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, homework)));
+
 			MorphRenderComponent::Sptr morphRenderer = homework->Add<MorphRenderComponent>(homeworkFrame0);
 
 			MorphAnimationManager::Sptr animator = homework->Add<MorphAnimationManager>();
 			animator->AddAnim(std::vector<Gameplay::MeshResource::Sptr>{homeworkFrame1, homeworkFrame2}, 2.0);
+			animator->AddAnim(std::vector<Gameplay::MeshResource::Sptr>{homeworkMessFrame1, homeworkMessFrame1}, 2.0);
+			
 			animator->SetContinuity(true);
 		}
 
@@ -600,6 +646,16 @@ int main() {
 
 			RigidBody::Sptr physics = shroomba->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(ConvexMeshCollider::Create());
+
+			TriggerVolume::Sptr volume = shroomba->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = shroomba->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handShroomMaterial);
+			InteractionTForm tf(InteractionTForm::tformt::rot, glm::vec3(180.f, 0.f, 0.f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, shroomba)));
 
 			MorphRenderComponent::Sptr morphRenderer = shroomba->Add<MorphRenderComponent>(shroombaFrame0);
 
@@ -661,9 +717,40 @@ int main() {
 
 			RigidBody::Sptr physics = boybandPoster->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(ConvexMeshCollider::Create());
+
+			TriggerVolume::Sptr volume = boybandPoster->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = boybandPoster->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handBoyBandMaterial);
+			interactions->AddFeedbackBehaviour((InteractionFeedback(bbPosterMesh2, boybandPoster)));
+			
 		}
 
+		GameObject::Sptr paintCan = scene->CreateGameObject("Paint Can");
+		{
+			paintCan->SetPosition(glm::vec3(0.45f, -5.1f, 6.44f));
 
+			RenderComponent::Sptr renderer = paintCan->Add<RenderComponent>();
+			renderer->SetMesh(paintcanMesh);
+			renderer->SetMaterial(paintcanMaterial);
+
+			RigidBody::Sptr physics = paintCan->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(ConvexMeshCollider::Create());
+
+			TriggerVolume::Sptr volume = paintCan->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = paintCan->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handRainbowMaterial);
+			interactions->AddFeedbackBehaviour((InteractionFeedback(spookyMaterial, bedroomObject)));
+			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(0.f, 0.f, -10.f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, paintCan)));
+		}
 
 		//set up the hand
 		GameObject::Sptr hand = scene->CreateGameObject("Idle Hand");
@@ -673,7 +760,7 @@ int main() {
 			//allows the hand to be rendered
 			RenderComponent::Sptr renderer = hand->Add<RenderComponent>();
 			renderer->SetMesh(theHandMesh);
-			renderer->SetMaterial(missingMaterial);
+			renderer->SetMaterial(handDefaultMaterial);
 
 			//make hand dynamic so that we can move it and it can interact with triggers
 			RigidBody::Sptr physics = hand->Add<RigidBody>(RigidBodyType::Dynamic);
