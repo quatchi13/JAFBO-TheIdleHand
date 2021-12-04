@@ -11,23 +11,23 @@ Pointer::Pointer() :
 { }
 Pointer::~Pointer() = default;
 
-void Pointer::OnEnteredTrigger(const Gameplay::Physics::TriggerVolume::Sptr & trigger) {
+void Pointer::OnEnteredTrigger(const Gameplay::Physics::TriggerVolume::Sptr& trigger) {
 
-	if (trigger->GetGameObject()->Has<RenderComponent>())
-	{
-
-		trigger->GetGameObject()->Get<RenderComponent>()->SetMaterial(MenuMaterial);
-	}
-
-	if (_renderer && MenuMaterial) {
-		_renderer->SetMaterial(MenuMaterial);
-	}
-
-
+		if (trigger->GetGameObject()->Has<RenderComponent>())
+		{
+			
+			trigger->GetGameObject()->Get<RenderComponent>()->SetMaterial(MenuMaterial);
+		}
+		
+		if (_renderer && MenuMaterial) {
+			_renderer->SetMaterial(MenuMaterial);
+		}
+	
+	
 	LOG_INFO("Entered trigger: {}", trigger->GetGameObject()->Name);
 }
 
-void Pointer::OnLeavingTrigger(const Gameplay::Physics::TriggerVolume::Sptr & trigger) {
+void Pointer::OnLeavingTrigger(const Gameplay::Physics::TriggerVolume::Sptr& trigger) {
 	if (_renderer && ListMaterial) {
 		_renderer->SetMaterial(ListMaterial);
 	}
@@ -37,7 +37,7 @@ void Pointer::OnLeavingTrigger(const Gameplay::Physics::TriggerVolume::Sptr & tr
 void Pointer::Awake() {
 	_renderer = GetComponent<RenderComponent>();
 
-
+	
 }
 
 void Pointer::Update(float deltaTime)
@@ -70,7 +70,7 @@ void Pointer::Update(float deltaTime)
 		GetGameObject()->SetPosition(glm::vec3(4.05f, 8.57f, 10.26f));
 		break;
 	}
-
+	
 }
 
 
@@ -89,9 +89,9 @@ nlohmann::json Pointer::ToJson() const {
 	};
 }
 
-Pointer::Sptr Pointer::FromJson(const nlohmann::json & blob) {
+Pointer::Sptr Pointer::FromJson(const nlohmann::json& blob) {
 	Pointer::Sptr result = std::make_shared<Pointer>();
 	result->MenuMaterial = ResourceManager::Get<Gameplay::Material>(Guid(blob["menu_material"]));
-	result->ListMaterial = ResourceManager::Get<Gameplay::Material>(Guid(blob["list_material"]));
+	result->ListMaterial  = ResourceManager::Get<Gameplay::Material>(Guid(blob["list_material"]));
 	return result;
 }

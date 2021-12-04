@@ -68,7 +68,12 @@ public:
 	//adds a material that can be sent to the hand after an interaction
 	void AddRewardMaterial(Gameplay::Material::Sptr r);
 	void AddFeedbackBehaviour(InteractionFeedback);
-
+	Gameplay::GameObject::Sptr prompt;
+	Gameplay::GameObject::Sptr objective;
+	Gameplay::GameObject::Sptr screen;
+	Gameplay::Material::Sptr image;
+	Gameplay::GameObject::Sptr secret;
+	bool isSecret = false;
 	// Inherited from IComponent
 	virtual void Awake() override;
 	virtual void Update(float deltaTime) override;

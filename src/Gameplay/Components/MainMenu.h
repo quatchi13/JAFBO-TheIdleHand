@@ -18,7 +18,8 @@ public:
 	virtual ~MainMenu();
 
 	Gameplay::Material::Sptr        MenuMaterial;
-	Gameplay::Material::Sptr        ListMaterial;
+	Gameplay::Material::Sptr        PauseMaterial;
+	Gameplay::Material::Sptr        WinMaterial;
 	
 	// Inherited from IComponent
 	bool onScreen = false;
@@ -27,6 +28,7 @@ public:
 	bool menu = true;
 	bool list = false;
 	int select = 1;
+	int objectives = 0;
 	virtual void OnEnteredTrigger(const std::shared_ptr<Gameplay::Physics::TriggerVolume>& trigger) override;
 	virtual void OnLeavingTrigger(const std::shared_ptr<Gameplay::Physics::TriggerVolume>& trigger) override;
 	virtual void Awake() override;

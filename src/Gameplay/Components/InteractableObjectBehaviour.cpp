@@ -2,6 +2,7 @@
 #include "Gameplay/Components/ComponentManager.h"
 #include "Gameplay/GameObject.h"
 #include "Gameplay/Components/RenderComponent.h"
+#include "Gameplay/Components/MainMenu.h"
 
 InteractionFeedback::InteractionFeedback(Gameplay::Material::Sptr mat, Gameplay::GameObject::Sptr o) {
 	_SWAPMAT = mat;
@@ -89,7 +90,7 @@ void InteractableObjectBehaviour::Awake() {
 
 void InteractableObjectBehaviour::Update(float deltaTime) {
 	if (_playerInTrigger) {
-		GetGameObject()->SetRotation(GetGameObject()->GetRotationEuler() + glm::vec3(0.f, 0.f, 90.f) * deltaTime);
+		//GetGameObject()->SetRotation(GetGameObject()->GetRotationEuler() + glm::vec3(0.f, 0.f, 90.f) * deltaTime);
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_E) == GLFW_PRESS) {
 			_hasBeenActivated = true;
@@ -98,6 +99,15 @@ void InteractableObjectBehaviour::Update(float deltaTime) {
 			PerformFeedback();
 			_body->GetGameObject()->Get<SkinManager>()->AddSkin(_rewardMaterial);
 			_body = nullptr;
+			prompt->SetPosition(glm::vec3(prompt->GetPosition().x, prompt->GetPosition().y, -prompt->GetPosition().z));
+			objective->SetPosition(glm::vec3(objective->GetPosition().x, objective->GetPosition().y, -objective->GetPosition().z));
+			screen->Get<RenderComponent>()->SetMaterial(image);
+			screen->SetPosition(glm::vec3(screen->GetPosition().x, screen->GetPosition().y, -screen->GetPosition().z));
+			if (isSecret)
+			{
+				secret->SetPosition(glm::vec3(secret->GetPosition().x, secret->GetPosition().y, -secret->GetPosition().z));
+			}
+			screen->Get<MainMenu>()->objectives += 1;
 		}
 
 	}
@@ -110,6 +120,7 @@ void InteractableObjectBehaviour::OnTriggerVolumeEntered(const std::shared_ptr<G
 		LOG_INFO("Body has entered our trigger volume: {}", body->GetGameObject()->Name);
 		_playerInTrigger = true;
 		_body = body;
+		prompt->SetPosition(glm::vec3(prompt->GetPosition().x, prompt->GetPosition().y, -prompt->GetPosition().z));
 	}
 }
 
@@ -119,6 +130,7 @@ void InteractableObjectBehaviour::OnTriggerVolumeLeaving(const std::shared_ptr<G
 		LOG_INFO("Body has left our trigger volume: {}", body->GetGameObject()->Name);
 		_playerInTrigger = false;
 		_body = nullptr;
+		prompt->SetPosition(glm::vec3(prompt->GetPosition().x, prompt->GetPosition().y, -prompt->GetPosition().z));
 	}
 		
 }
