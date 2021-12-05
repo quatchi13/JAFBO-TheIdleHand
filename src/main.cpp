@@ -430,7 +430,7 @@ int main() {
 		MeshResource::Sptr homeworkFrame0 = ResourceManager::CreateAsset<MeshResource>("animated meshes/homework/homeworkMesh-0.obj");
 		MeshResource::Sptr homeworkFrame1 = ResourceManager::CreateAsset<MeshResource>("animated meshes/homework/homeworkMesh-1.obj");
 		MeshResource::Sptr homeworkFrame2 = ResourceManager::CreateAsset<MeshResource>("animated meshes/homework/homeworkMesh-2.obj");
-		MeshResource::Sptr homeworkMessFrame1 = ResourceManager::CreateAsset<MeshResource>("animated meshes/homework/homework2Mesh-1.obj");
+		MeshResource::Sptr homeworkMessFrame1 = ResourceManager::CreateAsset<MeshResource>("animated meshes/homework/messyHomework.obj");
 		MeshResource::Sptr handIdle0 = ResourceManager::CreateAsset<MeshResource>("animated meshes/hand/handIdleMesh-0.obj");
 		MeshResource::Sptr handIdle3 = ResourceManager::CreateAsset<MeshResource>("animated meshes/hand/handIdleMesh-3.obj");
 		MeshResource::Sptr handIdle4 = ResourceManager::CreateAsset<MeshResource>("animated meshes/hand/handIdleMesh-4.obj");
@@ -443,7 +443,7 @@ int main() {
 		Texture2D::Sptr    handShroom = ResourceManager::CreateAsset<Texture2D>("textures/HandShroom1.png");
 		Texture2D::Sptr    handBoyBand = ResourceManager::CreateAsset<Texture2D>("textures/HandBoyBand.png");
 		Texture2D::Sptr    handRainbow = ResourceManager::CreateAsset<Texture2D>("textures/HandRainbow.png");
-		Texture2D::Sptr    spookyRoom = ResourceManager::CreateAsset<Texture2D>("textures/spookyroom.png");
+		Texture2D::Sptr    paintedOverPoster = ResourceManager::CreateAsset<Texture2D>("textures/megaTextMessy.png");
 
 		Texture2D::Sptr    missingTex = ResourceManager::CreateAsset<Texture2D>("textures/MissingTexture.png");
 		Texture2D::Sptr    rightWallTex = ResourceManager::CreateAsset<Texture2D>("textures/RightWall.png");
@@ -495,7 +495,7 @@ int main() {
 		Material::Sptr rightWallMaterial = MakeMaterial("Right Wall", basicShader, rightWallTex, 0.1f);
 		Material::Sptr shroombaMaterial = MakeMaterial("Shroomba Material", morphShader, shroomTex, 0.1f);
 		Material::Sptr bedroomMaterial = MakeMaterial("Bedroom Material", basicShader, bedroomTex, 0.2f);
-		Material::Sptr spookyMaterial = MakeMaterial("Spooky Material", basicShader, spookyRoom, 0.2);
+		Material::Sptr paintedOverMaterial = MakeMaterial("Spooky Material", basicShader, paintedOverPoster, 0.2);
 		Material::Sptr radioMaterial = MakeMaterial("Radio Material", morphShader, radioTex, 0.1f);
 		Material::Sptr radioMaterial2 = MakeMaterial("Radio Material 2", morphShader, radioTex2, 0.1f);
 		Material::Sptr homeworkMaterial = MakeMaterial("Homework Material", morphShader, homeworkTex, 0.1f);
@@ -764,16 +764,6 @@ int main() {
 			animator->AddAnim(std::vector<Gameplay::MeshResource::Sptr>{radioFrame1, radioFrame2, radioFrame3, radioFrame4, radioFrame5, radioFrame6}, 0.5);
 			animator->SetContinuity(true); 
 
-			//sample interpolation as of until joey fixes it
-			/*InterpolationBehaviour::Sptr interp = radio->Add<InterpolationBehaviour>();
-			interp->StartPushNewBehaviour("patrol");
-			interp->AddKeyFrame(TRANSLATION, 1.0f, glm::vec3(radio->GetPosition()));
-			interp->AddKeyFrame(ROTATION, 1.0f, glm::vec3(0));
-			interp->AddKeyFrame(SCALE, 1.0f, glm::vec3(radio->GetScale ()));
-			interp->AddKeyFrame(TRANSLATION, 1.0f, glm::vec3(0.0f));
-			interp->AddKeyFrame(ROTATION, 1.0f, glm::vec3(180.0f));
-			interp->AddKeyFrame(SCALE, 1.0f, glm::vec3(0.5f));
-			interp->EndPushNewBehaviour();*/
 			
 		}
 
@@ -893,7 +883,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = paintCan->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handRainbowMaterial);
-			interactions->AddFeedbackBehaviour((InteractionFeedback(spookyMaterial, bedroomObject)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(paintedOverMaterial, bedroomObject)));
 			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(0.f, 0.f, -10.f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, paintCan)));
 			interactions->prompt = prompt;
