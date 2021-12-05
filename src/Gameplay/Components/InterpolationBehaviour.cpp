@@ -49,6 +49,30 @@ void InterpolationBehaviour::ToggleBehaviour(std::string name, bool loops) {
 }
 
 /// <summary>
+/// Allows the user to specify which interpolation behaviour to use, and whether or not it will loop. 
+/// By default, the system will set the current behaviour to the first behaviour that was pushed, and will loop.
+/// </summary>
+/// <param name="index: ">index of the behaviour in the list</param>
+/// <param name="loops: ">if we want the behaviour to loop or run through once and stop</param>
+void InterpolationBehaviour::ToggleBehaviour(int index, bool loops) {
+
+	//resets current behaviour
+	for (int i = 0; i < 3; i++) {
+		(_allTransforms[_currentTransformIndex]).transformFinished[i] = 0;
+		(_allTransforms[_currentTransformIndex]).transformIndexes[i] = 0;
+		(_allTransforms[_currentTransformIndex]).transformTimes[i] = 0;
+	}
+
+	//sets to specified index
+	_currentTransformIndex = index;
+
+	//tells system whether the behaviour needs to loop or not
+	_loopTransform = loops;
+
+	std::cout << ' ' << _allTransforms[_currentTransformIndex].animName << '\n';
+}
+
+/// <summary>
 /// This function will pause or resume the current interpolation behaviour, 
 /// basically it just sets _isRunning to the opposite value
 /// </summary>
@@ -57,35 +81,9 @@ void InterpolationBehaviour::PauseOrResumeCurrentBehaviour() {
 }
 
 void InterpolationBehaviour::Update(float deltaTime) {
-	if (!cooldown) {
-		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_SPACE) == GLFW_PRESS) {
-			PauseOrResumeCurrentBehaviour();
-			cooldown = 30;
-		}
-		else if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_1) == GLFW_PRESS) {
-			ToggleBehaviour("patrol", Repeating);
-			cooldown = 30;
-		}
-		else if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_2) == GLFW_PRESS) {
-			ToggleBehaviour("spin", Repeating);
-			cooldown = 30;
-		}
-		else if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_3) == GLFW_PRESS) {
-			ToggleBehaviour("dance", Non_Repeating);
-			cooldown = 30;
-		}
-	}
-	else {
-		cooldown--;
-	}
-
-
 	if (_isRunning) {
 		InterpolationManager(deltaTime);
 	}
-
-
-
 }
 
 /// <summary>

@@ -39,7 +39,9 @@ public:
 	static MainMenu::Sptr FromJson(const nlohmann::json& blob);
 	MAKE_TYPENAME(MainMenu);
 
+	bool curIndex = 0;
 protected:
 	RenderComponent::Sptr _renderer;
-	
+	bool isSwitching = false;
+	bool hasResumed = false;
 };

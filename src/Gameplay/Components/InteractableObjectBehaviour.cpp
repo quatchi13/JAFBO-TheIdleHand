@@ -103,6 +103,7 @@ void InteractableObjectBehaviour::Update(float deltaTime) {
 			objective->SetPosition(glm::vec3(objective->GetPosition().x, objective->GetPosition().y, -objective->GetPosition().z));
 			screen->Get<RenderComponent>()->SetMaterial(image);
 			screen->SetPosition(glm::vec3(screen->GetPosition().x, screen->GetPosition().y, -screen->GetPosition().z));
+			screen->Get<MainMenu>()->curIndex = !(screen->Get<MainMenu>()->curIndex);
 			if (isSecret)
 			{
 				secret->SetPosition(glm::vec3(secret->GetPosition().x, secret->GetPosition().y, -secret->GetPosition().z));

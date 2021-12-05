@@ -86,6 +86,7 @@ public:
 	static InterpolationBehaviour::Sptr FromJson(const nlohmann::json& data);
 
 	void ToggleBehaviour(std::string newBehaviour, bool willLoop);
+	void ToggleBehaviour(int, bool);
 	void PauseOrResumeCurrentBehaviour();
 
 	void InterpolationManager(float deltaTime);
@@ -98,14 +99,15 @@ public:
 	void EndPushNewBehaviour();
 
 	MAKE_TYPENAME(InterpolationBehaviour);
-
+	
+	bool _isRunning;
 protected:
 
 	std::vector<TFormAnim> _allTransforms;
 	int _currentTransformIndex;
 	int _amountOfTransforms;
 	bool _loopTransform;
-	bool _isRunning;
+	
 	int cooldown;
 
 private:

@@ -1,7 +1,7 @@
 #include "Gameplay/Components/MainMenu.h"
 #include "Gameplay/Components/ComponentManager.h"
 #include "Gameplay/GameObject.h"
-
+#include "Gameplay/Components/InterpolationBehaviour.h"
 
 MainMenu::MainMenu() :
 	IComponent(),
@@ -46,10 +46,14 @@ void MainMenu::Update(float deltaTime)
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_ENTER) == GLFW_PRESS && !onScreen)
 		{
+			GetGameObject()->Get<InterpolationBehaviour>()->PauseOrResumeCurrentBehaviour();
+
 			onScreen = true;
 			std::cout << "poosh";
-			GetGameObject()->SetPosition(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y, -GetGameObject()->GetPosition().z));
-			_renderer->SetMaterial(PauseMaterial);
+			curIndex = !curIndex;
+			isSwitching = true;
+			
+			GetGameObject()->Get<InterpolationBehaviour>()->ToggleBehaviour(curIndex, false);
 			if (objectives == 5)
 			{
 				GetGameObject()->SetPosition(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y, -GetGameObject()->GetPosition().z));
@@ -89,6 +93,13 @@ void MainMenu::Update(float deltaTime)
 	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_UP) == GLFW_RELEASE)
 	{
 		uparrow = false;
+	}
+
+	if (isSwitching) {
+		if (!GetGameObject()->Get<InterpolationBehaviour>()->_isRunning) {
+			_renderer->SetMaterial(PauseMaterial);
+			isSwitching = false;
+		}
 	}
 	
 }

@@ -458,6 +458,7 @@ int main() {
 		Texture2D::Sptr    menuTex = ResourceManager::CreateAsset<Texture2D>("textures/Menu.png");
 		Texture2D::Sptr    menuPointerTex = ResourceManager::CreateAsset<Texture2D>("textures/MenuPointer.png");
 		Texture2D::Sptr    listTex = ResourceManager::CreateAsset<Texture2D>("textures/List.png");
+		Texture2D::Sptr    pauseTex = ResourceManager::CreateAsset<Texture2D>("textures/Pause.png");
 		Texture2D::Sptr    lineTex = ResourceManager::CreateAsset<Texture2D>("textures/Line.png");
 		Texture2D::Sptr    secretTex = ResourceManager::CreateAsset<Texture2D>("textures/SecretTextOne.png");
 		Texture2D::Sptr    booksInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/BooksInteract.png");
@@ -505,6 +506,7 @@ int main() {
 		Material::Sptr menuMaterial = MakeMaterial("Menu Material", basicShader, menuTex, 0.1f);
 		Material::Sptr menuPointerMaterial = MakeMaterial("Menu Pointer Material", basicShader, menuPointerTex, 0.1f);
 		Material::Sptr listMaterial = MakeMaterial("List Material", basicShader, listTex, 0.1f);
+		Material::Sptr pauseMaterial = MakeMaterial("Pause Material", basicShader, pauseTex, 0.1f);
 		Material::Sptr lineMaterial = MakeMaterial("Line Material", basicShader, lineTex, 0.1f);
 		Material::Sptr secretMaterial = MakeMaterial("Secret Material", basicShader, secretTex, 0.1f);
 		Material::Sptr radioInteractMaterial = MakeMaterial("Radio Interact Material", basicShader, radioInteractTex, 0.1f);
@@ -520,7 +522,7 @@ int main() {
 		scene->Lights.resize(3);
 		scene->Lights[0].Position = glm::vec3(0.0f, 1.0f, 17.23f);
 		scene->Lights[0].Color = glm::vec3(1.0f, 1.0f, 1.0f);
-		scene->Lights[0].Range = -15.0f;
+		scene->Lights[0].Range = -8.5f;
 
 		scene->Lights[1].Position = glm::vec3(-6.76f, 0.29f, 5.74f);
 		scene->Lights[1].Color = glm::vec3(0.10196f, 0.73725f, 0.8f);
@@ -571,13 +573,34 @@ int main() {
 			renderer->SetMaterial(menuMaterial);
 
 			screen->SetPosition(glm::vec3(5.0f, 5.34f, 12.8f));
-			screen->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
+			screen->SetRotation(glm::vec3(63.0f, 0.0f, 135.0f));
 
 			MainMenu::Sptr menu = screen->Add<MainMenu>();
 			menu->MenuMaterial = menuMaterial;
-			menu->PauseMaterial = listMaterial;
+			menu->PauseMaterial = pauseMaterial;
 			menu->WinMaterial = winMaterial;
 
+			InterpolationBehaviour::Sptr interp = screen->Add<InterpolationBehaviour>();
+			interp->StartPushNewBehaviour("Rising");
+			interp->AddKeyFrame(TRANSLATION, 3.0, glm::vec3(5.0f, 5.34f, -12.8f));
+			interp->AddKeyFrame(TRANSLATION, 3.0, glm::vec3(5.0f, 5.34f, 12.8f));
+			interp->AddKeyFrame(ROTATION, 3.0, glm::vec3(63.0f, 0.0f, 135.0f));
+			interp->AddKeyFrame(ROTATION, 3.0, glm::vec3(63.0f, 0.0f, 135.0f));
+			interp->AddKeyFrame(SCALE, 3.0, glm::vec3(1.0));
+			interp->AddKeyFrame(SCALE, 3.0, glm::vec3(1.0));
+			interp->EndPushNewBehaviour();
+			
+			interp->StartPushNewBehaviour("Lowering");
+			interp->AddKeyFrame(TRANSLATION, 3.0, glm::vec3(5.0f, 5.34f, 12.8f));
+			interp->AddKeyFrame(TRANSLATION, 3.0, glm::vec3(5.0f, 5.34f, -12.8f));
+			interp->AddKeyFrame(ROTATION, 3.0, glm::vec3(63.0f, 0.0f, 135.0f));
+			interp->AddKeyFrame(ROTATION, 3.0, glm::vec3(63.0f, 0.0f, 135.0f));
+			interp->AddKeyFrame(SCALE, 3.0, glm::vec3(1.0));
+			interp->AddKeyFrame(SCALE, 3.0, glm::vec3(1.0));
+			interp->EndPushNewBehaviour();
+
+			interp->ToggleBehaviour("Lowering", false);
+			interp->PauseOrResumeCurrentBehaviour();
 		}
 
 		GameObject::Sptr pointer = scene->CreateGameObject("Pointer");
@@ -614,7 +637,7 @@ int main() {
 			renderer->SetMesh(pointerMesh);
 			renderer->SetMaterial(menuPointerMaterial);
 
-			prompt->SetPosition(glm::vec3(1.26f, 7.67f, -16.25f));
+			prompt->SetPosition(glm::vec3(1.05f, 6.5f, -16.25f));
 			prompt->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
 		}
 
