@@ -61,6 +61,7 @@
 #include "Gameplay/Components/MorphAnimationManager.h"
 #include "Gameplay/Components/Pointer.h"
 #include "Gameplay/Components/LocomotionBehaviour.h"
+#include "Gameplay/Components/ObjectLinking.h"
 
 
 // Physics
@@ -73,6 +74,7 @@
 #include "Graphics/DebugDraw.h"
 #include "Gameplay/Components/TriggerVolumeEnterBehaviour.h"
 #include "Gameplay/Components/SimpleCameraControl.h"
+
 
 //#define LOG_GL_NOTIFICATIONS
 
@@ -370,6 +372,7 @@ int main() {
 	ComponentManager::RegisterType<MorphAnimationManager>();
 	ComponentManager::RegisterType<Pointer>();
 	ComponentManager::RegisterType<LocomotionBehaviour>();
+	ComponentManager::RegisterType<ObjectLinking>();
 
 
 
@@ -467,6 +470,8 @@ int main() {
 		Texture2D::Sptr    shroombaInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/ShroombaInteract.png");
 		Texture2D::Sptr    paintInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/PaintInteract.png");
 		Texture2D::Sptr    winTex = ResourceManager::CreateAsset<Texture2D>("textures/win.png");
+		Texture2D::Sptr    ePrTex = ResourceManager::CreateAsset<Texture2D>("textures/EnterPrompt.png");
+		Texture2D::Sptr    eTex = ResourceManager::CreateAsset<Texture2D>("textures/E.png");
 
 		// Here we'll load in the cubemap, as well as a special shader to handle drawing the skybox
 		TextureCube::Sptr testCubemap = ResourceManager::CreateAsset<TextureCube>("cubemaps/map/map.jpg");
@@ -515,6 +520,8 @@ int main() {
 		Material::Sptr booksInteractMaterial = MakeMaterial("Books Interact Material", basicShader, booksInteractTex, 0.1f);
 		Material::Sptr shroombaInteractMaterial = MakeMaterial("Shroomba Interact Material", basicShader, shroombaInteractTex, 0.1f);
 		Material::Sptr winMaterial = MakeMaterial("Win Material", basicShader, winTex, 0.1f);
+		Material::Sptr ePromptMaterial = MakeMaterial("Enter Prompt Material", basicShader, ePrTex, 0.1f);
+		Material::Sptr eMaterial = MakeMaterial("Enter Prompt Material", basicShader, eTex, 0.1f);
 
 
 
@@ -601,6 +608,8 @@ int main() {
 
 			interp->ToggleBehaviour("Lowering", false);
 			interp->PauseOrResumeCurrentBehaviour();
+
+			ObjectLinking::Sptr oLink = screen->Add<ObjectLinking>();
 		}
 
 		GameObject::Sptr pointer = scene->CreateGameObject("Pointer");
@@ -623,7 +632,22 @@ int main() {
 
 		}
 
-		
+		GameObject::Sptr enterPrompt = scene->CreateGameObject("Enter Prompt");
+		{
+			MeshResource::Sptr pointerMesh = ResourceManager::CreateAsset<MeshResource>();
+			pointerMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(4.0f, 1.0f)));
+			pointerMesh->GenerateMesh();
+
+			RenderComponent::Sptr renderer = enterPrompt->Add<RenderComponent>();
+			renderer->SetMesh(pointerMesh);
+			renderer->SetMaterial(ePromptMaterial);
+
+			enterPrompt->SetPosition(glm::vec3(6.f, 6.f, 11.f));
+			enterPrompt->SetRotation(glm::vec3(63.0f, 0.0f, 135.0f));
+
+			enterPrompt->Add<ObjectLinking>(screen);
+			screen->Get<ObjectLinking>()->LinkObject(enterPrompt);
+		}
 
 		GameObject::Sptr prompt = scene->CreateGameObject("Prompt");
 		{
@@ -635,7 +659,7 @@ int main() {
 			// Create and attach a RenderComponent to the object to draw our mesh
 			RenderComponent::Sptr renderer = prompt->Add<RenderComponent>();
 			renderer->SetMesh(pointerMesh);
-			renderer->SetMaterial(menuPointerMaterial);
+			renderer->SetMaterial(eMaterial);
 
 			prompt->SetPosition(glm::vec3(1.05f, 6.5f, -16.25f));
 			prompt->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
@@ -753,10 +777,10 @@ int main() {
 			lineFive->SetPosition(glm::vec3(10.26f, 1.49f, -9.17f));
 			lineFive->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
 		}
+		
+
+
 		//set up interactable 
-
-
-
 		GameObject::Sptr radio = scene->CreateGameObject("Radio");
 		{
 			radio->SetPosition(glm::vec3(-7.4f, -3.1f, 0.0f));
