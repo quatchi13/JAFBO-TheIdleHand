@@ -17,17 +17,20 @@ public:
 	MainMenu();
 	virtual ~MainMenu();
 
+	Gameplay::GameObject::Sptr      pointer;
+	Gameplay::GameObject::Sptr      fbScreen;
+
 	Gameplay::Material::Sptr        MenuMaterial;
 	Gameplay::Material::Sptr        PauseMaterial;
 	Gameplay::Material::Sptr        WinMaterial;
 	
 	// Inherited from IComponent
-	bool onScreen = false;
+	bool active = false;
 	bool uparrow = false;
 	bool downarrow = false;
 	bool menu = true;
 	bool list = false;
-	int select = 1;
+	int select = 0;
 	int objectives = 0;
 	virtual void OnEnteredTrigger(const std::shared_ptr<Gameplay::Physics::TriggerVolume>& trigger) override;
 	virtual void OnLeavingTrigger(const std::shared_ptr<Gameplay::Physics::TriggerVolume>& trigger) override;
@@ -39,9 +42,12 @@ public:
 	static MainMenu::Sptr FromJson(const nlohmann::json& blob);
 	MAKE_TYPENAME(MainMenu);
 
-	bool curIndex = 0;
+	bool curIndex = 1;
+	bool isMoving = false;
 protected:
 	RenderComponent::Sptr _renderer;
 	bool isSwitching = false;
 	bool hasResumed = false;
+	std::vector<glm::vec3> pointerPositions{ glm::vec3(2.29f, 6.39f, 15.63f), glm::vec3(3.05f, 6.75f, 13.77f), glm::vec3(3.5f, 7.6f, 11.96f), glm::vec3(4.05f, 8.57f, 10.26f), glm::vec3(0.f, 0.f, -20.f) };
+	int cooldown = 0;
 };

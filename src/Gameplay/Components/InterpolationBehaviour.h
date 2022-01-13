@@ -50,6 +50,7 @@ struct TFormAnim {
 	int transformIndexes[3]{ 0, 0, 0 };
 	float transformTimes[3]{ 0, 0, 0 };
 	bool transformFinished[3]{ 0, 0, 0 };
+	bool hasFrames[3]{ 0, 0, 0 };
 
 	/// <summary>
 	/// constructor for a TFormAnim
@@ -64,6 +65,8 @@ struct TFormAnim {
 		animKeys.push_back(sclFrames);
 
 		animName = aName;
+
+		for (int i = 0; i < 3; i++) { hasFrames[i] = (animKeys[i].size() > 0); }
 	}
 };
 
@@ -97,6 +100,8 @@ public:
 	void StartPushNewBehaviour(std::string bName);
 	void AddKeyFrame(TFormType, float, glm::vec3);
 	void EndPushNewBehaviour();
+
+	void AddBehaviourScript(std::string path);
 
 	MAKE_TYPENAME(InterpolationBehaviour);
 	

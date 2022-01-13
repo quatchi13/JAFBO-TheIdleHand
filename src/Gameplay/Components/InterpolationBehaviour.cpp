@@ -5,6 +5,8 @@
 #include "Gameplay/Scene.h"
 #include "GLFW/glfw3.h"
 
+#include <fstream>
+
 InterpolationBehaviour::InterpolationBehaviour() :IComponent() {
 	//we will assume that the first behaviour pushed is the one to use, 
 	//and that it should constantly loop
@@ -43,9 +45,6 @@ void InterpolationBehaviour::ToggleBehaviour(std::string name, bool loops) {
 
 	//tells system whether the behaviour needs to loop or not
 	_loopTransform = loops;
-	if (!_loopTransform) {
-		std::cout << "this animation will NOT loop";
-	}
 }
 
 /// <summary>
@@ -69,7 +68,6 @@ void InterpolationBehaviour::ToggleBehaviour(int index, bool loops) {
 	//tells system whether the behaviour needs to loop or not
 	_loopTransform = loops;
 
-	std::cout << ' ' << _allTransforms[_currentTransformIndex].animName << '\n';
 }
 
 /// <summary>
@@ -92,15 +90,19 @@ void InterpolationBehaviour::Update(float deltaTime) {
 /// <param name="deltaTime"></param>
 void InterpolationBehaviour::InterpolationManager(float deltaTime) {
 	TFormAnim currentTransform = _allTransforms[_currentTransformIndex];
+	int totalTforms = 0;
 	int completedTransformsTotal = 0;
 	for (int i = 0; i < 3; i++) {
-		completedTransformsTotal += currentTransform.transformFinished[i];
+		if (currentTransform.hasFrames[i]) {
+			completedTransformsTotal += currentTransform.transformFinished[i];
+			totalTforms++;
+		}
 	}
 
-	if (completedTransformsTotal < 3) {
-		if (!currentTransform.transformFinished[0])	GetGameObject()->SetPosition(PerformTransformation(deltaTime, 0, currentTransform.animKeys[0]));
-		if (!currentTransform.transformFinished[1])	GetGameObject()->SetRotation(PerformTransformation(deltaTime, 1, currentTransform.animKeys[1]));
-		if (!currentTransform.transformFinished[2])	GetGameObject()->SetScale(PerformTransformation(deltaTime, 2, currentTransform.animKeys[2]));
+	if (completedTransformsTotal < totalTforms) {
+		if(currentTransform.hasFrames[0]) if (!currentTransform.transformFinished[0]) GetGameObject()->SetPosition(PerformTransformation(deltaTime, 0, currentTransform.animKeys[0]));
+		if(currentTransform.hasFrames[1]) if (!currentTransform.transformFinished[1])	GetGameObject()->SetRotation(PerformTransformation(deltaTime, 1, currentTransform.animKeys[1]));
+		if(currentTransform.hasFrames[2]) if (!currentTransform.transformFinished[2])	GetGameObject()->SetScale(PerformTransformation(deltaTime, 2, currentTransform.animKeys[2]));
 	}
 	else {
 		if (!_loopTransform) {
@@ -109,9 +111,12 @@ void InterpolationBehaviour::InterpolationManager(float deltaTime) {
 		}
 
 		for (int i = 0; i < 3; i++) {
-			(_allTransforms[_currentTransformIndex]).transformFinished[i] = 0;
-			(_allTransforms[_currentTransformIndex]).transformIndexes[i] = 0;
-			(_allTransforms[_currentTransformIndex]).transformTimes[i] = 0;
+			if (currentTransform.hasFrames[i]) {
+				(_allTransforms[_currentTransformIndex]).transformFinished[i] = 0;
+				(_allTransforms[_currentTransformIndex]).transformIndexes[i] = 0;
+				(_allTransforms[_currentTransformIndex]).transformTimes[i] = 0;
+			}
+			
 		}
 
 	}
@@ -217,6 +222,40 @@ void InterpolationBehaviour::EndPushNewBehaviour() {
 	sclFrames.clear();
 }
 
+
+void InterpolationBehaviour::AddBehaviourScript(std::string path) {
+	std::fstream script;
+	std::string command;
+	std::string n;
+	int t;
+	float d;
+	glm::vec3 p{ 0.f };
+
+	script.open(path);
+	if (script.is_open()) {
+		while (script.good()) {
+			script >> command;
+
+			if (command == "s") {
+				script >> n;
+				std::cout << "reading animation: " << n;
+				StartPushNewBehaviour(n);
+			}
+			else if (command == "f") {
+				script >> t >> d >> p.x >> p.y >> p.z;
+				AddKeyFrame((TFormType)t, d, p);
+			}
+			else if (command == "e") {
+				EndPushNewBehaviour();
+				std::cout << "finishing push of animation: " << n; 
+			}
+		}
+	}
+	else {
+		std::cout << "Could not locate " << path << " in the system. Canceling processes...\n";
+		exit(-1);
+	}
+}
 
 
 void InterpolationBehaviour::RenderImGui() {

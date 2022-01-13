@@ -62,6 +62,7 @@
 #include "Gameplay/Components/Pointer.h"
 #include "Gameplay/Components/LocomotionBehaviour.h"
 #include "Gameplay/Components/ObjectLinking.h"
+#include "Gameplay/Components/SimpleScreenBehaviour.h"
 
 
 // Physics
@@ -373,7 +374,7 @@ int main() {
 	ComponentManager::RegisterType<Pointer>();
 	ComponentManager::RegisterType<LocomotionBehaviour>();
 	ComponentManager::RegisterType<ObjectLinking>();
-
+	ComponentManager::RegisterType<SimpleScreenBehaviour>();
 
 
 	// GL states, we'll enable depth testing and backface fulling
@@ -566,6 +567,48 @@ int main() {
 			renderer->SetMaterial(bedroomMaterial);
 
 		}
+		
+		GameObject::Sptr pointer = scene->CreateGameObject("Pointer");
+		{
+			// Make a big tiled mesh
+			MeshResource::Sptr pointerMesh = ResourceManager::CreateAsset<MeshResource>();
+			pointerMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(2.0f, 1.0f)));
+			pointerMesh->GenerateMesh();
+
+			// Create and attach a RenderComponent to the object to draw our mesh
+			RenderComponent::Sptr renderer = pointer->Add<RenderComponent>();
+			renderer->SetMesh(pointerMesh);
+			renderer->SetMaterial(menuPointerMaterial);
+
+			pointer->SetPosition(glm::vec3(2.29f, 6.39f, 15.63f));
+			pointer->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
+
+		}
+		
+		GameObject::Sptr extraScreen = scene->CreateGameObject("Extra Screen");
+		{
+			// Make a big tiled mesh
+			MeshResource::Sptr screenMesh = ResourceManager::CreateAsset<MeshResource>();
+			screenMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(18.0f, 10.0f)));
+			screenMesh->GenerateMesh();
+
+			// Create and attach a RenderComponent to the object to draw our mesh
+			RenderComponent::Sptr renderer = extraScreen->Add<RenderComponent>();
+			renderer->SetMesh(screenMesh);
+			renderer->SetMaterial(missingMaterial);
+
+			extraScreen->SetPosition(glm::vec3(5.0f, 5.34f, -12.8f));
+			extraScreen->SetRotation(glm::vec3(63.0f, 0.0f, 135.0f));
+
+			InterpolationBehaviour::Sptr interp = extraScreen->Add<InterpolationBehaviour>();
+			interp->AddBehaviourScript("interp_scripts/menu_behaviour.txt");
+			interp->ToggleBehaviour("Lowering", false);
+			interp->PauseOrResumeCurrentBehaviour();
+
+			SimpleScreenBehaviour::Sptr feedbackScreen = extraScreen->Add<SimpleScreenBehaviour>();
+			feedbackScreen->targetObjectives = 5;
+			feedbackScreen->WinScreen = winMaterial;
+		}
 
 		GameObject::Sptr screen = scene->CreateGameObject("Screen");
 		{
@@ -585,52 +628,21 @@ int main() {
 			MainMenu::Sptr menu = screen->Add<MainMenu>();
 			menu->MenuMaterial = menuMaterial;
 			menu->PauseMaterial = pauseMaterial;
-			menu->WinMaterial = winMaterial;
+			menu->pointer = pointer;
+			menu->fbScreen = extraScreen;
 
 			InterpolationBehaviour::Sptr interp = screen->Add<InterpolationBehaviour>();
-			interp->StartPushNewBehaviour("Rising");
-			interp->AddKeyFrame(TRANSLATION, 3.0, glm::vec3(5.0f, 5.34f, -12.8f));
-			interp->AddKeyFrame(TRANSLATION, 3.0, glm::vec3(5.0f, 5.34f, 12.8f));
-			interp->AddKeyFrame(ROTATION, 3.0, glm::vec3(63.0f, 0.0f, 135.0f));
-			interp->AddKeyFrame(ROTATION, 3.0, glm::vec3(63.0f, 0.0f, 135.0f));
-			interp->AddKeyFrame(SCALE, 3.0, glm::vec3(1.0));
-			interp->AddKeyFrame(SCALE, 3.0, glm::vec3(1.0));
-			interp->EndPushNewBehaviour();
-			
-			interp->StartPushNewBehaviour("Lowering");
-			interp->AddKeyFrame(TRANSLATION, 3.0, glm::vec3(5.0f, 5.34f, 12.8f));
-			interp->AddKeyFrame(TRANSLATION, 3.0, glm::vec3(5.0f, 5.34f, -12.8f));
-			interp->AddKeyFrame(ROTATION, 3.0, glm::vec3(63.0f, 0.0f, 135.0f));
-			interp->AddKeyFrame(ROTATION, 3.0, glm::vec3(63.0f, 0.0f, 135.0f));
-			interp->AddKeyFrame(SCALE, 3.0, glm::vec3(1.0));
-			interp->AddKeyFrame(SCALE, 3.0, glm::vec3(1.0));
-			interp->EndPushNewBehaviour();
-
+			interp->AddBehaviourScript("interp_scripts/menu_behaviour.txt");
 			interp->ToggleBehaviour("Lowering", false);
 			interp->PauseOrResumeCurrentBehaviour();
 
 			ObjectLinking::Sptr oLink = screen->Add<ObjectLinking>();
 		}
+		
+		
 
-		GameObject::Sptr pointer = scene->CreateGameObject("Pointer");
-		{
-			// Make a big tiled mesh
-			MeshResource::Sptr pointerMesh = ResourceManager::CreateAsset<MeshResource>();
-			pointerMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(2.0f, 1.0f)));
-			pointerMesh->GenerateMesh();
-
-			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = pointer->Add<RenderComponent>();
-			renderer->SetMesh(pointerMesh);
-			renderer->SetMaterial(menuPointerMaterial);
-
-			pointer->SetPosition(glm::vec3(2.29f, 6.39f, 15.63f));
-			pointer->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
-
-			Pointer::Sptr point = pointer->Add<Pointer>();
-			point->mainmenu = screen->Get<MainMenu>();
-
-		}
+		
+		
 
 		GameObject::Sptr enterPrompt = scene->CreateGameObject("Enter Prompt");
 		{
@@ -800,10 +812,13 @@ int main() {
 			InteractableObjectBehaviour::Sptr interactions = radio->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handMusicMaterial);            
 			interactions->AddFeedbackBehaviour((InteractionFeedback(radioMaterial2, radio)));
+			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(8.98, 0.17, 13.19));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineTwo)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(radioInteractMaterial, extraScreen)));
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.0, 5.34, 12.8));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
-			interactions->objective = lineTwo;
-			interactions->screen = screen;
-			interactions->image = radioInteractMaterial;
+			interactions->screen = extraScreen;
 
 			MorphRenderComponent::Sptr morphRenderer = radio->Add<MorphRenderComponent>(radioFrame0);
 
@@ -835,10 +850,13 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(1, homework)));
 			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(2.01f, 0.69f, 0.1f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, homework)));
+			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(8.62, 0.17, 14.53));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineOne)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(booksInteractMaterial, extraScreen)));
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.0, 5.34, 12.8));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
-			interactions->objective = lineOne;
-			interactions->screen = screen;
-			interactions->image = booksInteractMaterial;
+			interactions->screen = extraScreen;
 			MorphRenderComponent::Sptr morphRenderer = homework->Add<MorphRenderComponent>(homeworkFrame0);
 
 			MorphAnimationManager::Sptr animator = homework->Add<MorphAnimationManager>();
@@ -867,12 +885,15 @@ int main() {
 			interactions->AddRewardMaterial(handShroomMaterial);
 			InteractionTForm tf(InteractionTForm::tformt::rot, glm::vec3(180.f, 0.f, 0.f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, shroomba)));
-			interactions->isSecret = true;
+			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(10.26, 1.49, 9.17));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineFive)));
+			InteractionTForm secretTF(InteractionTForm::tformt::pos, glm::vec3(10.19, 1.32, 9.46));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ secretTF }, secretText)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(shroombaInteractMaterial, extraScreen)));
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.0, 5.34, 12.8));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
-			interactions->objective = lineFive;
-			interactions->screen = screen;
-			interactions->image = shroombaInteractMaterial;
-			interactions->secret = secretText;
+			interactions->screen = extraScreen;
 
 			MorphRenderComponent::Sptr morphRenderer = shroomba->Add<MorphRenderComponent>(shroombaFrame0);
 
@@ -880,11 +901,14 @@ int main() {
 			animator->AddAnim(std::vector<Gameplay::MeshResource::Sptr>{shroombaFrame1, shroombaFrame2, shroombaFrame3}, 2.4);
 			animator->SetContinuity(true);
 
-			LocomotionBehaviour::Sptr locomotion = shroomba->Add<LocomotionBehaviour>(shroomba);
+			/*LocomotionBehaviour::Sptr locomotion = shroomba->Add<LocomotionBehaviour>(shroomba);
 			PatrolPath mainpath(std::vector<glm::vec3>{glm::vec3(-0.5, 1.4, 0.2f), glm::vec3(1.25, 3.7, 0.2f), glm::vec3(3.7, 3.7, 0.2f), glm::vec3(3.7, -1.5, 0.2f),
 				glm::vec3(1.4, -1.5, 0.2), glm::vec3(-0.13, -4.9, 0.2), glm::vec3(-5.1, -2.7, 0.2), glm::vec3(-0.5, -1.0, 0.2)}, 0.2);
 			PatrolBehaviour pathfollow(AI_Mode::PATROL, "path_follow", mainpath, 5.0);
-			locomotion->AddBehaviour(pathfollow);
+			locomotion->AddBehaviour(pathfollow);*/
+
+			InterpolationBehaviour::Sptr interp = shroomba->Add<InterpolationBehaviour>();
+			interp->AddBehaviourScript("interp_scripts/ohno.txt");
 		}
 
 		GameObject::Sptr boybandPoster = scene->CreateGameObject("Boyband Poster");
@@ -906,10 +930,16 @@ int main() {
 			InteractableObjectBehaviour::Sptr interactions = boybandPoster->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handBoyBandMaterial);
 			interactions->AddFeedbackBehaviour((InteractionFeedback(bbPosterMesh2, boybandPoster)));
+			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(2.01f, 0.69f, 0.1f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, homework)));
+			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(9.26, 0.88, 11.91));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineThree)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(posterInteractMaterial, extraScreen)));
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.0, 5.34, 12.8));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+
 			interactions->prompt = prompt;
-			interactions->objective = lineThree;
-			interactions->screen = screen;
-			interactions->image = posterInteractMaterial;
+			interactions->screen = extraScreen;
 		}
 
 		GameObject::Sptr paintCan = scene->CreateGameObject("Paint Can");
@@ -933,10 +963,14 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(paintedOverMaterial, bedroomObject)));
 			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(0.f, 0.f, -10.f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, paintCan)));
+			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(9.82, 1.15, 10.62));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineFour)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(paintInteractMaterial, extraScreen)));
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.0, 5.34, 12.8));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+
 			interactions->prompt = prompt;
-			interactions->objective = lineFour;
-			interactions->screen = screen;
-			interactions->image = paintInteractMaterial;
+			interactions->screen = extraScreen;
 		}
 
 		//set up the hand
@@ -1003,7 +1037,7 @@ int main() {
 		float dt = static_cast<float>(thisFrame - lastFrame);
 
 		// Showcasing how to use the imGui library!
-		bool isDebugWindowOpen = ImGui::Begin("Debugging");
+		bool isDebugWindowOpen = ImGui::Begin("Debugging");//false;
 		if (isDebugWindowOpen) {
 			// Draws a button to control whether or not the game is currently playing
 			static char buttonLabel[64];
@@ -1155,12 +1189,14 @@ int main() {
 		scene->DrawSkybox();
 
 
-		// End our ImGui window
-		ImGui::End();
-
+		
+		if (isDebugWindowOpen) {// End our ImGui window
+			ImGui::End();
+		}
 		VertexArrayObject::Unbind();
 
 		lastFrame = thisFrame;
+		
 		ImGuiHelper::EndFrame();
 		glfwSwapBuffers(window);
 	}

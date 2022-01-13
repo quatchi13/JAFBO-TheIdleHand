@@ -2,6 +2,7 @@
 #include "Gameplay/Components/ComponentManager.h"
 #include "Gameplay/GameObject.h"
 #include "Gameplay/Components/InterpolationBehaviour.h"
+#include "Gameplay/Components/SimpleScreenBehaviour.h"
 
 MainMenu::MainMenu() :
 	IComponent(),
@@ -41,66 +42,51 @@ void MainMenu::Awake() {
 
 void MainMenu::Update(float deltaTime)
 {
+	if (cooldown) { cooldown--; }
 	
-	
+	if (!active) 
+	{//this manages the main menu
+		
 
-		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_ENTER) == GLFW_PRESS && !onScreen)
-		{
+		int c = select;
+		bool dPress = glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_DOWN);
+		bool uPress = glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_UP);
+
+		if (!cooldown) {
+			select += ((uPress * -1) + dPress);
+			select = (select < 0) ? 3 : ((select > 3) ? 0 : select);
+			cooldown = (select != c) ? 30 : 0;
+		}
+
+		pointer->SetPosition(pointerPositions[select]); 
+
+		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_ENTER) && !cooldown) {
+			active = true;
+			pointer->SetPosition(pointerPositions[4]);
 			GetGameObject()->Get<InterpolationBehaviour>()->PauseOrResumeCurrentBehaviour();
+			curIndex = 0;
+			isMoving = true;
+			cooldown = 30;
+		}
 
-			onScreen = true;
-			std::cout << "poosh";
-			curIndex = !curIndex;
-			isSwitching = true;
-			
+	}
+	else if (!fbScreen->Get<SimpleScreenBehaviour>()->active) {//this will manage the pause menu
+		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_ENTER) && !cooldown) {
+			GetGameObject()->Get<RenderComponent>()->SetMaterial(PauseMaterial);
 			GetGameObject()->Get<InterpolationBehaviour>()->ToggleBehaviour(curIndex, false);
-			if (objectives == 5)
-			{
-				GetGameObject()->SetPosition(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y, -GetGameObject()->GetPosition().z));
-				_renderer->SetMaterial(WinMaterial);
-			}
-		}
-
-		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_ENTER) == GLFW_RELEASE)
-		{
-			onScreen = false;
-		}
-	
-	
-	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_DOWN) == GLFW_PRESS && !onScreen && !downarrow)
-	{
-		downarrow = true;
-		if (select < 4)
-		{
-			select++;
+			GetGameObject()->Get<InterpolationBehaviour>()->PauseOrResumeCurrentBehaviour();
+			curIndex = !curIndex;
+			cooldown = 30;
+			isMoving = true;
 		}
 	}
-
-	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_DOWN) == GLFW_RELEASE)
-	{
-		downarrow = false;
-	}
-
-	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_UP) == GLFW_PRESS && !onScreen && !uparrow)
-	{
-		uparrow = true;
-		if (select > 1)
-		{
-			select--;
-		}
-	}
-
-	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_UP) == GLFW_RELEASE)
-	{
-		uparrow = false;
-	}
-
-	if (isSwitching) {
+	else if (isMoving) {
 		if (!GetGameObject()->Get<InterpolationBehaviour>()->_isRunning) {
-			_renderer->SetMaterial(PauseMaterial);
-			isSwitching = false;
+			GetGameObject()->Get<RenderComponent>()->SetMaterial(PauseMaterial);
+			isMoving = false;
 		}
 	}
+	
 	
 }
 

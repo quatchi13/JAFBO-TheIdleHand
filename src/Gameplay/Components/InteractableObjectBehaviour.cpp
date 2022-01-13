@@ -2,7 +2,7 @@
 #include "Gameplay/Components/ComponentManager.h"
 #include "Gameplay/GameObject.h"
 #include "Gameplay/Components/RenderComponent.h"
-#include "Gameplay/Components/MainMenu.h"
+#include "Gameplay/Components/SimpleScreenBehaviour.h"
 
 InteractionFeedback::InteractionFeedback(Gameplay::Material::Sptr mat, Gameplay::GameObject::Sptr o) {
 	_SWAPMAT = mat;
@@ -90,25 +90,17 @@ void InteractableObjectBehaviour::Awake() {
 
 void InteractableObjectBehaviour::Update(float deltaTime) {
 	if (_playerInTrigger) {
-		//GetGameObject()->SetRotation(GetGameObject()->GetRotationEuler() + glm::vec3(0.f, 0.f, 90.f) * deltaTime);
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_E) == GLFW_PRESS) {
 			_hasBeenActivated = true;
 			_playerInTrigger = false;
-			GetGameObject()->SetRotation(glm::vec3(0.f, 0.f, 0.f));
 			PerformFeedback();
 			_body->GetGameObject()->Get<SkinManager>()->AddSkin(_rewardMaterial);
 			_body = nullptr;
 			prompt->SetPosition(glm::vec3(prompt->GetPosition().x, prompt->GetPosition().y, -prompt->GetPosition().z));
-			objective->SetPosition(glm::vec3(objective->GetPosition().x, objective->GetPosition().y, -objective->GetPosition().z));
-			screen->Get<RenderComponent>()->SetMaterial(image);
-			screen->SetPosition(glm::vec3(screen->GetPosition().x, screen->GetPosition().y, -screen->GetPosition().z));
-			screen->Get<MainMenu>()->curIndex = !(screen->Get<MainMenu>()->curIndex);
-			if (isSecret)
-			{
-				secret->SetPosition(glm::vec3(secret->GetPosition().x, secret->GetPosition().y, -secret->GetPosition().z));
-			}
-			screen->Get<MainMenu>()->objectives += 1;
+			
+			screen->Get<SimpleScreenBehaviour>()->objectivesAchieved += 1;
+			screen->Get<SimpleScreenBehaviour>()->active = true;
 		}
 
 	}
