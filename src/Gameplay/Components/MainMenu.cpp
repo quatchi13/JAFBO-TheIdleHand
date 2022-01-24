@@ -51,6 +51,10 @@ void MainMenu::Update(float deltaTime)
 		int c = select;
 		bool dPress = glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_DOWN);
 		bool uPress = glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_UP);
+		if (controls == 1 || credits == 1){
+			dPress = 0;
+			uPress = 0;
+		}
 
 		if (!cooldown) {
 			select += ((uPress * -1) + dPress);
@@ -61,15 +65,47 @@ void MainMenu::Update(float deltaTime)
 		pointer->SetPosition(pointerPositions[select]); 
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_ENTER) && !cooldown) {
-			active = true;
-			pointer->SetPosition(pointerPositions[4]);
-			GetGameObject()->Get<InterpolationBehaviour>()->PauseOrResumeCurrentBehaviour();
-			curIndex = 0;
-			isMoving = true;
-			cooldown = 30;
+			std::cout << "Enter";
+			if (select == 0 && controls == 0 && credits == 0) {
+				active = true;
+				pointer->SetPosition(pointerPositions[4]);
+				GetGameObject()->Get<InterpolationBehaviour>()->PauseOrResumeCurrentBehaviour();
+				curIndex = 0;
+				isMoving = true;
+				cooldown = 30;
+			}
+			if (select == 1 && controls == 0 && credits == 0) {
+				GetGameObject()->SetPosition(glm::vec3(20.03f, -5.14f, 6.9f));
+				controls = true;
+				cooldown = 30;
+				select = 0;
+			}
+			if (select == 2 && controls == 0 && credits == 0) {
+				GetGameObject()->SetPosition(glm::vec3(-7.93f, 16.55f, 6.9f));
+				credits = true;
+				cooldown = 30;
+				select = 0;
+			}
+			if (select == 3 && controls == 0 && credits == 0) {
+				glfwSetWindowShouldClose(GetGameObject()->GetScene()->Window, true);
+				cooldown = 30;
+			}
+			if (controls == true && !cooldown) {
+				GetGameObject()->SetPosition(glm::vec3(5.87f, 5.79f, 6.9f));
+				cooldown = 30;
+				controls = false;
+				select = 1;	
+			}
+			if (credits == true && !cooldown) {
+				GetGameObject()->SetPosition(glm::vec3(5.87f, 5.79f, 6.9f));
+				cooldown = 30;
+				credits = false;
+				select = 2;
+			}
 		}
 
 	}
+
 	else if (!fbScreen->Get<SimpleScreenBehaviour>()->active) {//this will manage the pause menu
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_ENTER) && !cooldown) {
 			GetGameObject()->Get<RenderComponent>()->SetMaterial(PauseMaterial);

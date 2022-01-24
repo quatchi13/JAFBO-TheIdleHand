@@ -29,6 +29,8 @@ public:
 	bool uparrow = false;
 	bool downarrow = false;
 	bool menu = true;
+	bool controls = false;
+	bool credits = false;
 	bool list = false;
 	int select = 0;
 	int objectives = 0;
@@ -48,6 +50,6 @@ protected:
 	RenderComponent::Sptr _renderer;
 	bool isSwitching = false;
 	bool hasResumed = false;
-	std::vector<glm::vec3> pointerPositions{ glm::vec3(2.29f, 6.39f, 15.63f), glm::vec3(3.05f, 6.75f, 13.77f), glm::vec3(3.5f, 7.6f, 11.96f), glm::vec3(4.05f, 8.57f, 10.26f), glm::vec3(0.f, 0.f, -20.f) };
+	std::vector<glm::vec3> pointerPositions{ glm::vec3(4.07f, 7.21f, 9.55f), glm::vec3(4.07f, 7.21f, 7.86f), glm::vec3(4.01f, 7.45f, 5.96f), glm::vec3(3.680f, 8.23f, 3.580f), glm::vec3(0.f, 0.0f, -20.f) };
 	int cooldown = 0;
 };

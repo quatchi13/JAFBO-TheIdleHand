@@ -70,6 +70,7 @@ void Pointer::Update(float deltaTime)
 		GetGameObject()->SetPosition(glm::vec3(4.05f, 8.57f, 10.26f));
 		break;
 	}
+
 	
 }
 

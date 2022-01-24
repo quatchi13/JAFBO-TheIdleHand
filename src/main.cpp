@@ -547,8 +547,9 @@ int main() {
 		// Set up the scene's camera
 		GameObject::Sptr camera = scene->CreateGameObject("Main Camera");
 		{
-			camera->SetPosition(glm::vec3(8.0f, 8.0f, 15.0f));
-			camera->LookAt(glm::vec3(-7.5f, -7.5f, 4.0f));		
+			camera->SetPosition(glm::vec3(9.15f, 9.41f, 7.85f));
+			camera->SetRotation(glm::vec3(80.351f, 0.0f, 142.0f));
+			camera->SetScale(glm::vec3(0.69f, 0.769f, 0.83f));
 
 			Camera::Sptr cam = camera->Add<Camera>();
 			// Make sure that the camera is set as the scene's main camera!
@@ -580,8 +581,8 @@ int main() {
 			renderer->SetMesh(pointerMesh);
 			renderer->SetMaterial(menuPointerMaterial);
 
-			pointer->SetPosition(glm::vec3(2.29f, 6.39f, 15.63f));
-			pointer->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
+			pointer->SetPosition(glm::vec3(4.07f, 7.21f, 9.55f));
+			pointer->SetRotation(glm::vec3(80.351f, 0.0f, 142.0f));
 
 		}
 		
@@ -614,7 +615,7 @@ int main() {
 		{
 			// Make a big tiled mesh
 			MeshResource::Sptr menuMesh = ResourceManager::CreateAsset<MeshResource>();
-			menuMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(18.0f, 10.0f)));
+			menuMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(54.0f, 10.0f)));
 			menuMesh->GenerateMesh();
 
 			// Create and attach a RenderComponent to the object to draw our mesh
@@ -622,8 +623,8 @@ int main() {
 			renderer->SetMesh(menuMesh);
 			renderer->SetMaterial(menuMaterial);
 
-			screen->SetPosition(glm::vec3(5.0f, 5.34f, 12.8f));
-			screen->SetRotation(glm::vec3(63.0f, 0.0f, 135.0f));
+			screen->SetPosition(glm::vec3(5.87f, 5.79f, 6.9f));
+			screen->SetRotation(glm::vec3(80.351f, 0.0f, 142.00f));
 
 			MainMenu::Sptr menu = screen->Add<MainMenu>();
 			menu->MenuMaterial = menuMaterial;
@@ -690,8 +691,8 @@ int main() {
 			renderer->SetMesh(listMesh);
 			renderer->SetMaterial(listMaterial);
 
-			list->SetPosition(glm::vec3(9.3f, 0.25f, 12.44f));
-			list->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
+			list->SetPosition(glm::vec3(10.88f, 1.32f, 6.93f));
+			list->SetRotation(glm::vec3(80.351f, 0.0f, 142.00f));
 		}
 
 		GameObject::Sptr secretText = scene->CreateGameObject("secretText");
