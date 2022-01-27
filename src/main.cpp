@@ -324,6 +324,71 @@ GameObject::Sptr MakeStaticObject(std::string oName, MeshResource::Sptr oMesh, M
 	return staticObj;
 }
 
+
+/// <summary>
+/// A quick way to fill in the bare bones basics of a plane object (the inevitable stuff)
+/// </summary>
+/// <param name="name">the name of the object</param>
+/// <param name="x">the x position</param>
+/// <param name="y">the y position</param>
+/// <param name="z">the z position</param>
+/// <param name="rx">the x rotation</param>
+/// <param name="ry">the y rotation</param>
+/// <param name="rz">the z rotation</param>
+/// <param name="dx"> screen width</param>
+/// <param name="dy"> screen height</param>
+/// <param name="material">the material of the object</param>
+/// <returns></returns>
+GameObject::Sptr MakeBasicPlane(std::string name, float x, float y, float z, float rx, float ry, float rz, float dx, float dy, Material::Sptr material)
+{
+	GameObject::Sptr basicPlane = scene->CreateGameObject(name);
+	{
+		// Make a big tiled mesh
+		MeshResource::Sptr mesh = ResourceManager::CreateAsset<MeshResource>();
+		mesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(dx, dy)));
+		mesh->GenerateMesh();
+
+		// Create and attach a RenderComponent to the object to draw our mesh
+		RenderComponent::Sptr renderer = basicPlane->Add<RenderComponent>();
+		renderer->SetMesh(mesh);
+		renderer->SetMaterial(material);
+
+		basicPlane->SetPosition(glm::vec3(x, y, z));
+		basicPlane->SetRotation(glm::vec3(rx, ry, rz));
+		
+	}
+	return basicPlane;
+}
+
+/// <summary>
+/// A quick way to fill in the bare bones basics of an object (the inevitable stuff)
+/// </summary>
+/// <param name="name">the name of the object</param>
+/// <param name="x">the x position</param>
+/// <param name="y">the y position</param>
+/// <param name="z">the z position</param>
+/// <param name="rx">the x rotation</param>
+/// <param name="ry">the y rotation</param>
+/// <param name="rz">the z rotation</param>
+/// <param name="material">the material of the object</param>
+/// <param name="mesh">the mesh of the object</param>
+/// <returns></returns>
+GameObject::Sptr MakeBasic(std::string name, float x, float y, float z, float rx, float ry, float rz, Material::Sptr material, MeshResource::Sptr mesh)
+{
+	GameObject::Sptr basic = scene->CreateGameObject(name);
+	{
+		// Create and attach a RenderComponent to the object to draw our mesh
+		RenderComponent::Sptr renderer = basic->Add<RenderComponent>();
+		renderer->SetMesh(mesh);
+		renderer->SetMaterial(material);
+
+		basic->SetPosition(glm::vec3(x, y, z));
+		basic->SetRotation(glm::vec3(rx, ry, rz));
+
+	}
+	return basic;
+}
+
 int main() {
 	Logger::Init(); // We'll borrow the logger from the toolkit, but we need to initialize it
 
@@ -556,51 +621,12 @@ int main() {
 			scene->MainCamera = cam;
 		}
 
-
-		GameObject::Sptr bedroomObject = scene->CreateGameObject("Bedroom Object");
-		{
-			bedroomObject->SetPosition(glm::vec3(0.f, 0.0f, 0.0f));
-
-
-			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = bedroomObject->Add<RenderComponent>();
-			renderer->SetMesh(bedroomMesh);
-			renderer->SetMaterial(bedroomMaterial);
-
-		}
+		GameObject::Sptr bedroomObject = MakeBasic("Bedroom Object", 0.f, 0.0f, 0.0f, 0.f, 0.0f, 0.0f, bedroomMaterial, bedroomMesh);
 		
-		GameObject::Sptr pointer = scene->CreateGameObject("Pointer");
-		{
-			// Make a big tiled mesh
-			MeshResource::Sptr pointerMesh = ResourceManager::CreateAsset<MeshResource>();
-			pointerMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(2.0f, 1.0f)));
-			pointerMesh->GenerateMesh();
-
-			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = pointer->Add<RenderComponent>();
-			renderer->SetMesh(pointerMesh);
-			renderer->SetMaterial(menuPointerMaterial);
-
-			pointer->SetPosition(glm::vec3(4.07f, 7.21f, 9.55f));
-			pointer->SetRotation(glm::vec3(80.351f, 0.0f, 142.0f));
-
-		}
+		GameObject::Sptr pointer = MakeBasicPlane("Pointer", 4.07f, 7.21f, 9.55f, 80.351f, 0.0f, 142.0f, 2.0f, 1.0f, menuPointerMaterial);
 		
-		GameObject::Sptr extraScreen = scene->CreateGameObject("Extra Screen");
+		GameObject::Sptr extraScreen = MakeBasicPlane("Extra Screen", 5.0f, 5.34f, -12.8f, 63.0f, 0.0f, 135.0f, 18.0f, 10.0f, missingMaterial);
 		{
-			// Make a big tiled mesh
-			MeshResource::Sptr screenMesh = ResourceManager::CreateAsset<MeshResource>();
-			screenMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(18.0f, 10.0f)));
-			screenMesh->GenerateMesh();
-
-			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = extraScreen->Add<RenderComponent>();
-			renderer->SetMesh(screenMesh);
-			renderer->SetMaterial(missingMaterial);
-
-			extraScreen->SetPosition(glm::vec3(5.0f, 5.34f, -12.8f));
-			extraScreen->SetRotation(glm::vec3(63.0f, 0.0f, 135.0f));
-
 			InterpolationBehaviour::Sptr interp = extraScreen->Add<InterpolationBehaviour>();
 			interp->AddBehaviourScript("interp_scripts/menu_behaviour.txt");
 			interp->ToggleBehaviour("Lowering", false);
@@ -611,21 +637,8 @@ int main() {
 			feedbackScreen->WinScreen = winMaterial;
 		}
 
-		GameObject::Sptr screen = scene->CreateGameObject("Screen");
+		GameObject::Sptr screen = MakeBasicPlane("Screen", 5.87f, 5.79f, 6.9f, 80.351f, 0.0f, 142.00f, 54.0f, 10.0f, menuMaterial);
 		{
-			// Make a big tiled mesh
-			MeshResource::Sptr menuMesh = ResourceManager::CreateAsset<MeshResource>();
-			menuMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(54.0f, 10.0f)));
-			menuMesh->GenerateMesh();
-
-			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = screen->Add<RenderComponent>();
-			renderer->SetMesh(menuMesh);
-			renderer->SetMaterial(menuMaterial);
-
-			screen->SetPosition(glm::vec3(5.87f, 5.79f, 6.9f));
-			screen->SetRotation(glm::vec3(80.351f, 0.0f, 142.00f));
-
 			MainMenu::Sptr menu = screen->Add<MainMenu>();
 			menu->MenuMaterial = menuMaterial;
 			menu->PauseMaterial = pauseMaterial;
@@ -640,168 +653,30 @@ int main() {
 			ObjectLinking::Sptr oLink = screen->Add<ObjectLinking>();
 		}
 		
-		
-
-		
-		
-
-		GameObject::Sptr enterPrompt = scene->CreateGameObject("Enter Prompt");
+		GameObject::Sptr enterPrompt = MakeBasicPlane("Enter Prompt", 6.f, 6.f, 11.f, 63.0f, 0.0f, 135.0f, 4.0f, 1.0f, ePromptMaterial);
 		{
-			MeshResource::Sptr pointerMesh = ResourceManager::CreateAsset<MeshResource>();
-			pointerMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(4.0f, 1.0f)));
-			pointerMesh->GenerateMesh();
-
-			RenderComponent::Sptr renderer = enterPrompt->Add<RenderComponent>();
-			renderer->SetMesh(pointerMesh);
-			renderer->SetMaterial(ePromptMaterial);
-
-			enterPrompt->SetPosition(glm::vec3(6.f, 6.f, 11.f));
-			enterPrompt->SetRotation(glm::vec3(63.0f, 0.0f, 135.0f));
-
 			enterPrompt->Add<ObjectLinking>(screen);
 			screen->Get<ObjectLinking>()->LinkObject(enterPrompt);
 		}
 
-		GameObject::Sptr prompt = scene->CreateGameObject("Prompt");
-		{
-			// Make a big tiled mesh
-			MeshResource::Sptr pointerMesh = ResourceManager::CreateAsset<MeshResource>();
-			pointerMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(4.0f, 1.0f)));
-			pointerMesh->GenerateMesh();
+		GameObject::Sptr prompt = MakeBasicPlane("Prompt", 1.05f, 6.5f, -16.25f, 67.0f, 0.0f, 135.0f, 4.0f, 1.0f, eMaterial);
 
-			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = prompt->Add<RenderComponent>();
-			renderer->SetMesh(pointerMesh);
-			renderer->SetMaterial(eMaterial);
-
-			prompt->SetPosition(glm::vec3(1.05f, 6.5f, -16.25f));
-			prompt->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
-		}
-
-		//list components
-		GameObject::Sptr list = scene->CreateGameObject("List");
-		{
-			// Make a big tiled mesh
-			MeshResource::Sptr listMesh = ResourceManager::CreateAsset<MeshResource>();
-			listMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(4.0f, 10.0f)));
-			listMesh->GenerateMesh();
-
-			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = list->Add<RenderComponent>();
-			renderer->SetMesh(listMesh);
-			renderer->SetMaterial(listMaterial);
-
-			list->SetPosition(glm::vec3(10.88f, 1.32f, 6.93f));
-			list->SetRotation(glm::vec3(80.351f, 0.0f, 142.00f));
-		}
-
-		GameObject::Sptr secretText = scene->CreateGameObject("secretText");
-		{
-			// Make a big tiled mesh
-			MeshResource::Sptr lineMesh = ResourceManager::CreateAsset<MeshResource>();
-			lineMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(3.0f, 1.0f)));
-			lineMesh->GenerateMesh();
-
-			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = secretText->Add<RenderComponent>();
-			renderer->SetMesh(lineMesh);
-			renderer->SetMaterial(secretMaterial);
-
-			secretText->SetPosition(glm::vec3(10.19f, 1.32f, -9.46f));
-			secretText->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
-		}
-
-		GameObject::Sptr lineOne = scene->CreateGameObject("LineOne");
-		{
-			// Make a big tiled mesh
-			MeshResource::Sptr lineMesh = ResourceManager::CreateAsset<MeshResource>();
-			lineMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(3.0f, 1.0f)));
-			lineMesh->GenerateMesh();
-
-			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = lineOne->Add<RenderComponent>();
-			renderer->SetMesh(lineMesh);
-			renderer->SetMaterial(lineMaterial);
-
-			lineOne->SetPosition(glm::vec3(8.62f, 0.17f, -14.53f));
-			lineOne->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
-		}
-
-		GameObject::Sptr lineTwo = scene->CreateGameObject("LineTwo");
-		{
-			// Make a big tiled mesh
-			MeshResource::Sptr lineMesh = ResourceManager::CreateAsset<MeshResource>();
-			lineMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(3.0f, 1.0f)));
-			lineMesh->GenerateMesh();
-
-			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = lineTwo->Add<RenderComponent>();
-			renderer->SetMesh(lineMesh);
-			renderer->SetMaterial(lineMaterial);
-
-			lineTwo->SetPosition(glm::vec3(8.98f, 0.17f, -13.19f));
-			lineTwo->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
-		}
-
-		GameObject::Sptr lineThree = scene->CreateGameObject("LineThree");
-		{
-			// Make a big tiled mesh
-			MeshResource::Sptr lineMesh = ResourceManager::CreateAsset<MeshResource>();
-			lineMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(3.0f, 1.0f)));
-			lineMesh->GenerateMesh();
-
-			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = lineThree->Add<RenderComponent>();
-			renderer->SetMesh(lineMesh);
-			renderer->SetMaterial(lineMaterial);
-
-			lineThree->SetPosition(glm::vec3(9.26f, 0.88f, -11.91f));
-			lineThree->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
-		}
-
-		GameObject::Sptr lineFour = scene->CreateGameObject("LineFour");
-		{
-			// Make a big tiled mesh
-			MeshResource::Sptr lineMesh = ResourceManager::CreateAsset<MeshResource>();
-			lineMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(3.0f, 1.0f)));
-			lineMesh->GenerateMesh();
-
-			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = lineFour->Add<RenderComponent>();
-			renderer->SetMesh(lineMesh);
-			renderer->SetMaterial(lineMaterial);
-
-			lineFour->SetPosition(glm::vec3(9.82f, 1.15f, -10.62f));
-			lineFour->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
-		}
-
-		GameObject::Sptr lineFive = scene->CreateGameObject("LineFive");
-		{
-			// Make a big tiled mesh
-			MeshResource::Sptr lineMesh = ResourceManager::CreateAsset<MeshResource>();
-			lineMesh->AddParam(MeshBuilderParam::CreatePlane(ZERO, UNIT_Z, UNIT_X, glm::vec2(3.0f, 1.0f)));
-			lineMesh->GenerateMesh();
-
-			// Create and attach a RenderComponent to the object to draw our mesh
-			RenderComponent::Sptr renderer = lineFive->Add<RenderComponent>();
-			renderer->SetMesh(lineMesh);
-			renderer->SetMaterial(lineMaterial);
-
-			lineFive->SetPosition(glm::vec3(10.26f, 1.49f, -9.17f));
-			lineFive->SetRotation(glm::vec3(67.0f, 0.0f, 135.0f));
-		}
+		GameObject::Sptr list = MakeBasicPlane("List", 10.88f, 1.32f, 6.93f, 80.351f, 0.0f, 142.00f, 4.0f, 10.0f, listMaterial);
 		
+		GameObject::Sptr secretText = MakeBasicPlane("Secret Text", 10.19f, 1.32f, -9.46f, 67.0f, 0.0f, 135.0f, 3.0f, 1.0f, secretMaterial);
 
+		GameObject::Sptr lineOne = MakeBasicPlane("Line One", 8.62f, 0.17f, -14.53f, 67.0f, 0.0f, 135.0f, 3.0f, 1.0f, lineMaterial);
 
-		//set up interactable 
-		GameObject::Sptr radio = scene->CreateGameObject("Radio");
+		GameObject::Sptr lineTwo = MakeBasicPlane("Line Two", 8.98f, 0.17f, -13.19f, 67.0f, 0.0f, 135.0f, 3.0f, 1.0f, lineMaterial);
+
+		GameObject::Sptr lineThree = MakeBasicPlane("Line Three", 9.26f, 0.88f, -11.91f, 67.0f, 0.0f, 135.0f, 3.0f, 1.0f, lineMaterial);
+		
+		GameObject::Sptr lineFour = MakeBasicPlane("Line Four", 9.82f, 1.15f, -10.62f, 67.0f, 0.0f, 135.0f, 3.0f, 1.0f, lineMaterial);
+		
+		GameObject::Sptr lineFive = MakeBasicPlane("Line Five", 10.26f, 1.49f, -9.17f, 67.0f, 0.0f, 135.0f, 3.0f, 1.0f, lineMaterial);
+		
+		GameObject::Sptr radio = MakeBasic("Radio", -7.4f, -3.1f, 0.0f, 0.0f, 0.0f, 0.0f, radioMaterial, radioFrame0);
 		{
-			radio->SetPosition(glm::vec3(-7.4f, -3.1f, 0.0f));
-			
-			RenderComponent::Sptr renderer = radio->Add<RenderComponent>();
-			renderer->SetMesh(radioFrame0);
-			renderer->SetMaterial(radioMaterial);
-
 			RigidBody::Sptr physics = radio->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(ConvexMeshCollider::Create());
 			
@@ -826,18 +701,10 @@ int main() {
 			MorphAnimationManager::Sptr animator = radio->Add<MorphAnimationManager>();
 			animator->AddAnim(std::vector<Gameplay::MeshResource::Sptr>{radioFrame1, radioFrame2, radioFrame3, radioFrame4, radioFrame5, radioFrame6}, 0.5);
 			animator->SetContinuity(true); 
-
-			
 		}
 
-		GameObject::Sptr homework = scene->CreateGameObject("Homework");
+		GameObject::Sptr homework = MakeBasic("Homework", -5.f, 3.45f, 3.3f, 0.0f, 0.0f, 0.0f, homeworkMaterial, homeworkFrame0);
 		{
-			homework->SetPosition(glm::vec3(-5.f, 3.45f, 3.3f));
-
-			RenderComponent::Sptr renderer = homework->Add<RenderComponent>();
-			renderer->SetMesh(homeworkFrame0);
-			renderer->SetMaterial(homeworkMaterial);
-
 			RigidBody::Sptr physics = homework->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(ConvexMeshCollider::Create());
 
@@ -867,13 +734,8 @@ int main() {
 			animator->SetContinuity(true);
 		}
 		
-		GameObject::Sptr shroomba = scene->CreateGameObject("Bedroom Shroomba");
+		GameObject::Sptr shroomba = MakeBasic("Bedroom Shroomba", 2.f, 2.f, 0.f, 0.0f, 0.0f, 0.0f, shroombaMaterial, shroombaFrame0);
 		{
-			shroomba->SetPosition(glm::vec3(2.f, 2.f, 0.f));
-			RenderComponent::Sptr renderer = shroomba->Add<RenderComponent>();
-			renderer->SetMesh(shroombaFrame0);
-			renderer->SetMaterial(shroombaMaterial);
-
 			RigidBody::Sptr physics = shroomba->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(ConvexMeshCollider::Create());
 
@@ -912,14 +774,8 @@ int main() {
 			interp->AddBehaviourScript("interp_scripts/ohno.txt");
 		}
 
-		GameObject::Sptr boybandPoster = scene->CreateGameObject("Boyband Poster");
+		GameObject::Sptr boybandPoster = MakeBasic("Boyband Poster", -9.4f, 3.f, 9.0f, 0.0f, 0.0f, 0.0f, bbPosterMaterial, bbPosterMesh);
 		{
-			boybandPoster->SetPosition(glm::vec3(-9.4f, 3.f, 9.0f));
-
-			RenderComponent::Sptr renderer = boybandPoster->Add<RenderComponent>();
-			renderer->SetMesh(bbPosterMesh);
-			renderer->SetMaterial(bbPosterMaterial);
-
 			RigidBody::Sptr physics = boybandPoster->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(ConvexMeshCollider::Create());
 
@@ -943,14 +799,8 @@ int main() {
 			interactions->screen = extraScreen;
 		}
 
-		GameObject::Sptr paintCan = scene->CreateGameObject("Paint Can");
+		GameObject::Sptr paintCan = MakeBasic("Paint Can", 0.45f, -5.1f, 6.44f, 0.0f, 0.0f, 0.0f, paintcanMaterial, paintcanMesh);
 		{
-			paintCan->SetPosition(glm::vec3(0.45f, -5.1f, 6.44f));
-
-			RenderComponent::Sptr renderer = paintCan->Add<RenderComponent>();
-			renderer->SetMesh(paintcanMesh);
-			renderer->SetMaterial(paintcanMaterial);
-
 			RigidBody::Sptr physics = paintCan->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(ConvexMeshCollider::Create());
 
@@ -974,17 +824,8 @@ int main() {
 			interactions->screen = extraScreen;
 		}
 
-		//set up the hand
-		GameObject::Sptr hand = scene->CreateGameObject("Idle Hand");
+		GameObject::Sptr hand = MakeBasic("Idle Hand", 0.f, 0.f, 2.f, 0.0f, 0.0f, 0.0f, handDefaultMaterial, theHandMesh);
 		{
-			hand->SetPosition(glm::vec3(0.f, 0.f, 2.f));
-			
-			//allows the hand to be rendered
-			RenderComponent::Sptr renderer = hand->Add<RenderComponent>();
-			renderer->SetMesh(theHandMesh);
-			renderer->SetMaterial(handDefaultMaterial);
-
-
 			//make hand dynamic so that we can move it and it can interact with triggers
 			RigidBody::Sptr physics = hand->Add<RigidBody>(RigidBodyType::Dynamic);
 			physics->AddCollider(ConvexMeshCollider::Create());
@@ -1212,3 +1053,4 @@ int main() {
 	Logger::Uninitialize();
 	return 0;
 }
+
