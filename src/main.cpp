@@ -114,7 +114,7 @@ void GlDebugMessage(GLenum source, GLenum type, GLuint id, GLenum severity, GLsi
 // Stores our GLFW window in a global variable for now
 GLFWwindow* window;
 // The current size of our window in pixels
-glm::ivec2 windowSize = glm::ivec2(800, 800);
+glm::ivec2 windowSize = glm::ivec2(1600, 900);
 // The title of our GLFW window
 std::string windowTitle = "The Idle Hand";
 
@@ -625,7 +625,7 @@ int main() {
 		
 		GameObject::Sptr pointer = MakeBasicPlane("Pointer", 4.07f, 7.21f, 9.55f, 80.351f, 0.0f, 142.0f, 2.0f, 1.0f, menuPointerMaterial);
 		
-		GameObject::Sptr extraScreen = MakeBasicPlane("Extra Screen", 5.0f, 5.34f, -12.8f, 63.0f, 0.0f, 135.0f, 18.0f, 10.0f, missingMaterial);
+		GameObject::Sptr extraScreen = MakeBasicPlane("Extra Screen", 5.87f, 5.79f, -6.9f, 80.351f, 0.0f, 142.00f, 18.0f, 10.0f, missingMaterial);
 		{
 			InterpolationBehaviour::Sptr interp = extraScreen->Add<InterpolationBehaviour>();
 			interp->AddBehaviourScript("interp_scripts/menu_behaviour.txt");
@@ -653,28 +653,49 @@ int main() {
 			ObjectLinking::Sptr oLink = screen->Add<ObjectLinking>();
 		}
 		
-		GameObject::Sptr enterPrompt = MakeBasicPlane("Enter Prompt", 6.f, 6.f, 11.f, 63.0f, 0.0f, 135.0f, 4.0f, 1.0f, ePromptMaterial);
+		GameObject::Sptr enterPrompt = MakeBasicPlane("Enter Prompt", 6.54f, 6.03f, 3.4f, 80.351f, 0.0f, 142.00f, 4.0f, 1.0f, ePromptMaterial);
 		{
 			enterPrompt->Add<ObjectLinking>(screen);
 			screen->Get<ObjectLinking>()->LinkObject(enterPrompt);
 		}
 
-		GameObject::Sptr prompt = MakeBasicPlane("Prompt", 1.05f, 6.5f, -16.25f, 67.0f, 0.0f, 135.0f, 4.0f, 1.0f, eMaterial);
+		GameObject::Sptr prompt = MakeBasicPlane("Prompt", -1.38f, 8.19f, -11.82f, 80.351f, 0.0f, 142.00f, 4.0f, 1.0f, eMaterial);
 
-		GameObject::Sptr list = MakeBasicPlane("List", 10.88f, 1.32f, 6.93f, 80.351f, 0.0f, 142.00f, 4.0f, 10.0f, listMaterial);
+		GameObject::Sptr list = MakeBasicPlane("List", 11.37f, -1.07f, 6.68f, 80.351f, 0.0f, 142.00f, 4.0f, 10.0f, listMaterial); 
+		{
+			list->SetScale(glm::vec3(1.3, 1.3, 1.3));
+		}
 		
-		GameObject::Sptr secretText = MakeBasicPlane("Secret Text", 10.19f, 1.32f, -9.46f, 67.0f, 0.0f, 135.0f, 3.0f, 1.0f, secretMaterial);
+		GameObject::Sptr secretText = MakeBasicPlane("Secret Text", 10.19f, 1.32f, -9.46f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, secretMaterial);
+		{
+			secretText->SetScale(glm::vec3(1.3, 1.3, 1.3));
+		}
 
-		GameObject::Sptr lineOne = MakeBasicPlane("Line One", 8.62f, 0.17f, -14.53f, 67.0f, 0.0f, 135.0f, 3.0f, 1.0f, lineMaterial);
+		GameObject::Sptr lineOne = MakeBasicPlane("Line One", 8.62f, 0.17f, -14.53f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, lineMaterial);
+		{
+			lineOne->SetScale(glm::vec3(1.3, 1.3, 1.3));
+		}
 
-		GameObject::Sptr lineTwo = MakeBasicPlane("Line Two", 8.98f, 0.17f, -13.19f, 67.0f, 0.0f, 135.0f, 3.0f, 1.0f, lineMaterial);
+		GameObject::Sptr lineTwo = MakeBasicPlane("Line Two", 8.98f, 0.17f, -13.19f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, lineMaterial);
+		{
+			lineTwo->SetScale(glm::vec3(1.3, 1.3, 1.3));
+		}
 
-		GameObject::Sptr lineThree = MakeBasicPlane("Line Three", 9.26f, 0.88f, -11.91f, 67.0f, 0.0f, 135.0f, 3.0f, 1.0f, lineMaterial);
-		
-		GameObject::Sptr lineFour = MakeBasicPlane("Line Four", 9.82f, 1.15f, -10.62f, 67.0f, 0.0f, 135.0f, 3.0f, 1.0f, lineMaterial);
-		
-		GameObject::Sptr lineFive = MakeBasicPlane("Line Five", 10.26f, 1.49f, -9.17f, 67.0f, 0.0f, 135.0f, 3.0f, 1.0f, lineMaterial);
-		
+		GameObject::Sptr lineThree = MakeBasicPlane("Line Three", 9.26f, 0.88f, -11.91f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, lineMaterial);
+		{
+			lineThree->SetScale(glm::vec3(1.3, 1.3, 1.3));
+		}
+
+		GameObject::Sptr lineFour = MakeBasicPlane("Line Four", 9.82f, 1.15f, -10.62f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, lineMaterial);
+		{
+			lineFour->SetScale(glm::vec3(1.3, 1.3, 1.3));
+		}
+
+		GameObject::Sptr lineFive = MakeBasicPlane("Line Five", 10.26f, 1.49f, -9.17f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, lineMaterial);
+		{
+			lineFive->SetScale(glm::vec3(1.3, 1.3, 1.3));
+		}
+
 		GameObject::Sptr radio = MakeBasic("Radio", -7.4f, -3.1f, 0.0f, 0.0f, 0.0f, 0.0f, radioMaterial, radioFrame0);
 		{
 			RigidBody::Sptr physics = radio->Add<RigidBody>(RigidBodyType::Kinematic);
@@ -688,10 +709,10 @@ int main() {
 			InteractableObjectBehaviour::Sptr interactions = radio->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handMusicMaterial);            
 			interactions->AddFeedbackBehaviour((InteractionFeedback(radioMaterial2, radio)));
-			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(8.98, 0.17, 13.19));
+			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.01, -0.750, 7.65));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineTwo)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(radioInteractMaterial, extraScreen)));
-			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.0, 5.34, 12.8));
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
@@ -718,10 +739,10 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(1, homework)));
 			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(2.01f, 0.69f, 0.1f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, homework)));
-			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(8.62, 0.17, 14.53));
+			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(10.85, -0.55, 9.11));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineOne)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(booksInteractMaterial, extraScreen)));
-			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.0, 5.34, 12.8));
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
@@ -748,12 +769,12 @@ int main() {
 			interactions->AddRewardMaterial(handShroomMaterial);
 			InteractionTForm tf(InteractionTForm::tformt::rot, glm::vec3(180.f, 0.f, 0.f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, shroomba)));
-			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(10.26, 1.49, 9.17));
+			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.72, -0.31, 2.13));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineFive)));
-			InteractionTForm secretTF(InteractionTForm::tformt::pos, glm::vec3(10.19, 1.32, 9.46));
+			InteractionTForm secretTF(InteractionTForm::tformt::pos, glm::vec3(11.94, -0.63, 2.6));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ secretTF }, secretText)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(shroombaInteractMaterial, extraScreen)));
-			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.0, 5.34, 12.8));
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
@@ -771,7 +792,7 @@ int main() {
 			locomotion->AddBehaviour(pathfollow);*/
 
 			InterpolationBehaviour::Sptr interp = shroomba->Add<InterpolationBehaviour>();
-			interp->AddBehaviourScript("interp_scripts/ohno.txt");
+			interp->AddBehaviourScript("interp_scripts/shroombaPath.txt");
 		}
 
 		GameObject::Sptr boybandPoster = MakeBasic("Boyband Poster", -9.4f, 3.f, 9.0f, 0.0f, 0.0f, 0.0f, bbPosterMaterial, bbPosterMesh);
@@ -789,10 +810,10 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(bbPosterMesh2, boybandPoster)));
 			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(2.01f, 0.69f, 0.1f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, homework)));
-			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(9.26, 0.88, 11.91));
+			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.23, -0.49, 5.83));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineThree)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(posterInteractMaterial, extraScreen)));
-			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.0, 5.34, 12.8));
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 
 			interactions->prompt = prompt;
@@ -814,16 +835,74 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(paintedOverMaterial, bedroomObject)));
 			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(0.f, 0.f, -10.f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, paintCan)));
-			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(9.82, 1.15, 10.62));
+			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.48, -0.4, 3.98));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineFour)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(paintInteractMaterial, extraScreen)));
-			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.0, 5.34, 12.8));
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 		}
+		GameObject::Sptr boundingPosZ = scene->CreateGameObject("boundingPosZ");
+		{
+	
+			boundingPosZ->SetPosition(glm::vec3(0, 0, 11));
+			boundingPosZ->SetRotation(glm::vec3(0, 0, 0));
 
+			RigidBody::Sptr physics = boundingPosZ->Add<RigidBody>(RigidBodyType::Static);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(11,11,0.5)));
+		}
+
+		GameObject::Sptr boundingNegZ = scene->CreateGameObject("boundingNegZ");
+		{
+
+			boundingNegZ->SetPosition(glm::vec3(0, 0, -0.49));
+			boundingNegZ->SetRotation(glm::vec3(0, 0, 0));
+
+			RigidBody::Sptr physics = boundingNegZ->Add<RigidBody>(RigidBodyType::Static);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(11, 11, 0.5)));
+		}
+
+		GameObject::Sptr boundingPosX = scene->CreateGameObject("boundingPosX");
+		{
+
+			boundingPosX->SetPosition(glm::vec3(5.87, 0, 6));
+			boundingPosX->SetRotation(glm::vec3(0, 90, 0));
+
+			RigidBody::Sptr physics = boundingPosX->Add<RigidBody>(RigidBodyType::Static);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(11, 11, 0.5)));
+		}
+
+		GameObject::Sptr boundingNegX = scene->CreateGameObject("boundingNegX");
+		{
+
+			boundingNegX->SetPosition(glm::vec3(-9.98, 0, 6));
+			boundingNegX->SetRotation(glm::vec3(0, 90, 0));
+
+			RigidBody::Sptr physics = boundingNegX->Add<RigidBody>(RigidBodyType::Static);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(11, 11, 0.5)));
+		}
+
+		GameObject::Sptr boundingPosY = scene->CreateGameObject("boundingPosY");
+		{
+
+			boundingPosY->SetPosition(glm::vec3(0, 5.91, 6));
+			boundingPosY->SetRotation(glm::vec3(90, 0, 0));
+
+			RigidBody::Sptr physics = boundingPosY->Add<RigidBody>(RigidBodyType::Static);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(11, 11, 0.5)));
+		}
+
+		GameObject::Sptr boundingNegY = scene->CreateGameObject("boundingNegX");
+		{
+
+			boundingNegY->SetPosition(glm::vec3(0, -7, 6));
+			boundingNegY->SetRotation(glm::vec3(90, 0, 0));
+
+			RigidBody::Sptr physics = boundingNegY->Add<RigidBody>(RigidBodyType::Static);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(11, 11, 0.5)));
+		}
 		GameObject::Sptr hand = MakeBasic("Idle Hand", 0.f, 0.f, 2.f, 0.0f, 0.0f, 0.0f, handDefaultMaterial, theHandMesh);
 		{
 			//make hand dynamic so that we can move it and it can interact with triggers

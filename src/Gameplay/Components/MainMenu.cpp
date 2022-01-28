@@ -63,6 +63,7 @@ void MainMenu::Update(float deltaTime)
 		}
 
 		pointer->SetPosition(pointerPositions[select]); 
+		GetGameObject()->Get<InterpolationBehaviour>()->AddBehaviourScript("interp_scripts/menu_behaviour.txt");
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_ENTER) && !cooldown) {
 			std::cout << "Enter";
@@ -75,32 +76,40 @@ void MainMenu::Update(float deltaTime)
 				cooldown = 30;
 			}
 			if (select == 1 && controls == 0 && credits == 0) {
-				GetGameObject()->SetPosition(glm::vec3(20.03f, -5.14f, 6.9f));
+				//GetGameObject()->SetPosition(glm::vec3(20.03f, -5.14f, 6.9f));
 				controls = true;
 				cooldown = 30;
 				select = 0;
+				GetGameObject()->Get<InterpolationBehaviour>()->ToggleBehaviour("MenuToControl", false);
+				GetGameObject()->Get<InterpolationBehaviour>()->PauseOrResumeCurrentBehaviour();
 			}
 			if (select == 2 && controls == 0 && credits == 0) {
-				GetGameObject()->SetPosition(glm::vec3(-7.93f, 16.55f, 6.9f));
+				//GetGameObject()->SetPosition(glm::vec3(-7.93f, 16.55f, 6.9f));
 				credits = true;
 				cooldown = 30;
 				select = 0;
+				GetGameObject()->Get<InterpolationBehaviour>()->ToggleBehaviour("MenuToCredits", false);
+				GetGameObject()->Get<InterpolationBehaviour>()->PauseOrResumeCurrentBehaviour();
 			}
 			if (select == 3 && controls == 0 && credits == 0) {
 				glfwSetWindowShouldClose(GetGameObject()->GetScene()->Window, true);
 				cooldown = 30;
 			}
 			if (controls == true && !cooldown) {
-				GetGameObject()->SetPosition(glm::vec3(5.87f, 5.79f, 6.9f));
+				//GetGameObject()->SetPosition(glm::vec3(5.87f, 5.79f, 6.9f));
 				cooldown = 30;
 				controls = false;
 				select = 1;	
+				GetGameObject()->Get<InterpolationBehaviour>()->ToggleBehaviour("ControlToMenu", false);
+				GetGameObject()->Get<InterpolationBehaviour>()->PauseOrResumeCurrentBehaviour();
 			}
 			if (credits == true && !cooldown) {
-				GetGameObject()->SetPosition(glm::vec3(5.87f, 5.79f, 6.9f));
+				//GetGameObject()->SetPosition(glm::vec3(5.87f, 5.79f, 6.9f));
 				cooldown = 30;
 				credits = false;
 				select = 2;
+				GetGameObject()->Get<InterpolationBehaviour>()->ToggleBehaviour("CreditsToMenu", false);
+				GetGameObject()->Get<InterpolationBehaviour>()->PauseOrResumeCurrentBehaviour();
 			}
 		}
 
