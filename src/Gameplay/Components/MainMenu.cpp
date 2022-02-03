@@ -79,7 +79,7 @@ void MainMenu::Update(float deltaTime)
 				//GetGameObject()->SetPosition(glm::vec3(20.03f, -5.14f, 6.9f));
 				controls = true;
 				cooldown = 30;
-				select = 0;
+				select = 4;
 				GetGameObject()->Get<InterpolationBehaviour>()->ToggleBehaviour("MenuToControl", false);
 				GetGameObject()->Get<InterpolationBehaviour>()->PauseOrResumeCurrentBehaviour();
 			}
@@ -87,7 +87,7 @@ void MainMenu::Update(float deltaTime)
 				//GetGameObject()->SetPosition(glm::vec3(-7.93f, 16.55f, 6.9f));
 				credits = true;
 				cooldown = 30;
-				select = 0;
+				select = 4;
 				GetGameObject()->Get<InterpolationBehaviour>()->ToggleBehaviour("MenuToCredits", false);
 				GetGameObject()->Get<InterpolationBehaviour>()->PauseOrResumeCurrentBehaviour();
 			}
@@ -99,7 +99,7 @@ void MainMenu::Update(float deltaTime)
 				//GetGameObject()->SetPosition(glm::vec3(5.87f, 5.79f, 6.9f));
 				cooldown = 30;
 				controls = false;
-				select = 1;	
+				select = 4;	
 				GetGameObject()->Get<InterpolationBehaviour>()->ToggleBehaviour("ControlToMenu", false);
 				GetGameObject()->Get<InterpolationBehaviour>()->PauseOrResumeCurrentBehaviour();
 			}
@@ -107,7 +107,7 @@ void MainMenu::Update(float deltaTime)
 				//GetGameObject()->SetPosition(glm::vec3(5.87f, 5.79f, 6.9f));
 				cooldown = 30;
 				credits = false;
-				select = 2;
+				select = 4;
 				GetGameObject()->Get<InterpolationBehaviour>()->ToggleBehaviour("CreditsToMenu", false);
 				GetGameObject()->Get<InterpolationBehaviour>()->PauseOrResumeCurrentBehaviour();
 			}

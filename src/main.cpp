@@ -661,7 +661,7 @@ int main() {
 
 		GameObject::Sptr prompt = MakeBasicPlane("Prompt", -1.38f, 8.19f, -11.82f, 80.351f, 0.0f, 142.00f, 4.0f, 1.0f, eMaterial);
 
-		GameObject::Sptr list = MakeBasicPlane("List", 11.37f, -1.07f, 6.68f, 80.351f, 0.0f, 142.00f, 4.0f, 10.0f, listMaterial); 
+		GameObject::Sptr list = MakeBasicPlane("List", 11.21f, -1.01f, 6.68f, 80.351f, 0.0f, 142.00f, 4.0f, 10.0f, listMaterial); 
 		{
 			list->SetScale(glm::vec3(1.3, 1.3, 1.3));
 		}
@@ -709,7 +709,7 @@ int main() {
 			InteractableObjectBehaviour::Sptr interactions = radio->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handMusicMaterial);            
 			interactions->AddFeedbackBehaviour((InteractionFeedback(radioMaterial2, radio)));
-			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.01, -0.750, 7.65));
+			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.22, -0.750, 7.65));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineTwo)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(radioInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -739,7 +739,7 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(1, homework)));
 			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(2.01f, 0.69f, 0.1f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, homework)));
-			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(10.85, -0.55, 9.11));
+			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.33, -0.55, 5.47));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineOne)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(booksInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -769,9 +769,9 @@ int main() {
 			interactions->AddRewardMaterial(handShroomMaterial);
 			InteractionTForm tf(InteractionTForm::tformt::rot, glm::vec3(180.f, 0.f, 0.f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, shroomba)));
-			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.72, -0.31, 2.13));
+			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.84, -0.30, 1.74));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineFive)));
-			InteractionTForm secretTF(InteractionTForm::tformt::pos, glm::vec3(11.94, -0.63, 2.6));
+			InteractionTForm secretTF(InteractionTForm::tformt::pos, glm::vec3(12.11, -0.55, 1.71));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ secretTF }, secretText)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(shroombaInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -784,13 +784,13 @@ int main() {
 			MorphAnimationManager::Sptr animator = shroomba->Add<MorphAnimationManager>();
 			animator->AddAnim(std::vector<Gameplay::MeshResource::Sptr>{shroombaFrame1, shroombaFrame2, shroombaFrame3}, 2.4);
 			animator->SetContinuity(true);
-
+			
 			/*LocomotionBehaviour::Sptr locomotion = shroomba->Add<LocomotionBehaviour>(shroomba);
 			PatrolPath mainpath(std::vector<glm::vec3>{glm::vec3(-0.5, 1.4, 0.2f), glm::vec3(1.25, 3.7, 0.2f), glm::vec3(3.7, 3.7, 0.2f), glm::vec3(3.7, -1.5, 0.2f),
 				glm::vec3(1.4, -1.5, 0.2), glm::vec3(-0.13, -4.9, 0.2), glm::vec3(-5.1, -2.7, 0.2), glm::vec3(-0.5, -1.0, 0.2)}, 0.2);
 			PatrolBehaviour pathfollow(AI_Mode::PATROL, "path_follow", mainpath, 5.0);
 			locomotion->AddBehaviour(pathfollow);*/
-
+			
 			InterpolationBehaviour::Sptr interp = shroomba->Add<InterpolationBehaviour>();
 			interp->AddBehaviourScript("interp_scripts/shroombaPath.txt");
 		}
@@ -810,7 +810,7 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(bbPosterMesh2, boybandPoster)));
 			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(2.01f, 0.69f, 0.1f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, homework)));
-			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.23, -0.49, 5.83));
+			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(10.77, -0.25, 9.25));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineThree)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(posterInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -835,7 +835,7 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(paintedOverMaterial, bedroomObject)));
 			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(0.f, 0.f, -10.f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, paintCan)));
-			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.48, -0.4, 3.98));
+			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.57, -0.3, 3.39));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineFour)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(paintInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
