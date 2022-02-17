@@ -51,6 +51,11 @@ public:
 	virtual nlohmann::json ToJson() const override;
 	static RenderComponent::Sptr FromJson(const nlohmann::json& data);
 	MAKE_TYPENAME(RenderComponent);
+	
+	bool isRendering = true;
+	int floorTag;
+
+	void setIsRendering(bool);
 
 protected:
 	// The object's mesh

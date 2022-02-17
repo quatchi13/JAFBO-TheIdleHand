@@ -54,6 +54,11 @@ RenderComponent::Sptr RenderComponent::FromJson(const nlohmann::json& data) {
 	return result;
 }
 
+void RenderComponent::setIsRendering(bool render)
+{
+	isRendering = render;
+}
+
 void RenderComponent::RenderImGui() {
 	ImGui::Text("Indexed:   %s", GetMesh() != nullptr ? (_mesh->Mesh->GetIndexBuffer() != nullptr ? "true" : "false") : "N/A");
 	ImGui::Text("Triangles: %d", GetMesh() != nullptr ? (_mesh->Mesh->GetElementCount() / 3) : 0);
