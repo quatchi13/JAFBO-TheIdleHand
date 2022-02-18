@@ -1,5 +1,6 @@
 #pragma once
 #include "IComponent.h"
+#include "Gameplay/Gameobject.h"
 
 /// <summary>
 /// Showcases a very simple behaviour that rotates the parent gameobject at a fixed rate over time

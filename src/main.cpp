@@ -66,6 +66,7 @@
 #include "Gameplay/Components/WarpBehaviour.h"
 
 
+
 // Physics
 #include "Gameplay/Physics/RigidBody.h"
 #include "Gameplay/Physics/Colliders/BoxCollider.h"
@@ -448,6 +449,8 @@ int main() {
 	ComponentManager::RegisterType<WarpBehaviour>();
 
 
+
+
 	// GL states, we'll enable depth testing and backface fulling
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
@@ -626,13 +629,26 @@ int main() {
 			Camera::Sptr cam = camera->Add<Camera>();
 			// Make sure that the camera is set as the scene's main camera!
 			scene->MainCamera = cam;
-
-			WarpBehaviour::Sptr warp = camera->Add<WarpBehaviour>();
 		}
 
 		GameObject::Sptr bedroomObject = MakeBasic("Bedroom Object", 0.f, 0.0f, 0.0f, 0.f, 0.0f, 0.0f, 1, bedroomMaterial, bedroomMesh);
+		{	
+			ObjectLinking::Sptr link = bedroomObject->Add<ObjectLinking>();
+		}
 		
 		GameObject::Sptr livingRoomObject = MakeBasic("Living Room Object", 0.f, 0.0f, 100.0f, 0.f, 0.0f, 0.0f, 2, missingMaterial, roomTwoMesh);
+		{
+
+		}
+
+
+		GameObject::Sptr floorManager = scene->CreateGameObject("Floor Manager");
+		{
+			WarpBehaviour::Sptr warp = floorManager->Add<WarpBehaviour>();
+			warp->roomOne = bedroomObject;
+			warp->roomTwo = livingRoomObject;
+		}
+
 
 		GameObject::Sptr pointer = MakeBasicPlane("Pointer", 4.07f, 7.21f, 9.55f, 80.351f, 0.0f, 142.0f, 2.0f, 1.0f, 1, menuPointerMaterial);
 		
@@ -676,37 +692,42 @@ int main() {
 		{
 			list->SetScale(glm::vec3(1.3, 1.3, 1.3));
 
-			WarpBehaviour::Sptr warp = list->Add<WarpBehaviour>();
 		}
 		
 		GameObject::Sptr secretText = MakeBasicPlane("Secret Text", 10.19f, 1.32f, -9.46f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 1, secretMaterial);
 		{
 			secretText->SetScale(glm::vec3(1.3, 1.3, 1.3));
+
 		}
 
 		GameObject::Sptr lineOne = MakeBasicPlane("Line One", 8.62f, 0.17f, -14.53f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 1, lineMaterial);
 		{
 			lineOne->SetScale(glm::vec3(1.3, 1.3, 1.3));
+
 		}
 
 		GameObject::Sptr lineTwo = MakeBasicPlane("Line Two", 8.98f, 0.17f, -13.19f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 1, lineMaterial);
 		{
 			lineTwo->SetScale(glm::vec3(1.3, 1.3, 1.3));
+
 		}
 
 		GameObject::Sptr lineThree = MakeBasicPlane("Line Three", 9.26f, 0.88f, -11.91f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 1, lineMaterial);
 		{
 			lineThree->SetScale(glm::vec3(1.3, 1.3, 1.3));
+
 		}
 
 		GameObject::Sptr lineFour = MakeBasicPlane("Line Four", 9.82f, 1.15f, -10.62f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 1, lineMaterial);
 		{
 			lineFour->SetScale(glm::vec3(1.3, 1.3, 1.3));
+
 		}
 
 		GameObject::Sptr lineFive = MakeBasicPlane("Line Five", 10.26f, 1.49f, -9.17f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 1, lineMaterial);
 		{
 			lineFive->SetScale(glm::vec3(1.3, 1.3, 1.3));
+
 		}
 
 		GameObject::Sptr radio = MakeBasic("Radio", -7.4f, -3.1f, 0.0f, 0.0f, 0.0f, 0.0f, 1, radioMaterial, radioFrame0);
@@ -735,6 +756,9 @@ int main() {
 			MorphAnimationManager::Sptr animator = radio->Add<MorphAnimationManager>();
 			animator->AddAnim(std::vector<Gameplay::MeshResource::Sptr>{radioFrame1, radioFrame2, radioFrame3, radioFrame4, radioFrame5, radioFrame6}, 0.5);
 			animator->SetContinuity(true); 
+
+			radio->Add<ObjectLinking>(bedroomObject);
+			bedroomObject->Get<ObjectLinking>()->LinkObject(radio);
 		}
 
 		GameObject::Sptr homework = MakeBasic("Homework", -5.f, 3.45f, 3.3f, 0.0f, 0.0f, 0.0f, 1, homeworkMaterial, homeworkFrame0);
@@ -766,6 +790,9 @@ int main() {
 			animator->AddAnim(std::vector<Gameplay::MeshResource::Sptr>{homeworkMessFrame1, homeworkMessFrame1}, 2.0);
 			
 			animator->SetContinuity(true);
+
+			homework->Add<ObjectLinking>(bedroomObject);
+			bedroomObject->Get<ObjectLinking>()->LinkObject(homework);
 		}
 		
 		GameObject::Sptr shroomba = MakeBasic("Bedroom Shroomba", 2.f, 2.f, 0.f, 0.0f, 0.0f, 0.0f, 1, shroombaMaterial, shroombaFrame0);
@@ -806,6 +833,7 @@ int main() {
 			
 			InterpolationBehaviour::Sptr interp = shroomba->Add<InterpolationBehaviour>();
 			interp->AddBehaviourScript("interp_scripts/shroombaPath.txt");
+
 		}
 
 		GameObject::Sptr boybandPoster = MakeBasic("Boyband Poster", -9.4f, 3.f, 9.0f, 0.0f, 0.0f, 0.0f, 1, bbPosterMaterial, bbPosterMesh);
@@ -831,6 +859,10 @@ int main() {
 
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
+
+
+			boybandPoster->Add<ObjectLinking>(bedroomObject);
+			bedroomObject->Get<ObjectLinking>()->LinkObject(boybandPoster);
 		}
 
 		GameObject::Sptr paintCan = MakeBasic("Paint Can", 0.45f, -5.1f, 6.44f, 0.0f, 0.0f, 0.0f, 1, paintcanMaterial, paintcanMesh);
@@ -856,7 +888,12 @@ int main() {
 
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
+
+
+			paintCan->Add<ObjectLinking>(bedroomObject);
+			bedroomObject->Get<ObjectLinking>()->LinkObject(paintCan);
 		}
+
 		GameObject::Sptr boundingPosZ = scene->CreateGameObject("boundingPosZ");
 		{
 	
@@ -865,6 +902,10 @@ int main() {
 
 			RigidBody::Sptr physics = boundingPosZ->Add<RigidBody>(RigidBodyType::Static);
 			physics->AddCollider(BoxCollider::Create(glm::vec3(11,11,0.5)));
+
+
+			boundingPosZ->Add<ObjectLinking>(bedroomObject);
+			bedroomObject->Get<ObjectLinking>()->LinkObject(boundingPosZ);
 		}
 
 		GameObject::Sptr boundingNegZ = scene->CreateGameObject("boundingNegZ");
@@ -875,6 +916,8 @@ int main() {
 
 			RigidBody::Sptr physics = boundingNegZ->Add<RigidBody>(RigidBodyType::Static);
 			physics->AddCollider(BoxCollider::Create(glm::vec3(11, 11, 0.5)));
+			boundingNegZ->Add<ObjectLinking>(bedroomObject);
+			bedroomObject->Get<ObjectLinking>()->LinkObject(boundingNegZ);
 		}
 
 		GameObject::Sptr boundingPosX = scene->CreateGameObject("boundingPosX");
@@ -885,6 +928,9 @@ int main() {
 
 			RigidBody::Sptr physics = boundingPosX->Add<RigidBody>(RigidBodyType::Static);
 			physics->AddCollider(BoxCollider::Create(glm::vec3(11, 11, 0.5)));
+
+			boundingPosX->Add<ObjectLinking>(bedroomObject);
+			bedroomObject->Get<ObjectLinking>()->LinkObject(boundingPosX);
 		}
 
 		GameObject::Sptr boundingNegX = scene->CreateGameObject("boundingNegX");
@@ -895,6 +941,9 @@ int main() {
 
 			RigidBody::Sptr physics = boundingNegX->Add<RigidBody>(RigidBodyType::Static);
 			physics->AddCollider(BoxCollider::Create(glm::vec3(11, 11, 0.5)));
+
+			boundingNegX->Add<ObjectLinking>(bedroomObject);
+			bedroomObject->Get<ObjectLinking>()->LinkObject(boundingNegX);
 		}
 
 		GameObject::Sptr boundingPosY = scene->CreateGameObject("boundingPosY");
@@ -905,6 +954,9 @@ int main() {
 
 			RigidBody::Sptr physics = boundingPosY->Add<RigidBody>(RigidBodyType::Static);
 			physics->AddCollider(BoxCollider::Create(glm::vec3(11, 11, 0.5)));
+
+			boundingPosY->Add<ObjectLinking>(bedroomObject);
+			bedroomObject->Get<ObjectLinking>()->LinkObject(boundingPosY);
 		}
 
 		GameObject::Sptr boundingNegY = scene->CreateGameObject("boundingNegX");
@@ -915,16 +967,17 @@ int main() {
 
 			RigidBody::Sptr physics = boundingNegY->Add<RigidBody>(RigidBodyType::Static);
 			physics->AddCollider(BoxCollider::Create(glm::vec3(11, 11, 0.5)));
+
+			boundingNegY->Add<ObjectLinking>(bedroomObject);
+			bedroomObject->Get<ObjectLinking>()->LinkObject(boundingNegY);
+
 		}
-		GameObject::Sptr floorManager = scene->CreateGameObject("Floor Manager");
-		{
-			WarpBehaviour::Sptr warp = floorManager->Add<WarpBehaviour>();
-		}
-		GameObject::Sptr hand = MakeBasic("Idle Hand", 0.f, 0.f, 2.f, 0.0f, 0.0f, 0.0f, 1, handDefaultMaterial, theHandMesh);
+
+		GameObject::Sptr hand = MakeBasic("Idle Hand", 0.f, 0.f, 2.f, 0.0f, 0.0f, 0.0f, 0, handDefaultMaterial, theHandMesh);
 		{
 			//make hand dynamic so that we can move it and it can interact with triggers
 			RigidBody::Sptr physics = hand->Add<RigidBody>(RigidBodyType::Dynamic);
-			physics->AddCollider(ConvexMeshCollider::Create());
+			physics->AddCollider(BoxCollider::Create(glm::vec3(1.7, 0.9, 0.8)));
 
 			CharacterController::Sptr controller = hand->Add<CharacterController>();
 
@@ -934,8 +987,6 @@ int main() {
 			MorphRenderComponent::Sptr morph = hand->Add<MorphRenderComponent>(handIdle0);
 			MorphAnimationManager::Sptr anims = hand->Add<MorphAnimationManager>();
 			anims->AddAnim(std::vector<MeshResource::Sptr>{handIdle3, handIdle4, handIdle5}, 0.5);
-
-			WarpBehaviour::Sptr warper = hand->Add<WarpBehaviour>();
 		}
 
 

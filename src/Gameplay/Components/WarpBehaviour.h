@@ -13,7 +13,11 @@ public:
 	WarpBehaviour() = default;
 	
 	int currentFloor = 1;
-
+	Gameplay::GameObject::Sptr roomOne;
+	Gameplay::GameObject::Sptr roomTwo;
+	//Gameplay::GameObject::Sptr roomThree;
+	//Gameplay::GameObject::Sptr roomFour;
+	//Gameplay::GameObject::Sptr roomFive;
 	virtual void Update(float deltaTime) override;
 
 	virtual void RenderImGui() override;

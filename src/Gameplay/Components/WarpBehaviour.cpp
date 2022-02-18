@@ -7,11 +7,15 @@ void WarpBehaviour::Update(float deltaTime) {
 	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_SPACE))
 	{
 		currentFloor = 2;
+		roomOne->SetPosition(glm::vec3(0, 0, -50));
+		roomTwo->SetPosition(glm::vec3(0, 0, 0));
 	}
 	
 	if ((glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_BACKSPACE)))
 	{
 		currentFloor = 1;
+		roomTwo->SetPosition(glm::vec3(0, 0, -50));
+		roomOne->SetPosition(glm::vec3(0, 0, 0));
 	}
 }
 
