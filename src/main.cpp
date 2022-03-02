@@ -513,8 +513,12 @@ int main() {
 		MeshResource::Sptr handIdle3 = ResourceManager::CreateAsset<MeshResource>("animated meshes/hand/handIdleMesh-3.obj");
 		MeshResource::Sptr handIdle4 = ResourceManager::CreateAsset<MeshResource>("animated meshes/hand/handIdleMesh-4.obj");
 		MeshResource::Sptr handIdle5 = ResourceManager::CreateAsset<MeshResource>("animated meshes/hand/handIdleMesh-5.obj");
-		MeshResource::Sptr roomTwoMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomTemporary.obj");
-
+		MeshResource::Sptr roomTwoMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MasterBedroomMegaModel.obj");
+		MeshResource::Sptr VanityMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Vanity.obj");
+		MeshResource::Sptr MasterBedMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MasterBed.obj");
+		MeshResource::Sptr JeweleryBoxMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Jewelery_Box.obj");
+		MeshResource::Sptr FlowerMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Flower.obj");
+		
 		//Textures
 		Texture2D::Sptr    handDefault = ResourceManager::CreateAsset<Texture2D>("textures/Hand.png");
 		Texture2D::Sptr    handMusic = ResourceManager::CreateAsset<Texture2D>("textures/HandMusic.png");
@@ -548,6 +552,11 @@ int main() {
 		Texture2D::Sptr    winTex = ResourceManager::CreateAsset<Texture2D>("textures/win.png");
 		Texture2D::Sptr    ePrTex = ResourceManager::CreateAsset<Texture2D>("textures/EnterPrompt.png");
 		Texture2D::Sptr    eTex = ResourceManager::CreateAsset<Texture2D>("textures/E.png");
+		Texture2D::Sptr    FlowerTex = ResourceManager::CreateAsset<Texture2D>("textures/Flower.png");
+		Texture2D::Sptr    JeweleryBoxTex = ResourceManager::CreateAsset<Texture2D>("textures/Jewelery_Box.png");
+		Texture2D::Sptr    MasterBedTex = ResourceManager::CreateAsset<Texture2D>("textures/Masterbed.png");
+		Texture2D::Sptr    VanityTex = ResourceManager::CreateAsset<Texture2D>("textures/Vanity.png");
+		Texture2D::Sptr    MasterBedroomTex = ResourceManager::CreateAsset<Texture2D>("textures/MasterBedroom.png");
 
 		// Here we'll load in the cubemap, as well as a special shader to handle drawing the skybox
 		TextureCube::Sptr testCubemap = ResourceManager::CreateAsset<TextureCube>("cubemaps/map/map.jpg");
@@ -558,7 +567,7 @@ int main() {
 		 
 		// Create an empty scene
 		scene = std::make_shared<Scene>();
-
+		
 		// Setting up our enviroment map
 		scene->SetSkyboxTexture(testCubemap);
 		scene->SetSkyboxShader(skyboxShader);
@@ -598,6 +607,11 @@ int main() {
 		Material::Sptr winMaterial = MakeMaterial("Win Material", basicShader, winTex, 0.1f);
 		Material::Sptr ePromptMaterial = MakeMaterial("Enter Prompt Material", basicShader, ePrTex, 0.1f);
 		Material::Sptr eMaterial = MakeMaterial("Enter Prompt Material", basicShader, eTex, 0.1f);
+		Material::Sptr flowerMaterial = MakeMaterial("Enter Prompt Material", basicShader, FlowerTex, 0.1f);
+		Material::Sptr jeweleryBoxMaterial = MakeMaterial("Enter Prompt Material", basicShader, JeweleryBoxTex, 0.1f);
+		Material::Sptr masterBedMaterial = MakeMaterial("Enter Prompt Material", basicShader, MasterBedTex, 0.1f);
+		Material::Sptr vanityMaterial = MakeMaterial("Enter Prompt Material", basicShader, VanityTex, 0.1f);
+		Material::Sptr masterBedroomMaterial = MakeMaterial("Enter Prompt Material", basicShader, MasterBedroomTex, 0.1f);
 
 
 
@@ -636,9 +650,10 @@ int main() {
 			ObjectLinking::Sptr link = bedroomObject->Add<ObjectLinking>();
 		}
 		
-		GameObject::Sptr livingRoomObject = MakeBasic("Living Room Object", 0.f, 0.0f, 100.0f, 0.f, 0.0f, 0.0f, 2, missingMaterial, roomTwoMesh);
+		GameObject::Sptr masterBedroomObject = MakeBasic("Master Bedroom Object", 0.f, 0.0f, -50.0f, 0.f, 0.0f, 90.0f, 2, masterBedroomMaterial, roomTwoMesh);
 		{
-
+			ObjectLinking::Sptr link = masterBedroomObject->Add<ObjectLinking>();
+			masterBedroomObject->SetScale(glm::vec3(5.0f, 5.0f, 5.0f));
 		}
 
 
@@ -646,13 +661,41 @@ int main() {
 		{
 			WarpBehaviour::Sptr warp = floorManager->Add<WarpBehaviour>();
 			warp->roomOne = bedroomObject;
-			warp->roomTwo = livingRoomObject;
+			warp->roomTwo = masterBedroomObject;
+
+
+			TriggerVolume::Sptr volume = floorManager->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.8);
+			collider->SetPosition(glm::vec3(3.5f, 3.5f, 0.f));
+			volume->AddCollider(collider);
 		}
 
+		GameObject::Sptr flowerObject = MakeBasic("Flower Object", 0.f, 0.0f, -50.0f, 0.f, 0.0f, 0.0f, 2, flowerMaterial, FlowerMesh);
+		{
+			flowerObject->Add<ObjectLinking>(masterBedroomObject);
+			masterBedroomObject->Get<ObjectLinking>()->LinkObject(flowerObject);
+		}
 
-		GameObject::Sptr pointer = MakeBasicPlane("Pointer", 4.07f, 7.21f, 9.55f, 80.351f, 0.0f, 142.0f, 2.0f, 1.0f, 1, menuPointerMaterial);
+		GameObject::Sptr vanityObject = MakeBasic("Vanity Object", 0.f, 0.0f, -50.0f, 0.f, 0.0f, 0.0f, 2, vanityMaterial, VanityMesh);
+		{
+			vanityObject->Add<ObjectLinking>(masterBedroomObject);
+			masterBedroomObject->Get<ObjectLinking>()->LinkObject(vanityObject);
+		}
+
+		GameObject::Sptr masterBedObject = MakeBasic("Master Bed Object", 0.f, 0.0f, -50.0f, 0.f, 0.0f, 0.0f, 2, masterBedMaterial, MasterBedMesh);
+		{
+			masterBedObject->Add<ObjectLinking>(masterBedroomObject);
+			masterBedroomObject->Get<ObjectLinking>()->LinkObject(masterBedObject);
+		}
+
+		GameObject::Sptr jeweleryBoxObject = MakeBasic("Jewelery Box Object", 0.f, 0.0f, -50.0f, 0.f, 0.0f, 0.0f, 2, jeweleryBoxMaterial, JeweleryBoxMesh);
+		{
+			jeweleryBoxObject->Add<ObjectLinking>(masterBedroomObject);
+			masterBedroomObject->Get<ObjectLinking>()->LinkObject(jeweleryBoxObject);
+		}
+		GameObject::Sptr pointer = MakeBasicPlane("Pointer", 4.07f, 7.21f, 9.55f, 80.351f, 0.0f, 142.0f, 2.0f, 1.0f, 0, menuPointerMaterial);
 		
-		GameObject::Sptr extraScreen = MakeBasicPlane("Extra Screen", 5.87f, 5.79f, -6.9f, 80.351f, 0.0f, 142.00f, 18.0f, 10.0f, 1, missingMaterial);
+		GameObject::Sptr extraScreen = MakeBasicPlane("Extra Screen", 5.87f, 5.79f, -6.9f, 80.351f, 0.0f, 142.00f, 18.0f, 10.0f, 0, missingMaterial);
 		{
 			InterpolationBehaviour::Sptr interp = extraScreen->Add<InterpolationBehaviour>();
 			interp->AddBehaviourScript("interp_scripts/menu_behaviour.txt");
@@ -664,7 +707,7 @@ int main() {
 			feedbackScreen->WinScreen = winMaterial;
 		}
 
-		GameObject::Sptr screen = MakeBasicPlane("Screen", 5.87f, 5.79f, 6.9f, 80.351f, 0.0f, 142.00f, 54.0f, 10.0f, 1, menuMaterial);
+		GameObject::Sptr screen = MakeBasicPlane("Screen", 5.87f, 5.79f, 6.9f, 80.351f, 0.0f, 142.00f, 54.0f, 10.0f, 0, menuMaterial);
 		{
 			MainMenu::Sptr menu = screen->Add<MainMenu>();
 			menu->MenuMaterial = menuMaterial;
@@ -680,18 +723,18 @@ int main() {
 			ObjectLinking::Sptr oLink = screen->Add<ObjectLinking>();
 		}
 		
-		GameObject::Sptr enterPrompt = MakeBasicPlane("Enter Prompt", 6.54f, 6.03f, 3.4f, 80.351f, 0.0f, 142.00f, 4.0f, 1.0f, 1, ePromptMaterial);
+		GameObject::Sptr enterPrompt = MakeBasicPlane("Enter Prompt", 6.54f, 6.03f, 3.4f, 80.351f, 0.0f, 142.00f, 4.0f, 1.0f, 0, ePromptMaterial);
 		{
 			enterPrompt->Add<ObjectLinking>(screen);
 			screen->Get<ObjectLinking>()->LinkObject(enterPrompt);
 		}
 
-		GameObject::Sptr prompt = MakeBasicPlane("Prompt", -1.38f, 8.19f, -11.82f, 80.351f, 0.0f, 142.00f, 4.0f, 1.0f, 1, eMaterial);
+		GameObject::Sptr prompt = MakeBasicPlane("Prompt", -1.38f, 8.19f, -11.82f, 80.351f, 0.0f, 142.00f, 4.0f, 1.0f, 0, eMaterial);
 
 		GameObject::Sptr list = MakeBasicPlane("List", 11.21f, -1.01f, 6.68f, 80.351f, 0.0f, 142.00f, 4.0f, 10.0f, 1, listMaterial);
 		{
 			list->SetScale(glm::vec3(1.3, 1.3, 1.3));
-
+			
 		}
 		
 		GameObject::Sptr secretText = MakeBasicPlane("Secret Text", 10.19f, 1.32f, -9.46f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 1, secretMaterial);
@@ -989,7 +1032,6 @@ int main() {
 			anims->AddAnim(std::vector<MeshResource::Sptr>{handIdle3, handIdle4, handIdle5}, 0.5);
 		}
 
-
 		// Call scene awake to start up all of our components
 		scene->Window = window;
 		scene->Awake();
@@ -1105,7 +1147,7 @@ int main() {
 			// Split lights from the objects in ImGui
 			ImGui::Separator();
 		}
-
+		
 		dt *= playbackSpeed;
 		
 		// Perform updates for all components
@@ -1174,7 +1216,7 @@ int main() {
 			if (object->Has<MorphRenderComponent>()) { shader->SetUniform("u_t", object->Get<MorphRenderComponent>()->_t); } 
 
 
-			if (object->Get<RenderComponent>()->floorTag != scene->FindObjectByName("Floor Manager")->Get<WarpBehaviour>()->currentFloor)
+			if (object->Get<RenderComponent>()->floorTag != scene->FindObjectByName("Floor Manager")->Get<WarpBehaviour>()->currentFloor && object->Get<RenderComponent>()->floorTag != 0)
 			{
 				return;
 			}

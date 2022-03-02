@@ -11,7 +11,7 @@ public:
 	typedef std::shared_ptr<WarpBehaviour> Sptr;
 
 	WarpBehaviour() = default;
-	
+
 	int currentFloor = 1;
 	Gameplay::GameObject::Sptr roomOne;
 	Gameplay::GameObject::Sptr roomTwo;
@@ -20,11 +20,17 @@ public:
 	//Gameplay::GameObject::Sptr roomFive;
 	virtual void Update(float deltaTime) override;
 
+	virtual void OnTriggerVolumeEntered(const std::shared_ptr<Gameplay::Physics::RigidBody>& body) override;
+	virtual void OnTriggerVolumeLeaving(const std::shared_ptr<Gameplay::Physics::RigidBody>& body) override;
+
 	virtual void RenderImGui() override;
 
 	virtual nlohmann::json ToJson() const override;
 	static WarpBehaviour::Sptr FromJson(const nlohmann::json& data);
 
 	MAKE_TYPENAME(WarpBehaviour);
-};
 
+protected:
+	bool _playerInTrigger = false;
+	int floorMax = 2;
+};
