@@ -13,7 +13,7 @@ void WarpBehaviour::Update(float deltaTime) {
 			{
 				currentFloor = 2;
 				roomOne->SetPosition(glm::vec3(0, 0, -50));
-				roomTwo->SetPosition(glm::vec3(0, 0, 0));
+				roomTwo->SetPosition(glm::vec3(1.38, -5.100, 0));
 			}
 
 		}

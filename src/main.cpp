@@ -650,10 +650,10 @@ int main() {
 			ObjectLinking::Sptr link = bedroomObject->Add<ObjectLinking>();
 		}
 		
-		GameObject::Sptr masterBedroomObject = MakeBasic("Master Bedroom Object", 0.f, 0.0f, -50.0f, 0.f, 0.0f, 90.0f, 2, masterBedroomMaterial, roomTwoMesh);
+		GameObject::Sptr masterBedroomObject = MakeBasic("Master Bedroom Object", 0.0f, 0.0f, -50.0f, 0.f, 0.0f, 111.0f, 2, masterBedroomMaterial, roomTwoMesh);
 		{
 			ObjectLinking::Sptr link = masterBedroomObject->Add<ObjectLinking>();
-			masterBedroomObject->SetScale(glm::vec3(5.0f, 5.0f, 5.0f));
+			masterBedroomObject->SetScale(glm::vec3(5.170f, 5.20f, 6.240f));
 		}
 
 
