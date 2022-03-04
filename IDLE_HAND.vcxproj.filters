@@ -186,6 +186,9 @@
     <ClInclude Include="src\Graphics\VertexTypes.h">
       <Filter>Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="src\Utils\AudioEngine.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
     <ClInclude Include="src\Utils\FileHelpers.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -370,6 +373,9 @@
     </ClCompile>
     <ClCompile Include="src\Graphics\VertexTypes.cpp">
       <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utils\AudioEngine.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="src\Utils\FileHelpers.cpp">
       <Filter>Utils</Filter>

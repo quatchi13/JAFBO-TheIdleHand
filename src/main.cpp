@@ -38,6 +38,7 @@
 #include "Utils/JsonGlmHelpers.h"
 #include "Utils/StringUtils.h"
 #include "Utils/GlmDefines.h"
+#include "Utils/AudioEngine.h"
 
 // Gameplay
 #include "Gameplay/Material.h"
@@ -613,7 +614,12 @@ int main() {
 		Material::Sptr vanityMaterial = MakeMaterial("Enter Prompt Material", basicShader, VanityTex, 0.1f);
 		Material::Sptr masterBedroomMaterial = MakeMaterial("Enter Prompt Material", basicShader, MasterBedroomTex, 0.1f);
 
+		//Audio Setups
 
+		AudioEngine audioEngine;
+		audioEngine.init();
+		audioEngine.loadSound("test", "sounds/test.wav", true);
+		audioEngine.playSoundByName("test");
 
 		// Create some lights for our scene
 		scene->Lights.resize(3);
