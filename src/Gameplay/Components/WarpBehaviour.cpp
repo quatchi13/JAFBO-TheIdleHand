@@ -7,27 +7,72 @@ void WarpBehaviour::Update(float deltaTime) {
 
 	if (_playerInTrigger)
 	{
-		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_SPACE))
+		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_1))
 		{
-			if (currentFloor < floorMax)
-			{
-				currentFloor = 2;
-				roomOne->SetPosition(glm::vec3(0, 0, -50));
-				roomTwo->SetPosition(glm::vec3(1.38, -5.100, 0));
-			}
-
+			currentFloor = 1;
+			roomOne->SetPosition(glm::vec3(0, 0, 0));
+			roomTwo->SetPosition(glm::vec3(0, 50, -50));
+			roomThree->SetPosition(glm::vec3(0, 100, -50));
+			roomFour->SetPosition(glm::vec3(0, 150, -50));
+			roomFive->SetPosition(glm::vec3(0, 200, -50));
+			roomSix->SetPosition(glm::vec3(0, 250, -50));
 		}
 
-		if ((glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_BACKSPACE)))
+		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_2))
 		{
-			if (currentFloor > 1)
-			{
-				currentFloor = 1;
-				roomTwo->SetPosition(glm::vec3(0, 0, -50));
-				roomOne->SetPosition(glm::vec3(0, 0, 0));
-			}
-
+			currentFloor = 2;
+			roomOne->SetPosition(glm::vec3(0, 0, -50));
+			roomTwo->SetPosition(glm::vec3(1.38, -5.100, 0));
+			roomThree->SetPosition(glm::vec3(0, 100, -50));
+			roomFour->SetPosition(glm::vec3(0, 150, -50));
+			roomFive->SetPosition(glm::vec3(0, 200, -50));	
+			roomSix->SetPosition(glm::vec3(0, 250, -50));
 		}
+
+		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_3))
+		{
+			currentFloor = 3;
+			roomOne->SetPosition(glm::vec3(0, 0, -50));
+			roomTwo->SetPosition(glm::vec3(0, 50, -50));
+			roomThree->SetPosition(glm::vec3(-2.33, 1.98, 0));
+			roomFour->SetPosition(glm::vec3(0, 150, -50));
+			roomFive->SetPosition(glm::vec3(0, 200, -50));
+			roomSix->SetPosition(glm::vec3(0, 250, -50));
+		}
+
+		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_4))
+		{
+			currentFloor = 4;
+			roomOne->SetPosition(glm::vec3(0, 0, -50));
+			roomTwo->SetPosition(glm::vec3(0, 50, -50));
+			roomThree->SetPosition(glm::vec3(0, 100, -50));
+			roomFour->SetPosition(glm::vec3(0, 0, 0));
+			roomFive->SetPosition(glm::vec3(0, 200, -50));
+			roomSix->SetPosition(glm::vec3(0, 250, -50));
+		}
+
+		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_5))
+		{
+			currentFloor = 5;
+			roomOne->SetPosition(glm::vec3(0, 0, -50));
+			roomTwo->SetPosition(glm::vec3(0, 50, -50));
+			roomThree->SetPosition(glm::vec3(0, 100, -50));
+			roomFour->SetPosition(glm::vec3(0, 150, -50));
+			roomFive->SetPosition(glm::vec3(0, 0, 0));
+			roomSix->SetPosition(glm::vec3(0, 250, -50));
+		}
+
+		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_6))
+		{
+			currentFloor = 6;
+			roomOne->SetPosition(glm::vec3(0, 0, -50));
+			roomTwo->SetPosition(glm::vec3(0, 50, -50));
+			roomThree->SetPosition(glm::vec3(0, 100, -50));
+			roomFour->SetPosition(glm::vec3(0, 150, -50));
+			roomFive->SetPosition(glm::vec3(0, 200, -150));
+			roomSix->SetPosition(glm::vec3(0, 0, 0 ));
+		}
+
 	}
 
 }

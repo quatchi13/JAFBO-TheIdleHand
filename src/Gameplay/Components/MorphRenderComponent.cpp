@@ -17,7 +17,6 @@ MorphRenderComponent::MorphRenderComponent(const Gameplay::MeshResource::Sptr& b
 	_mesh1 = baseMesh;
 	_t = 0;
 
-	std::cout << "beep boop";
 
 	//UpdateVBOs(_mesh0, _mesh1, 0.f);
 

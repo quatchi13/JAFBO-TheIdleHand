@@ -15,6 +15,10 @@ public:
 	int currentFloor = 1;
 	Gameplay::GameObject::Sptr roomOne;
 	Gameplay::GameObject::Sptr roomTwo;
+	Gameplay::GameObject::Sptr roomThree;
+	Gameplay::GameObject::Sptr roomFour;
+	Gameplay::GameObject::Sptr roomFive;
+	Gameplay::GameObject::Sptr roomSix;
 	//Gameplay::GameObject::Sptr roomThree;
 	//Gameplay::GameObject::Sptr roomFour;
 	//Gameplay::GameObject::Sptr roomFive;
@@ -32,5 +36,6 @@ public:
 
 protected:
 	bool _playerInTrigger = false;
-	int floorMax = 2;
+	int floorMax = 6;
+	int floorSwitchTimer = 0;
 };

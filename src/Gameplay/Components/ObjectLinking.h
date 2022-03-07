@@ -1,5 +1,6 @@
 #pragma once
 #include "IComponent.h"
+#include "Gameplay/Scene.h"
 #include "Gameplay/GameObject.h"
 
 /// <summary>
@@ -22,6 +23,8 @@ public:
 
 	virtual nlohmann::json ToJson() const override;
 	static ObjectLinking::Sptr FromJson(const nlohmann::json& data);
+
+	bool currentlyLinked = true;
 
 	MAKE_TYPENAME(ObjectLinking);
 protected:

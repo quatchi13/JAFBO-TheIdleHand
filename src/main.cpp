@@ -514,12 +514,38 @@ int main() {
 		MeshResource::Sptr handIdle3 = ResourceManager::CreateAsset<MeshResource>("animated meshes/hand/handIdleMesh-3.obj");
 		MeshResource::Sptr handIdle4 = ResourceManager::CreateAsset<MeshResource>("animated meshes/hand/handIdleMesh-4.obj");
 		MeshResource::Sptr handIdle5 = ResourceManager::CreateAsset<MeshResource>("animated meshes/hand/handIdleMesh-5.obj");
+
 		MeshResource::Sptr roomTwoMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MasterBedroomMegaModel.obj");
 		MeshResource::Sptr VanityMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Vanity.obj");
 		MeshResource::Sptr MasterBedMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MasterBed.obj");
 		MeshResource::Sptr JeweleryBoxMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Jewelery_Box.obj");
 		MeshResource::Sptr FlowerMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Flower.obj");
+
+		MeshResource::Sptr megaBathroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/megaBathroom.obj");
+		MeshResource::Sptr soapMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/soap.obj");
+		MeshResource::Sptr duckyMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/ducky.obj");
+		MeshResource::Sptr toiletMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/toilet.obj");
+
+		MeshResource::Sptr megaKitchenMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/megaKitchen.obj");
+		MeshResource::Sptr trashMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/Trash.obj");
+		MeshResource::Sptr cakeMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/cake.obj");
+		MeshResource::Sptr mouseTrapMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/mouseTrap.obj");
+		MeshResource::Sptr bowlOfFruitMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/bowlOfFruit.obj");
+
+		MeshResource::Sptr megaLivingroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/LivingRoomMega.obj");
+		MeshResource::Sptr glassTableMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/glassTable.obj");
+		MeshResource::Sptr picturesMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/pictures.obj");
+		MeshResource::Sptr plantMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/plant.obj");
+		MeshResource::Sptr remoteMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/remote.obj");
+		MeshResource::Sptr TVMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/TV.obj");
 		
+		MeshResource::Sptr megaBasementMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/megaBasement.obj");
+		MeshResource::Sptr teslaCoilMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/Teslacoil.obj");
+		MeshResource::Sptr frankenstineMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/Frankenstine.obj");
+		MeshResource::Sptr flasksMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/flasks.obj");
+		MeshResource::Sptr chainsawMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/chainsaw.obj");
+		MeshResource::Sptr boilerMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/boiler.obj");
+
 		//Textures
 		Texture2D::Sptr    handDefault = ResourceManager::CreateAsset<Texture2D>("textures/Hand.png");
 		Texture2D::Sptr    handMusic = ResourceManager::CreateAsset<Texture2D>("textures/HandMusic.png");
@@ -553,11 +579,37 @@ int main() {
 		Texture2D::Sptr    winTex = ResourceManager::CreateAsset<Texture2D>("textures/win.png");
 		Texture2D::Sptr    ePrTex = ResourceManager::CreateAsset<Texture2D>("textures/EnterPrompt.png");
 		Texture2D::Sptr    eTex = ResourceManager::CreateAsset<Texture2D>("textures/E.png");
+
 		Texture2D::Sptr    FlowerTex = ResourceManager::CreateAsset<Texture2D>("textures/Flower.png");
 		Texture2D::Sptr    JeweleryBoxTex = ResourceManager::CreateAsset<Texture2D>("textures/Jewelery_Box.png");
 		Texture2D::Sptr    MasterBedTex = ResourceManager::CreateAsset<Texture2D>("textures/Masterbed.png");
 		Texture2D::Sptr    VanityTex = ResourceManager::CreateAsset<Texture2D>("textures/Vanity.png");
 		Texture2D::Sptr    MasterBedroomTex = ResourceManager::CreateAsset<Texture2D>("textures/MasterBedroom.png");
+
+		Texture2D::Sptr megaBathroomTex = ResourceManager::CreateAsset<Texture2D>("textures/BathroomTextures/BathroomTexture.png");
+		Texture2D::Sptr soapTex = ResourceManager::CreateAsset<Texture2D>("textures/BathroomTextures/soap.png");
+		Texture2D::Sptr duckyTex = ResourceManager::CreateAsset<Texture2D>("textures/BathroomTextures/Ducky.png");
+		Texture2D::Sptr toiletTex = ResourceManager::CreateAsset<Texture2D>("textures/BathroomTextures/toilet.png");
+
+		Texture2D::Sptr megaKitchenTex = ResourceManager::CreateAsset<Texture2D>("textures/KitchenTextures/KitchenTexture.png");
+		Texture2D::Sptr trashTex = ResourceManager::CreateAsset<Texture2D>("textures/KitchenTextures/Trash.png");
+		Texture2D::Sptr cakeTex = ResourceManager::CreateAsset<Texture2D>("textures/KitchenTextures/Cake.png");
+		Texture2D::Sptr mouseTrapTex = ResourceManager::CreateAsset<Texture2D>("textures/KitchenTextures/MouseTrap.png");
+		Texture2D::Sptr bowlOfFruitTex = ResourceManager::CreateAsset<Texture2D>("textures/KitchenTextures/FruitBowl.png");
+
+		Texture2D::Sptr megaLivingroomTex = ResourceManager::CreateAsset<Texture2D>("textures/LivingroomTextures/MegaModelTexture.png");
+		Texture2D::Sptr glassTableTex = ResourceManager::CreateAsset<Texture2D>("textures/LivingroomTextures/glassTable.png");
+		Texture2D::Sptr picturesTex = ResourceManager::CreateAsset<Texture2D>("textures/LivingroomTextures/pictures.png");
+		Texture2D::Sptr plantTex = ResourceManager::CreateAsset<Texture2D>("textures/LivingroomTextures/Plant.png");
+		Texture2D::Sptr remoteTex = ResourceManager::CreateAsset<Texture2D>("textures/LivingroomTextures/remote.png");
+		Texture2D::Sptr TVTex = ResourceManager::CreateAsset<Texture2D>("textures/LivingroomTextures/TV.png");
+
+		Texture2D::Sptr megaBasementTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/BasementTexture.png");
+		Texture2D::Sptr teslaCoilTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/TeslaCoil.png");
+		Texture2D::Sptr frankenstineTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/Frankensine.png");
+		Texture2D::Sptr flasksTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/Flasks.png");
+		Texture2D::Sptr chainsawTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/Chainsaw.png");
+		Texture2D::Sptr boilerTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/Boiler.png");
 
 		// Here we'll load in the cubemap, as well as a special shader to handle drawing the skybox
 		TextureCube::Sptr testCubemap = ResourceManager::CreateAsset<TextureCube>("cubemaps/map/map.jpg");
@@ -608,11 +660,37 @@ int main() {
 		Material::Sptr winMaterial = MakeMaterial("Win Material", basicShader, winTex, 0.1f);
 		Material::Sptr ePromptMaterial = MakeMaterial("Enter Prompt Material", basicShader, ePrTex, 0.1f);
 		Material::Sptr eMaterial = MakeMaterial("Enter Prompt Material", basicShader, eTex, 0.1f);
+
 		Material::Sptr flowerMaterial = MakeMaterial("Enter Prompt Material", basicShader, FlowerTex, 0.1f);
 		Material::Sptr jeweleryBoxMaterial = MakeMaterial("Enter Prompt Material", basicShader, JeweleryBoxTex, 0.1f);
 		Material::Sptr masterBedMaterial = MakeMaterial("Enter Prompt Material", basicShader, MasterBedTex, 0.1f);
 		Material::Sptr vanityMaterial = MakeMaterial("Enter Prompt Material", basicShader, VanityTex, 0.1f);
 		Material::Sptr masterBedroomMaterial = MakeMaterial("Enter Prompt Material", basicShader, MasterBedroomTex, 0.1f);
+
+		Material::Sptr megaBathroomMaterial = MakeMaterial("Enter Prompt Material", basicShader, megaBathroomTex, 0.1f);
+		Material::Sptr soapMaterial = MakeMaterial("Enter Prompt Material", basicShader, soapTex, 0.1f);
+		Material::Sptr duckyMaterial = MakeMaterial("Enter Prompt Material", basicShader, duckyTex, 0.1f);
+		Material::Sptr toiletMaterial = MakeMaterial("Enter Prompt Material", basicShader, toiletTex, 0.1f);
+
+		Material::Sptr megaKitchenMaterial = MakeMaterial("Enter Prompt Material", basicShader, megaKitchenTex, 0.1f);
+		Material::Sptr trashMaterial = MakeMaterial("Enter Prompt Material", basicShader, trashTex, 0.1f);
+		Material::Sptr cakeMaterial = MakeMaterial("Enter Prompt Material", basicShader, cakeTex, 0.1f);
+		Material::Sptr mouseTrapMaterial = MakeMaterial("Enter Prompt Material", basicShader, mouseTrapTex, 0.1f);
+		Material::Sptr bowlOfFruitMaterial = MakeMaterial("Enter Prompt Material", basicShader, bowlOfFruitTex, 0.1f);
+
+		Material::Sptr megaLivingroomMaterial = MakeMaterial("Enter Prompt Material", basicShader, megaLivingroomTex, 0.1f);
+		Material::Sptr glassTableMaterial = MakeMaterial("Enter Prompt Material", basicShader, glassTableTex, 0.1f);
+		Material::Sptr picturesMaterial = MakeMaterial("Enter Prompt Material", basicShader, picturesTex, 0.1f);
+		Material::Sptr plantMaterial = MakeMaterial("Enter Prompt Material", basicShader, plantTex, 0.1f);
+		Material::Sptr remoteMaterial = MakeMaterial("Enter Prompt Material", basicShader, remoteTex, 0.1f);
+		Material::Sptr TVMaterial = MakeMaterial("Enter Prompt Material", basicShader, TVTex, 0.1f);
+
+		Material::Sptr megaBasementMaterial = MakeMaterial("Enter Prompt Material", basicShader, megaBasementTex, 0.1f);
+		Material::Sptr teslaCoilMaterial = MakeMaterial("Enter Prompt Material", basicShader, teslaCoilTex, 0.1f);
+		Material::Sptr frankenstineMaterial = MakeMaterial("Enter Prompt Material", basicShader, frankenstineTex, 0.1f);
+		Material::Sptr flasksMaterial = MakeMaterial("Enter Prompt Material", basicShader, flasksTex, 0.1f);
+		Material::Sptr chainsawMaterial = MakeMaterial("Enter Prompt Material", basicShader, chainsawTex, 0.1f);
+		Material::Sptr boilerMaterial = MakeMaterial("Enter Prompt Material", basicShader, boilerTex, 0.1f);
 
 		//Audio Setups
 
@@ -656,19 +734,45 @@ int main() {
 			ObjectLinking::Sptr link = bedroomObject->Add<ObjectLinking>();
 		}
 		
-		GameObject::Sptr masterBedroomObject = MakeBasic("Master Bedroom Object", 0.0f, 0.0f, -50.0f, 0.f, 0.0f, 111.0f, 2, masterBedroomMaterial, roomTwoMesh);
+		GameObject::Sptr masterBedroomObject = MakeBasic("Master Bedroom Object", 0.0f, 50.0f, -50.0f, 0.f, 0.0f, -10.0f, 2, masterBedroomMaterial, roomTwoMesh);
 		{
 			ObjectLinking::Sptr link = masterBedroomObject->Add<ObjectLinking>();
 			masterBedroomObject->SetScale(glm::vec3(5.170f, 5.20f, 6.240f));
 		}
 
+		GameObject::Sptr megaBathroomObject = MakeBasic("Bathroom Object", 0.0f, 100.0f, -50.0f, 0.f, 0.0f, -36.0f, 3, megaBathroomMaterial, megaBathroomMesh);
+		{
+			ObjectLinking::Sptr link = megaBathroomObject->Add<ObjectLinking>();
+			megaBathroomObject->SetScale(glm::vec3(1.5f, 1.5f, 1.5f));
+		}
+
+		GameObject::Sptr megaKitchenObject = MakeBasic("Kitchen Object", 0.0f, 150.0f, -50.0f, 0.0f, 0.0f, -9.0f, 4, megaKitchenMaterial, megaKitchenMesh);
+		{
+			megaKitchenObject->SetScale(glm::vec3(1.2, 1.2, 1.2));
+			ObjectLinking::Sptr link = megaKitchenObject->Add<ObjectLinking>();
+		}
+
+		GameObject::Sptr megaLivingroomObject = MakeBasic("Livingroom Object", 0.0f, 200.0f, -50.0f, 00.0f, 0.0f, -10.0f, 5, megaLivingroomMaterial, megaLivingroomMesh);
+		{
+			megaLivingroomObject->SetScale(glm::vec3(1.3, 1.3, 1.3));
+			ObjectLinking::Sptr link = megaLivingroomObject->Add<ObjectLinking>();
+		}
+
+		GameObject::Sptr megaBasementObject = MakeBasic("Basement Object", 0.0f, 250.0f, -50.0f, 00.0f, 0.0f, -24.0f, 6, megaBasementMaterial, megaBasementMesh);
+		{
+			//megaBasementObject->SetScale(glm::vec3(1.3, 1.3, 1.3));
+			ObjectLinking::Sptr link = megaBasementObject->Add<ObjectLinking>();
+		}
 
 		GameObject::Sptr floorManager = scene->CreateGameObject("Floor Manager");
 		{
 			WarpBehaviour::Sptr warp = floorManager->Add<WarpBehaviour>();
 			warp->roomOne = bedroomObject;
 			warp->roomTwo = masterBedroomObject;
-
+			warp->roomThree = megaBathroomObject;
+			warp->roomFour = megaKitchenObject;
+			warp->roomFive = megaLivingroomObject;
+			warp->roomSix = megaBasementObject;
 
 			TriggerVolume::Sptr volume = floorManager->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.8);
@@ -676,29 +780,161 @@ int main() {
 			volume->AddCollider(collider);
 		}
 
-		GameObject::Sptr flowerObject = MakeBasic("Flower Object", 0.f, 0.0f, -50.0f, 0.f, 0.0f, 0.0f, 2, flowerMaterial, FlowerMesh);
+
+		//Objects for the Master bed
+		GameObject::Sptr flowerObject = MakeBasic("Flower Object", -8.18f, 55.6f, -50.830f, 0.f, 0.0f, -50.0f, 2, flowerMaterial, FlowerMesh);
 		{
+			flowerObject->SetScale(glm::vec3(2.0, 2.0, 2.0));
 			flowerObject->Add<ObjectLinking>(masterBedroomObject);
 			masterBedroomObject->Get<ObjectLinking>()->LinkObject(flowerObject);
 		}
 
-		GameObject::Sptr vanityObject = MakeBasic("Vanity Object", 0.f, 0.0f, -50.0f, 0.f, 0.0f, 0.0f, 2, vanityMaterial, VanityMesh);
+		GameObject::Sptr vanityObject = MakeBasic("Vanity Object", 6.32f, 38.92f, -45.75f, 0.f, 0.0f, -81.0f, 2, vanityMaterial, VanityMesh);
 		{
+			vanityObject->SetScale(glm::vec3(1.3, 1.3, 1.5));
 			vanityObject->Add<ObjectLinking>(masterBedroomObject);
 			masterBedroomObject->Get<ObjectLinking>()->LinkObject(vanityObject);
 		}
 
-		GameObject::Sptr masterBedObject = MakeBasic("Master Bed Object", 0.f, 0.0f, -50.0f, 0.f, 0.0f, 0.0f, 2, masterBedMaterial, MasterBedMesh);
+		GameObject::Sptr masterBedObject = MakeBasic("Master Bed Object", -2.32f, 46.25f, -49.78f, 0.f, 0.0f, 11.0f, 2, masterBedMaterial, MasterBedMesh);
 		{
 			masterBedObject->Add<ObjectLinking>(masterBedroomObject);
 			masterBedroomObject->Get<ObjectLinking>()->LinkObject(masterBedObject);
 		}
 
-		GameObject::Sptr jeweleryBoxObject = MakeBasic("Jewelery Box Object", 0.f, 0.0f, -50.0f, 0.f, 0.0f, 0.0f, 2, jeweleryBoxMaterial, JeweleryBoxMesh);
+		GameObject::Sptr jeweleryBoxObject = MakeBasic("Jewelery Box Object", 8.18f, 40.5f, -45.65f, 0.f, 0.0f, 0.0f, 2, jeweleryBoxMaterial, JeweleryBoxMesh);
 		{
 			jeweleryBoxObject->Add<ObjectLinking>(masterBedroomObject);
 			masterBedroomObject->Get<ObjectLinking>()->LinkObject(jeweleryBoxObject);
 		}
+
+
+		//Objects for Bathroom
+
+
+		GameObject::Sptr soapObject = MakeBasic("Soap Object", 2.72f, 89.66f, -44.56f, 90.f, 0.0f, -90.0f, 3, soapMaterial, soapMesh);
+		{
+			soapObject->SetScale(glm::vec3(0.5, 0.5, 0.5));
+			soapObject->Add<ObjectLinking>(megaBathroomObject);
+			megaBathroomObject->Get<ObjectLinking>()->LinkObject(soapObject);
+		}
+
+		GameObject::Sptr duckObject = MakeBasic("Duck Object", -7.41f, 102.36f, -47.44f, 90.f, 0.0f, 9.0f, 3, duckyMaterial, duckyMesh);
+		{
+			duckObject->SetScale(glm::vec3(0.4, 0.4, 0.4));
+			duckObject->Add<ObjectLinking>(megaBathroomObject);
+			megaBathroomObject->Get<ObjectLinking>()->LinkObject(duckObject);
+		}
+
+		GameObject::Sptr toiletObject = MakeBasic("Toilet Object", -2.08f, 95.23f, -48.86f, 90.f, 0.0f, 49.0f, 3, toiletMaterial, toiletMesh);
+		{
+			toiletObject->SetScale(glm::vec3(1.2, 1.2, 1.2));
+			toiletObject->Add<ObjectLinking>(megaBathroomObject);
+			megaBathroomObject->Get<ObjectLinking>()->LinkObject(toiletObject);
+		}
+
+
+
+		//Objects for Kitchen
+
+		GameObject::Sptr trashObject = MakeBasic("Trash Object", -9.48f, 146.51f, -49.76f, 90, 0, 90, 4, trashMaterial, trashMesh);
+		{
+			trashObject->SetScale(glm::vec3(1.5, 1.5, 1.5));
+			trashObject->Add<ObjectLinking>(megaKitchenObject);
+			megaKitchenObject->Get<ObjectLinking>()->LinkObject(trashObject);
+		}
+
+		GameObject::Sptr mousetrapObject = MakeBasic("Mouse trap Object", 10.64f, 147.72f, -49.81f, 90, 0, 0, 4, mouseTrapMaterial, mouseTrapMesh);
+		{
+			mousetrapObject->Add<ObjectLinking>(megaKitchenObject);
+			megaKitchenObject->Get<ObjectLinking>()->LinkObject(mousetrapObject);
+		}
+
+		GameObject::Sptr cakeObject = MakeBasic("Cake Object", 4.37f, 142.73f, -44.65f, 90, 0, 0, 4, cakeMaterial,cakeMesh);
+		{
+			cakeObject->Add<ObjectLinking>(megaKitchenObject);
+			megaKitchenObject->Get<ObjectLinking>()->LinkObject(cakeObject);
+		}
+
+		GameObject::Sptr bowlOfFruitObject = MakeBasic("Bowl Of Fruit Object", -7.01f, 144.91f, -45.19f, 90, 0, 0, 4, bowlOfFruitMaterial, bowlOfFruitMesh);
+		{
+			bowlOfFruitObject->Add<ObjectLinking>(megaKitchenObject);
+			megaKitchenObject->Get<ObjectLinking>()->LinkObject(bowlOfFruitObject);
+		}
+
+
+		//Objects for living room
+
+
+		GameObject::Sptr glassTableObject = MakeBasic("Glass Table Object", 0.36f, 199.9f, -49.73f, 90, 0, 79, 5, glassTableMaterial, glassTableMesh);
+		{
+			glassTableObject->SetScale(glm::vec3(1.5, 1.5, 1.5));
+			glassTableObject->Add<ObjectLinking>(megaLivingroomObject);
+			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(glassTableObject);
+		}
+
+		GameObject::Sptr picturesObject = MakeBasic("Pictures Object", 8.33f, 186.03f, -49.69f, 0, 0, 83, 5, picturesMaterial, picturesMesh);
+		{
+			picturesObject->Add<ObjectLinking>(megaLivingroomObject);
+			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(picturesObject);
+		}
+
+		GameObject::Sptr plantObject = MakeBasic("Plant Object", -10.35f, 210.15f, -44.63f, 90, 0, 81, 5, plantMaterial, plantMesh);
+		{
+			plantObject->Add<ObjectLinking>(megaLivingroomObject);
+			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(plantObject);
+		}
+
+		GameObject::Sptr remoteObject = MakeBasic("Remote Object", -4.6f, 204.75f, -48.3f, 90, 0, -43, 5, remoteMaterial, remoteMesh);
+		{
+			remoteObject->SetScale(glm::vec3(0.3, 0.3, 0.3));
+			remoteObject->Add<ObjectLinking>(megaLivingroomObject);
+			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(remoteObject);
+		}
+
+		GameObject::Sptr TVObject = MakeBasic("TV Object", -2.57f, 187.29f, -41.16f, 90, 0, -101, 5, TVMaterial, TVMesh);
+		{
+			TVObject->Add<ObjectLinking>(megaLivingroomObject);
+			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(TVObject);
+		}
+
+		//Objects for Basement
+		GameObject::Sptr teslaCoilObject = MakeBasic("Tesla Coil Object", -5.72f, 258.5f, -46.91f, 90, 0, 0, 6, teslaCoilMaterial, teslaCoilMesh);
+		{
+			teslaCoilObject->Add<ObjectLinking>(megaBasementObject);
+			megaBasementObject->Get<ObjectLinking>()->LinkObject(teslaCoilObject);
+		}
+
+		GameObject::Sptr frankenstineObject = MakeBasic("Frankenstine Object", -4.25f, 246.87f, -49.97f, 90, 0, -120, 6, frankenstineMaterial, frankenstineMesh);
+		{
+			frankenstineObject->SetScale(glm::vec3(0.85, 0.85, 0.85));
+			frankenstineObject->Add<ObjectLinking>(megaBasementObject);
+			megaBasementObject->Get<ObjectLinking>()->LinkObject(frankenstineObject);
+		}
+
+		GameObject::Sptr flasksObject = MakeBasic("Flasks Object", 3.13f, 242.4f, -46.7f, 90, 0, 0, 6, flasksMaterial, flasksMesh);
+		{
+			flasksObject->SetScale(glm::vec3(0.3, 0.3, 0.3));
+			flasksObject->Add<ObjectLinking>(megaBasementObject);
+			megaBasementObject->Get<ObjectLinking>()->LinkObject(flasksObject);
+		}
+
+		GameObject::Sptr chainsawObject = MakeBasic("Chainsaw Object", -0.35f, 250.0f, -48.66f, 90, 0, 31, 6, chainsawMaterial, chainsawMesh);
+		{
+			chainsawObject->SetScale(glm::vec3(0.7, 0.7, 0.7));
+			chainsawObject->Add<ObjectLinking>(megaBasementObject);
+			megaBasementObject->Get<ObjectLinking>()->LinkObject(chainsawObject);
+		}
+
+		GameObject::Sptr boilerObject = MakeBasic("Boiler Object", -6.63f, 255.02f, -48.46f, 90, 0, 167, 6, boilerMaterial, boilerMesh);
+		{
+			boilerObject->SetScale(glm::vec3(0.7, 0.7, 0.7));
+			boilerObject->Add<ObjectLinking>(megaBasementObject);
+			megaBasementObject->Get<ObjectLinking>()->LinkObject(boilerObject);
+		}
+
+
+		//Objects for UI
 		GameObject::Sptr pointer = MakeBasicPlane("Pointer", 4.07f, 7.21f, 9.55f, 80.351f, 0.0f, 142.0f, 2.0f, 1.0f, 0, menuPointerMaterial);
 		
 		GameObject::Sptr extraScreen = MakeBasicPlane("Extra Screen", 5.87f, 5.79f, -6.9f, 80.351f, 0.0f, 142.00f, 18.0f, 10.0f, 0, missingMaterial);

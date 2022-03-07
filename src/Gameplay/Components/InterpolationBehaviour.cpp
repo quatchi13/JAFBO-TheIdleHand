@@ -107,7 +107,6 @@ void InterpolationBehaviour::InterpolationManager(float deltaTime) {
 	else {
 		if (!_loopTransform) {
 			_isRunning = false;
-			std::cout << "done animation";
 		}
 
 		for (int i = 0; i < 3; i++) {
@@ -238,7 +237,6 @@ void InterpolationBehaviour::AddBehaviourScript(std::string path) {
 
 			if (command == "s") {
 				script >> n;
-				std::cout << "reading animation: " << n;
 				StartPushNewBehaviour(n);
 			}
 			else if (command == "f") {
@@ -247,7 +245,7 @@ void InterpolationBehaviour::AddBehaviourScript(std::string path) {
 			}
 			else if (command == "e") {
 				EndPushNewBehaviour();
-				std::cout << "finishing push of animation: " << n; 
+ 
 			}
 		}
 	}
