@@ -39,6 +39,7 @@
 #include "Utils/StringUtils.h"
 #include "Utils/GlmDefines.h"
 #include "Utils/AudioEngine.h"
+#include "Utils/AudioSource.h"
 
 // Gameplay
 #include "Gameplay/Material.h"
@@ -694,10 +695,18 @@ int main() {
 
 		//Audio Setups
 
-		AudioEngine audioEngine;
-		audioEngine.init();
-		audioEngine.loadSound("test", "sounds/test.wav", true);
-		audioEngine.playSoundByName("test");
+		AudioEngine* audioEngine = AudioEngine::instance();
+
+		audioEngine->init();
+		audioEngine->loadSound("test", "sounds/test.wav", true);
+		//audioEngine->playSoundByName("test");
+
+		AudioSource sound;
+		sound.setSound("test");
+		sound.setPosition(FMOD_VECTOR{ 0,0,0 });
+		sound.play();
+		sound.setLooping(true);
+
 
 		// Create some lights for our scene
 		scene->Lights.resize(3);
