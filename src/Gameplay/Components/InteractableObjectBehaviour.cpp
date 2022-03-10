@@ -156,6 +156,31 @@ nlohmann::json InteractableObjectBehaviour::ToJson() const {
 	nlohmann::json result;
 	result["reward_skin"] = (_rewardMaterial) ? _rewardMaterial->GetGUID().str() : "null";
 	result["has_been_activated"] = _hasBeenActivated;
+	result["number_of_feedbacks"] = feedback.size();
+	for (int i = 0; i < feedback.size(); i++) {
+		std::string fbackName = "feedback_" + std::to_string(i);
+		result[fbackName + "_target"] = feedback[i]._TARGET->GUID.str();
+		result[fbackName + "_type"] = (int)feedback[i].b;
+
+		switch (feedback[i].b) {
+		case(TEX):
+			result[fbackName + "_mat"] = feedback[i]._SWAPMAT->GetGUID().str();
+			break;
+		case(MESH):
+			result[fbackName + "_mesh"] = feedback[i]._SWAPMESH->GetGUID().str();
+			break;
+		case(TRANSFORM):
+			result[fbackName + "_tformcount"] = feedback[i]._TRANSFORMCOUNT;
+			for (int j = 0; j < feedback[i]._TRANSFORMCOUNT; j++) {
+				std::string tformName = fbackName + "_tform_" + std::to_string(j);
+				result[tformName + "_type"] = (int)feedback[i]._SWAPTRANSFORM[j].trnsfrm;
+				result[tformName + "_vec"] = GlmToJson(feedback[i]._SWAPTRANSFORM[j].tform);
+			}
+			break;
+		default:
+			result[fbackName + "_animIndex"] = feedback[i]._SWAPAINDEX;
+		}
+	}
 	return result;
 }
 
@@ -163,6 +188,37 @@ InteractableObjectBehaviour::Sptr InteractableObjectBehaviour::FromJson(const nl
 	InteractableObjectBehaviour::Sptr result = std::make_shared<InteractableObjectBehaviour>();
 	result->_rewardMaterial = ResourceManager::Get<Gameplay::Material>(Guid(blob["reward_skin"].get<std::string>()));
 	result->_hasBeenActivated = blob["has_been_activated"];
+	int y = blob["number_of_feedbacks"];
+	int count = 0;
+	for (int i = 0; i < y; i++) {
+		std::string fbackName = "feedback_" + std::to_string(i);
+		int x = blob[fbackName + "_type"];
+		if (!x) {
+			InteractionFeedback iF(ResourceManager::Get<Gameplay::Material>(Guid(blob[fbackName + "_mat"].get<std::string>())), result->GetGameObject()->GetScene()->FindObjectByGUID(Guid(blob[fbackName + "_target"])));
+			result->AddFeedbackBehaviour(iF);
+		}
+		else if (x == 1) {
+			InteractionFeedback iF(ResourceManager::Get<Gameplay::MeshResource>(Guid(blob[fbackName + "_mesh"].get<std::string>())), result->GetGameObject()->GetScene()->FindObjectByGUID(Guid(blob[fbackName + "_target"])));
+			result->AddFeedbackBehaviour(iF);
+		}
+		else if (x == 2) {
+			std::vector<InteractionTForm> tForms;
+			int tFormSize = blob[fbackName + "_tformcount"];
+			for (int j = 0; j < tFormSize; j++) {
+				std::string tformName = fbackName + ("_tform_" + std::to_string(j));
+				int tft = blob[tformName + "_type"];
+				tForms.push_back(InteractionTForm(InteractionTForm::tformt(tft), ParseJsonVec3(blob[tformName + "_vec"])));
+			}
+			InteractionFeedback iF(tForms, result->GetGameObject()->GetScene()->FindObjectByGUID(Guid(blob[fbackName + "_target"])));
+		}
+
+		else {
+			InteractionFeedback iF((int)blob[fbackName + "_animIndex"], result->GetGameObject()->GetScene()->FindObjectByGUID(Guid(blob[fbackName + "target"])));
+			result->AddFeedbackBehaviour(iF);
+		}
+		count++;
+	}
+
 	return result;
 }
 

@@ -262,18 +262,31 @@ void InterpolationBehaviour::RenderImGui() {
 
 nlohmann::json InterpolationBehaviour::ToJson() const {
 	nlohmann::json result;
+
 	result["is_running"] = _isRunning;
 	result["is_looping"] = _loopTransform;
 	result["current_index"] = _currentTransformIndex;
 	result["num_of_transforms"] = _amountOfTransforms;
+
+	result["interpolation_scripts_used"] = loadedScripts.size();
+	for (int i = 0; i < loadedScripts.size(); i++) {
+		result["interpolation_script_" + std::to_string(i)] = loadedScripts[i];
+	}
+
 	return result;
 }
 
-InterpolationBehaviour::Sptr InterpolationBehaviour::FromJson(const nlohmann::json & data) {
+InterpolationBehaviour::Sptr InterpolationBehaviour::FromJson(const nlohmann::json & blob) {
 	InterpolationBehaviour::Sptr result = std::make_shared<InterpolationBehaviour>();
-	result->_isRunning = data["is_running"];
-	result->_loopTransform = data["is_looping"];
-	result->_currentTransformIndex = data["current_index"];
-	result->_amountOfTransforms = data["num_of_transforms"];
+	result->_isRunning = blob["is_running"];
+	result->_loopTransform = blob["is_looping"];
+	result->_currentTransformIndex = blob["current_index"];
+	result->_amountOfTransforms = blob["num_of_transforms"];
+
+	int numOfFiles = blob["interpolation_scripts_used"];
+	for (int i = 0; i < numOfFiles; i++) {
+		result->AddBehaviourScript(blob["interpolation_script_" + std::to_string(i)]);
+	}
+
 	return result;
 }

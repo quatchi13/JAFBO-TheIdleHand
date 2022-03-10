@@ -46,6 +46,7 @@ public:
 	Gameplay::GameObject::Sptr _TARGET;
 	std::vector<InteractionTForm> _SWAPTRANSFORM;
 	int _SWAPAINDEX;
+	int _TRANSFORMCOUNT = 0;
 
 
 	void SwapMat();

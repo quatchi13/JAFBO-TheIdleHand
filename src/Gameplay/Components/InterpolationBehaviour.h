@@ -115,6 +115,8 @@ protected:
 	
 	int cooldown;
 
+	std::vector<std::string> loadedScripts;
+
 private:
 	//these variables are used during initiation 
 	//they should not be accessed after start-up is complete, as they will be empty

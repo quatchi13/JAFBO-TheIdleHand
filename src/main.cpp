@@ -1154,7 +1154,6 @@ int main() {
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
-
 			boybandPoster->Add<ObjectLinking>(bedroomObject);
 			bedroomObject->Get<ObjectLinking>()->LinkObject(boybandPoster);
 		}
@@ -1182,7 +1181,6 @@ int main() {
 
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
-
 
 			paintCan->Add<ObjectLinking>(bedroomObject);
 			bedroomObject->Get<ObjectLinking>()->LinkObject(paintCan);

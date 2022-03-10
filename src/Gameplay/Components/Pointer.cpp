@@ -84,15 +84,23 @@ void Pointer::SetRenderer(RenderComponent::Sptr render)
 }
 
 nlohmann::json Pointer::ToJson() const {
-	return {
-		{ "menu_material", MenuMaterial != nullptr ? MenuMaterial->GetGUID().str() : "null" },
-		{ "list_material", ListMaterial != nullptr ? ListMaterial->GetGUID().str() : "null" }
-	};
+	nlohmann::json result;
+
+	result["renderer"] = (_renderer != nullptr) ? _renderer->ToJson() : "null";
+	result["is_onscreen"] = onScreen;
+	result["menu_material"] = (MenuMaterial != nullptr) ? MenuMaterial->GetGUID().str() : "null";
+	result["list_material"] = (ListMaterial != nullptr) ? ListMaterial->GetGUID().str() : "null";
+
+	return result;
 }
 
 Pointer::Sptr Pointer::FromJson(const nlohmann::json& blob) {
 	Pointer::Sptr result = std::make_shared<Pointer>();
-	result->MenuMaterial = ResourceManager::Get<Gameplay::Material>(Guid(blob["menu_material"]));
-	result->ListMaterial  = ResourceManager::Get<Gameplay::Material>(Guid(blob["list_material"]));
+
+	result->_renderer = RenderComponent::FromJson(blob["renderer"]);
+	result->onScreen = blob["is_onscreen"];
+	result->MenuMaterial = ResourceManager::Get<Gameplay::Material>(Guid(blob["menu_material"].get<std::string>()));
+	result->ListMaterial = ResourceManager::Get<Gameplay::Material>(Guid(blob["list_material"].get<std::string>()));
+
 	return result;
 }
