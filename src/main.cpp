@@ -699,14 +699,23 @@ int main() {
 
 		audioEngine->init();
 		audioEngine->loadSound("test", "sounds/test.wav", true);
+		audioEngine->loadSound("background", "sounds/backgroundmusic.wav", true);
+		audioEngine->loadSound("books", "sounds/Books_crashing.wav", true);
+		audioEngine->loadSound("brush", "sounds/Brush_Strokes.wav", true);
+		audioEngine->loadSound("velcro", "sounds/Velcro.wav", true);
+
+		audioEngine->loadSound("Bang", "sounds/Bang.wav", true);
+		audioEngine->loadSound("Bing", "sounds/Bing.wav", true);
+		audioEngine->loadSound("Bong", "sounds/Bong.wav", true);
 		//audioEngine->playSoundByName("test");
 
 		AudioSource sound;
-		sound.setSound("test");
-		sound.setPosition(FMOD_VECTOR{ 0,0,0 });
-		sound.play();
-		sound.setLooping(true);
-
+		//sound.setSound("test");
+		//sound.setPosition(FMOD_VECTOR{ 0,0,0 });
+		//sound.play();
+		
+		//sound.setLooping(true);
+		
 
 		// Create some lights for our scene
 		scene->Lights.resize(3);
@@ -788,7 +797,6 @@ int main() {
 			collider->SetPosition(glm::vec3(3.5f, 3.5f, 0.f));
 			volume->AddCollider(collider);
 		}
-
 
 		//Objects for the Master bed
 		GameObject::Sptr flowerObject = MakeBasic("Flower Object", -8.18f, 55.6f, -50.830f, 0.f, 0.0f, -50.0f, 2, flowerMaterial, FlowerMesh);
@@ -1035,7 +1043,9 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = radio->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);            
+			interactions->AddRewardMaterial(handMusicMaterial);     
+			interactions->AddSoundEffect("velcro");
+
 			interactions->AddFeedbackBehaviour((InteractionFeedback(radioMaterial2, radio)));
 			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.22, -0.750, 7.65));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineTwo)));
@@ -1067,6 +1077,8 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = homework->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handHomeworkMaterial);
+			interactions->AddSoundEffect("books");
+
 			interactions->AddFeedbackBehaviour((InteractionFeedback(1, homework)));
 			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(2.01f, 0.69f, 0.1f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, homework)));
@@ -1101,6 +1113,8 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = shroomba->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handShroomMaterial);
+			interactions->AddSoundEffect("velcro");
+
 			InteractionTForm tf(InteractionTForm::tformt::rot, glm::vec3(180.f, 0.f, 0.f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, shroomba)));
 			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.84, -0.30, 1.74));
@@ -1142,6 +1156,8 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = boybandPoster->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handBoyBandMaterial);
+			interactions->AddSoundEffect("velcro");
+
 			interactions->AddFeedbackBehaviour((InteractionFeedback(bbPosterMesh2, boybandPoster)));
 			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(2.01f, 0.69f, 0.1f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, homework)));
@@ -1170,6 +1186,8 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = paintCan->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handRainbowMaterial);
+			interactions->AddSoundEffect("brush");
+
 			interactions->AddFeedbackBehaviour((InteractionFeedback(paintedOverMaterial, bedroomObject)));
 			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(0.f, 0.f, -10.f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, paintCan)));

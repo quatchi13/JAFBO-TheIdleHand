@@ -38,12 +38,39 @@ void MainMenu::OnLeavingTrigger(const Gameplay::Physics::TriggerVolume::Sptr& tr
 
 void MainMenu::Awake() {
 	_renderer = GetComponent<RenderComponent>();
+	sound.setSound("background");
+	sound.setPosition(FMOD_VECTOR{ 0,0,0 });
+	sound.play();
+	sound.setLooping(true);
+	sound.setVolume(backgroundvolume);
 }
 
 void MainMenu::Update(float deltaTime)
 {
+
+	if (backgroundCooldown) { backgroundCooldown--; }
+	std::cout << backgroundCooldown;
+	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_8) && backgroundvolume > 0 && !backgroundCooldown)
+	{
+		backgroundvolume--;
+		sound.setVolume(backgroundvolume);
+		backgroundCooldown = 10;
+		std::cout << "volume changed";
+	}
+	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_9) && backgroundvolume < 10 && !backgroundCooldown)
+	{
+		backgroundvolume++;
+		sound.setVolume(backgroundvolume);
+		backgroundCooldown = 10;
+		std::cout << "volume changed";
+	}
+
+
+
 	if (cooldown) { cooldown--; }
-	
+
+
+
 	if (!active) 
 	{//this manages the main menu
 		
@@ -123,6 +150,7 @@ void MainMenu::Update(float deltaTime)
 			curIndex = !curIndex;
 			cooldown = 30;
 			isMoving = true;
+
 		}
 	}
 	else if (isMoving) {

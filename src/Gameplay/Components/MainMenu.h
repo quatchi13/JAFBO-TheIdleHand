@@ -5,6 +5,7 @@
 #include "Gameplay/Physics/TriggerVolume.h"
 #include <GLFW/glfw3.h>
 #include "Gameplay/Scene.h"
+#include "Utils/AudioSource.h"
 
 /// <summary>
 /// Provides an example behaviour that uses some of the trigger interface to change the material
@@ -23,6 +24,10 @@ public:
 	Gameplay::Material::Sptr        MenuMaterial;
 	Gameplay::Material::Sptr        PauseMaterial;
 	Gameplay::Material::Sptr        WinMaterial;
+
+	AudioSource sound;
+	int backgroundvolume = 10;
+	int backgroundCooldown = 0;
 	
 	// Inherited from IComponent
 	bool active = false;

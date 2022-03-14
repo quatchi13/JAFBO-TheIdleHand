@@ -25,7 +25,7 @@ void WarpBehaviour::Update(float deltaTime) {
 			roomTwo->SetPosition(glm::vec3(1.38, -5.100, 0));
 			roomThree->SetPosition(glm::vec3(0, 100, -50));
 			roomFour->SetPosition(glm::vec3(0, 150, -50));
-			roomFive->SetPosition(glm::vec3(0, 200, -50));	
+			roomFive->SetPosition(glm::vec3(0, 200, -50));
 			roomSix->SetPosition(glm::vec3(0, 250, -50));
 		}
 
@@ -70,11 +70,32 @@ void WarpBehaviour::Update(float deltaTime) {
 			roomThree->SetPosition(glm::vec3(0, 100, -50));
 			roomFour->SetPosition(glm::vec3(0, 150, -50));
 			roomFive->SetPosition(glm::vec3(0, 200, -150));
-			roomSix->SetPosition(glm::vec3(0, 0, 0 ));
+			roomSix->SetPosition(glm::vec3(0, 0, 0));
 		}
-
 	}
 
+	// For game sound assignment to show multi instruement
+	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_7))
+	{
+
+		srand(time(0));
+		randomNumber = (rand() % 3);
+		switch (randomNumber)
+		{
+		case 0:
+			audioEngine->playSoundByName("Bang");
+
+			break;
+
+		case 1:
+			audioEngine->playSoundByName("Bing");
+
+			break;
+		case 2:
+			audioEngine->playSoundByName("Bong");
+			break;
+		}
+	}
 }
 
 void WarpBehaviour::OnTriggerVolumeEntered(const std::shared_ptr<Gameplay::Physics::RigidBody>& body)

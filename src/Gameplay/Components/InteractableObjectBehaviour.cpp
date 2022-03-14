@@ -79,6 +79,10 @@ void InteractableObjectBehaviour::AddRewardMaterial(Gameplay::Material::Sptr r) 
 	_rewardMaterial = r;
 }
 
+void InteractableObjectBehaviour::AddSoundEffect(std::string soundName) {
+	soundEffect = soundName;
+}
+
 void InteractableObjectBehaviour::AddFeedbackBehaviour(InteractionFeedback f) {
 	feedback.push_back(f);
 }
@@ -101,6 +105,7 @@ void InteractableObjectBehaviour::Update(float deltaTime) {
 			
 			screen->Get<SimpleScreenBehaviour>()->objectivesAchieved += 1;
 			screen->Get<SimpleScreenBehaviour>()->active = true;
+			audioEngine->playSoundByName(soundEffect);
 		}
 
 	}

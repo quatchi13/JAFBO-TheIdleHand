@@ -2,7 +2,9 @@
 #include "IComponent.h"
 #include <GLFW/glfw3.h>
 #include "Gameplay/Scene.h"
-
+#include "Utils/AudioEngine.h"
+#include <ctime>
+#include <cstdlib>
 /// <summary>
 /// Showcases a very simple behaviour that rotates the parent gameobject at a fixed rate over time
 /// </summary>
@@ -19,9 +21,10 @@ public:
 	Gameplay::GameObject::Sptr roomFour;
 	Gameplay::GameObject::Sptr roomFive;
 	Gameplay::GameObject::Sptr roomSix;
-	//Gameplay::GameObject::Sptr roomThree;
-	//Gameplay::GameObject::Sptr roomFour;
-	//Gameplay::GameObject::Sptr roomFive;
+
+	AudioEngine* audioEngine = AudioEngine::instance();
+	int randomNumber;
+
 	virtual void Update(float deltaTime) override;
 
 	virtual void OnTriggerVolumeEntered(const std::shared_ptr<Gameplay::Physics::RigidBody>& body) override;

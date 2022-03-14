@@ -6,6 +6,7 @@
 #include "GLFW/glfw3.h"
 #include "Gameplay/Scene.h"
 #include "Gameplay/Components/MorphAnimationManager.h"
+#include "Utils/AudioEngine.h"
 
 enum FeedbackBehaviour {
 	TEX, 
@@ -44,6 +45,8 @@ public:
 	Gameplay::Material::Sptr _SWAPMAT = nullptr;
 	Gameplay::MeshResource::Sptr _SWAPMESH = nullptr;
 	Gameplay::GameObject::Sptr _TARGET;
+
+	AudioEngine* audioEngine = AudioEngine::instance();
 	std::vector<InteractionTForm> _SWAPTRANSFORM;
 	int _SWAPAINDEX;
 	int _TRANSFORMCOUNT = 0;
@@ -68,6 +71,9 @@ public:
 	virtual ~InteractableObjectBehaviour();
 	//adds a material that can be sent to the hand after an interaction
 	void AddRewardMaterial(Gameplay::Material::Sptr r);
+	AudioEngine* audioEngine = AudioEngine::instance();
+	void AddSoundEffect(std::string soundName);
+
 	void AddFeedbackBehaviour(InteractionFeedback);
 	Gameplay::GameObject::Sptr prompt;
 	Gameplay::GameObject::Sptr objective;
@@ -96,6 +102,7 @@ protected:
 
 	GLFWwindow* _windowPointer;
 	Gameplay::Material::Sptr _rewardMaterial;
+	std::string soundEffect;
 
 	std::vector<InteractionFeedback> feedback;
 };
