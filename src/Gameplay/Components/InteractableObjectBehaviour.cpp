@@ -109,6 +109,31 @@ void InteractableObjectBehaviour::Update(float deltaTime) {
 		}
 
 	}
+
+
+		// For game sound assignment to show multi instruement
+		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_E) && makeBang == 1)
+		{
+
+			srand(time(0));
+			randomNumber = (rand() % 3);
+			switch (randomNumber)
+			{
+			case 0:
+				audioEngine->playSoundByName("Bang");
+
+				break;
+
+			case 1:
+				audioEngine->playSoundByName("Bing");
+
+				break;
+			case 2:
+				audioEngine->playSoundByName("Bong");
+				break;
+			}
+		}
+	
 }
 
 
@@ -120,6 +145,11 @@ void InteractableObjectBehaviour::OnTriggerVolumeEntered(const std::shared_ptr<G
 		_body = body;
 		prompt->SetPosition(glm::vec3(prompt->GetPosition().x, prompt->GetPosition().y, -prompt->GetPosition().z));
 	}
+	std::cout << "enter trigger";
+	if (_hasBeenActivated == true) {
+		makeBang = true;
+		std::cout << std::endl << "trigger has been activated";
+	}
 }
 
 void InteractableObjectBehaviour::OnTriggerVolumeLeaving(const std::shared_ptr<Gameplay::Physics::RigidBody>& body) {
@@ -129,6 +159,11 @@ void InteractableObjectBehaviour::OnTriggerVolumeLeaving(const std::shared_ptr<G
 		_playerInTrigger = false;
 		_body = nullptr;
 		prompt->SetPosition(glm::vec3(prompt->GetPosition().x, prompt->GetPosition().y, -prompt->GetPosition().z));
+	}
+	std::cout << "exit trigger";
+	if (_hasBeenActivated == true) {
+		makeBang = false;
+		std::cout << std::endl << "trigger has been exited";
 	}
 		
 }

@@ -73,6 +73,8 @@ public:
 	void AddRewardMaterial(Gameplay::Material::Sptr r);
 	AudioEngine* audioEngine = AudioEngine::instance();
 	void AddSoundEffect(std::string soundName);
+	int randomNumber;
+	bool makeBang;
 
 	void AddFeedbackBehaviour(InteractionFeedback);
 	Gameplay::GameObject::Sptr prompt;

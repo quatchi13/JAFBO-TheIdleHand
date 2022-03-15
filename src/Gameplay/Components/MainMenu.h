@@ -26,7 +26,7 @@ public:
 	Gameplay::Material::Sptr        WinMaterial;
 
 	AudioSource sound;
-	int backgroundvolume = 10;
+	int backgroundvolume = 5;
 	int backgroundCooldown = 0;
 	
 	// Inherited from IComponent
