@@ -554,6 +554,26 @@ int main() {
 		Texture2D::Sptr    handShroom = ResourceManager::CreateAsset<Texture2D>("textures/HandShroom1.png");
 		Texture2D::Sptr    handBoyBand = ResourceManager::CreateAsset<Texture2D>("textures/HandBoyBand.png");
 		Texture2D::Sptr    handRainbow = ResourceManager::CreateAsset<Texture2D>("textures/HandRainbow.png");
+		Texture2D::Sptr    handAngry = ResourceManager::CreateAsset<Texture2D>("textures/HandAngry.png");
+		Texture2D::Sptr    handBling = ResourceManager::CreateAsset<Texture2D>("textures/HandBling.png");
+		Texture2D::Sptr    handBurned = ResourceManager::CreateAsset<Texture2D>("textures/HandBurned.png");
+		Texture2D::Sptr    handCake = ResourceManager::CreateAsset<Texture2D>("textures/HandCake.png");
+		Texture2D::Sptr    handClean = ResourceManager::CreateAsset<Texture2D>("textures/HandClean.png");
+		Texture2D::Sptr    handClown = ResourceManager::CreateAsset<Texture2D>("textures/HandClown.png");
+		Texture2D::Sptr    handCracked = ResourceManager::CreateAsset<Texture2D>("textures/HandCracked.png");
+		Texture2D::Sptr    handDucky = ResourceManager::CreateAsset<Texture2D>("textures/HandDucky.png");
+		Texture2D::Sptr    handElectric = ResourceManager::CreateAsset<Texture2D>("textures/HandElecrified.png");
+		Texture2D::Sptr    handFrank = ResourceManager::CreateAsset<Texture2D>("textures/HandFrankenstine.png");
+		Texture2D::Sptr    handFruit = ResourceManager::CreateAsset<Texture2D>("textures/HandFruit.png");
+		Texture2D::Sptr    handGreen = ResourceManager::CreateAsset<Texture2D>("textures/HandGreenThumb.png");
+		Texture2D::Sptr    handKiller = ResourceManager::CreateAsset<Texture2D>("textures/HandKiller.png");
+		Texture2D::Sptr    handMouse = ResourceManager::CreateAsset<Texture2D>("textures/HandMouse.png");
+		Texture2D::Sptr    handRobe = ResourceManager::CreateAsset<Texture2D>("textures/HandRobe.png");
+		Texture2D::Sptr    handScience = ResourceManager::CreateAsset<Texture2D>("textures/HandScientist.png");
+		Texture2D::Sptr    handPoo = ResourceManager::CreateAsset<Texture2D>("textures/HandPoo.png");
+		Texture2D::Sptr    handTech = ResourceManager::CreateAsset<Texture2D>("textures/HandTech.png");
+		Texture2D::Sptr    handTrash = ResourceManager::CreateAsset<Texture2D>("textures/HandTrash.png");
+		Texture2D::Sptr    handZombie = ResourceManager::CreateAsset<Texture2D>("textures/HandZombie.png");
 		Texture2D::Sptr    paintedOverPoster = ResourceManager::CreateAsset<Texture2D>("textures/megaTextMessy.png");
 
 		Texture2D::Sptr    missingTex = ResourceManager::CreateAsset<Texture2D>("textures/MissingTexture.png");
@@ -635,6 +655,27 @@ int main() {
 		Material::Sptr handBoyBandMaterial = MakeMaterial("Hand BoyBand", morphShader, handBoyBand, 0.1);
 		Material::Sptr handShroomMaterial = MakeMaterial("Hand Shroom", morphShader, handShroom, 0.1);
 		Material::Sptr handRainbowMaterial = MakeMaterial("Hand Rainbow", morphShader, handRainbow, 0.1);
+		Material::Sptr handAngryMaterial = MakeMaterial("Hand Angry", morphShader, handAngry, 0.1);
+		Material::Sptr handBlingMaterial = MakeMaterial("Hand Bling", morphShader, handBling, 0.1);
+		Material::Sptr handBurnedMaterial = MakeMaterial("Hand Burned", morphShader, handBurned, 0.1);
+		Material::Sptr handCakeMaterial = MakeMaterial("Hand Cake", morphShader, handCake, 0.1);
+		Material::Sptr handCleanMaterial = MakeMaterial("Hand Clean", morphShader, handClean, 0.1);
+		Material::Sptr handClownMaterial = MakeMaterial("Hand Clown", morphShader, handClown, 0.1);
+		Material::Sptr handCrackedMaterial = MakeMaterial("Hand Cracked", morphShader, handCracked, 0.1);
+		Material::Sptr handDuckyMaterial = MakeMaterial("Hand Ducky", morphShader, handDucky, 0.1);
+		Material::Sptr handElectricMaterial = MakeMaterial("Hand Electric", morphShader, handElectric, 0.1);
+		Material::Sptr handFrankMaterial = MakeMaterial("Hand Frank", morphShader, handFrank, 0.1);
+		Material::Sptr handFruitMaterial = MakeMaterial("Hand Fruit", morphShader, handFruit, 0.1);
+		Material::Sptr handGreenMaterial = MakeMaterial("Hand Green", morphShader, handGreen, 0.1);
+		Material::Sptr handKillerMaterial = MakeMaterial("Hand Killer", morphShader, handKiller, 0.1);
+		Material::Sptr handMouseMaterial = MakeMaterial("Hand Mouse", morphShader, handMouse, 0.1);
+		Material::Sptr handPooMaterial = MakeMaterial("Hand Poo", morphShader, handPoo, 0.1);
+		Material::Sptr handRobeMaterial = MakeMaterial("Hand Robe", morphShader, handRobe, 0.1);
+		Material::Sptr handScienceMaterial = MakeMaterial("Hand Science", morphShader, handScience, 0.1);
+		Material::Sptr handTechMaterial = MakeMaterial("Hand Tech", morphShader, handTech, 0.1);
+		Material::Sptr handTrashMaterial = MakeMaterial("Hand Trash", morphShader, handTrash, 0.1);
+		Material::Sptr handZombieMaterial = MakeMaterial("Hand Zombie", morphShader, handZombie, 0.1);
+
 		Material::Sptr missingMaterial = MakeMaterial("Missing Texture", basicShader, missingTex, 0.1f);
 		Material::Sptr rewardMaterial = MakeMaterial("Reward Material", reflectiveShader, rewardSkin, 0.5);
 		Material::Sptr rightWallMaterial = MakeMaterial("Right Wall", basicShader, rightWallTex, 0.1f);
@@ -889,7 +930,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = flowerObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handZombieMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -910,7 +951,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = vanityObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handCrackedMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -931,7 +972,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = masterBedObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handRobeMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -952,7 +993,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = jeweleryBoxObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handBlingMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -976,7 +1017,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = soapObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handCleanMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -997,7 +1038,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = duckObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handDuckyMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1018,7 +1059,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = toiletObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handPooMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1043,7 +1084,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = trashObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handTrashMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1064,7 +1105,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = mousetrapObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handMouseMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1084,7 +1125,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = cakeObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handCakeMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1104,7 +1145,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = bowlOfFruitObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handFruitMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1128,7 +1169,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = glassTableObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handAngryMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1149,7 +1190,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = picturesObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handClownMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1169,7 +1210,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = plantObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handGreenMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1189,7 +1230,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = remoteObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handTechMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1204,20 +1245,7 @@ int main() {
 
 		GameObject::Sptr TVObject = MakeBasic("TV Object", -2.57f, 187.29f, -41.16f, 90, 0, -101, 5, TVMaterial, TVMesh);
 		{
-			TriggerVolume::Sptr volume = TVObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
-			collider->SetPosition(glm::vec3(0.f));
-			volume->AddCollider(collider);
-
-			InteractableObjectBehaviour::Sptr interactions = TVObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
-			interactions->AddSoundEffect("velcro");
-
-			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
-			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
-			interactions->prompt = prompt;
-			interactions->screen = extraScreen;
-
+			
 			TVObject->Add<ObjectLinking>(megaLivingroomObject);
 			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(TVObject);
 		}
@@ -1232,7 +1260,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = teslaCoilObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handElectricMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1252,7 +1280,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = frankenstineObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handFrankMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1273,7 +1301,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = flasksObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handScienceMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1294,7 +1322,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = chainsawObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handKillerMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1315,7 +1343,7 @@ int main() {
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = boilerObject->Add<InteractableObjectBehaviour>();
-			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddRewardMaterial(handBurnedMaterial);
 			interactions->AddSoundEffect("velcro");
 
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
