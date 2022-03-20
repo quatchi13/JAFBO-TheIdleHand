@@ -112,7 +112,7 @@ void InteractableObjectBehaviour::Update(float deltaTime) {
 
 
 		// For game sound assignment to show multi instruement
-		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_E) && makeBang == 1)
+		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_7))
 		{
 
 			srand(time(0));

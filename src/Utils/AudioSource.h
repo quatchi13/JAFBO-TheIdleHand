@@ -24,6 +24,7 @@ public:
 	void setVolume(const float newVolume);
 	void setLooping(const bool isLooping);
 
+	void setRolloffMinMaxDistance(const float minDistance, const float maxDistance);
 
 private:
 
@@ -34,6 +35,8 @@ private:
 	FMOD_VECTOR position;
 	FMOD_VECTOR velocity;
 
+	float rolloffMinDistance = 0.5f;
+	float rolloffMaxDistance = 0.5f;
 	float volume = 1.0f;
 	bool bLoop = false;
 	bool bPaused = false;

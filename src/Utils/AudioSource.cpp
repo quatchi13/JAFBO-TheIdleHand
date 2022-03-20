@@ -20,13 +20,17 @@ void AudioSource::play()
 
 
 	AudioEngine::ErrorCheck(pChannel->setMode(loopMode));
+	pChannel->set3DMinMaxDistance(rolloffMinDistance, rolloffMaxDistance);
 	setPaused(false);
+
 
 }
 
 bool AudioSource::isPlaying()
 {
-	return false;
+	bool isPlaying;
+	AudioEngine::ErrorCheck(pChannel->isPlaying(&isPlaying));
+	return isPlaying;
 }
 
 void AudioSource::setPosition(const FMOD_VECTOR newPosition)
@@ -70,5 +74,12 @@ void AudioSource::setLooping(const bool isLooping)
 
 
 	AudioEngine::ErrorCheck(pChannel->setMode(loopMode));
+
+}
+
+void AudioSource::setRolloffMinMaxDistance(const float minDistance, const float maxDistance)
+{
+	rolloffMinDistance = minDistance;
+	rolloffMaxDistance = maxDistance;
 
 }

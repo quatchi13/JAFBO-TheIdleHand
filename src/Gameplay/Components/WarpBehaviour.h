@@ -36,7 +36,7 @@ public:
 	static WarpBehaviour::Sptr FromJson(const nlohmann::json& data);
 
 	MAKE_TYPENAME(WarpBehaviour);
-
+	 
 protected:
 	bool _playerInTrigger = false;
 	int floorMax = 6;

@@ -44,6 +44,7 @@ void AudioEngine::init()
 
 	pSystem->set3DNumListeners(1);
 
+	pSystem->set3DSettings(1.0f, WORLD_SCALE, 1.0f);
 	//Forward and up vectors can be created from your transformation matrices (world transform)
 
 	FMOD_VECTOR up = { 0, 0, 1 };
@@ -90,6 +91,7 @@ void AudioEngine::loadSound(const std::string& soundName, const std::string& fil
 	if (loadedSound != nullptr)
 	{
 		sounds[soundName] = loadedSound;
+		loadedSound->set3DMinMaxDistance(1.0f,1000.0);
 
 	}
 
@@ -124,5 +126,10 @@ void AudioEngine::playSoundByName(const std::string& soundName, FMOD::Channel** 
 
 	ErrorCheck(pSystem->playSound((*soundIt).second, nullptr, false, channelReturned));
 	
+}
+
+FMOD::System* AudioEngine::getSystem()
+{
+	return pSystem;
 }
 
