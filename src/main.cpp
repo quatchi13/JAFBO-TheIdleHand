@@ -797,163 +797,11 @@ int main() {
 			collider->SetPosition(glm::vec3(3.5f, 3.5f, 0.f));
 			volume->AddCollider(collider);
 		}
+		//global UI objects
+		GameObject::Sptr prompt = MakeBasicPlane("Prompt", -1.38f, 8.19f, -11.82f, 80.351f, 0.0f, 142.00f, 4.0f, 1.0f, 0, eMaterial);
 
-		//Objects for the Master bed
-		GameObject::Sptr flowerObject = MakeBasic("Flower Object", -8.18f, 55.6f, -50.830f, 0.f, 0.0f, -50.0f, 2, flowerMaterial, FlowerMesh);
-		{
-			flowerObject->SetScale(glm::vec3(2.0, 2.0, 2.0));
-			flowerObject->Add<ObjectLinking>(masterBedroomObject);
-			masterBedroomObject->Get<ObjectLinking>()->LinkObject(flowerObject);
-		}
-
-		GameObject::Sptr vanityObject = MakeBasic("Vanity Object", 6.32f, 38.92f, -45.75f, 0.f, 0.0f, -81.0f, 2, vanityMaterial, VanityMesh);
-		{
-			vanityObject->SetScale(glm::vec3(1.3, 1.3, 1.5));
-			vanityObject->Add<ObjectLinking>(masterBedroomObject);
-			masterBedroomObject->Get<ObjectLinking>()->LinkObject(vanityObject);
-		}
-
-		GameObject::Sptr masterBedObject = MakeBasic("Master Bed Object", -2.32f, 46.25f, -49.78f, 0.f, 0.0f, 11.0f, 2, masterBedMaterial, MasterBedMesh);
-		{
-			masterBedObject->Add<ObjectLinking>(masterBedroomObject);
-			masterBedroomObject->Get<ObjectLinking>()->LinkObject(masterBedObject);
-		}
-
-		GameObject::Sptr jeweleryBoxObject = MakeBasic("Jewelery Box Object", 8.18f, 40.5f, -45.65f, 0.f, 0.0f, 0.0f, 2, jeweleryBoxMaterial, JeweleryBoxMesh);
-		{
-			jeweleryBoxObject->Add<ObjectLinking>(masterBedroomObject);
-			masterBedroomObject->Get<ObjectLinking>()->LinkObject(jeweleryBoxObject);
-		}
-
-
-		//Objects for Bathroom
-
-
-		GameObject::Sptr soapObject = MakeBasic("Soap Object", 2.72f, 89.66f, -44.56f, 90.f, 0.0f, -90.0f, 3, soapMaterial, soapMesh);
-		{
-			soapObject->SetScale(glm::vec3(0.5, 0.5, 0.5));
-			soapObject->Add<ObjectLinking>(megaBathroomObject);
-			megaBathroomObject->Get<ObjectLinking>()->LinkObject(soapObject);
-		}
-
-		GameObject::Sptr duckObject = MakeBasic("Duck Object", -7.41f, 102.36f, -47.44f, 90.f, 0.0f, 9.0f, 3, duckyMaterial, duckyMesh);
-		{
-			duckObject->SetScale(glm::vec3(0.4, 0.4, 0.4));
-			duckObject->Add<ObjectLinking>(megaBathroomObject);
-			megaBathroomObject->Get<ObjectLinking>()->LinkObject(duckObject);
-		}
-
-		GameObject::Sptr toiletObject = MakeBasic("Toilet Object", -2.08f, 95.23f, -48.86f, 90.f, 0.0f, 49.0f, 3, toiletMaterial, toiletMesh);
-		{
-			toiletObject->SetScale(glm::vec3(1.2, 1.2, 1.2));
-			toiletObject->Add<ObjectLinking>(megaBathroomObject);
-			megaBathroomObject->Get<ObjectLinking>()->LinkObject(toiletObject);
-		}
-
-
-
-		//Objects for Kitchen
-
-		GameObject::Sptr trashObject = MakeBasic("Trash Object", -9.48f, 146.51f, -49.76f, 90, 0, 90, 4, trashMaterial, trashMesh);
-		{
-			trashObject->SetScale(glm::vec3(1.5, 1.5, 1.5));
-			trashObject->Add<ObjectLinking>(megaKitchenObject);
-			megaKitchenObject->Get<ObjectLinking>()->LinkObject(trashObject);
-		}
-
-		GameObject::Sptr mousetrapObject = MakeBasic("Mouse trap Object", 10.64f, 147.72f, -49.81f, 90, 0, 0, 4, mouseTrapMaterial, mouseTrapMesh);
-		{
-			mousetrapObject->Add<ObjectLinking>(megaKitchenObject);
-			megaKitchenObject->Get<ObjectLinking>()->LinkObject(mousetrapObject);
-		}
-
-		GameObject::Sptr cakeObject = MakeBasic("Cake Object", 4.37f, 142.73f, -44.65f, 90, 0, 0, 4, cakeMaterial,cakeMesh);
-		{
-			cakeObject->Add<ObjectLinking>(megaKitchenObject);
-			megaKitchenObject->Get<ObjectLinking>()->LinkObject(cakeObject);
-		}
-
-		GameObject::Sptr bowlOfFruitObject = MakeBasic("Bowl Of Fruit Object", -7.01f, 144.91f, -45.19f, 90, 0, 0, 4, bowlOfFruitMaterial, bowlOfFruitMesh);
-		{
-			bowlOfFruitObject->Add<ObjectLinking>(megaKitchenObject);
-			megaKitchenObject->Get<ObjectLinking>()->LinkObject(bowlOfFruitObject);
-		}
-
-
-		//Objects for living room
-
-
-		GameObject::Sptr glassTableObject = MakeBasic("Glass Table Object", 0.36f, 199.9f, -49.73f, 90, 0, 79, 5, glassTableMaterial, glassTableMesh);
-		{
-			glassTableObject->SetScale(glm::vec3(1.5, 1.5, 1.5));
-			glassTableObject->Add<ObjectLinking>(megaLivingroomObject);
-			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(glassTableObject);
-		}
-
-		GameObject::Sptr picturesObject = MakeBasic("Pictures Object", 8.33f, 186.03f, -49.69f, 0, 0, 83, 5, picturesMaterial, picturesMesh);
-		{
-			picturesObject->Add<ObjectLinking>(megaLivingroomObject);
-			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(picturesObject);
-		}
-
-		GameObject::Sptr plantObject = MakeBasic("Plant Object", -10.35f, 210.15f, -44.63f, 90, 0, 81, 5, plantMaterial, plantMesh);
-		{
-			plantObject->Add<ObjectLinking>(megaLivingroomObject);
-			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(plantObject);
-		}
-
-		GameObject::Sptr remoteObject = MakeBasic("Remote Object", -4.6f, 204.75f, -48.3f, 90, 0, -43, 5, remoteMaterial, remoteMesh);
-		{
-			remoteObject->SetScale(glm::vec3(0.3, 0.3, 0.3));
-			remoteObject->Add<ObjectLinking>(megaLivingroomObject);
-			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(remoteObject);
-		}
-
-		GameObject::Sptr TVObject = MakeBasic("TV Object", -2.57f, 187.29f, -41.16f, 90, 0, -101, 5, TVMaterial, TVMesh);
-		{
-			TVObject->Add<ObjectLinking>(megaLivingroomObject);
-			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(TVObject);
-		}
-
-		//Objects for Basement
-		GameObject::Sptr teslaCoilObject = MakeBasic("Tesla Coil Object", -5.72f, 258.5f, -46.91f, 90, 0, 0, 6, teslaCoilMaterial, teslaCoilMesh);
-		{
-			teslaCoilObject->Add<ObjectLinking>(megaBasementObject);
-			megaBasementObject->Get<ObjectLinking>()->LinkObject(teslaCoilObject);
-		}
-
-		GameObject::Sptr frankenstineObject = MakeBasic("Frankenstine Object", -4.25f, 246.87f, -49.97f, 90, 0, -120, 6, frankenstineMaterial, frankenstineMesh);
-		{
-			frankenstineObject->SetScale(glm::vec3(0.85, 0.85, 0.85));
-			frankenstineObject->Add<ObjectLinking>(megaBasementObject);
-			megaBasementObject->Get<ObjectLinking>()->LinkObject(frankenstineObject);
-		}
-
-		GameObject::Sptr flasksObject = MakeBasic("Flasks Object", 3.13f, 242.4f, -46.7f, 90, 0, 0, 6, flasksMaterial, flasksMesh);
-		{
-			flasksObject->SetScale(glm::vec3(0.3, 0.3, 0.3));
-			flasksObject->Add<ObjectLinking>(megaBasementObject);
-			megaBasementObject->Get<ObjectLinking>()->LinkObject(flasksObject);
-		}
-
-		GameObject::Sptr chainsawObject = MakeBasic("Chainsaw Object", -0.35f, 250.0f, -48.66f, 90, 0, 31, 6, chainsawMaterial, chainsawMesh);
-		{
-			chainsawObject->SetScale(glm::vec3(0.7, 0.7, 0.7));
-			chainsawObject->Add<ObjectLinking>(megaBasementObject);
-			megaBasementObject->Get<ObjectLinking>()->LinkObject(chainsawObject);
-		}
-
-		GameObject::Sptr boilerObject = MakeBasic("Boiler Object", -6.63f, 255.02f, -48.46f, 90, 0, 167, 6, boilerMaterial, boilerMesh);
-		{
-			boilerObject->SetScale(glm::vec3(0.7, 0.7, 0.7));
-			boilerObject->Add<ObjectLinking>(megaBasementObject);
-			megaBasementObject->Get<ObjectLinking>()->LinkObject(boilerObject);
-		}
-
-
-		//Objects for UI
 		GameObject::Sptr pointer = MakeBasicPlane("Pointer", 4.07f, 7.21f, 9.55f, 80.351f, 0.0f, 142.0f, 2.0f, 1.0f, 0, menuPointerMaterial);
-		
+
 		GameObject::Sptr extraScreen = MakeBasicPlane("Extra Screen", 5.87f, 5.79f, -6.9f, 80.351f, 0.0f, 142.00f, 18.0f, 10.0f, 0, missingMaterial);
 		{
 			InterpolationBehaviour::Sptr interp = extraScreen->Add<InterpolationBehaviour>();
@@ -981,21 +829,19 @@ int main() {
 
 			ObjectLinking::Sptr oLink = screen->Add<ObjectLinking>();
 		}
-		
+
 		GameObject::Sptr enterPrompt = MakeBasicPlane("Enter Prompt", 6.54f, 6.03f, 3.4f, 80.351f, 0.0f, 142.00f, 4.0f, 1.0f, 0, ePromptMaterial);
 		{
 			enterPrompt->Add<ObjectLinking>(screen);
 			screen->Get<ObjectLinking>()->LinkObject(enterPrompt);
 		}
 
-		GameObject::Sptr prompt = MakeBasicPlane("Prompt", -1.38f, 8.19f, -11.82f, 80.351f, 0.0f, 142.00f, 4.0f, 1.0f, 0, eMaterial);
-
 		GameObject::Sptr list = MakeBasicPlane("List", 11.21f, -1.01f, 6.68f, 80.351f, 0.0f, 142.00f, 4.0f, 10.0f, 1, listMaterial);
 		{
 			list->SetScale(glm::vec3(1.3, 1.3, 1.3));
-			
+
 		}
-		
+
 		GameObject::Sptr secretText = MakeBasicPlane("Secret Text", 10.19f, 1.32f, -9.46f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 1, secretMaterial);
 		{
 			secretText->SetScale(glm::vec3(1.3, 1.3, 1.3));
@@ -1032,10 +878,459 @@ int main() {
 
 		}
 
+
+
+		//Objects for the Master bed
+		GameObject::Sptr flowerObject = MakeBasic("Flower Object", -8.18f, 55.6f, -50.830f, 0.f, 0.0f, -50.0f, 2, flowerMaterial, FlowerMesh);
+		{
+			TriggerVolume::Sptr volume = flowerObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = flowerObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			flowerObject->SetScale(glm::vec3(2.0, 2.0, 2.0));
+			flowerObject->Add<ObjectLinking>(masterBedroomObject);
+			masterBedroomObject->Get<ObjectLinking>()->LinkObject(flowerObject);
+		}
+
+		GameObject::Sptr vanityObject = MakeBasic("Vanity Object", 6.32f, 38.92f, -45.75f, 0.f, 0.0f, -81.0f, 2, vanityMaterial, VanityMesh);
+		{
+			TriggerVolume::Sptr volume = vanityObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = vanityObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			vanityObject->SetScale(glm::vec3(1.3, 1.3, 1.5));
+			vanityObject->Add<ObjectLinking>(masterBedroomObject);
+			masterBedroomObject->Get<ObjectLinking>()->LinkObject(vanityObject);
+		}
+
+		GameObject::Sptr masterBedObject = MakeBasic("Master Bed Object", -2.32f, 46.25f, -49.78f, 0.f, 0.0f, 11.0f, 2, masterBedMaterial, MasterBedMesh);
+		{
+			TriggerVolume::Sptr volume = masterBedObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = masterBedObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			
+			masterBedObject->Add<ObjectLinking>(masterBedroomObject);
+			masterBedroomObject->Get<ObjectLinking>()->LinkObject(masterBedObject);
+		}
+
+		GameObject::Sptr jeweleryBoxObject = MakeBasic("Jewelery Box Object", 8.18f, 40.5f, -45.65f, 0.f, 0.0f, 0.0f, 2, jeweleryBoxMaterial, JeweleryBoxMesh);
+		{
+			TriggerVolume::Sptr volume = jeweleryBoxObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = jeweleryBoxObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			jeweleryBoxObject->Add<ObjectLinking>(masterBedroomObject);
+			masterBedroomObject->Get<ObjectLinking>()->LinkObject(jeweleryBoxObject);
+		}
+
+
+		//Objects for Bathroom
+
+
+		GameObject::Sptr soapObject = MakeBasic("Soap Object", 2.72f, 89.66f, -44.56f, 90.f, 0.0f, -90.0f, 3, soapMaterial, soapMesh);
+		{
+			TriggerVolume::Sptr volume = soapObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = soapObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			soapObject->SetScale(glm::vec3(0.5, 0.5, 0.5));
+			soapObject->Add<ObjectLinking>(megaBathroomObject);
+			megaBathroomObject->Get<ObjectLinking>()->LinkObject(soapObject);
+		}
+
+		GameObject::Sptr duckObject = MakeBasic("Duck Object", -7.41f, 102.36f, -47.44f, 90.f, 0.0f, 9.0f, 3, duckyMaterial, duckyMesh);
+		{
+			TriggerVolume::Sptr volume = duckObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = duckObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			duckObject->SetScale(glm::vec3(0.4, 0.4, 0.4));
+			duckObject->Add<ObjectLinking>(megaBathroomObject);
+			megaBathroomObject->Get<ObjectLinking>()->LinkObject(duckObject);
+		}
+
+		GameObject::Sptr toiletObject = MakeBasic("Toilet Object", -2.08f, 95.23f, -48.86f, 90.f, 0.0f, 49.0f, 3, toiletMaterial, toiletMesh);
+		{
+			TriggerVolume::Sptr volume = toiletObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = toiletObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			toiletObject->SetScale(glm::vec3(1.2, 1.2, 1.2));
+			toiletObject->Add<ObjectLinking>(megaBathroomObject);
+			megaBathroomObject->Get<ObjectLinking>()->LinkObject(toiletObject);
+		}
+
+
+
+		//Objects for Kitchen
+
+		GameObject::Sptr trashObject = MakeBasic("Trash Object", -9.48f, 146.51f, -49.76f, 90, 0, 90, 4, trashMaterial, trashMesh);
+		{
+			TriggerVolume::Sptr volume = trashObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = trashObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			trashObject->SetScale(glm::vec3(1.5, 1.5, 1.5));
+			trashObject->Add<ObjectLinking>(megaKitchenObject);
+			megaKitchenObject->Get<ObjectLinking>()->LinkObject(trashObject);
+		}
+
+		GameObject::Sptr mousetrapObject = MakeBasic("Mouse trap Object", 10.64f, 147.72f, -49.81f, 90, 0, 0, 4, mouseTrapMaterial, mouseTrapMesh);
+		{
+			TriggerVolume::Sptr volume = mousetrapObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = mousetrapObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			mousetrapObject->Add<ObjectLinking>(megaKitchenObject);
+			megaKitchenObject->Get<ObjectLinking>()->LinkObject(mousetrapObject);
+		}
+
+		GameObject::Sptr cakeObject = MakeBasic("Cake Object", 4.37f, 142.73f, -44.65f, 90, 0, 0, 4, cakeMaterial,cakeMesh);
+		{
+			TriggerVolume::Sptr volume = cakeObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = cakeObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			cakeObject->Add<ObjectLinking>(megaKitchenObject);
+			megaKitchenObject->Get<ObjectLinking>()->LinkObject(cakeObject);
+		}
+
+		GameObject::Sptr bowlOfFruitObject = MakeBasic("Bowl Of Fruit Object", -7.01f, 144.91f, -45.19f, 90, 0, 0, 4, bowlOfFruitMaterial, bowlOfFruitMesh);
+		{
+			TriggerVolume::Sptr volume = bowlOfFruitObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = bowlOfFruitObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			bowlOfFruitObject->Add<ObjectLinking>(megaKitchenObject);
+			megaKitchenObject->Get<ObjectLinking>()->LinkObject(bowlOfFruitObject);
+		}
+
+
+		//Objects for living room
+
+
+		GameObject::Sptr glassTableObject = MakeBasic("Glass Table Object", 0.36f, 199.9f, -49.73f, 90, 0, 79, 5, glassTableMaterial, glassTableMesh);
+		{
+			TriggerVolume::Sptr volume = glassTableObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = glassTableObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			glassTableObject->SetScale(glm::vec3(1.5, 1.5, 1.5));
+			glassTableObject->Add<ObjectLinking>(megaLivingroomObject);
+			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(glassTableObject);
+		}
+
+		GameObject::Sptr picturesObject = MakeBasic("Pictures Object", 8.33f, 186.03f, -49.69f, 0, 0, 83, 5, picturesMaterial, picturesMesh);
+		{
+			TriggerVolume::Sptr volume = picturesObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = picturesObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			picturesObject->Add<ObjectLinking>(megaLivingroomObject);
+			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(picturesObject);
+		}
+
+		GameObject::Sptr plantObject = MakeBasic("Plant Object", -10.35f, 210.15f, -44.63f, 90, 0, 81, 5, plantMaterial, plantMesh);
+		{
+			TriggerVolume::Sptr volume = plantObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = plantObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			plantObject->Add<ObjectLinking>(megaLivingroomObject);
+			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(plantObject);
+		}
+
+		GameObject::Sptr remoteObject = MakeBasic("Remote Object", -4.6f, 204.75f, -48.3f, 90, 0, -43, 5, remoteMaterial, remoteMesh);
+		{
+			TriggerVolume::Sptr volume = remoteObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = remoteObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			remoteObject->SetScale(glm::vec3(0.3, 0.3, 0.3));
+			remoteObject->Add<ObjectLinking>(megaLivingroomObject);
+			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(remoteObject);
+		}
+
+		GameObject::Sptr TVObject = MakeBasic("TV Object", -2.57f, 187.29f, -41.16f, 90, 0, -101, 5, TVMaterial, TVMesh);
+		{
+			TriggerVolume::Sptr volume = TVObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = TVObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			TVObject->Add<ObjectLinking>(megaLivingroomObject);
+			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(TVObject);
+		}
+
+
+		//Objects for Basement
+		GameObject::Sptr teslaCoilObject = MakeBasic("Tesla Coil Object", -5.72f, 258.5f, -46.91f, 90, 0, 0, 6, teslaCoilMaterial, teslaCoilMesh);
+		{
+			TriggerVolume::Sptr volume = teslaCoilObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = teslaCoilObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			teslaCoilObject->Add<ObjectLinking>(megaBasementObject);
+			megaBasementObject->Get<ObjectLinking>()->LinkObject(teslaCoilObject);
+		}
+
+		GameObject::Sptr frankenstineObject = MakeBasic("Frankenstine Object", -4.25f, 246.87f, -49.97f, 90, 0, -120, 6, frankenstineMaterial, frankenstineMesh);
+		{
+			TriggerVolume::Sptr volume = frankenstineObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = frankenstineObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			frankenstineObject->SetScale(glm::vec3(0.85, 0.85, 0.85));
+			frankenstineObject->Add<ObjectLinking>(megaBasementObject);
+			megaBasementObject->Get<ObjectLinking>()->LinkObject(frankenstineObject);
+		}
+
+		GameObject::Sptr flasksObject = MakeBasic("Flasks Object", 3.13f, 242.4f, -46.7f, 90, 0, 0, 6, flasksMaterial, flasksMesh);
+		{
+			TriggerVolume::Sptr volume = flasksObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = flasksObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			flasksObject->SetScale(glm::vec3(0.3, 0.3, 0.3));
+			flasksObject->Add<ObjectLinking>(megaBasementObject);
+			megaBasementObject->Get<ObjectLinking>()->LinkObject(flasksObject);
+		}
+
+		GameObject::Sptr chainsawObject = MakeBasic("Chainsaw Object", -0.35f, 250.0f, -48.66f, 90, 0, 31, 6, chainsawMaterial, chainsawMesh);
+		{
+			TriggerVolume::Sptr volume = chainsawObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = chainsawObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			chainsawObject->SetScale(glm::vec3(0.7, 0.7, 0.7));
+			chainsawObject->Add<ObjectLinking>(megaBasementObject);
+			megaBasementObject->Get<ObjectLinking>()->LinkObject(chainsawObject);
+		}
+
+		GameObject::Sptr boilerObject = MakeBasic("Boiler Object", -6.63f, 255.02f, -48.46f, 90, 0, 167, 6, boilerMaterial, boilerMesh);
+		{
+			TriggerVolume::Sptr volume = boilerObject->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
+			volume->AddCollider(collider);
+
+			InteractableObjectBehaviour::Sptr interactions = boilerObject->Add<InteractableObjectBehaviour>();
+			interactions->AddRewardMaterial(handMusicMaterial);
+			interactions->AddSoundEffect("velcro");
+
+			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->prompt = prompt;
+			interactions->screen = extraScreen;
+
+			boilerObject->SetScale(glm::vec3(0.7, 0.7, 0.7));
+			boilerObject->Add<ObjectLinking>(megaBasementObject);
+			megaBasementObject->Get<ObjectLinking>()->LinkObject(boilerObject);
+		}
+
 		GameObject::Sptr radio = MakeBasic("Radio", -7.4f, -3.1f, 0.0f, 0.0f, 0.0f, 0.0f, 1, radioMaterial, radioFrame0);
 		{
-			RigidBody::Sptr physics = radio->Add<RigidBody>(RigidBodyType::Kinematic);
-			physics->AddCollider(ConvexMeshCollider::Create());
+			
 			
 			TriggerVolume::Sptr volume = radio->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
@@ -1067,8 +1362,7 @@ int main() {
 
 		GameObject::Sptr homework = MakeBasic("Homework", -5.f, 3.45f, 3.3f, 0.0f, 0.0f, 0.0f, 1, homeworkMaterial, homeworkFrame0);
 		{
-			RigidBody::Sptr physics = homework->Add<RigidBody>(RigidBodyType::Kinematic);
-			physics->AddCollider(ConvexMeshCollider::Create());
+			
 
 			TriggerVolume::Sptr volume = homework->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
@@ -1103,9 +1397,6 @@ int main() {
 		
 		GameObject::Sptr shroomba = MakeBasic("Bedroom Shroomba", 2.f, 2.f, 0.f, 0.0f, 0.0f, 0.0f, 1, shroombaMaterial, shroombaFrame0);
 		{
-			RigidBody::Sptr physics = shroomba->Add<RigidBody>(RigidBodyType::Kinematic);
-			physics->AddCollider(ConvexMeshCollider::Create());
-
 			TriggerVolume::Sptr volume = shroomba->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
 			collider->SetPosition(glm::vec3(0.f));
@@ -1146,8 +1437,7 @@ int main() {
 
 		GameObject::Sptr boybandPoster = MakeBasic("Boyband Poster", -9.4f, 3.f, 9.0f, 0.0f, 0.0f, 0.0f, 1, bbPosterMaterial, bbPosterMesh);
 		{
-			RigidBody::Sptr physics = boybandPoster->Add<RigidBody>(RigidBodyType::Kinematic);
-			physics->AddCollider(ConvexMeshCollider::Create());
+			
 
 			TriggerVolume::Sptr volume = boybandPoster->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
@@ -1176,8 +1466,7 @@ int main() {
 
 		GameObject::Sptr paintCan = MakeBasic("Paint Can", 0.45f, -5.1f, 6.44f, 0.0f, 0.0f, 0.0f, 1, paintcanMaterial, paintcanMesh);
 		{
-			RigidBody::Sptr physics = paintCan->Add<RigidBody>(RigidBodyType::Kinematic);
-			physics->AddCollider(ConvexMeshCollider::Create());
+			
 
 			TriggerVolume::Sptr volume = paintCan->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
