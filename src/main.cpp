@@ -592,19 +592,42 @@ int main() {
 		Texture2D::Sptr    pauseTex = ResourceManager::CreateAsset<Texture2D>("textures/Pause.png");
 		Texture2D::Sptr    lineTex = ResourceManager::CreateAsset<Texture2D>("textures/Line.png");
 		Texture2D::Sptr    secretTex = ResourceManager::CreateAsset<Texture2D>("textures/SecretTextOne.png");
+
 		Texture2D::Sptr    booksInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/BooksInteract.png");
 		Texture2D::Sptr    radioInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/RadioInteract.png");
 		Texture2D::Sptr    posterInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/PosterInteract.png");
 		Texture2D::Sptr    shroombaInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/ShroombaInteract.png");
 		Texture2D::Sptr    paintInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/PaintInteract.png");
+		Texture2D::Sptr    bedInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Bed.png");
+		Texture2D::Sptr    alchemyInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Alchemy Lab.png");
+		Texture2D::Sptr    boilerInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Boiler.png");
+		Texture2D::Sptr    cakeInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Cake.png");
+		Texture2D::Sptr    chainsawInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/ChainSaw.png");
+		Texture2D::Sptr    duckyInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Ducky.png");
+		Texture2D::Sptr    flowerInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Flower.png");
+		Texture2D::Sptr    frankInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Frankenstine.png");
+		Texture2D::Sptr    fruitInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Fruit.png");
+		Texture2D::Sptr    jewleryInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Jewelry Box.png");
+		Texture2D::Sptr    mouseInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/MouseTrap.png");
+		Texture2D::Sptr    picturesInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Pictures.png");
+		Texture2D::Sptr    plantInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Plant.png");
+		Texture2D::Sptr    remoteInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Remote.png");
+		Texture2D::Sptr    toiletInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Toilet.png");
+		Texture2D::Sptr    soapInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Soap.png");
+		Texture2D::Sptr    tableInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Table.png");
+		Texture2D::Sptr    teslaInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/TeslaCoil.png");
+		Texture2D::Sptr    trashInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Trash.png");
+		Texture2D::Sptr    vanityInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Vanity.png");
+
+
 		Texture2D::Sptr    winTex = ResourceManager::CreateAsset<Texture2D>("textures/win.png");
 		Texture2D::Sptr    ePrTex = ResourceManager::CreateAsset<Texture2D>("textures/EnterPrompt.png");
 		Texture2D::Sptr    eTex = ResourceManager::CreateAsset<Texture2D>("textures/E.png");
 
-		Texture2D::Sptr    FlowerTex = ResourceManager::CreateAsset<Texture2D>("textures/Flower.png");
+		Texture2D::Sptr    FlowerTex = ResourceManager::CreateAsset<Texture2D>("textures/FlowerBase.png");
 		Texture2D::Sptr    JeweleryBoxTex = ResourceManager::CreateAsset<Texture2D>("textures/Jewelery_Box.png");
 		Texture2D::Sptr    MasterBedTex = ResourceManager::CreateAsset<Texture2D>("textures/Masterbed.png");
-		Texture2D::Sptr    VanityTex = ResourceManager::CreateAsset<Texture2D>("textures/Vanity.png");
+		Texture2D::Sptr    VanityTex = ResourceManager::CreateAsset<Texture2D>("textures/VanityBase.png");
 		Texture2D::Sptr    MasterBedroomTex = ResourceManager::CreateAsset<Texture2D>("textures/MasterBedroom.png");
 
 		Texture2D::Sptr megaBathroomTex = ResourceManager::CreateAsset<Texture2D>("textures/BathroomTextures/BathroomTexture.png");
@@ -694,11 +717,34 @@ int main() {
 		Material::Sptr pauseMaterial = MakeMaterial("Pause Material", basicShader, pauseTex, 0.1f);
 		Material::Sptr lineMaterial = MakeMaterial("Line Material", basicShader, lineTex, 0.1f);
 		Material::Sptr secretMaterial = MakeMaterial("Secret Material", basicShader, secretTex, 0.1f);
+
 		Material::Sptr radioInteractMaterial = MakeMaterial("Radio Interact Material", basicShader, radioInteractTex, 0.1f);
 		Material::Sptr posterInteractMaterial = MakeMaterial("Poster Interact Material", basicShader, posterInteractTex, 0.1f);
 		Material::Sptr paintInteractMaterial = MakeMaterial("Paint Interact Material", basicShader, paintInteractTex, 0.1f);
 		Material::Sptr booksInteractMaterial = MakeMaterial("Books Interact Material", basicShader, booksInteractTex, 0.1f);
 		Material::Sptr shroombaInteractMaterial = MakeMaterial("Shroomba Interact Material", basicShader, shroombaInteractTex, 0.1f);
+		Material::Sptr alchemyInteractMaterial = MakeMaterial("Alchemy Interact Material", basicShader, alchemyInteractTex, 0.1f);
+		Material::Sptr bedInteractMaterial = MakeMaterial("Bed Interact Material", basicShader, bedInteractTex, 0.1f);
+		Material::Sptr boilerInteractMaterial = MakeMaterial("Boiler Interact Material", basicShader, boilerInteractTex, 0.1f);
+		Material::Sptr cakeInteractMaterial = MakeMaterial("Cake Interact Material", basicShader, cakeInteractTex, 0.1f);
+		Material::Sptr chainsawInteractMaterial = MakeMaterial("Chainsaw Interact Material", basicShader, chainsawInteractTex, 0.1f);
+		Material::Sptr duckyInteractMaterial = MakeMaterial("Ducky Interact Material", basicShader, duckyInteractTex, 0.1f);
+		Material::Sptr flowerInteractMaterial = MakeMaterial("Flower Interact Material", basicShader, flowerInteractTex, 0.1f);
+		Material::Sptr frankInteractMaterial = MakeMaterial("Frankenstine Interact Material", basicShader, frankInteractTex, 0.1f);
+		Material::Sptr fruitInteractMaterial = MakeMaterial("Fruit Interact Material", basicShader, fruitInteractTex, 0.1f);
+		Material::Sptr jewleryInteractMaterial = MakeMaterial("Jewlery Interact Material", basicShader, jewleryInteractTex, 0.1f);
+		Material::Sptr mouseInteractMaterial = MakeMaterial("Mousetrap Interact Material", basicShader, mouseInteractTex, 0.1f);
+		Material::Sptr picturesInteractMaterial = MakeMaterial("Pictures Interact Material", basicShader, picturesInteractTex, 0.1f);
+		Material::Sptr plantInteractMaterial = MakeMaterial("Plant Interact Material", basicShader, plantInteractTex, 0.1f);
+		Material::Sptr remoteInteractMaterial = MakeMaterial("Remote Interact Material", basicShader, remoteInteractTex, 0.1f);
+		Material::Sptr toiletInteractMaterial = MakeMaterial("Toilet Interact Material", basicShader, toiletInteractTex, 0.1f);
+		Material::Sptr soapInteractMaterial = MakeMaterial("Soap Interact Material", basicShader, soapInteractTex, 0.1f);
+		Material::Sptr tableInteractMaterial = MakeMaterial("Table Interact Material", basicShader, tableInteractTex, 0.1f);
+		Material::Sptr teslaInteractMaterial = MakeMaterial("Tesla Coil Interact Material", basicShader, teslaInteractTex, 0.1f);
+		Material::Sptr trashInteractMaterial = MakeMaterial("Trash Interact Material", basicShader, trashInteractTex, 0.1f);
+		Material::Sptr vanityInteractMaterial = MakeMaterial("Vanity Interact Material", basicShader, vanityInteractTex, 0.1f);
+		
+
 		Material::Sptr winMaterial = MakeMaterial("Win Material", basicShader, winTex, 0.1f);
 		Material::Sptr ePromptMaterial = MakeMaterial("Enter Prompt Material", basicShader, ePrTex, 0.1f);
 		Material::Sptr eMaterial = MakeMaterial("Enter Prompt Material", basicShader, eTex, 0.1f);
@@ -933,6 +979,7 @@ int main() {
 			interactions->AddRewardMaterial(handZombieMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(flowerInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -954,6 +1001,7 @@ int main() {
 			interactions->AddRewardMaterial(handCrackedMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(vanityInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -975,6 +1023,7 @@ int main() {
 			interactions->AddRewardMaterial(handRobeMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(bedInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -996,6 +1045,7 @@ int main() {
 			interactions->AddRewardMaterial(handBlingMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(jewleryInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -1020,6 +1070,7 @@ int main() {
 			interactions->AddRewardMaterial(handCleanMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(soapInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -1041,6 +1092,7 @@ int main() {
 			interactions->AddRewardMaterial(handDuckyMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(duckyInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -1062,6 +1114,7 @@ int main() {
 			interactions->AddRewardMaterial(handPooMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(toiletInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -1087,6 +1140,7 @@ int main() {
 			interactions->AddRewardMaterial(handTrashMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(trashInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -1108,6 +1162,7 @@ int main() {
 			interactions->AddRewardMaterial(handMouseMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(mouseInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -1128,6 +1183,7 @@ int main() {
 			interactions->AddRewardMaterial(handCakeMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(cakeInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -1148,6 +1204,7 @@ int main() {
 			interactions->AddRewardMaterial(handFruitMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(fruitInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -1172,6 +1229,7 @@ int main() {
 			interactions->AddRewardMaterial(handAngryMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(tableInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -1193,6 +1251,7 @@ int main() {
 			interactions->AddRewardMaterial(handClownMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(picturesInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -1213,6 +1272,7 @@ int main() {
 			interactions->AddRewardMaterial(handGreenMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(plantInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -1233,6 +1293,7 @@ int main() {
 			interactions->AddRewardMaterial(handTechMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(remoteInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -1263,6 +1324,7 @@ int main() {
 			interactions->AddRewardMaterial(handElectricMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(teslaInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -1283,6 +1345,7 @@ int main() {
 			interactions->AddRewardMaterial(handFrankMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(frankInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -1304,6 +1367,7 @@ int main() {
 			interactions->AddRewardMaterial(handScienceMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(alchemyInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -1325,6 +1389,7 @@ int main() {
 			interactions->AddRewardMaterial(handKillerMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(chainsawInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
@@ -1346,6 +1411,7 @@ int main() {
 			interactions->AddRewardMaterial(handBurnedMaterial);
 			interactions->AddSoundEffect("velcro");
 
+			interactions->AddFeedbackBehaviour((InteractionFeedback(boilerInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->prompt = prompt;
