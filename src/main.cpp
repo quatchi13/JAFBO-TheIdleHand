@@ -1129,7 +1129,7 @@ int main() {
 
 		//Objects for Kitchen
 
-		GameObject::Sptr trashObject = MakeBasic("Trash Object", -9.48f, 146.51f, -49.76f, 90, 0, 90, 4, trashMaterial, trashMesh);
+		GameObject::Sptr trashObject = MakeBasic("Trash Object", -8.19f, 150.51f, -49.76f, 90, 0, 90, 4, trashMaterial, trashMesh);
 		{
 			TriggerVolume::Sptr volume = trashObject->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
@@ -1313,7 +1313,7 @@ int main() {
 
 
 		//Objects for Basement
-		GameObject::Sptr teslaCoilObject = MakeBasic("Tesla Coil Object", -5.72f, 258.5f, -46.91f, 90, 0, 0, 6, teslaCoilMaterial, teslaCoilMesh);
+		GameObject::Sptr teslaCoilObject = MakeBasic("Tesla Coil Object", -8.72f, 249.6f, -47.91f, 90, 0, 0, 6, teslaCoilMaterial, teslaCoilMesh);
 		{
 			TriggerVolume::Sptr volume = teslaCoilObject->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
@@ -1334,7 +1334,7 @@ int main() {
 			megaBasementObject->Get<ObjectLinking>()->LinkObject(teslaCoilObject);
 		}
 
-		GameObject::Sptr frankenstineObject = MakeBasic("Frankenstine Object", -4.25f, 246.87f, -49.97f, 90, 0, -120, 6, frankenstineMaterial, frankenstineMesh);
+		GameObject::Sptr frankenstineObject = MakeBasic("Frankenstine Object", -1.424f, 249.87f, -49.97f, 90, -1, -87, 6, frankenstineMaterial, frankenstineMesh);
 		{
 			TriggerVolume::Sptr volume = frankenstineObject->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
@@ -1378,7 +1378,7 @@ int main() {
 			megaBasementObject->Get<ObjectLinking>()->LinkObject(flasksObject);
 		}
 
-		GameObject::Sptr chainsawObject = MakeBasic("Chainsaw Object", -0.35f, 250.0f, -48.66f, 90, 0, 31, 6, chainsawMaterial, chainsawMesh);
+		GameObject::Sptr chainsawObject = MakeBasic("Chainsaw Object", 6.65f, 248.0f, -48.66f, 90, 0, 31, 6, chainsawMaterial, chainsawMesh);
 		{
 			TriggerVolume::Sptr volume = chainsawObject->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
@@ -1400,7 +1400,7 @@ int main() {
 			megaBasementObject->Get<ObjectLinking>()->LinkObject(chainsawObject);
 		}
 
-		GameObject::Sptr boilerObject = MakeBasic("Boiler Object", -6.63f, 255.02f, -48.46f, 90, 0, 167, 6, boilerMaterial, boilerMesh);
+		GameObject::Sptr boilerObject = MakeBasic("Boiler Object", -6.63f, 255.02f, -48.46f, 90, 0, -125, 6, boilerMaterial, boilerMesh);
 		{
 			TriggerVolume::Sptr volume = boilerObject->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
