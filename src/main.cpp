@@ -785,11 +785,32 @@ int main() {
 		AudioEngine* audioEngine = AudioEngine::instance();
 
 		audioEngine->init();
-		audioEngine->loadSound("test", "sounds/test.wav", true);
+
 		audioEngine->loadSound("background", "sounds/backgroundmusic.wav", true);
+
 		audioEngine->loadSound("books", "sounds/Books_crashing.wav", true);
 		audioEngine->loadSound("brush", "sounds/Brush_Strokes.wav", true);
 		audioEngine->loadSound("velcro", "sounds/Velcro.wav", true);
+		audioEngine->loadSound("bed", "sounds/Bed.wav", true);
+		audioEngine->loadSound("boiler", "sounds/Boiler.wav", true);
+		audioEngine->loadSound("cake", "sounds/Cake.wav", true);
+		audioEngine->loadSound("chainsaw", "sounds/Chainsaw.wav", true);
+		audioEngine->loadSound("ducky", "sounds/Ducky.wav", true);
+		audioEngine->loadSound("flower", "sounds/Flower.wav", true);
+		audioEngine->loadSound("frank", "sounds/Frankenstine.wav", true);
+		audioEngine->loadSound("fruit", "sounds/Fruit.wav", true);
+		audioEngine->loadSound("jewelry", "sounds/JewelryBox.wav", true);
+		audioEngine->loadSound("lab", "sounds/Lab.wav", true);
+		audioEngine->loadSound("mouse", "sounds/MouseTrap.wav", true);
+		audioEngine->loadSound("pictures", "sounds/Pictures.wav", true);
+		audioEngine->loadSound("plant", "sounds/Plant.wav", true);
+		audioEngine->loadSound("remote", "sounds/Remote.wav", true);
+		audioEngine->loadSound("soap", "sounds/Soap.wav", true);
+		audioEngine->loadSound("table", "sounds/Table.wav", true);
+		audioEngine->loadSound("tesla", "sounds/Tesla Coils.wav", true);
+		audioEngine->loadSound("toilet", "sounds/Toilet.wav", true);
+		audioEngine->loadSound("trash", "sounds/Trash.wav", true);
+		audioEngine->loadSound("vanity", "sounds/Vanity.wav", true);
 
 		audioEngine->loadSound("Bang", "sounds/Bang.wav", true);
 		audioEngine->loadSound("Bing", "sounds/Bing.wav", true);
@@ -977,7 +998,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = flowerObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handZombieMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("flower");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(flowerInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -999,7 +1020,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = vanityObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handCrackedMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("vanity");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(vanityInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1021,7 +1042,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = masterBedObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handRobeMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("bed");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(bedInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1043,7 +1064,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = jeweleryBoxObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handBlingMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("jewelry");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(jewleryInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1068,7 +1089,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = soapObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handCleanMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("soap");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(soapInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1090,7 +1111,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = duckObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handDuckyMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("ducky");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(duckyInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1112,7 +1133,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = toiletObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handPooMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("toilet");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(toiletInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1138,7 +1159,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = trashObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handTrashMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("trash");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(trashInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1160,7 +1181,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = mousetrapObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handMouseMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("mouse");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(mouseInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1181,7 +1202,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = cakeObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handCakeMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("cake");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(cakeInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1202,7 +1223,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = bowlOfFruitObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handFruitMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("fruit");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(fruitInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1227,7 +1248,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = glassTableObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handAngryMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("table");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(tableInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1249,7 +1270,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = picturesObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handClownMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("pictures");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(picturesInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1270,7 +1291,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = plantObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handGreenMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("plant");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(plantInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1291,7 +1312,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = remoteObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handTechMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("remote");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(remoteInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1322,7 +1343,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = teslaCoilObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handElectricMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("tesla");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(teslaInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1343,7 +1364,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = frankenstineObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handFrankMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("frank");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(frankInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1365,7 +1386,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = flasksObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handScienceMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("lab");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(alchemyInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1387,7 +1408,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = chainsawObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handKillerMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("chainsaw");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(chainsawInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
@@ -1409,7 +1430,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = boilerObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handBurnedMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("boiler");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(boilerInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));

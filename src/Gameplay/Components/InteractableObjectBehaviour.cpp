@@ -143,7 +143,7 @@ void InteractableObjectBehaviour::OnTriggerVolumeEntered(const std::shared_ptr<G
 		LOG_INFO("Body has entered our trigger volume: {}", body->GetGameObject()->Name);
 		_playerInTrigger = true;
 		_body = body;
-		prompt->SetPosition(glm::vec3(prompt->GetPosition().x, prompt->GetPosition().y, -prompt->GetPosition().z));
+		
 	}
 	std::cout << "enter trigger";
 	if (_hasBeenActivated == true) {
@@ -158,7 +158,7 @@ void InteractableObjectBehaviour::OnTriggerVolumeLeaving(const std::shared_ptr<G
 		LOG_INFO("Body has left our trigger volume: {}", body->GetGameObject()->Name);
 		_playerInTrigger = false;
 		_body = nullptr;
-		prompt->SetPosition(glm::vec3(prompt->GetPosition().x, prompt->GetPosition().y, -prompt->GetPosition().z));
+		
 	}
 	std::cout << "exit trigger";
 	if (_hasBeenActivated == true) {
