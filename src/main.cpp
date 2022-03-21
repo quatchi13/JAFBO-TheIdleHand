@@ -520,7 +520,7 @@ int main() {
 		MeshResource::Sptr VanityMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Vanity.obj");
 		MeshResource::Sptr MasterBedMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MasterBed.obj");
 		MeshResource::Sptr JeweleryBoxMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Jewelery_Box.obj");
-		MeshResource::Sptr FlowerMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Flower.obj");
+		MeshResource::Sptr FlowerMesh = ResourceManager::CreateAsset<MeshResource>("animated meshes/Flower/FlowerMesh0.obj");
 
 		MeshResource::Sptr megaBathroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/megaBathroom.obj");
 		MeshResource::Sptr soapMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/soap.obj");
@@ -528,7 +528,7 @@ int main() {
 		MeshResource::Sptr toiletMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/toilet.obj");
 
 		MeshResource::Sptr megaKitchenMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/megaKitchen.obj");
-		MeshResource::Sptr trashMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/Trash.obj");
+		MeshResource::Sptr trashMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/TrashFixed.obj");
 		MeshResource::Sptr cakeMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/cake.obj");
 		MeshResource::Sptr mouseTrapMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/mouseTrap.obj");
 		MeshResource::Sptr bowlOfFruitMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/bowlOfFruit.obj");
@@ -542,7 +542,7 @@ int main() {
 		
 		MeshResource::Sptr megaBasementMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/megaBasement.obj");
 		MeshResource::Sptr teslaCoilMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/Teslacoil.obj");
-		MeshResource::Sptr frankenstineMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/Frankenstine.obj");
+		MeshResource::Sptr frankenstineMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/FrankenstineFixed.obj");
 		MeshResource::Sptr flasksMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/flasks.obj");
 		MeshResource::Sptr chainsawMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/chainsaw.obj");
 		MeshResource::Sptr boilerMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/boiler.obj");
@@ -653,8 +653,8 @@ int main() {
 		Texture2D::Sptr frankenstineTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/Frankensine.png");
 		Texture2D::Sptr flasksTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/Flasks.png");
 		Texture2D::Sptr chainsawTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/Chainsaw.png");
-		Texture2D::Sptr boilerTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/Boiler.png");
-
+		Texture2D::Sptr boilerTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/boilerFixed.png");
+		
 		// Here we'll load in the cubemap, as well as a special shader to handle drawing the skybox
 		TextureCube::Sptr testCubemap = ResourceManager::CreateAsset<TextureCube>("cubemaps/map/map.jpg");
 		Shader::Sptr      skyboxShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
