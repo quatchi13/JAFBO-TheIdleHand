@@ -524,6 +524,7 @@ int main() {
 
 		MeshResource::Sptr megaBathroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/megaBathroom.obj");
 		MeshResource::Sptr soapMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/soap.obj");
+		MeshResource::Sptr soapSpilledMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/soapSpilled.obj");
 		MeshResource::Sptr duckyMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/ducky.obj");
 		MeshResource::Sptr flatDuckyMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/flatDucky.obj");
 		MeshResource::Sptr toiletMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/toilet.obj");
@@ -652,8 +653,10 @@ int main() {
 		Texture2D::Sptr bathroomListTex = ResourceManager::CreateAsset<Texture2D>("textures/ListBathroom.png");
 		Texture2D::Sptr megaBathroomTex = ResourceManager::CreateAsset<Texture2D>("textures/BathroomTextures/BathroomTexture.png");
 		Texture2D::Sptr soapTex = ResourceManager::CreateAsset<Texture2D>("textures/BathroomTextures/soap.png");
+		Texture2D::Sptr spilledSoapTex = ResourceManager::CreateAsset<Texture2D>("textures/BathroomTextures/SpilledSoap.png");
 		Texture2D::Sptr duckyTex = ResourceManager::CreateAsset<Texture2D>("textures/BathroomTextures/Ducky.png");
 		Texture2D::Sptr toiletTex = ResourceManager::CreateAsset<Texture2D>("textures/BathroomTextures/toilet.png");
+		Texture2D::Sptr dirtyToiletTex = ResourceManager::CreateAsset<Texture2D>("textures/BathroomTextures/ShitToilet.png");
 
 		Texture2D::Sptr kitchenListTex = ResourceManager::CreateAsset<Texture2D>("textures/ListKitchen.png");
 		Texture2D::Sptr megaKitchenTex = ResourceManager::CreateAsset<Texture2D>("textures/KitchenTextures/KitchenTexture.png");
@@ -792,10 +795,13 @@ int main() {
 		Material::Sptr vanityMaterial = MakeMaterial("Enter Prompt Material", basicShader, VanityTex, 0.1f);
 		Material::Sptr masterBedroomMaterial = MakeMaterial("Enter Prompt Material", basicShader, MasterBedroomTex, 0.1f);
 
-		Material::Sptr megaBathroomMaterial = MakeMaterial("Enter Prompt Material", basicShader, megaBathroomTex, 0.1f);
-		Material::Sptr soapMaterial = MakeMaterial("Enter Prompt Material", basicShader, soapTex, 0.1f);
-		Material::Sptr duckyMaterial = MakeMaterial("Enter Prompt Material", basicShader, duckyTex, 0.1f);
-		Material::Sptr toiletMaterial = MakeMaterial("Enter Prompt Material", basicShader, toiletTex, 0.1f);
+		Material::Sptr megaBathroomMaterial = MakeMaterial("Mega Bathroom Material", basicShader, megaBathroomTex, 0.1f);
+		Material::Sptr soapMaterial = MakeMaterial("Soap Material", basicShader, soapTex, 0.1f);
+		Material::Sptr spilledSoapMaterial = MakeMaterial("Spilled Soap Material", basicShader, spilledSoapTex, 0.1);
+		Material::Sptr duckyMaterial = MakeMaterial("Ducky Material", basicShader, duckyTex, 0.1f);
+		Material::Sptr toiletMaterial = MakeMaterial("Clean Toilet Material", basicShader, toiletTex, 0.3f);
+		Material::Sptr soiledToiletMaterial = MakeMaterial("Soiled Toilet Material", basicShader, dirtyToiletTex, 0.1);
+
 
 		Material::Sptr megaKitchenMaterial = MakeMaterial("Enter Prompt Material", basicShader, megaKitchenTex, 0.1f);
 		Material::Sptr trashMaterial = MakeMaterial("Enter Prompt Material", basicShader, trashTex, 0.1f);
@@ -1153,6 +1159,11 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(soapInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour(InteractionFeedback(soapSpilledMesh, soapObject));
+			interactions->AddFeedbackBehaviour(InteractionFeedback(spilledSoapMaterial, soapObject));
+			InteractionTForm soapPos(InteractionTForm::tformt::pos, glm::vec3(1.9, -3.78, 0.05));
+			InteractionTForm soapRot(InteractionTForm::tformt::rot, glm::vec3(90, 0, 88));
+			interactions->AddFeedbackBehaviour(InteractionFeedback(std::vector<InteractionTForm>{soapPos, soapRot}, soapObject));
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(2)));
 
@@ -1179,6 +1190,9 @@ int main() {
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(flatDuckyMesh, duckObject)));
+			InteractionTForm duckPos(InteractionTForm::tformt::pos, glm::vec3(-3.42, -0.68, 0.13));
+			InteractionTForm duckRot(InteractionTForm::tformt::rot, glm::vec3(90, 0, -70));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{duckPos, duckRot}, duckObject)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(1)));
 
 			interactions->prompt = prompt;
@@ -1203,6 +1217,7 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(toiletInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(soiledToiletMaterial, toiletObject)));
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(0)));
 
