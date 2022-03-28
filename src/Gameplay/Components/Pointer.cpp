@@ -45,8 +45,6 @@ void Pointer::Update(float deltaTime)
 	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_ENTER) == GLFW_PRESS && !onScreen)
 	{
 		onScreen = true;
-		//std::cout << "poosh";
-		//GetGameObject()->SetPosition(glm::vec3(GetGameObject()->GetPosition().x, GetGameObject()->GetPosition().y, -GetGameObject()->GetPosition().z));
 		_renderer->SetMaterial(ListMaterial);
 	}
 

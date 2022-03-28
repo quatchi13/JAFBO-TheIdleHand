@@ -7,12 +7,14 @@
 #include "Gameplay/Scene.h"
 #include "Gameplay/Components/MorphAnimationManager.h"
 #include "Utils/AudioEngine.h"
+#include "Gameplay/Components/ObjectLinking.h"
 
 enum FeedbackBehaviour {
 	TEX, 
 	MESH,
 	TRANSFORM,
-	ANIM
+	ANIM,
+	CROSSOUT
 };
 
 class InteractionTForm {
@@ -37,6 +39,7 @@ public:
 	InteractionFeedback(Gameplay::MeshResource::Sptr, Gameplay::GameObject::Sptr);
 	InteractionFeedback(std::vector<InteractionTForm>, Gameplay::GameObject::Sptr);
 	InteractionFeedback(int, Gameplay::GameObject::Sptr);
+	InteractionFeedback(int);
 
 
 
@@ -51,7 +54,7 @@ public:
 	int _SWAPAINDEX;
 	int _TRANSFORMCOUNT = 0;
 
-
+	
 	void SwapMat();
 	void SwapMesh();
 	void SwapTransforms();

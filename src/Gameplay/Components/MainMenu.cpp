@@ -49,7 +49,7 @@ void MainMenu::Update(float deltaTime)
 {
 
 	if (backgroundCooldown) { backgroundCooldown--; }
-	std::cout << backgroundCooldown;
+	
 	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_8) && backgroundvolume > 0 && !backgroundCooldown)
 	{
 		backgroundvolume--;

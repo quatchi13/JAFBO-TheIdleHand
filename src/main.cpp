@@ -525,27 +525,45 @@ int main() {
 		MeshResource::Sptr megaBathroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/megaBathroom.obj");
 		MeshResource::Sptr soapMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/soap.obj");
 		MeshResource::Sptr duckyMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/ducky.obj");
+		MeshResource::Sptr flatDuckyMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/flatDucky.obj");
 		MeshResource::Sptr toiletMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/toilet.obj");
 
 		MeshResource::Sptr megaKitchenMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/megaKitchen.obj");
-		MeshResource::Sptr trashMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/TrashFixed.obj");
+		MeshResource::Sptr trashMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/Trash.obj");
 		MeshResource::Sptr cakeMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/cake.obj");
 		MeshResource::Sptr mouseTrapMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/mouseTrap.obj");
 		MeshResource::Sptr bowlOfFruitMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/bowlOfFruit.obj");
 
 		MeshResource::Sptr megaLivingroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/LivingRoomMega.obj");
 		MeshResource::Sptr glassTableMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/glassTable.obj");
+		MeshResource::Sptr brokenTableMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/glassTableBroken.obj");
 		MeshResource::Sptr picturesMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/pictures.obj");
-		MeshResource::Sptr plantMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/plant.obj");
+		MeshResource::Sptr plantFrame0 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Plant/plantMesh0.obj");
+		MeshResource::Sptr plantFrame1 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Plant/plantMesh1.obj");
+		MeshResource::Sptr plantFrame2 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Plant/plantMesh2.obj");
+		MeshResource::Sptr plantFrame3 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Plant/plantMesh3.obj");
+		MeshResource::Sptr plantFrame4 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Plant/plantMesh4.obj");
+		MeshResource::Sptr monsterPlantFrame0 = ResourceManager::CreateAsset<MeshResource>("animated meshes/PlantMonster/plantMonsterMesh0.obj");
+		MeshResource::Sptr monsterPlantFrame1 = ResourceManager::CreateAsset<MeshResource>("animated meshes/PlantMonster/plantMonsterMesh1.obj");
+		MeshResource::Sptr monsterPlantFrame2 = ResourceManager::CreateAsset<MeshResource>("animated meshes/PlantMonster/plantMonsterMesh2.obj");
 		MeshResource::Sptr remoteMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/remote.obj");
 		MeshResource::Sptr TVMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/TV.obj");
+		MeshResource::Sptr monsterPlantMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/plantMonster.obj");
 		
 		MeshResource::Sptr megaBasementMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/megaBasement.obj");
 		MeshResource::Sptr teslaCoilMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/Teslacoil.obj");
 		MeshResource::Sptr frankenstineMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/FrankenstineFixed.obj");
+		MeshResource::Sptr frankensteinLessMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/FrankenstineGone.obj");
 		MeshResource::Sptr flasksMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/flasks.obj");
+		MeshResource::Sptr boiledOverFlaskMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/boiledOverFlasks.obj");
 		MeshResource::Sptr chainsawMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/chainsaw.obj");
 		MeshResource::Sptr boilerMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/boiler.obj");
+		MeshResource::Sptr boilerFrame0 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Boiler/boilerMesh0.obj");
+		MeshResource::Sptr boilerFrame1 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Boiler/boilerMesh1.obj");
+		MeshResource::Sptr boilerFrame2 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Boiler/boilerMesh2.obj");
+		MeshResource::Sptr boilerFrame3 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Boiler/boilerMesh3.obj");
+		MeshResource::Sptr boilerFrame4 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Boiler/boilerMesh4.obj");
+		
 
 		//Textures
 		Texture2D::Sptr    handDefault = ResourceManager::CreateAsset<Texture2D>("textures/Hand.png");
@@ -554,7 +572,7 @@ int main() {
 		Texture2D::Sptr    handShroom = ResourceManager::CreateAsset<Texture2D>("textures/HandShroom1.png");
 		Texture2D::Sptr    handBoyBand = ResourceManager::CreateAsset<Texture2D>("textures/HandBoyBand.png");
 		Texture2D::Sptr    handRainbow = ResourceManager::CreateAsset<Texture2D>("textures/HandRainbow.png");
-		Texture2D::Sptr    handAngry = ResourceManager::CreateAsset<Texture2D>("textures/HandAngry.png");
+		Texture2D::Sptr    handAngry = ResourceManager::CreateAsset<Texture2D>("textures/HandAngy.png");
 		Texture2D::Sptr    handBling = ResourceManager::CreateAsset<Texture2D>("textures/HandBling.png");
 		Texture2D::Sptr    handBurned = ResourceManager::CreateAsset<Texture2D>("textures/HandBurned.png");
 		Texture2D::Sptr    handCake = ResourceManager::CreateAsset<Texture2D>("textures/HandCake.png");
@@ -588,7 +606,7 @@ int main() {
 		Texture2D::Sptr    paintcanTex = ResourceManager::CreateAsset<Texture2D>("textures/PaintCan.png");
 		Texture2D::Sptr    menuTex = ResourceManager::CreateAsset<Texture2D>("textures/Menu.png");
 		Texture2D::Sptr    menuPointerTex = ResourceManager::CreateAsset<Texture2D>("textures/MenuPointer.png");
-		Texture2D::Sptr    listTex = ResourceManager::CreateAsset<Texture2D>("textures/List.png");
+		Texture2D::Sptr    ListTex = ResourceManager::CreateAsset<Texture2D>("textures/List.png");
 		Texture2D::Sptr    pauseTex = ResourceManager::CreateAsset<Texture2D>("textures/Pause.png");
 		Texture2D::Sptr    lineTex = ResourceManager::CreateAsset<Texture2D>("textures/Line.png");
 		Texture2D::Sptr    secretTex = ResourceManager::CreateAsset<Texture2D>("textures/SecretTextOne.png");
@@ -624,36 +642,47 @@ int main() {
 		Texture2D::Sptr    ePrTex = ResourceManager::CreateAsset<Texture2D>("textures/EnterPrompt.png");
 		Texture2D::Sptr    eTex = ResourceManager::CreateAsset<Texture2D>("textures/E.png");
 
+		Texture2D::Sptr    bedroom_mListTex = ResourceManager::CreateAsset<Texture2D>("textures/ListMasterBedroom.png");
 		Texture2D::Sptr    FlowerTex = ResourceManager::CreateAsset<Texture2D>("textures/FlowerBase.png");
 		Texture2D::Sptr    JeweleryBoxTex = ResourceManager::CreateAsset<Texture2D>("textures/Jewelery_Box.png");
 		Texture2D::Sptr    MasterBedTex = ResourceManager::CreateAsset<Texture2D>("textures/Masterbed.png");
 		Texture2D::Sptr    VanityTex = ResourceManager::CreateAsset<Texture2D>("textures/VanityBase.png");
 		Texture2D::Sptr    MasterBedroomTex = ResourceManager::CreateAsset<Texture2D>("textures/MasterBedroom.png");
 
+		Texture2D::Sptr bathroomListTex = ResourceManager::CreateAsset<Texture2D>("textures/ListBathroom.png");
 		Texture2D::Sptr megaBathroomTex = ResourceManager::CreateAsset<Texture2D>("textures/BathroomTextures/BathroomTexture.png");
 		Texture2D::Sptr soapTex = ResourceManager::CreateAsset<Texture2D>("textures/BathroomTextures/soap.png");
 		Texture2D::Sptr duckyTex = ResourceManager::CreateAsset<Texture2D>("textures/BathroomTextures/Ducky.png");
 		Texture2D::Sptr toiletTex = ResourceManager::CreateAsset<Texture2D>("textures/BathroomTextures/toilet.png");
 
+		Texture2D::Sptr kitchenListTex = ResourceManager::CreateAsset<Texture2D>("textures/ListKitchen.png");
 		Texture2D::Sptr megaKitchenTex = ResourceManager::CreateAsset<Texture2D>("textures/KitchenTextures/KitchenTexture.png");
 		Texture2D::Sptr trashTex = ResourceManager::CreateAsset<Texture2D>("textures/KitchenTextures/Trash.png");
 		Texture2D::Sptr cakeTex = ResourceManager::CreateAsset<Texture2D>("textures/KitchenTextures/Cake.png");
 		Texture2D::Sptr mouseTrapTex = ResourceManager::CreateAsset<Texture2D>("textures/KitchenTextures/MouseTrap.png");
 		Texture2D::Sptr bowlOfFruitTex = ResourceManager::CreateAsset<Texture2D>("textures/KitchenTextures/FruitBowl.png");
 
+		Texture2D::Sptr livingroomListTex = ResourceManager::CreateAsset<Texture2D>("textures/ListLivingroom.png");
 		Texture2D::Sptr megaLivingroomTex = ResourceManager::CreateAsset<Texture2D>("textures/LivingroomTextures/MegaModelTexture.png");
 		Texture2D::Sptr glassTableTex = ResourceManager::CreateAsset<Texture2D>("textures/LivingroomTextures/glassTable.png");
 		Texture2D::Sptr picturesTex = ResourceManager::CreateAsset<Texture2D>("textures/LivingroomTextures/pictures.png");
+		Texture2D::Sptr clownPicturesTex = ResourceManager::CreateAsset<Texture2D>("textures/LivingroomTextures/clownpictures.png");
 		Texture2D::Sptr plantTex = ResourceManager::CreateAsset<Texture2D>("textures/LivingroomTextures/Plant.png");
 		Texture2D::Sptr remoteTex = ResourceManager::CreateAsset<Texture2D>("textures/LivingroomTextures/remote.png");
 		Texture2D::Sptr TVTex = ResourceManager::CreateAsset<Texture2D>("textures/LivingroomTextures/TV.png");
+		Texture2D::Sptr BrokenTVTex = ResourceManager::CreateAsset<Texture2D>("textures/LivingroomTextures/BrokenTV.png");
+		Texture2D::Sptr monsterPlantTex = ResourceManager::CreateAsset<Texture2D>("textures/LivingroomTextures/plantMonster.png");
 
+		Texture2D::Sptr basementListTex = ResourceManager::CreateAsset<Texture2D>("textures/ListBasement.png");
 		Texture2D::Sptr megaBasementTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/BasementTexture.png");
 		Texture2D::Sptr teslaCoilTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/TeslaCoil.png");
+		Texture2D::Sptr teslaCoilOnTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/TeslaCoilOn.png");
 		Texture2D::Sptr frankenstineTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/Frankensine.png");
 		Texture2D::Sptr flasksTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/Flasks.png");
+		Texture2D::Sptr boiledOverFlasksTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/ExplosionFlasks.png");
 		Texture2D::Sptr chainsawTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/Chainsaw.png");
 		Texture2D::Sptr boilerTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/boilerFixed.png");
+
 		
 		// Here we'll load in the cubemap, as well as a special shader to handle drawing the skybox
 		TextureCube::Sptr testCubemap = ResourceManager::CreateAsset<TextureCube>("cubemaps/map/map.jpg");
@@ -713,10 +742,18 @@ int main() {
 		Material::Sptr paintcanMaterial = MakeMaterial("Paint Can Material", basicShader, paintcanTex, 0.1f);
 		Material::Sptr menuMaterial = MakeMaterial("Menu Material", basicShader, menuTex, 0.1f);
 		Material::Sptr menuPointerMaterial = MakeMaterial("Menu Pointer Material", basicShader, menuPointerTex, 0.1f);
-		Material::Sptr listMaterial = MakeMaterial("List Material", basicShader, listTex, 0.1f);
 		Material::Sptr pauseMaterial = MakeMaterial("Pause Material", basicShader, pauseTex, 0.1f);
 		Material::Sptr lineMaterial = MakeMaterial("Line Material", basicShader, lineTex, 0.1f);
 		Material::Sptr secretMaterial = MakeMaterial("Secret Material", basicShader, secretTex, 0.1f);
+
+
+		Material::Sptr ListMaterial = MakeMaterial("Bedroom List Material", basicShader, ListTex, 0.1f);
+		Material::Sptr bedroom_mListMaterial = MakeMaterial("Master B.Room List Material", basicShader, bedroom_mListTex, 0.1f);
+		Material::Sptr bathroomListMaterial = MakeMaterial("Bathroom List Material", basicShader, bathroomListTex, 0.1f);
+		Material::Sptr kitchenListMaterial = MakeMaterial("Kitchen List Material", basicShader, kitchenListTex, 0.1f);
+		Material::Sptr livingroomListMaterial = MakeMaterial("Living Room List Material", basicShader, livingroomListTex, 0.1f);
+		Material::Sptr basementListMaterial = MakeMaterial("Basement List Material", basicShader, basementListTex, 0.1f);
+		std::vector<Material::Sptr>listMats{ ListMaterial, bedroom_mListMaterial, bathroomListMaterial, kitchenListMaterial, livingroomListMaterial, basementListMaterial };
 
 		Material::Sptr radioInteractMaterial = MakeMaterial("Radio Interact Material", basicShader, radioInteractTex, 0.1f);
 		Material::Sptr posterInteractMaterial = MakeMaterial("Poster Interact Material", basicShader, posterInteractTex, 0.1f);
@@ -766,27 +803,35 @@ int main() {
 		Material::Sptr mouseTrapMaterial = MakeMaterial("Enter Prompt Material", basicShader, mouseTrapTex, 0.1f);
 		Material::Sptr bowlOfFruitMaterial = MakeMaterial("Enter Prompt Material", basicShader, bowlOfFruitTex, 0.1f);
 
-		Material::Sptr megaLivingroomMaterial = MakeMaterial("Enter Prompt Material", basicShader, megaLivingroomTex, 0.1f);
-		Material::Sptr glassTableMaterial = MakeMaterial("Enter Prompt Material", basicShader, glassTableTex, 0.1f);
-		Material::Sptr picturesMaterial = MakeMaterial("Enter Prompt Material", basicShader, picturesTex, 0.1f);
-		Material::Sptr plantMaterial = MakeMaterial("Enter Prompt Material", basicShader, plantTex, 0.1f);
-		Material::Sptr remoteMaterial = MakeMaterial("Enter Prompt Material", basicShader, remoteTex, 0.1f);
-		Material::Sptr TVMaterial = MakeMaterial("Enter Prompt Material", basicShader, TVTex, 0.1f);
+		Material::Sptr megaLivingroomMaterial = MakeMaterial("Mega Livingroom Material", basicShader, megaLivingroomTex, 0.1f);
+		Material::Sptr glassTableMaterial = MakeMaterial("Glass Table Material", basicShader, glassTableTex, 0.1f);
+		Material::Sptr picturesMaterial = MakeMaterial("Livingroom Pictures Material", basicShader, picturesTex, 0.1f);
+		Material::Sptr clownPicsMaterial = MakeMaterial("Clown Pictures Material", basicShader, clownPicturesTex, 0.1f);
+		Material::Sptr plantMaterial = MakeMaterial("Plant Material", morphShader, plantTex, 0.1f);
+		Material::Sptr remoteMaterial = MakeMaterial("TV Remote Material", basicShader, remoteTex, 0.1f);
+		Material::Sptr TVMaterial = MakeMaterial("TV Material", basicShader, TVTex, 0.1f);
+		Material::Sptr brokenTVmaterial = MakeMaterial("Broken TV Material", basicShader, BrokenTVTex, 0.1f);
+		Material::Sptr monsterPlantMaterial = MakeMaterial("Monster Plant Material", morphShader, monsterPlantTex, 0.1f);
 
-		Material::Sptr megaBasementMaterial = MakeMaterial("Enter Prompt Material", basicShader, megaBasementTex, 0.1f);
-		Material::Sptr teslaCoilMaterial = MakeMaterial("Enter Prompt Material", basicShader, teslaCoilTex, 0.1f);
-		Material::Sptr frankenstineMaterial = MakeMaterial("Enter Prompt Material", basicShader, frankenstineTex, 0.1f);
-		Material::Sptr flasksMaterial = MakeMaterial("Enter Prompt Material", basicShader, flasksTex, 0.1f);
-		Material::Sptr chainsawMaterial = MakeMaterial("Enter Prompt Material", basicShader, chainsawTex, 0.1f);
-		Material::Sptr boilerMaterial = MakeMaterial("Enter Prompt Material", basicShader, boilerTex, 0.1f);
+		Material::Sptr megaBasementMaterial = MakeMaterial("Basement Material", basicShader, megaBasementTex, 0.1f);
+		Material::Sptr teslaCoilMaterial = MakeMaterial("Tesla Coil Material", basicShader, teslaCoilTex, 0.1f);
+		Material::Sptr teslaCoilOnMaterial = MakeMaterial("Tesla Coil On Material", basicShader, teslaCoilOnTex, 0.1f);
+		Material::Sptr frankenstineMaterial = MakeMaterial("Frankenstein Material", basicShader, frankenstineTex, 0.1f);
+		Material::Sptr flasksMaterial = MakeMaterial("Flasks Material", basicShader, flasksTex, 0.1f);
+		Material::Sptr expFlasksMaterial = MakeMaterial("Exploded Flasks Material", basicShader, boiledOverFlasksTex, 0.1f);
+		Material::Sptr chainsawMaterial = MakeMaterial("Chainsaw Material", basicShader, chainsawTex, 0.1f);
+		Material::Sptr boilerMaterial = MakeMaterial("Boiler Material", morphShader, boilerTex, 0.1f);
+
+
 
 		//Audio Setups
+
 
 		AudioEngine* audioEngine = AudioEngine::instance();
 
 		audioEngine->init();
 
-		audioEngine->loadSound("background", "sounds/backgroundmusic.wav", true);
+		audioEngine->loadSound("background", "sounds/bkgbop.wav", true);
 
 		audioEngine->loadSound("books", "sounds/Books_crashing.wav", true);
 		audioEngine->loadSound("brush", "sounds/Brush_Strokes.wav", true);
@@ -899,6 +944,7 @@ int main() {
 			warp->roomFour = megaKitchenObject;
 			warp->roomFive = megaLivingroomObject;
 			warp->roomSix = megaBasementObject;
+			warp->PushLists(listMats);
 
 			TriggerVolume::Sptr volume = floorManager->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.8);
@@ -944,7 +990,7 @@ int main() {
 			screen->Get<ObjectLinking>()->LinkObject(enterPrompt);
 		}
 
-		GameObject::Sptr list = MakeBasicPlane("List", 11.21f, -1.01f, 6.68f, 80.351f, 0.0f, 142.00f, 4.0f, 10.0f, 1, listMaterial);
+		GameObject::Sptr list = MakeBasicPlane("List", 11.21f, -1.01f, 6.68f, 80.351f, 0.0f, 142.00f, 4.0f, 10.0f, 0, ListMaterial);
 		{
 			list->SetScale(glm::vec3(1.3, 1.3, 1.3));
 
@@ -956,36 +1002,39 @@ int main() {
 
 		}
 
-		GameObject::Sptr lineOne = MakeBasicPlane("Line One", 8.62f, 0.17f, -14.53f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 1, lineMaterial);
+		GameObject::Sptr lineOne = MakeBasicPlane("Line One", 10.77, -0.25, 109.25, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 0, lineMaterial);
 		{
 			lineOne->SetScale(glm::vec3(1.3, 1.3, 1.3));
 
 		}
 
-		GameObject::Sptr lineTwo = MakeBasicPlane("Line Two", 8.98f, 0.17f, -13.19f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 1, lineMaterial);
+		GameObject::Sptr lineTwo = MakeBasicPlane("Line Two", 11.22, -0.75, 107.65, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 0, lineMaterial);
 		{
 			lineTwo->SetScale(glm::vec3(1.3, 1.3, 1.3));
 
 		}
 
-		GameObject::Sptr lineThree = MakeBasicPlane("Line Three", 9.26f, 0.88f, -11.91f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 1, lineMaterial);
+		GameObject::Sptr lineThree = MakeBasicPlane("Line Three", 11.33, -0.55, 105.47, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 0, lineMaterial);
 		{
 			lineThree->SetScale(glm::vec3(1.3, 1.3, 1.3));
 
 		}
 
-		GameObject::Sptr lineFour = MakeBasicPlane("Line Four", 9.82f, 1.15f, -10.62f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 1, lineMaterial);
+		GameObject::Sptr lineFour = MakeBasicPlane("Line Four", 11.57, -0.3, 103.39, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 0, lineMaterial);
 		{
 			lineFour->SetScale(glm::vec3(1.3, 1.3, 1.3));
 
 		}
 
-		GameObject::Sptr lineFive = MakeBasicPlane("Line Five", 10.26f, 1.49f, -9.17f, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 1, lineMaterial);
+		GameObject::Sptr lineFive = MakeBasicPlane("Line Five", 11.84, -0.3, 101.74, 80.351f, 0.0f, 142.00f, 3.0f, 1.0f, 0, lineMaterial);
 		{
 			lineFive->SetScale(glm::vec3(1.3, 1.3, 1.3));
 
 		}
 
+		std::vector<GameObject::Sptr>lines{ lineOne, lineTwo, lineThree, lineFour, lineFive };
+		floorManager->Get<WarpBehaviour>()->PushLines(lines);
+		
 
 
 		//Objects for the Master bed
@@ -1003,6 +1052,9 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(flowerInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			
+			interactions->AddFeedbackBehaviour((InteractionFeedback(0)));
+
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1025,6 +1077,9 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(vanityInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			
+			interactions->AddFeedbackBehaviour((InteractionFeedback(3)));
+			
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1047,6 +1102,9 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(bedInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			
+			interactions->AddFeedbackBehaviour((InteractionFeedback(1)));
+			
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1069,6 +1127,9 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(jewleryInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			
+			interactions->AddFeedbackBehaviour((InteractionFeedback(2)));
+			
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1078,8 +1139,6 @@ int main() {
 
 
 		//Objects for Bathroom
-
-
 		GameObject::Sptr soapObject = MakeBasic("Soap Object", 2.72f, 89.66f, -44.56f, 90.f, 0.0f, -90.0f, 3, soapMaterial, soapMesh);
 		{
 			TriggerVolume::Sptr volume = soapObject->Add<TriggerVolume>();
@@ -1094,6 +1153,9 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(soapInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+
+			interactions->AddFeedbackBehaviour((InteractionFeedback(2)));
+
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1116,6 +1178,9 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(duckyInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(flatDuckyMesh, duckObject)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(1)));
+
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1138,6 +1203,9 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(toiletInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+
+			interactions->AddFeedbackBehaviour((InteractionFeedback(0)));
+
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1149,8 +1217,7 @@ int main() {
 
 
 		//Objects for Kitchen
-
-		GameObject::Sptr trashObject = MakeBasic("Trash Object", -8.19f, 150.51f, -49.76f, 90, 0, 90, 4, trashMaterial, trashMesh);
+		GameObject::Sptr trashObject = MakeBasic("Trash Object", -9.15f, 150.51f, -49.76f, 90, 0, 90, 4, trashMaterial, trashMesh);
 		{
 			TriggerVolume::Sptr volume = trashObject->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
@@ -1164,6 +1231,9 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(trashInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+
+			interactions->AddFeedbackBehaviour((InteractionFeedback(3)));
+
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1186,6 +1256,9 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(mouseInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			
+			interactions->AddFeedbackBehaviour((InteractionFeedback(0)));
+			
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1207,6 +1280,9 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(cakeInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+
+			interactions->AddFeedbackBehaviour((InteractionFeedback(1)));
+
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1228,6 +1304,9 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(fruitInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+
+			interactions->AddFeedbackBehaviour((InteractionFeedback(2)));
+
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1237,12 +1316,10 @@ int main() {
 
 
 		//Objects for living room
-
-
 		GameObject::Sptr glassTableObject = MakeBasic("Glass Table Object", 0.36f, 199.9f, -49.73f, 90, 0, 79, 5, glassTableMaterial, glassTableMesh);
 		{
 			TriggerVolume::Sptr volume = glassTableObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0));
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
@@ -1253,6 +1330,10 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(tableInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(brokenTableMesh, glassTableObject)));
+
+			interactions->AddFeedbackBehaviour((InteractionFeedback(3)));
+
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1264,7 +1345,7 @@ int main() {
 		GameObject::Sptr picturesObject = MakeBasic("Pictures Object", 8.33f, 186.03f, -49.69f, 0, 0, 83, 5, picturesMaterial, picturesMesh);
 		{
 			TriggerVolume::Sptr volume = picturesObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0));
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
@@ -1275,6 +1356,10 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(picturesInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(clownPicsMaterial, picturesObject)));
+
+			interactions->AddFeedbackBehaviour((InteractionFeedback(2)));
+
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1282,8 +1367,10 @@ int main() {
 			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(picturesObject);
 		}
 
-		GameObject::Sptr plantObject = MakeBasic("Plant Object", -10.35f, 210.15f, -44.63f, 90, 0, 81, 5, plantMaterial, plantMesh);
+		GameObject::Sptr plantObject = MakeBasic("Plant Object", -10.35f, 210.15f, -44.63f, 90, 0, 81, 5, plantMaterial, plantFrame0);
 		{
+			plantObject->SetScale(glm::vec3(0.5, 0.5, 0.5));
+
 			TriggerVolume::Sptr volume = plantObject->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
 			collider->SetPosition(glm::vec3(0.f));
@@ -1296,8 +1383,19 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(plantInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(monsterPlantMesh, plantObject)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(monsterPlantMaterial, plantObject)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(1, plantObject)));
+
+			interactions->AddFeedbackBehaviour((InteractionFeedback(0)));
+
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
+
+			MorphRenderComponent::Sptr morphRender = plantObject->Add<MorphRenderComponent>(plantFrame0);
+			MorphAnimationManager::Sptr animator = plantObject->Add<MorphAnimationManager>();
+			animator->AddAnim(std::vector<MeshResource::Sptr>{plantFrame1, plantFrame2, plantFrame3, plantFrame4}, 0.5);
+			animator->AddAnim(std::vector<MeshResource::Sptr>{monsterPlantFrame0, monsterPlantFrame1, monsterPlantFrame2}, 0.5);
 
 			plantObject->Add<ObjectLinking>(megaLivingroomObject);
 			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(plantObject);
@@ -1306,7 +1404,7 @@ int main() {
 		GameObject::Sptr remoteObject = MakeBasic("Remote Object", -4.6f, 204.75f, -48.3f, 90, 0, -43, 5, remoteMaterial, remoteMesh);
 		{
 			TriggerVolume::Sptr volume = remoteObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0));
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
@@ -1317,6 +1415,11 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(remoteInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			InteractionTForm remoteMove(InteractionTForm::tformt::pos, glm::vec3(-4.6, 4.75, -5.0));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{remoteMove}, remoteObject)));
+
+			interactions->AddFeedbackBehaviour((InteractionFeedback(1)));
+
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1330,16 +1433,22 @@ int main() {
 			
 			TVObject->Add<ObjectLinking>(megaLivingroomObject);
 			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(TVObject);
+
+			remoteObject->Get<InteractableObjectBehaviour>()->AddFeedbackBehaviour(InteractionFeedback(brokenTVmaterial, TVObject));
 		}
+
 
 
 		//Objects for Basement
 		GameObject::Sptr teslaCoilObject = MakeBasic("Tesla Coil Object", -8.72f, 249.6f, -47.91f, 90, 0, 0, 6, teslaCoilMaterial, teslaCoilMesh);
 		{
 			TriggerVolume::Sptr volume = teslaCoilObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.3, 5.0, 1.3));
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
+
+			RigidBody::Sptr physics = teslaCoilObject->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(1, 4.2, 1)));
 
 			InteractableObjectBehaviour::Sptr interactions = teslaCoilObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handElectricMaterial);
@@ -1348,6 +1457,9 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(teslaInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(teslaCoilOnMaterial, teslaCoilObject)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(4)));
+
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1358,8 +1470,8 @@ int main() {
 		GameObject::Sptr frankenstineObject = MakeBasic("Frankenstine Object", -1.424f, 249.87f, -49.97f, 90, -1, -87, 6, frankenstineMaterial, frankenstineMesh);
 		{
 			TriggerVolume::Sptr volume = frankenstineObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
-			collider->SetPosition(glm::vec3(0.f));
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.68, 0.75, 1.56));
+			collider->SetPosition(glm::vec3(-0.09, 4.74, 0.75));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = frankenstineObject->Add<InteractableObjectBehaviour>();
@@ -1369,6 +1481,10 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(frankInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(frankensteinLessMesh, frankenstineObject)));
+
+			interactions->AddFeedbackBehaviour((InteractionFeedback(0)));
+
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1380,9 +1496,11 @@ int main() {
 		GameObject::Sptr flasksObject = MakeBasic("Flasks Object", 3.13f, 242.4f, -46.7f, 90, 0, 0, 6, flasksMaterial, flasksMesh);
 		{
 			TriggerVolume::Sptr volume = flasksObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
-			collider->SetPosition(glm::vec3(0.f));
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0, 0.88, 1.11));
+			collider->SetPosition(glm::vec3(0.33, 0.75, 0.0));
+			collider->SetRotation(glm::vec3(0.0, -24.0, 0.0));
 			volume->AddCollider(collider);
+
 
 			InteractableObjectBehaviour::Sptr interactions = flasksObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handScienceMaterial);
@@ -1391,6 +1509,11 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(alchemyInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(boiledOverFlaskMesh, flasksObject)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(expFlasksMaterial, flasksObject)));
+
+			interactions->AddFeedbackBehaviour((InteractionFeedback(2)));
+
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1402,9 +1525,10 @@ int main() {
 		GameObject::Sptr chainsawObject = MakeBasic("Chainsaw Object", 6.65f, 248.0f, -48.66f, 90, 0, 31, 6, chainsawMaterial, chainsawMesh);
 		{
 			TriggerVolume::Sptr volume = chainsawObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
-			collider->SetPosition(glm::vec3(0.f));
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(0.8, 1.2, 2.5));
+			collider->SetPosition(glm::vec3(0.0, 0.0, -1.66));
 			volume->AddCollider(collider);
+
 
 			InteractableObjectBehaviour::Sptr interactions = chainsawObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handKillerMaterial);
@@ -1413,6 +1537,12 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(chainsawInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			InteractionTForm chainsawPos(InteractionTForm::tformt::pos, glm::vec3(0.21, -7.88, 5.27));
+			InteractionTForm chainsawRot(InteractionTForm::tformt::rot, glm::vec3(-124, -10, 16));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{chainsawPos, chainsawRot}, chainsawObject)));
+
+			interactions->AddFeedbackBehaviour((InteractionFeedback(3)));
+
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1421,12 +1551,21 @@ int main() {
 			megaBasementObject->Get<ObjectLinking>()->LinkObject(chainsawObject);
 		}
 
-		GameObject::Sptr boilerObject = MakeBasic("Boiler Object", -6.63f, 255.02f, -48.46f, 90, 0, -125, 6, boilerMaterial, boilerMesh);
+		GameObject::Sptr boilerObject = MakeBasic("Boiler Object", -6.63f, 255.02f, -48.46f, 90, 0, -125, 6, boilerMaterial, boilerFrame0);
 		{
 			TriggerVolume::Sptr volume = boilerObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.69, 1.0, 2.27));
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
+
+			RigidBody::Sptr physics = boilerObject->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(1.24, 2.92, 1.878)));
+
+			MorphRenderComponent::Sptr morphRend = boilerObject->Add<MorphRenderComponent>(boilerFrame0);
+			MorphAnimationManager::Sptr morphManager = boilerObject->Add<MorphAnimationManager>();
+			morphManager->AddAnim(std::vector<MeshResource::Sptr>{ boilerFrame0, boilerFrame0}, 0.5);
+			morphManager->AddAnim(std::vector<MeshResource::Sptr>{boilerFrame1, boilerFrame2, boilerFrame3, boilerFrame4}, 0.5);
+			morphManager->SetCurrentAnim(0);
 
 			InteractableObjectBehaviour::Sptr interactions = boilerObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handBurnedMaterial);
@@ -1435,6 +1574,11 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(boilerInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(1, boilerObject)));
+			
+
+			interactions->AddFeedbackBehaviour((InteractionFeedback(1)));
+
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1443,9 +1587,52 @@ int main() {
 			megaBasementObject->Get<ObjectLinking>()->LinkObject(boilerObject);
 		}
 
+		GameObject::Sptr alchemyCollider = scene->CreateGameObject("Alchemy Collider");
+		{
+			alchemyCollider->SetPosition(glm::vec3(4.14, 241.67f, -46.96f));
+			alchemyCollider->SetRotation(glm::vec3(0, 0, -24));
+
+			RigidBody::Sptr physics = alchemyCollider->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(2.07, 1.83, 0.55)));;
+			
+			ObjectLinking::Sptr link = alchemyCollider->Add<ObjectLinking>(flasksObject);
+			flasksObject->Get<ObjectLinking>()->LinkObject(alchemyCollider);
+		}
+
+		GameObject::Sptr frankensteinCollider = scene->CreateGameObject("Frankenstein Collider");
+		{
+			frankensteinCollider->SetPosition(glm::vec3(-0.404, 250.25, -48.35));
+			frankensteinCollider->SetRotation(glm::vec3(0, 0, -1));
+
+
+			RigidBody::Sptr physics = frankensteinCollider->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(3.72, 1.79, 2.17)));
+
+			ObjectLinking::Sptr link = frankensteinCollider->Add<ObjectLinking>(frankenstineObject);
+			frankenstineObject->Get<ObjectLinking>()->LinkObject(frankensteinCollider);
+		}
+
+		GameObject::Sptr chainsawCollider = scene->CreateGameObject("Chainsaw Collider");
+		{
+			chainsawCollider->SetPosition(glm::vec3(5.89f, 249.34f, -48.66f));
+			chainsawCollider->SetRotation(glm::vec3(0, 0, -59.f));
+
+			RigidBody::Sptr physics = chainsawCollider->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(2.20, 0.46, 0.72)));
+
+			InteractionTForm chainsawPos(InteractionTForm::tformt::pos, glm::vec3(0.44, -9.36, 5.73));
+			InteractionTForm chainsawRot(InteractionTForm::tformt::rot, glm::vec3(-14, 32, 99));
+			chainsawObject->Get<InteractableObjectBehaviour>()->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{chainsawPos, chainsawRot}, chainsawCollider)));
+
+			ObjectLinking::Sptr link = chainsawCollider->Add<ObjectLinking>(chainsawObject);
+			chainsawObject->Get<ObjectLinking>()->LinkObject(chainsawCollider);
+		}
+
+		
+
+		//bedroom objects 
 		GameObject::Sptr radio = MakeBasic("Radio", -7.4f, -3.1f, 0.0f, 0.0f, 0.0f, 0.0f, 1, radioMaterial, radioFrame0);
 		{
-			
 			
 			TriggerVolume::Sptr volume = radio->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
@@ -1457,11 +1644,10 @@ int main() {
 			interactions->AddSoundEffect("velcro");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(radioMaterial2, radio)));
-			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.22, -0.750, 7.65));
-			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineTwo)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(radioInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(1)));
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1491,11 +1677,10 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(1, homework)));
 			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(2.01f, 0.69f, 0.1f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, homework)));
-			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.33, -0.55, 5.47));
-			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineOne)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(booksInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(2)));
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 			MorphRenderComponent::Sptr morphRenderer = homework->Add<MorphRenderComponent>(homeworkFrame0);
@@ -1523,13 +1708,12 @@ int main() {
 
 			InteractionTForm tf(InteractionTForm::tformt::rot, glm::vec3(180.f, 0.f, 0.f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, shroomba)));
-			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.84, -0.30, 1.74));
-			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineFive)));
 			InteractionTForm secretTF(InteractionTForm::tformt::pos, glm::vec3(12.11, -0.55, 1.71));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ secretTF }, secretText)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(shroombaInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(4)));
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
 
@@ -1539,14 +1723,12 @@ int main() {
 			animator->AddAnim(std::vector<Gameplay::MeshResource::Sptr>{shroombaFrame1, shroombaFrame2, shroombaFrame3}, 2.4);
 			animator->SetContinuity(true);
 			
-			/*LocomotionBehaviour::Sptr locomotion = shroomba->Add<LocomotionBehaviour>(shroomba);
-			PatrolPath mainpath(std::vector<glm::vec3>{glm::vec3(-0.5, 1.4, 0.2f), glm::vec3(1.25, 3.7, 0.2f), glm::vec3(3.7, 3.7, 0.2f), glm::vec3(3.7, -1.5, 0.2f),
-				glm::vec3(1.4, -1.5, 0.2), glm::vec3(-0.13, -4.9, 0.2), glm::vec3(-5.1, -2.7, 0.2), glm::vec3(-0.5, -1.0, 0.2)}, 0.2);
-			PatrolBehaviour pathfollow(AI_Mode::PATROL, "path_follow", mainpath, 5.0);
-			locomotion->AddBehaviour(pathfollow);*/
-			
 			InterpolationBehaviour::Sptr interp = shroomba->Add<InterpolationBehaviour>();
 			interp->AddBehaviourScript("interp_scripts/shroombaPath.txt");
+
+			ObjectLinking::Sptr link = shroomba->Add<ObjectLinking>(bedroomObject);
+			bedroomObject->Get<ObjectLinking>()->LinkObject(shroomba);
+			link->currentlyLinked = false;
 
 		}
 
@@ -1566,11 +1748,10 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(bbPosterMesh2, boybandPoster)));
 			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(2.01f, 0.69f, 0.1f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, homework)));
-			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(10.77, -0.25, 9.25));
-			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineThree)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(posterInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(0)));
 
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
@@ -1595,11 +1776,10 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(paintedOverMaterial, bedroomObject)));
 			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(0.f, 0.f, -10.f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, paintCan)));
-			InteractionTForm crossoutTF(InteractionTForm::tformt::pos, glm::vec3(11.57, -0.3, 3.39));
-			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{ crossoutTF }, lineFour)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(paintInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(3)));
 
 			interactions->prompt = prompt;
 			interactions->screen = extraScreen;
@@ -1608,18 +1788,20 @@ int main() {
 			bedroomObject->Get<ObjectLinking>()->LinkObject(paintCan);
 		}
 
+		
+
+
+
+
 		GameObject::Sptr boundingPosZ = scene->CreateGameObject("boundingPosZ");
 		{
 	
 			boundingPosZ->SetPosition(glm::vec3(0, 0, 11));
 			boundingPosZ->SetRotation(glm::vec3(0, 0, 0));
 
-			RigidBody::Sptr physics = boundingPosZ->Add<RigidBody>(RigidBodyType::Static);
+			RigidBody::Sptr physics = boundingPosZ->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(BoxCollider::Create(glm::vec3(11,11,0.5)));
 
-
-			boundingPosZ->Add<ObjectLinking>(bedroomObject);
-			bedroomObject->Get<ObjectLinking>()->LinkObject(boundingPosZ);
 		}
 
 		GameObject::Sptr boundingNegZ = scene->CreateGameObject("boundingNegZ");
@@ -1628,10 +1810,8 @@ int main() {
 			boundingNegZ->SetPosition(glm::vec3(0, 0, -0.49));
 			boundingNegZ->SetRotation(glm::vec3(0, 0, 0));
 
-			RigidBody::Sptr physics = boundingNegZ->Add<RigidBody>(RigidBodyType::Static);
+			RigidBody::Sptr physics = boundingNegZ->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(BoxCollider::Create(glm::vec3(11, 11, 0.5)));
-			boundingNegZ->Add<ObjectLinking>(bedroomObject);
-			bedroomObject->Get<ObjectLinking>()->LinkObject(boundingNegZ);
 		}
 
 		GameObject::Sptr boundingPosX = scene->CreateGameObject("boundingPosX");
@@ -1640,11 +1820,9 @@ int main() {
 			boundingPosX->SetPosition(glm::vec3(5.87, 0, 6));
 			boundingPosX->SetRotation(glm::vec3(0, 90, 0));
 
-			RigidBody::Sptr physics = boundingPosX->Add<RigidBody>(RigidBodyType::Static);
+			RigidBody::Sptr physics = boundingPosX->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(BoxCollider::Create(glm::vec3(11, 11, 0.5)));
 
-			boundingPosX->Add<ObjectLinking>(bedroomObject);
-			bedroomObject->Get<ObjectLinking>()->LinkObject(boundingPosX);
 		}
 
 		GameObject::Sptr boundingNegX = scene->CreateGameObject("boundingNegX");
@@ -1653,11 +1831,9 @@ int main() {
 			boundingNegX->SetPosition(glm::vec3(-9.98, 0, 6));
 			boundingNegX->SetRotation(glm::vec3(0, 90, 0));
 
-			RigidBody::Sptr physics = boundingNegX->Add<RigidBody>(RigidBodyType::Static);
+			RigidBody::Sptr physics = boundingNegX->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(BoxCollider::Create(glm::vec3(11, 11, 0.5)));
 
-			boundingNegX->Add<ObjectLinking>(bedroomObject);
-			bedroomObject->Get<ObjectLinking>()->LinkObject(boundingNegX);
 		}
 
 		GameObject::Sptr boundingPosY = scene->CreateGameObject("boundingPosY");
@@ -1666,27 +1842,24 @@ int main() {
 			boundingPosY->SetPosition(glm::vec3(0, 5.91, 6));
 			boundingPosY->SetRotation(glm::vec3(90, 0, 0));
 
-			RigidBody::Sptr physics = boundingPosY->Add<RigidBody>(RigidBodyType::Static);
+			RigidBody::Sptr physics = boundingPosY->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(BoxCollider::Create(glm::vec3(11, 11, 0.5)));
 
-			boundingPosY->Add<ObjectLinking>(bedroomObject);
-			bedroomObject->Get<ObjectLinking>()->LinkObject(boundingPosY);
 		}
 
-		GameObject::Sptr boundingNegY = scene->CreateGameObject("boundingNegX");
+		GameObject::Sptr boundingNegY = scene->CreateGameObject("boundingNegY");
 		{
 
 			boundingNegY->SetPosition(glm::vec3(0, -7, 6));
 			boundingNegY->SetRotation(glm::vec3(90, 0, 0));
 
-			RigidBody::Sptr physics = boundingNegY->Add<RigidBody>(RigidBodyType::Static);
+			RigidBody::Sptr physics = boundingNegY->Add<RigidBody>(RigidBodyType::Kinematic);
 			physics->AddCollider(BoxCollider::Create(glm::vec3(11, 11, 0.5)));
-
-			boundingNegY->Add<ObjectLinking>(bedroomObject);
-			bedroomObject->Get<ObjectLinking>()->LinkObject(boundingNegY);
-
 		}
 
+
+
+		//the    H A N D
 		GameObject::Sptr hand = MakeBasic("Idle Hand", 0.f, 0.f, 2.f, 0.0f, 0.0f, 0.0f, 0, handDefaultMaterial, theHandMesh);
 		{
 			//make hand dynamic so that we can move it and it can interact with triggers

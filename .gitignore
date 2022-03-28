@@ -352,3 +352,7 @@ MigrationBackup/
 *.vcxproj
 
 JAFBO-TheIdleHand.vcxproj.filters
+
+res/Seatbelt2/
+
+res/Seatbelt.zip

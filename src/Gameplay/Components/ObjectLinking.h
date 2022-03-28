@@ -18,7 +18,7 @@ public:
 	virtual void Awake() override;
 
 	virtual void Update(float deltaTime) override;
-
+	void CalculateOffset();
 	virtual void RenderImGui() override;
 
 	virtual nlohmann::json ToJson() const override;
@@ -31,7 +31,7 @@ protected:
 	std::vector<Gameplay::GameObject::Sptr> linkedObjects;
 	bool isRoot = false;
 	Gameplay::GameObject::Sptr parent;
-	void CalculateOffset();
+	
 	void UpdateChildren();
 };
 

@@ -2,6 +2,13 @@
 #include "Gameplay/GameObject.h"
 #include "Utils/ImGuiHelper.h"
 #include "Utils/JsonGlmHelpers.h"
+#include "Gameplay/Components/RenderComponent.h"
+#include "Gameplay/Components/ObjectLinking.h"
+#include "Gameplay/Components/InterpolationBehaviour.h"
+
+void WarpBehaviour::Awake() {
+	InitList();
+}
 
 void WarpBehaviour::Update(float deltaTime) {
 
@@ -10,6 +17,8 @@ void WarpBehaviour::Update(float deltaTime) {
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_1))
 		{
 			currentFloor = 1;
+			UpdateListForNewRoom();
+
 			roomOne->SetPosition(glm::vec3(0, 0, 0));
 			roomTwo->SetPosition(glm::vec3(0, 50, -50));
 			roomThree->SetPosition(glm::vec3(0, 100, -50));
@@ -30,11 +39,39 @@ void WarpBehaviour::Update(float deltaTime) {
 			GetGameObject()->GetScene()->Lights[2].Range = 90.9f;
 
 			GetGameObject()->GetScene()->SetupShaderAndLights();
+
+			//use this to turn the shroomba on for a room
+			auto& shroombaMoveba = GetGameObject()->GetScene()->FindObjectByName("Bedroom Shroomba")->Get<InterpolationBehaviour>();
+			if (!shroombaMoveba->_isRunning) {
+				GetGameObject()->GetScene()->FindObjectByName("Bedroom Shroomba")->Get<ObjectLinking>()->currentlyLinked = false;
+				shroombaMoveba->ToggleBehaviour(0, true);//replace 0 with the index of the behaviour for the shroomba
+				shroombaMoveba->PauseOrResumeCurrentBehaviour();
+			}	
+
+
+			//bounding boxes
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetRotation(glm::vec3(0, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetRotation(glm::vec3(0, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetPosition(glm::vec3(0, 0, 11));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetPosition(glm::vec3(0, 0, -0.49));
+
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetRotation(glm::vec3(0, 90, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetRotation(glm::vec3(0, 90, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetPosition(glm::vec3(5.87, 0, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetPosition(glm::vec3(-9.98, 0, 6));
+
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetRotation(glm::vec3(90, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(0, 5.91, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(0, -7, 6));
+
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_2))
 		{
 			currentFloor = 2;
+			UpdateListForNewRoom();
+
 			roomOne->SetPosition(glm::vec3(0, 0, -50));
 			roomTwo->SetPosition(glm::vec3(1.38, -5.100, 0));
 			roomThree->SetPosition(glm::vec3(0, 100, -50));
@@ -60,12 +97,21 @@ void WarpBehaviour::Update(float deltaTime) {
 
 			//very important line that will actually have your changes take effect visually, MUST be AFTER the parameters change
 			GetGameObject()->GetScene()->SetupShaderAndLights();
+
+			//use this to turn the shroomba off for a room
+			auto& shroombaMoveba = GetGameObject()->GetScene()->FindObjectByName("Bedroom Shroomba")->Get<InterpolationBehaviour>();
+			if (shroombaMoveba->_isRunning) {
+				shroombaMoveba->PauseOrResumeCurrentBehaviour();
+				GetGameObject()->GetScene()->FindObjectByName("Bedroom Shroomba")->Get<ObjectLinking>()->currentlyLinked = true;
+			}
 			
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_3))
 		{
 			currentFloor = 3;
+			UpdateListForNewRoom();
+
 			roomOne->SetPosition(glm::vec3(0, 0, -50));
 			roomTwo->SetPosition(glm::vec3(0, 50, -50));
 			roomThree->SetPosition(glm::vec3(-2.33, 1.98, 0));
@@ -88,11 +134,19 @@ void WarpBehaviour::Update(float deltaTime) {
 
 			//very important line that will actually have your changes take effect visually, MUST be AFTER the parameters change
 			GetGameObject()->GetScene()->SetupShaderAndLights();
+
+			auto& shroombaMoveba = GetGameObject()->GetScene()->FindObjectByName("Bedroom Shroomba")->Get<InterpolationBehaviour>();
+			if (shroombaMoveba->_isRunning) {
+				shroombaMoveba->PauseOrResumeCurrentBehaviour();
+				GetGameObject()->GetScene()->FindObjectByName("Bedroom Shroomba")->Get<ObjectLinking>()->currentlyLinked = true;
+			}
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_4))
 		{
 			currentFloor = 4;
+			UpdateListForNewRoom();
+
 			roomOne->SetPosition(glm::vec3(0, 0, -50));
 			roomTwo->SetPosition(glm::vec3(0, 50, -50));
 			roomThree->SetPosition(glm::vec3(0, 100, -50));
@@ -115,11 +169,19 @@ void WarpBehaviour::Update(float deltaTime) {
 
 			//very important line that will actually have your changes take effect visually, MUST be AFTER the parameters change
 			GetGameObject()->GetScene()->SetupShaderAndLights();
+
+			auto& shroombaMoveba = GetGameObject()->GetScene()->FindObjectByName("Bedroom Shroomba")->Get<InterpolationBehaviour>();
+			if (shroombaMoveba->_isRunning) {
+				shroombaMoveba->PauseOrResumeCurrentBehaviour();
+				GetGameObject()->GetScene()->FindObjectByName("Bedroom Shroomba")->Get<ObjectLinking>()->currentlyLinked = true;
+			}
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_5))
 		{
 			currentFloor = 5;
+			UpdateListForNewRoom();
+
 			roomOne->SetPosition(glm::vec3(0, 0, -50));
 			roomTwo->SetPosition(glm::vec3(0, 50, -50));
 			roomThree->SetPosition(glm::vec3(0, 100, -50));
@@ -142,11 +204,19 @@ void WarpBehaviour::Update(float deltaTime) {
 
 			//very important line that will actually have your changes take effect visually, MUST be AFTER the parameters change
 			GetGameObject()->GetScene()->SetupShaderAndLights();
+
+			auto& shroombaMoveba = GetGameObject()->GetScene()->FindObjectByName("Bedroom Shroomba")->Get<InterpolationBehaviour>();
+			if (shroombaMoveba->_isRunning) {
+				shroombaMoveba->PauseOrResumeCurrentBehaviour();
+				GetGameObject()->GetScene()->FindObjectByName("Bedroom Shroomba")->Get<ObjectLinking>()->currentlyLinked = true;
+			}
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_6))
 		{
 			currentFloor = 6;
+			UpdateListForNewRoom();
+
 			roomOne->SetPosition(glm::vec3(0, 0, -50));
 			roomTwo->SetPosition(glm::vec3(0, 50, -50));
 			roomThree->SetPosition(glm::vec3(0, 100, -50));
@@ -169,6 +239,31 @@ void WarpBehaviour::Update(float deltaTime) {
 
 			//very important line that will actually have your changes take effect visually, MUST be AFTER the parameters change
 			GetGameObject()->GetScene()->SetupShaderAndLights();
+
+
+			auto& shroombaMoveba = GetGameObject()->GetScene()->FindObjectByName("Bedroom Shroomba")->Get<InterpolationBehaviour>();
+			if (shroombaMoveba->_isRunning) {
+				shroombaMoveba->PauseOrResumeCurrentBehaviour();
+				GetGameObject()->GetScene()->FindObjectByName("Bedroom Shroomba")->Get<ObjectLinking>()->currentlyLinked = true;
+			}
+			
+
+			
+			//bounding boxes
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetRotation(glm::vec3(0.f, 0.f, -22.f));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetRotation(glm::vec3(0.f, 0.f, -22.f));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetPosition(glm::vec3(0.f, 0.f, 11.f));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetPosition(glm::vec3(0.f, 0.f, -0.49f));
+
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetRotation(glm::vec3(23.f, 87.98f, 0.f));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetRotation(glm::vec3(23.f, 87.98f, 0.f));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetPosition(glm::vec3(10.17f, 0.f, 6.f));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetPosition(glm::vec3(-10.95f, 0.f, 6.f));
+
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetRotation(glm::vec3(90.f, 0.f, -32.f));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90.f, 0.f, -26.f));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(2.97f, 6.01f, 6.f));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(-2.55f, -7.09f, 6.f));
 		}
 
 
@@ -200,4 +295,57 @@ WarpBehaviour::Sptr WarpBehaviour::FromJson(const nlohmann::json& data) {
 	WarpBehaviour::Sptr result = std::make_shared<WarpBehaviour>();
 
 	return result;
+}
+
+
+
+void WarpBehaviour::InitList() {
+	for (int i = 0; i < 6; i++) {
+		std::vector<bool> array{ 0, 0, 0, 0, 0 };
+
+		listChecks.push_back(array);
+	}
+}
+
+void WarpBehaviour::UpdateListForNewRoom() {
+	for (int i = 0; i < 5; i++) {
+		if (lines[i]->GetPosition().z < 80.f) {
+			glm::vec3 pos = glm::vec3(lines[i]->GetPosition());
+			pos.z += 100;
+			lines[i]->SetPosition(pos);
+		}
+
+
+		int x = currentFloor - 1;
+		if (listChecks[x][i]) {
+			CrossOffItem(i);
+		}
+
+	}
+
+	int lNum = currentFloor - 1;
+	GetGameObject()->GetScene()->FindObjectByName("List")->Get<RenderComponent>()->SetMaterial(lists[lNum]);
+}
+
+void WarpBehaviour::CrossOffItem(int index) {
+	int x = currentFloor - 1;
+	(listChecks[x])[index] = true;
+	glm::vec3 pos = glm::vec3(lines[index]->GetPosition());
+	std::cout << "retrieving " << index << ": " << lines[index]->Name;
+	pos.z -= 100;
+	lines[index]->SetPosition(pos);
+}
+
+
+
+void WarpBehaviour::PushLines(std::vector<Gameplay::GameObject::Sptr> lineVec) {
+	for (int i = 0; i < 5; i++) {
+		lines.push_back(lineVec[i]);
+	}
+}
+
+void WarpBehaviour::PushLists(std::vector<Gameplay::Material::Sptr> listVec) {
+	for (int i = 0; i < 6; i++) {
+		lists.push_back(listVec[i]);
+	}
 }

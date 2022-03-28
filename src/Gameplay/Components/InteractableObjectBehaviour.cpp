@@ -3,7 +3,7 @@
 #include "Gameplay/GameObject.h"
 #include "Gameplay/Components/RenderComponent.h"
 #include "Gameplay/Components/SimpleScreenBehaviour.h"
-
+#include "Gameplay/Components/WarpBehaviour.h"
 InteractionFeedback::InteractionFeedback(Gameplay::Material::Sptr mat, Gameplay::GameObject::Sptr o) {
 	_SWAPMAT = mat;
 	_TARGET = o;
@@ -31,6 +31,12 @@ InteractionFeedback::InteractionFeedback(int aIndex, Gameplay::GameObject::Sptr 
 	b = ANIM;
 }
 
+InteractionFeedback::InteractionFeedback(int listIndex) {
+	_SWAPAINDEX = listIndex;
+	_TARGET = nullptr;
+	b = CROSSOUT;
+}
+
 void InteractionFeedback::SwapMat() {
 	_TARGET->Get<RenderComponent>()->SetMaterial(_SWAPMAT);
 	std::cout << "swapping material";
@@ -41,6 +47,10 @@ void InteractionFeedback::SwapMesh() {
 }
 
 void InteractionFeedback::SwapTransforms() {
+	if (_TARGET->Has<ObjectLinking>()) {
+		_TARGET->Get<ObjectLinking>()->currentlyLinked = false;
+	}
+
 	for (int i = 0; i < _SWAPTRANSFORM.size(); i++) {
 		switch (_SWAPTRANSFORM[i].trnsfrm) {
 		case(InteractionTForm::pos):
@@ -52,6 +62,11 @@ void InteractionFeedback::SwapTransforms() {
 		default:
 			_TARGET->SetScale(_SWAPTRANSFORM[i].tform);
 		}
+	}
+
+	if (_TARGET->Has<ObjectLinking>()) {
+		_TARGET->Get<ObjectLinking>()->CalculateOffset();
+		_TARGET->Get<ObjectLinking>()->currentlyLinked = true;
 	}
 }
 
@@ -101,7 +116,6 @@ void InteractableObjectBehaviour::Update(float deltaTime) {
 			PerformFeedback();
 			_body->GetGameObject()->Get<SkinManager>()->AddSkin(_rewardMaterial);
 			_body = nullptr;
-			prompt->SetPosition(glm::vec3(prompt->GetPosition().x, prompt->GetPosition().y, -prompt->GetPosition().z));
 			
 			screen->Get<SimpleScreenBehaviour>()->objectivesAchieved += 1;
 			screen->Get<SimpleScreenBehaviour>()->active = true;
@@ -182,8 +196,11 @@ void InteractableObjectBehaviour::PerformFeedback() {
 		case(TRANSFORM):
 			feedback[i].SwapTransforms();
 			break;
-		default:
+		case(ANIM):
 			feedback[i].SwapAnim();
+			break;
+		default:
+			(GetGameObject()->GetScene()->FindObjectByName("Floor Manager"))->Get<WarpBehaviour>()->CrossOffItem(feedback[i]._SWAPAINDEX);
 		}
 	}
 }
@@ -199,7 +216,7 @@ nlohmann::json InteractableObjectBehaviour::ToJson() const {
 	result["number_of_feedbacks"] = feedback.size();
 	for (int i = 0; i < feedback.size(); i++) {
 		std::string fbackName = "feedback_" + std::to_string(i);
-		result[fbackName + "_target"] = feedback[i]._TARGET->GUID.str();
+		result[fbackName + "_target"] = (feedback[i]._TARGET != nullptr)?feedback[i]._TARGET->GUID.str() : "null";
 		result[fbackName + "_type"] = (int)feedback[i].b;
 
 		switch (feedback[i].b) {
@@ -217,8 +234,11 @@ nlohmann::json InteractableObjectBehaviour::ToJson() const {
 				result[tformName + "_vec"] = GlmToJson(feedback[i]._SWAPTRANSFORM[j].tform);
 			}
 			break;
-		default:
+		case(ANIM):
 			result[fbackName + "_animIndex"] = feedback[i]._SWAPAINDEX;
+			break;
+		default:
+			result[fbackName + "_crossout"] = feedback[i]._SWAPAINDEX;
 		}
 	}
 	return result;
@@ -249,12 +269,13 @@ InteractableObjectBehaviour::Sptr InteractableObjectBehaviour::FromJson(const nl
 				int tft = blob[tformName + "_type"];
 				tForms.push_back(InteractionTForm(InteractionTForm::tformt(tft), ParseJsonVec3(blob[tformName + "_vec"])));
 			}
-			InteractionFeedback iF(tForms, result->GetGameObject()->GetScene()->FindObjectByGUID(Guid(blob[fbackName + "_target"])));
-		}
-
-		else {
+			InteractionFeedback iF(tForms, (blob[fbackName + "_target"]!= "null")?result->GetGameObject()->GetScene()->FindObjectByGUID(Guid(blob[fbackName + "_target"])):nullptr);
+		}else if(x == 3) {
 			InteractionFeedback iF((int)blob[fbackName + "_animIndex"], result->GetGameObject()->GetScene()->FindObjectByGUID(Guid(blob[fbackName + "target"])));
 			result->AddFeedbackBehaviour(iF);
+		}
+		else {
+			InteractionFeedback iF((int)blob[fbackName + "_crossout"]);
 		}
 		count++;
 	}

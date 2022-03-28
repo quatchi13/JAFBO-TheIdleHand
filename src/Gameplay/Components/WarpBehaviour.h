@@ -25,6 +25,7 @@ public:
 	AudioEngine* audioEngine = AudioEngine::instance();
 	int randomNumber;
 
+	virtual void Awake() override;
 	virtual void Update(float deltaTime) override;
 
 	virtual void OnTriggerVolumeEntered(const std::shared_ptr<Gameplay::Physics::RigidBody>& body) override;
@@ -35,10 +36,23 @@ public:
 	virtual nlohmann::json ToJson() const override;
 	static WarpBehaviour::Sptr FromJson(const nlohmann::json& data);
 
+	void CrossOffItem(int);
+
+	void PushLines(std::vector<Gameplay::GameObject::Sptr>);
+	void PushLists(std::vector <Gameplay::Material::Sptr>);
+
 	MAKE_TYPENAME(WarpBehaviour);
 	 
 protected:
 	bool _playerInTrigger = false;
 	int floorMax = 6;
 	int floorSwitchTimer = 0;
+
+	std::vector<std::vector<bool>> listChecks;
+	std::vector<Gameplay::Material::Sptr>lists;
+	std::vector<Gameplay::GameObject::Sptr>lines;
+	std::vector<Gameplay::GameObject::Sptr>linesInUse;
+
+	void InitList();
+	void UpdateListForNewRoom();
 };
