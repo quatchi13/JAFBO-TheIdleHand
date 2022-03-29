@@ -105,6 +105,21 @@ void WarpBehaviour::Update(float deltaTime) {
 				GetGameObject()->GetScene()->FindObjectByName("Bedroom Shroomba")->Get<ObjectLinking>()->currentlyLinked = true;
 			}
 			
+			//bounding boxes
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetRotation(glm::vec3(0, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetRotation(glm::vec3(0, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetPosition(glm::vec3(0, 0, 11));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetPosition(glm::vec3(0, 0, -0.49));
+
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetRotation(glm::vec3(0, 90, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetRotation(glm::vec3(0, 90, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetPosition(glm::vec3(5.87, 0, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetPosition(glm::vec3(-9.98, 0, 6));
+
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetRotation(glm::vec3(90, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(0, 5.91, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(0, -7, 6));
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_3))
@@ -140,6 +155,22 @@ void WarpBehaviour::Update(float deltaTime) {
 				shroombaMoveba->PauseOrResumeCurrentBehaviour();
 				GetGameObject()->GetScene()->FindObjectByName("Bedroom Shroomba")->Get<ObjectLinking>()->currentlyLinked = true;
 			}
+
+			//bounding boxes
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetRotation(glm::vec3(0, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetRotation(glm::vec3(0, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetPosition(glm::vec3(0, 0, 11));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetPosition(glm::vec3(0, 0, -0.49));
+
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetRotation(glm::vec3(31, 90, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetRotation(glm::vec3(27, 85, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetPosition(glm::vec3(5.57, -3.26, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetPosition(glm::vec3(-13.16, 4.44, 6));
+
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetRotation(glm::vec3(90, 0, -33));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90, 0, -36));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(4.47, 5.01, 7.58));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(-6.49, -3.89, 5.29));
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_4))
@@ -175,6 +206,22 @@ void WarpBehaviour::Update(float deltaTime) {
 				shroombaMoveba->PauseOrResumeCurrentBehaviour();
 				GetGameObject()->GetScene()->FindObjectByName("Bedroom Shroomba")->Get<ObjectLinking>()->currentlyLinked = true;
 			}
+
+			//bounding boxes
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetRotation(glm::vec3(0, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetRotation(glm::vec3(0, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetPosition(glm::vec3(0, 0, 11));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetPosition(glm::vec3(0, 0, -0.49));
+
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetRotation(glm::vec3(0, 90, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetRotation(glm::vec3(0, 90, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetPosition(glm::vec3(5.87, 0, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetPosition(glm::vec3(-9.98, 0, 6));
+
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetRotation(glm::vec3(90, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(0, 5.91, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(0, -7, 6));
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_5))
@@ -210,6 +257,22 @@ void WarpBehaviour::Update(float deltaTime) {
 				shroombaMoveba->PauseOrResumeCurrentBehaviour();
 				GetGameObject()->GetScene()->FindObjectByName("Bedroom Shroomba")->Get<ObjectLinking>()->currentlyLinked = true;
 			}
+
+			//bounding boxes
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetRotation(glm::vec3(0, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetRotation(glm::vec3(0, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetPosition(glm::vec3(0, 0, 11));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetPosition(glm::vec3(0, 0, -0.49));
+
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetRotation(glm::vec3(0, 90, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetRotation(glm::vec3(0, 90, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetPosition(glm::vec3(9.71, -2.68, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetPosition(glm::vec3(-12.98, 0, 6));
+
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetRotation(glm::vec3(90, -3, -8));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(-0.08, 9.96, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(-1.05, -11.31, 4.4));
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_6))
@@ -262,7 +325,7 @@ void WarpBehaviour::Update(float deltaTime) {
 
 			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetRotation(glm::vec3(90.f, 0.f, -32.f));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90.f, 0.f, -26.f));
-			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(2.97f, 6.01f, 6.f));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(1.28f, 6.94f, 6.f));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(-2.55f, -7.09f, 6.f));
 		}
 
