@@ -492,7 +492,7 @@ int main() {
 
 		//Meshes
 		MeshResource::Sptr theHandMesh = ResourceManager::CreateAsset<MeshResource>("meshes/hand.obj");
-		MeshResource::Sptr bedroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/megaBedroom.obj");
+		MeshResource::Sptr bedroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MegaModels/megaBedroom.obj");
 		MeshResource::Sptr bbPosterMesh = ResourceManager::CreateAsset<MeshResource>("meshes/boyband_poster.obj");
 		MeshResource::Sptr bbPosterMesh2 = ResourceManager::CreateAsset<MeshResource>("meshes/boyband_poster2.obj");
 		MeshResource::Sptr paintcanMesh = ResourceManager::CreateAsset<MeshResource>("meshes/paintCan.obj");
@@ -516,26 +516,26 @@ int main() {
 		MeshResource::Sptr handIdle4 = ResourceManager::CreateAsset<MeshResource>("animated meshes/hand/handIdleMesh-4.obj");
 		MeshResource::Sptr handIdle5 = ResourceManager::CreateAsset<MeshResource>("animated meshes/hand/handIdleMesh-5.obj");
 
-		MeshResource::Sptr roomTwoMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MasterBedroomMegaModel.obj");
+		MeshResource::Sptr roomTwoMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MegaModels/MasterBedroomMegaModel.obj");
 		MeshResource::Sptr VanityMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Vanity.obj");
 		MeshResource::Sptr MasterBedMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MasterBed.obj");
 		MeshResource::Sptr JeweleryBoxMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Jewelery_Box.obj");
 		MeshResource::Sptr FlowerMesh = ResourceManager::CreateAsset<MeshResource>("animated meshes/Flower/FlowerMesh0.obj");
 
-		MeshResource::Sptr megaBathroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/megaBathroom.obj");
+		MeshResource::Sptr megaBathroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MegaModels/megaBathroom.obj");
 		MeshResource::Sptr soapMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/soap.obj");
 		MeshResource::Sptr soapSpilledMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/soapSpilled.obj");
 		MeshResource::Sptr duckyMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/ducky.obj");
 		MeshResource::Sptr flatDuckyMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/flatDucky.obj");
 		MeshResource::Sptr toiletMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/toilet.obj");
 
-		MeshResource::Sptr megaKitchenMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/megaKitchen.obj");
+		MeshResource::Sptr megaKitchenMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MegaModels/megaKitchen.obj");
 		MeshResource::Sptr trashMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/Trash.obj");
 		MeshResource::Sptr cakeMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/cake.obj");
 		MeshResource::Sptr mouseTrapMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/mouseTrap.obj");
 		MeshResource::Sptr bowlOfFruitMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/bowlOfFruit.obj");
 
-		MeshResource::Sptr megaLivingroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/LivingRoomMega.obj");
+		MeshResource::Sptr megaLivingroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MegaModels/LivingRoomMega.obj");
 		MeshResource::Sptr glassTableMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/glassTable.obj");
 		MeshResource::Sptr brokenTableMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/glassTableBroken.obj");
 		MeshResource::Sptr picturesMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/pictures.obj");
@@ -551,7 +551,7 @@ int main() {
 		MeshResource::Sptr TVMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/TV.obj");
 		MeshResource::Sptr monsterPlantMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/plantMonster.obj");
 		
-		MeshResource::Sptr megaBasementMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/megaBasement.obj");
+		MeshResource::Sptr megaBasementMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MegaModels/megaBasement.obj");
 		MeshResource::Sptr teslaCoilMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/Teslacoil.obj");
 		MeshResource::Sptr frankenstineMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/FrankenstineFixed.obj");
 		MeshResource::Sptr frankensteinLessMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BasementMeshes/FrankenstineGone.obj");
@@ -688,7 +688,7 @@ int main() {
 
 		
 		// Here we'll load in the cubemap, as well as a special shader to handle drawing the skybox
-		TextureCube::Sptr testCubemap = ResourceManager::CreateAsset<TextureCube>("cubemaps/map/map.jpg");
+		TextureCube::Sptr testCubemap = ResourceManager::CreateAsset<TextureCube>("cubemaps/NightSky/NightSky.jpg");
 		Shader::Sptr      skyboxShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
 			{ ShaderPartType::Vertex, "shaders/skybox_vert.glsl" },
 			{ ShaderPartType::Fragment, "shaders/skybox_frag.glsl" }
@@ -909,7 +909,7 @@ int main() {
 		GameObject::Sptr bedroomObject = MakeBasic("Bedroom Object", 0.f, 0.0f, 0.0f, 0.f, 0.0f, 0.0f, 1, bedroomMaterial, bedroomMesh);
 		{	
 			ObjectLinking::Sptr link = bedroomObject->Add<ObjectLinking>();
-		}
+		} 
 		
 		GameObject::Sptr masterBedroomObject = MakeBasic("Master Bedroom Object", 0.0f, 50.0f, -50.0f, 0.f, 0.0f, -10.0f, 2, masterBedroomMaterial, roomTwoMesh);
 		{
@@ -1646,7 +1646,7 @@ int main() {
 		
 
 		//bedroom objects 
-		GameObject::Sptr radio = MakeBasic("Radio", -7.4f, -3.1f, 0.0f, 0.0f, 0.0f, 0.0f, 1, radioMaterial, radioFrame0);
+		GameObject::Sptr radio = MakeBasic("Radio", -6.84f, -1.85f, 0.02f, 0.0f, 0.0f, 0.0f, 1, radioMaterial, radioFrame0);
 		{
 			
 			TriggerVolume::Sptr volume = radio->Add<TriggerVolume>();
@@ -1676,7 +1676,7 @@ int main() {
 			bedroomObject->Get<ObjectLinking>()->LinkObject(radio);
 		}
 
-		GameObject::Sptr homework = MakeBasic("Homework", -5.f, 3.45f, 3.3f, 0.0f, 0.0f, 0.0f, 1, homeworkMaterial, homeworkFrame0);
+		GameObject::Sptr homework = MakeBasic("Homework", -3.65f, 5.55f, 3.71f, 0.0f, 0.0f, 0.0f, 1, homeworkMaterial, homeworkFrame0);
 		{
 			
 
@@ -1747,7 +1747,7 @@ int main() {
 
 		}
 
-		GameObject::Sptr boybandPoster = MakeBasic("Boyband Poster", -9.4f, 3.f, 9.0f, 0.0f, 0.0f, 0.0f, 1, bbPosterMaterial, bbPosterMesh);
+		GameObject::Sptr boybandPoster = MakeBasic("Boyband Poster", -7.67f, 5.01f, 11.29f, 0.0f, 0.0f, 0.0f, 1, bbPosterMaterial, bbPosterMesh);
 		{
 			
 
@@ -1775,7 +1775,7 @@ int main() {
 			bedroomObject->Get<ObjectLinking>()->LinkObject(boybandPoster);
 		}
 
-		GameObject::Sptr paintCan = MakeBasic("Paint Can", 0.45f, -5.1f, 6.44f, 0.0f, 0.0f, 0.0f, 1, paintcanMaterial, paintcanMesh);
+		GameObject::Sptr paintCan = MakeBasic("Paint Can", 1.34f, -4.72f, 6.54f, 0.0f, 0.0f, 0.0f, 1, paintcanMaterial, paintcanMesh);
 		{
 			
 
