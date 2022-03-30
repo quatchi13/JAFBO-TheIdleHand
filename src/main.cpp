@@ -515,12 +515,23 @@ int main() {
 		MeshResource::Sptr handIdle3 = ResourceManager::CreateAsset<MeshResource>("animated meshes/hand/handIdleMesh-3.obj");
 		MeshResource::Sptr handIdle4 = ResourceManager::CreateAsset<MeshResource>("animated meshes/hand/handIdleMesh-4.obj");
 		MeshResource::Sptr handIdle5 = ResourceManager::CreateAsset<MeshResource>("animated meshes/hand/handIdleMesh-5.obj");
-
+		
 		MeshResource::Sptr roomTwoMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MegaModels/MasterBedroomMegaModel.obj");
 		MeshResource::Sptr VanityMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Vanity.obj");
 		MeshResource::Sptr MasterBedMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MasterBed.obj");
+		MeshResource::Sptr BrokenBedMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MasterBedRuined.obj");
 		MeshResource::Sptr JeweleryBoxMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Jewelery_Box.obj");
+		MeshResource::Sptr JeweleryMesh = ResourceManager::CreateAsset<MeshResource>("meshes/Jewelery.obj");
 		MeshResource::Sptr FlowerMesh = ResourceManager::CreateAsset<MeshResource>("animated meshes/Flower/FlowerMesh0.obj");
+		MeshResource::Sptr FlowerFrame1 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Flower/FlowerMesh1.obj");
+		MeshResource::Sptr FlowerFrame2 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Flower/FlowerMesh2.obj");
+		MeshResource::Sptr FlowerFrame3 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Flower/FlowerMesh3.obj");
+		MeshResource::Sptr BrainMesh0 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Brain/brainMesh0.obj");
+		MeshResource::Sptr BrainMesh1 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Brain/brainMesh1.obj");
+		MeshResource::Sptr BrainMesh2 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Brain/brainMesh2.obj");
+		MeshResource::Sptr BrainMesh3 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Brain/brainMesh3.obj");
+		MeshResource::Sptr BrainMesh4 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Brain/brainMesh4.obj");
+		MeshResource::Sptr BrainMesh5 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Brain/brainMesh5.obj");
 
 		MeshResource::Sptr megaBathroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MegaModels/megaBathroom.obj");
 		MeshResource::Sptr soapMesh = ResourceManager::CreateAsset<MeshResource>("meshes/BathroomMeshes/soap.obj");
@@ -531,9 +542,19 @@ int main() {
 
 		MeshResource::Sptr megaKitchenMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MegaModels/megaKitchen.obj");
 		MeshResource::Sptr trashMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/Trash.obj");
+		MeshResource::Sptr ruinedTrashMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/KnockedTrash.obj");
 		MeshResource::Sptr cakeMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/cake.obj");
+		MeshResource::Sptr ruinedCakeMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/ruinedCake.obj");
 		MeshResource::Sptr mouseTrapMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/mouseTrap.obj");
+		MeshResource::Sptr triggeredTrapMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/mouseTrapTriggered.obj");
+		MeshResource::Sptr mouseMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/Mouse.obj");
 		MeshResource::Sptr bowlOfFruitMesh = ResourceManager::CreateAsset<MeshResource>("meshes/KitchenMeshes/bowlOfFruit.obj");
+		MeshResource::Sptr mushFrame0 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Mush/FruitMushMesh0.obj");
+		MeshResource::Sptr mushFrame1 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Mush/FruitMushMesh1.obj");
+		MeshResource::Sptr mushFrame2 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Mush/FruitMushMesh2.obj");
+		MeshResource::Sptr mushFrame3 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Mush/FruitMushMesh3.obj");
+		MeshResource::Sptr mushFrame4 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Mush/FruitMushMesh4.obj");
+		MeshResource::Sptr mushFrame5 = ResourceManager::CreateAsset<MeshResource>("animated meshes/Mush/FruitMushMesh5.obj");
 
 		MeshResource::Sptr megaLivingroomMesh = ResourceManager::CreateAsset<MeshResource>("meshes/MegaModels/LivingRoomMega.obj");
 		MeshResource::Sptr glassTableMesh = ResourceManager::CreateAsset<MeshResource>("meshes/LivingroomMeshes/glassTable.obj");
@@ -639,16 +660,18 @@ int main() {
 		Texture2D::Sptr    vanityInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Vanity.png");
 
 
-		Texture2D::Sptr    winTex = ResourceManager::CreateAsset<Texture2D>("textures/win.png");
-		Texture2D::Sptr    ePrTex = ResourceManager::CreateAsset<Texture2D>("textures/EnterPrompt.png");
-		Texture2D::Sptr    eTex = ResourceManager::CreateAsset<Texture2D>("textures/E.png");
+		Texture2D::Sptr winTex = ResourceManager::CreateAsset<Texture2D>("textures/win.png");
+		Texture2D::Sptr ePrTex = ResourceManager::CreateAsset<Texture2D>("textures/EnterPrompt.png");
+		Texture2D::Sptr eTex = ResourceManager::CreateAsset<Texture2D>("textures/E.png");
 
-		Texture2D::Sptr    bedroom_mListTex = ResourceManager::CreateAsset<Texture2D>("textures/ListMasterBedroom.png");
-		Texture2D::Sptr    FlowerTex = ResourceManager::CreateAsset<Texture2D>("textures/FlowerBase.png");
-		Texture2D::Sptr    JeweleryBoxTex = ResourceManager::CreateAsset<Texture2D>("textures/Jewelery_Box.png");
-		Texture2D::Sptr    MasterBedTex = ResourceManager::CreateAsset<Texture2D>("textures/Masterbed.png");
-		Texture2D::Sptr    VanityTex = ResourceManager::CreateAsset<Texture2D>("textures/VanityBase.png");
-		Texture2D::Sptr    MasterBedroomTex = ResourceManager::CreateAsset<Texture2D>("textures/MasterBedroom.png");
+		Texture2D::Sptr bedroom_mListTex = ResourceManager::CreateAsset<Texture2D>("textures/ListMasterBedroom.png");
+		Texture2D::Sptr FlowerTex = ResourceManager::CreateAsset<Texture2D>("textures/FlowerBase.png");
+		Texture2D::Sptr BrainTex = ResourceManager::CreateAsset<Texture2D>("textures/brain.png");
+		Texture2D::Sptr JeweleryBoxTex = ResourceManager::CreateAsset<Texture2D>("textures/Jewelery_Box.png");
+		Texture2D::Sptr MasterBedTex = ResourceManager::CreateAsset<Texture2D>("textures/Masterbed.png");
+		Texture2D::Sptr VanityTex = ResourceManager::CreateAsset<Texture2D>("textures/VanityBase.png");
+		Texture2D::Sptr BrokenVanityTex = ResourceManager::CreateAsset<Texture2D>("textures/VanityBorked.png");
+		Texture2D::Sptr MasterBedroomTex = ResourceManager::CreateAsset<Texture2D>("textures/MasterBedroom.png");
 
 		Texture2D::Sptr bathroomListTex = ResourceManager::CreateAsset<Texture2D>("textures/ListBathroom.png");
 		Texture2D::Sptr megaBathroomTex = ResourceManager::CreateAsset<Texture2D>("textures/BathroomTextures/BathroomTexture.png");
@@ -789,10 +812,12 @@ int main() {
 		Material::Sptr ePromptMaterial = MakeMaterial("Enter Prompt Material", basicShader, ePrTex, 0.1f);
 		Material::Sptr eMaterial = MakeMaterial("Enter Prompt Material", basicShader, eTex, 0.1f);
 
-		Material::Sptr flowerMaterial = MakeMaterial("Enter Prompt Material", basicShader, FlowerTex, 0.1f);
+		Material::Sptr flowerMaterial = MakeMaterial("Flower Material", morphShader, FlowerTex, 0.1f);
+		Material::Sptr brainMaterial = MakeMaterial("Brain Material", morphShader, BrainTex, 0.1f);
 		Material::Sptr jeweleryBoxMaterial = MakeMaterial("Enter Prompt Material", basicShader, JeweleryBoxTex, 0.1f);
 		Material::Sptr masterBedMaterial = MakeMaterial("Enter Prompt Material", basicShader, MasterBedTex, 0.1f);
 		Material::Sptr vanityMaterial = MakeMaterial("Enter Prompt Material", basicShader, VanityTex, 0.1f);
+		Material::Sptr brokenVanityMaterial = MakeMaterial("Broken Vanity Material", basicShader, BrokenVanityTex, 0.1f);
 		Material::Sptr masterBedroomMaterial = MakeMaterial("Enter Prompt Material", basicShader, MasterBedroomTex, 0.1f);
 
 		Material::Sptr megaBathroomMaterial = MakeMaterial("Mega Bathroom Material", basicShader, megaBathroomTex, 0.1f);
@@ -1044,12 +1069,17 @@ int main() {
 
 
 		//Objects for the Master bed
-		GameObject::Sptr flowerObject = MakeBasic("Flower Object", -8.18f, 55.6f, -50.830f, 0.f, 0.0f, -50.0f, 2, flowerMaterial, FlowerMesh);
+		GameObject::Sptr flowerObject = MakeBasic("Flower Object", -6.8f, 50.5f, -50.071f, 0.f, 0.0f, -50.0f, 2, flowerMaterial, FlowerMesh);
 		{
 			TriggerVolume::Sptr volume = flowerObject->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
+
+			MorphRenderComponent::Sptr morphRender = flowerObject->Add<MorphRenderComponent>(FlowerMesh);
+			MorphAnimationManager::Sptr anims = flowerObject->Add<MorphAnimationManager>();
+			anims->AddAnim(std::vector<MeshResource::Sptr>{FlowerFrame1, FlowerFrame2, FlowerFrame3}, 0.5);
+			anims->AddAnim(std::vector<MeshResource::Sptr>{BrainMesh0, BrainMesh1, BrainMesh2, BrainMesh3, BrainMesh4, BrainMesh5}, 0.5);
 
 			InteractableObjectBehaviour::Sptr interactions = flowerObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handZombieMaterial);
@@ -1058,7 +1088,10 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(flowerInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
-			
+			interactions->AddFeedbackBehaviour((InteractionFeedback(brainMaterial, flowerObject)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(1, flowerObject)));
+			InteractionTForm brainPos(InteractionTForm::tformt::pos, glm::vec3(-6.80, 0.5, 4.4));
+			InteractionTForm brainRot(InteractionTForm::tformt::rot, glm::vec3(90, 0, 90));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(0)));
 
 			interactions->prompt = prompt;
@@ -1083,6 +1116,7 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(vanityInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(brokenVanityMaterial, vanityObject)));
 			
 			interactions->AddFeedbackBehaviour((InteractionFeedback(3)));
 			
@@ -1108,6 +1142,7 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(bedInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(BrokenBedMesh, masterBedObject)));
 			
 			interactions->AddFeedbackBehaviour((InteractionFeedback(1)));
 			
@@ -1246,6 +1281,7 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(trashInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(ruinedTrashMesh, trashObject)));
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(3)));
 
@@ -1271,6 +1307,7 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(mouseInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(triggeredTrapMesh, mousetrapObject)));
 			
 			interactions->AddFeedbackBehaviour((InteractionFeedback(0)));
 			
@@ -1295,6 +1332,7 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(cakeInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
+			interactions->AddFeedbackBehaviour((InteractionFeedback(ruinedCakeMesh, cakeObject)));
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(1)));
 
