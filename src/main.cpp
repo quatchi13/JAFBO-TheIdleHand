@@ -449,9 +449,7 @@ int main() {
 	ComponentManager::RegisterType<ObjectLinking>();
 	ComponentManager::RegisterType<SimpleScreenBehaviour>();
 	ComponentManager::RegisterType<WarpBehaviour>();
-
-
-
+	//   
 
 	// GL states, we'll enable depth testing and backface fulling
 	glEnable(GL_DEPTH_TEST);
@@ -481,13 +479,13 @@ int main() {
 		// This shader handles our basic materials without reflections (cause they expensive)
 		Shader::Sptr basicShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
 			{ ShaderPartType::Vertex, "shaders/newshader.glsl" },
-			{ ShaderPartType::Fragment, "shaders/frag_blinn_phong_textured.glsl" }
+			{ ShaderPartType::Fragment, "shaders/frag_blinn_phong_textured.glsl"}
 		});
 
 		//This shader handles morph animations (use at own risk!)
 		Shader::Sptr morphShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
 			{ShaderPartType::Vertex, "shaders/morph_vert.glsl"},
-			{ ShaderPartType::Fragment, "shaders/frag_blinn_phong_textured.glsl" }
+			{ ShaderPartType::Fragment, "shaders/blinn_with_rim.glsl"/*"shaders/frag_blinn_phong_textured.glsl"*/ }
 		});
 
 		//Meshes
@@ -1072,8 +1070,8 @@ int main() {
 		GameObject::Sptr flowerObject = MakeBasic("Flower Object", -6.8f, 50.5f, -50.071f, 0.f, 0.0f, -50.0f, 2, flowerMaterial, FlowerMesh);
 		{
 			TriggerVolume::Sptr volume = flowerObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.66);
-			collider->SetPosition(glm::vec3(-5.01f, 2.43f, 5.71));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
 			MorphRenderComponent::Sptr morphRender = flowerObject->Add<MorphRenderComponent>(FlowerMesh);
@@ -1105,9 +1103,8 @@ int main() {
 		GameObject::Sptr vanityObject = MakeBasic("Vanity Object", 6.32f, 38.92f, -45.75f, 0.f, 0.0f, -81.0f, 2, vanityMaterial, VanityMesh);
 		{
 			TriggerVolume::Sptr volume = vanityObject->Add<TriggerVolume>();
-			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0));
-			collider->SetPosition(glm::vec3(-0.54f, -0.06f, 1.95f));
-			collider->SetScale(glm::vec3(1.f, 1.6f, 2.63f));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = vanityObject->Add<InteractableObjectBehaviour>();
@@ -1132,9 +1129,8 @@ int main() {
 		GameObject::Sptr masterBedObject = MakeBasic("Master Bed Object", -2.32f, 46.25f, -49.78f, 0.f, 0.0f, 11.0f, 2, masterBedMaterial, MasterBedMesh);
 		{
 			TriggerVolume::Sptr volume = masterBedObject->Add<TriggerVolume>();
-			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0));
-			collider->SetPosition(glm::vec3(0.f, 0.f, 7.44f));
-			collider->SetScale(glm::vec3(4.52f, 4.9f, 2.02f));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = masterBedObject->Add<InteractableObjectBehaviour>();
@@ -1159,9 +1155,8 @@ int main() {
 		GameObject::Sptr jeweleryBoxObject = MakeBasic("Jewelery Box Object", 8.18f, 40.5f, -45.65f, 0.f, 0.0f, 0.0f, 2, jeweleryBoxMaterial, JeweleryBoxMesh);
 		{
 			TriggerVolume::Sptr volume = jeweleryBoxObject->Add<TriggerVolume>();
-			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
 			collider->SetPosition(glm::vec3(0.f));
-			collider->SetScale(glm::vec3(0.f, 0.1, 0.f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = jeweleryBoxObject->Add<InteractableObjectBehaviour>();
@@ -1186,8 +1181,8 @@ int main() {
 		GameObject::Sptr soapObject = MakeBasic("Soap Object", 2.72f, 89.66f, -44.56f, 90.f, 0.0f, -90.0f, 3, soapMaterial, soapMesh);
 		{
 			TriggerVolume::Sptr volume = soapObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.01f);
-			collider->SetPosition(glm::vec3(0.f, 0.72f, 0.0f));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = soapObject->Add<InteractableObjectBehaviour>();
@@ -1216,8 +1211,8 @@ int main() {
 		GameObject::Sptr duckObject = MakeBasic("Duck Object", -7.41f, 102.36f, -47.44f, 90.f, 0.0f, 9.0f, 3, duckyMaterial, duckyMesh);
 		{
 			TriggerVolume::Sptr volume = duckObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(0.91f);
-			collider->SetPosition(glm::vec3(0.29f, 0.3f, 0.0f));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = duckObject->Add<InteractableObjectBehaviour>();
@@ -1244,8 +1239,8 @@ int main() {
 		GameObject::Sptr toiletObject = MakeBasic("Toilet Object", -2.08f, 95.23f, -48.86f, 90.f, 0.0f, 49.0f, 3, toiletMaterial, toiletMesh);
 		{
 			TriggerVolume::Sptr volume = toiletObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.26f);
-			collider->SetPosition(glm::vec3(0.35f, 0.98f, 0.f));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = toiletObject->Add<InteractableObjectBehaviour>();
@@ -1273,9 +1268,8 @@ int main() {
 		GameObject::Sptr trashObject = MakeBasic("Trash Object", -9.15f, 150.51f, -49.76f, 90, 0, 90, 4, trashMaterial, trashMesh);
 		{
 			TriggerVolume::Sptr volume = trashObject->Add<TriggerVolume>();
-			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0));
-			collider->SetPosition(glm::vec3(0.1f, 3.54f, -0.56f));
-			collider->SetScale(glm::vec3(1.19f, 0.76f, 1.f));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = trashObject->Add<InteractableObjectBehaviour>();
@@ -1300,9 +1294,8 @@ int main() {
 		GameObject::Sptr mousetrapObject = MakeBasic("Mouse trap Object", 10.64f, 147.72f, -49.81f, 90, 0, 0, 4, mouseTrapMaterial, mouseTrapMesh);
 		{
 			TriggerVolume::Sptr volume = mousetrapObject->Add<TriggerVolume>();
-			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0));
-			collider->SetPosition(glm::vec3(0.f, 0.02f, 0.f));
-			collider->SetScale(glm::vec3(0.67f, 0.19f, 0.61f));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = mousetrapObject->Add<InteractableObjectBehaviour>();
@@ -1326,8 +1319,8 @@ int main() {
 		GameObject::Sptr cakeObject = MakeBasic("Cake Object", 4.37f, 142.73f, -44.65f, 90, 0, 0, 4, cakeMaterial,cakeMesh);
 		{
 			TriggerVolume::Sptr volume = cakeObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.6);
-			collider->SetPosition(glm::vec3(0.f, -0.52f, 0.f));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = cakeObject->Add<InteractableObjectBehaviour>();
@@ -1351,7 +1344,7 @@ int main() {
 		GameObject::Sptr bowlOfFruitObject = MakeBasic("Bowl Of Fruit Object", -7.01f, 144.91f, -45.19f, 90, 0, 0, 4, bowlOfFruitMaterial, bowlOfFruitMesh);
 		{
 			TriggerVolume::Sptr volume = bowlOfFruitObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.08f);
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
@@ -1371,15 +1364,14 @@ int main() {
 			bowlOfFruitObject->Add<ObjectLinking>(megaKitchenObject);
 			megaKitchenObject->Get<ObjectLinking>()->LinkObject(bowlOfFruitObject);
 		}
-
+		
 
 		//Objects for living room
 		GameObject::Sptr glassTableObject = MakeBasic("Glass Table Object", 0.36f, 199.9f, -49.73f, 90, 0, 79, 5, glassTableMaterial, glassTableMesh);
 		{
 			TriggerVolume::Sptr volume = glassTableObject->Add<TriggerVolume>();
 			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0));
-			collider->SetPosition(glm::vec3(0.f, 0.94f, 0.f));
-			collider->SetScale(glm::vec3(4.19f, 0.31f, 2.92f));
+			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = glassTableObject->Add<InteractableObjectBehaviour>();
@@ -1405,8 +1397,7 @@ int main() {
 		{
 			TriggerVolume::Sptr volume = picturesObject->Add<TriggerVolume>();
 			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0));
-			collider->SetPosition(glm::vec3(-0.31f, 2.55f, 8.09f));
-			collider->SetScale(glm::vec3(0.82f, 4.35f, 2.82f));
+			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = picturesObject->Add<InteractableObjectBehaviour>();
@@ -1432,8 +1423,8 @@ int main() {
 			plantObject->SetScale(glm::vec3(0.5, 0.5, 0.5));
 
 			TriggerVolume::Sptr volume = plantObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(0.65);
-			collider->SetPosition(glm::vec3(0.f, 0.2f, 0.f));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = plantObject->Add<InteractableObjectBehaviour>();
@@ -1466,7 +1457,6 @@ int main() {
 			TriggerVolume::Sptr volume = remoteObject->Add<TriggerVolume>();
 			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0));
 			collider->SetPosition(glm::vec3(0.f));
-			collider->SetScale(glm::vec3(0.58f, 0.32f, 0.45f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = remoteObject->Add<InteractableObjectBehaviour>();
@@ -1696,10 +1686,8 @@ int main() {
 		{
 			
 			TriggerVolume::Sptr volume = radio->Add<TriggerVolume>();
-			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(0.8, 1.2, 2.5));
-			collider->SetPosition(glm::vec3(0.f, 0.f, 0.99f));
-			collider->SetRotation(glm::vec3(0.f, 0.f, 45.f));
-			collider->SetScale(glm::vec3(1.f, 1.f, 0.39f));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = radio->Add<InteractableObjectBehaviour>();
@@ -1729,9 +1717,8 @@ int main() {
 			
 
 			TriggerVolume::Sptr volume = homework->Add<TriggerVolume>();
-			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(0.8, 1.2, 2.5));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
 			collider->SetPosition(glm::vec3(0.f));
-			collider->SetScale(glm::vec3(2.38f, 1.24f, 0.42f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = homework->Add<InteractableObjectBehaviour>();
@@ -1762,9 +1749,8 @@ int main() {
 		GameObject::Sptr shroomba = MakeBasic("Bedroom Shroomba", 2.f, 2.f, 0.f, 0.0f, 0.0f, 0.0f, 1, shroombaMaterial, shroombaFrame0);
 		{
 			TriggerVolume::Sptr volume = shroomba->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.26);
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
 			collider->SetPosition(glm::vec3(0.f));
-			
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = shroomba->Add<InteractableObjectBehaviour>();
@@ -1802,8 +1788,8 @@ int main() {
 			
 
 			TriggerVolume::Sptr volume = boybandPoster->Add<TriggerVolume>();
-			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(0.8, 1.2, 2.5));
-			collider->SetScale(glm::vec3(0.95f, 1.72, 0.92f));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = boybandPoster->Add<InteractableObjectBehaviour>();
