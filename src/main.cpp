@@ -993,7 +993,7 @@ int main() {
 			interp->PauseOrResumeCurrentBehaviour();
 
 			SimpleScreenBehaviour::Sptr feedbackScreen = extraScreen->Add<SimpleScreenBehaviour>();
-			feedbackScreen->targetObjectives = 5;
+			feedbackScreen->targetObjectives = 45;
 			feedbackScreen->WinScreen = winMaterial;
 		}
 
@@ -1069,10 +1069,15 @@ int main() {
 		//Objects for the Master bed
 		GameObject::Sptr flowerObject = MakeBasic("Flower Object", -6.8f, 50.5f, -50.071f, 0.f, 0.0f, -50.0f, 2, flowerMaterial, FlowerMesh);
 		{
+			
+
 			TriggerVolume::Sptr volume = flowerObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
-			collider->SetPosition(glm::vec3(0.f));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.66);
+			collider->SetPosition(glm::vec3(0));
 			volume->AddCollider(collider);
+
+			RigidBody::Sptr physics = flowerObject->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(1)));
 
 			MorphRenderComponent::Sptr morphRender = flowerObject->Add<MorphRenderComponent>(FlowerMesh);
 			MorphAnimationManager::Sptr anims = flowerObject->Add<MorphAnimationManager>();
@@ -1107,6 +1112,7 @@ int main() {
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
+
 			InteractableObjectBehaviour::Sptr interactions = vanityObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handCrackedMaterial);
 			interactions->AddSoundEffect("vanity");
@@ -1133,6 +1139,11 @@ int main() {
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
+			RigidBody::Sptr physics = masterBedObject->Add<RigidBody>(RigidBodyType::Kinematic);
+			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(4.51f, 4.97f, 1.92f));
+			rigid->SetPosition(glm::vec3(0.0f, 0.0f, 1.66f));
+			physics->AddCollider(rigid);
+
 			InteractableObjectBehaviour::Sptr interactions = masterBedObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handRobeMaterial);
 			interactions->AddSoundEffect("bed");
@@ -1157,7 +1168,11 @@ int main() {
 			TriggerVolume::Sptr volume = jeweleryBoxObject->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
 			collider->SetPosition(glm::vec3(0.f));
+			collider->SetScale(glm::vec3(1.21f, 1.37, 1.07f));
 			volume->AddCollider(collider);
+
+			RigidBody::Sptr physics = jeweleryBoxObject->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(0.95f, 1.07f, 0.65f)));
 
 			InteractableObjectBehaviour::Sptr interactions = jeweleryBoxObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handBlingMaterial);
@@ -1184,6 +1199,11 @@ int main() {
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
+
+			RigidBody::Sptr physics = soapObject->Add<RigidBody>(RigidBodyType::Kinematic);
+			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(0.58f, 0.48f, 0.38f));
+			rigid->SetPosition(glm::vec3(0.0f, 0.48f, 0.0f));
+			physics->AddCollider(rigid);
 
 			InteractableObjectBehaviour::Sptr interactions = soapObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handCleanMaterial);
@@ -1215,6 +1235,11 @@ int main() {
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
+			RigidBody::Sptr physics = duckObject->Add<RigidBody>(RigidBodyType::Kinematic);
+			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(0.53f, 0.25f, 0.49f));
+			rigid->SetPosition(glm::vec3(0.35f, 0.31f, 0.05f));
+			physics->AddCollider(rigid);
+
 			InteractableObjectBehaviour::Sptr interactions = duckObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handDuckyMaterial);
 			interactions->AddSoundEffect("ducky");
@@ -1242,6 +1267,9 @@ int main() {
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
+
+			RigidBody::Sptr physics = toiletObject->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(1.84f, 1.09f, 1.79f)));
 
 			InteractableObjectBehaviour::Sptr interactions = toiletObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handPooMaterial);
@@ -1272,6 +1300,11 @@ int main() {
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
+			RigidBody::Sptr physics = trashObject->Add<RigidBody>(RigidBodyType::Kinematic);
+			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(1.13f, 1.55f, 0.72f));
+			rigid->SetPosition(glm::vec3(0.19f, 1.58f, -0.28f));
+			physics->AddCollider(BoxCollider::Create(glm::vec3(1)));
+
 			InteractableObjectBehaviour::Sptr interactions = trashObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handTrashMaterial);
 			interactions->AddSoundEffect("trash");
@@ -1298,6 +1331,7 @@ int main() {
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
+
 			InteractableObjectBehaviour::Sptr interactions = mousetrapObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handMouseMaterial);
 			interactions->AddSoundEffect("mouse");
@@ -1323,6 +1357,11 @@ int main() {
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
+			RigidBody::Sptr physics = cakeObject->Add<RigidBody>(RigidBodyType::Kinematic);
+			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(1.05f, 0.51f, 1.19f));
+			rigid->SetPosition(glm::vec3(0.0f, -0.36f, 0.0f));
+			physics->AddCollider(rigid);
+			
 			InteractableObjectBehaviour::Sptr interactions = cakeObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handCakeMaterial);
 			interactions->AddSoundEffect("cake");
@@ -1347,6 +1386,10 @@ int main() {
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
+
+			RigidBody::Sptr physics = bowlOfFruitObject->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(0.71f, 0.35f, 0.63f)));
+
 
 			InteractableObjectBehaviour::Sptr interactions = bowlOfFruitObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handFruitMaterial);
@@ -1373,6 +1416,9 @@ int main() {
 			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0));
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
+
+			RigidBody::Sptr physics = glassTableObject->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(3.84f, 0.06f, 2.48f)));
 
 			InteractableObjectBehaviour::Sptr interactions = glassTableObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handAngryMaterial);
@@ -1427,6 +1473,11 @@ int main() {
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
+			RigidBody::Sptr physics = plantObject->Add<RigidBody>(RigidBodyType::Kinematic);
+			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(0.39f, 0.18f, 0.45f));
+			rigid->SetPosition(glm::vec3(0.0f, 0.22f, 0.0f));
+			physics->AddCollider(rigid);
+
 			InteractableObjectBehaviour::Sptr interactions = plantObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handGreenMaterial);
 			interactions->AddSoundEffect("plant");
@@ -1458,6 +1509,9 @@ int main() {
 			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0));
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
+
+			RigidBody::Sptr physics = remoteObject->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(0.49f, 0.17f, 0.21f)));
 
 			InteractableObjectBehaviour::Sptr interactions = remoteObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handTechMaterial);
@@ -1690,6 +1744,11 @@ int main() {
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
+			RigidBody::Sptr physics = radio->Add<RigidBody>(RigidBodyType::Kinematic);
+			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(0.62f, 0.97f, 1.41f));
+			rigid->SetRotation(glm::vec3(0.0f, 0.0f, 45));
+			physics->AddCollider(rigid);
+
 			InteractableObjectBehaviour::Sptr interactions = radio->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handMusicMaterial);     
 			interactions->AddSoundEffect("velcro");
@@ -1720,6 +1779,10 @@ int main() {
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
+
+			RigidBody::Sptr physics = homework->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(1.35f, 1.09f, 0.76f)));
+
 
 			InteractableObjectBehaviour::Sptr interactions = homework->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handHomeworkMaterial);
@@ -1819,6 +1882,9 @@ int main() {
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
+
+			RigidBody::Sptr physics = paintCan->Add<RigidBody>(RigidBodyType::Kinematic);
+			physics->AddCollider(BoxCollider::Create(glm::vec3(0.75f, 0.6f, 0.73f)));
 
 			InteractableObjectBehaviour::Sptr interactions = paintCan->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handRainbowMaterial);

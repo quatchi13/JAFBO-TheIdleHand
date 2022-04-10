@@ -125,28 +125,7 @@ void InteractableObjectBehaviour::Update(float deltaTime) {
 	}
 
 
-		// For game sound assignment to show multi instruement
-		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_7))
-		{
-
-			srand(time(0));
-			randomNumber = (rand() % 3);
-			switch (randomNumber)
-			{
-			case 0:
-				audioEngine->playSoundByName("Bang");
-
-				break;
-
-			case 1:
-				audioEngine->playSoundByName("Bing");
-
-				break;
-			case 2:
-				audioEngine->playSoundByName("Bong");
-				break;
-			}
-		}
+		
 	
 }
 
