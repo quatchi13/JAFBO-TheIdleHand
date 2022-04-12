@@ -1067,17 +1067,19 @@ int main() {
 
 
 		//Objects for the Master bed
-		GameObject::Sptr flowerObject = MakeBasic("Flower Object", -6.8f, 50.5f, -50.071f, 0.f, 0.0f, -50.0f, 2, flowerMaterial, FlowerMesh);
+		GameObject::Sptr flowerObject = MakeBasic("Flower Object", -8.18f, 55.6f, -50.071f, 90.f, 0.0f, -50.0f, 2, flowerMaterial, FlowerMesh);
 		{
 			
 
 			TriggerVolume::Sptr volume = flowerObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.66);
-			collider->SetPosition(glm::vec3(0));
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.f, 2.f, 1.f));
+			collider->SetPosition(glm::vec3(-0.02f, 6.31f, -0.46f));
 			volume->AddCollider(collider);
 
 			RigidBody::Sptr physics = flowerObject->Add<RigidBody>(RigidBodyType::Kinematic);
-			physics->AddCollider(BoxCollider::Create(glm::vec3(1)));
+			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(1.16f, 2.04f, 1.0f));
+			rigid->SetPosition(glm::vec3(0.0f, 2.33f, -0.84f));
+			physics->AddCollider(rigid);
 
 			MorphRenderComponent::Sptr morphRender = flowerObject->Add<MorphRenderComponent>(FlowerMesh);
 			MorphAnimationManager::Sptr anims = flowerObject->Add<MorphAnimationManager>();
@@ -1093,8 +1095,9 @@ int main() {
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(brainMaterial, flowerObject)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(1, flowerObject)));
-			InteractionTForm brainPos(InteractionTForm::tformt::pos, glm::vec3(-6.80, 0.5, 4.4));
+			InteractionTForm brainPos(InteractionTForm::tformt::pos, glm::vec3(-9.69, 4.49, 4.239));
 			InteractionTForm brainRot(InteractionTForm::tformt::rot, glm::vec3(90, 0, 90));
+			interactions->AddFeedbackBehaviour(InteractionFeedback(std::vector<InteractionTForm>{brainPos, brainRot}, flowerObject));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(0)));
 
 			interactions->prompt = prompt;
@@ -1108,8 +1111,9 @@ int main() {
 		GameObject::Sptr vanityObject = MakeBasic("Vanity Object", 6.32f, 38.92f, -45.75f, 0.f, 0.0f, -81.0f, 2, vanityMaterial, VanityMesh);
 		{
 			TriggerVolume::Sptr volume = vanityObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
-			collider->SetPosition(glm::vec3(0.f));
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.5));
+			collider->SetScale(glm::vec3(1.16f, 0.89f, 1.71f));
+			collider->SetPosition(glm::vec3(0.f, 0.f, 1.89f));
 			volume->AddCollider(collider);
 
 
@@ -1135,12 +1139,12 @@ int main() {
 		GameObject::Sptr masterBedObject = MakeBasic("Master Bed Object", -2.32f, 46.25f, -49.78f, 0.f, 0.0f, 11.0f, 2, masterBedMaterial, MasterBedMesh);
 		{
 			TriggerVolume::Sptr volume = masterBedObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
-			collider->SetPosition(glm::vec3(0.f));
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(4.51f, 4.97f, 1.f));
+			collider->SetPosition(glm::vec3(0.f, 0.f, 4.11f));
 			volume->AddCollider(collider);
 
 			RigidBody::Sptr physics = masterBedObject->Add<RigidBody>(RigidBodyType::Kinematic);
-			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(4.51f, 4.97f, 1.92f));
+			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(4.51f, 4.97f, 1.65f));
 			rigid->SetPosition(glm::vec3(0.0f, 0.0f, 1.66f));
 			physics->AddCollider(rigid);
 
@@ -1166,9 +1170,8 @@ int main() {
 		GameObject::Sptr jeweleryBoxObject = MakeBasic("Jewelery Box Object", 8.18f, 40.5f, -45.65f, 0.f, 0.0f, 0.0f, 2, jeweleryBoxMaterial, JeweleryBoxMesh);
 		{
 			TriggerVolume::Sptr volume = jeweleryBoxObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
-			collider->SetPosition(glm::vec3(0.f));
-			collider->SetScale(glm::vec3(1.21f, 1.37, 1.07f));
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0));
+			collider->SetPosition(glm::vec3(0.f, 1.14f, 0.49f));
 			volume->AddCollider(collider);
 
 			RigidBody::Sptr physics = jeweleryBoxObject->Add<RigidBody>(RigidBodyType::Kinematic);
@@ -1196,8 +1199,8 @@ int main() {
 		GameObject::Sptr soapObject = MakeBasic("Soap Object", 2.72f, 89.66f, -44.56f, 90.f, 0.0f, -90.0f, 3, soapMaterial, soapMesh);
 		{
 			TriggerVolume::Sptr volume = soapObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
-			collider->SetPosition(glm::vec3(0.f));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.15);
+			collider->SetPosition(glm::vec3(0.f, 0.6f, 0.f));
 			volume->AddCollider(collider);
 
 			RigidBody::Sptr physics = soapObject->Add<RigidBody>(RigidBodyType::Kinematic);
@@ -1231,8 +1234,8 @@ int main() {
 		GameObject::Sptr duckObject = MakeBasic("Duck Object", -7.41f, 102.36f, -47.44f, 90.f, 0.0f, 9.0f, 3, duckyMaterial, duckyMesh);
 		{
 			TriggerVolume::Sptr volume = duckObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
-			collider->SetPosition(glm::vec3(0.f));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.13);
+			collider->SetPosition(glm::vec3(0.f, 0.18f, 0.f));
 			volume->AddCollider(collider);
 
 			RigidBody::Sptr physics = duckObject->Add<RigidBody>(RigidBodyType::Kinematic);
@@ -1264,8 +1267,8 @@ int main() {
 		GameObject::Sptr toiletObject = MakeBasic("Toilet Object", -2.08f, 95.23f, -48.86f, 90.f, 0.0f, 49.0f, 3, toiletMaterial, toiletMesh);
 		{
 			TriggerVolume::Sptr volume = toiletObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
-			collider->SetPosition(glm::vec3(0.f));
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.5));
+			collider->SetPosition(glm::vec3(0.f, 1.8f, 0.f));
 			volume->AddCollider(collider);
 
 			RigidBody::Sptr physics = toiletObject->Add<RigidBody>(RigidBodyType::Kinematic);
@@ -1297,13 +1300,13 @@ int main() {
 		{
 			TriggerVolume::Sptr volume = trashObject->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
-			collider->SetPosition(glm::vec3(0.f));
+			collider->SetPosition(glm::vec3(0.f, 3.34f, -0.56f));
 			volume->AddCollider(collider);
 
 			RigidBody::Sptr physics = trashObject->Add<RigidBody>(RigidBodyType::Kinematic);
-			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(1.13f, 1.55f, 0.72f));
-			rigid->SetPosition(glm::vec3(0.19f, 1.58f, -0.28f));
-			physics->AddCollider(BoxCollider::Create(glm::vec3(1)));
+			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(1.f, 1.4f, 1.00f));
+			rigid->SetPosition(glm::vec3(0.09f, 1.59f, -0.38f));
+			physics->AddCollider(rigid);
 
 			InteractableObjectBehaviour::Sptr interactions = trashObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handTrashMaterial);
@@ -1327,7 +1330,7 @@ int main() {
 		GameObject::Sptr mousetrapObject = MakeBasic("Mouse trap Object", 10.64f, 147.72f, -49.81f, 90, 0, 0, 4, mouseTrapMaterial, mouseTrapMesh);
 		{
 			TriggerVolume::Sptr volume = mousetrapObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			SphereCollider::Sptr collider = SphereCollider::Create(1.2);
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
@@ -1413,12 +1416,14 @@ int main() {
 		GameObject::Sptr glassTableObject = MakeBasic("Glass Table Object", 0.36f, 199.9f, -49.73f, 90, 0, 79, 5, glassTableMaterial, glassTableMesh);
 		{
 			TriggerVolume::Sptr volume = glassTableObject->Add<TriggerVolume>();
-			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0));
-			collider->SetPosition(glm::vec3(0.f));
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(3.84f, 0.3f, 2.48f));
+			collider->SetPosition(glm::vec3(0.f, 1.0f, 0.f));
 			volume->AddCollider(collider);
 
 			RigidBody::Sptr physics = glassTableObject->Add<RigidBody>(RigidBodyType::Kinematic);
-			physics->AddCollider(BoxCollider::Create(glm::vec3(3.84f, 0.06f, 2.48f)));
+			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(3.84f, 0.06f, 2.48f));
+			rigid->SetPosition(glm::vec3(0.0f, 0.77f, 0.0f));
+			physics->AddCollider(rigid);
 
 			InteractableObjectBehaviour::Sptr interactions = glassTableObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handAngryMaterial);
@@ -1439,12 +1444,15 @@ int main() {
 			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(glassTableObject);
 		}
 
-		GameObject::Sptr picturesObject = MakeBasic("Pictures Object", 8.33f, 186.03f, -49.69f, 0, 0, 83, 5, picturesMaterial, picturesMesh);
+		GameObject::Sptr picturesObject = MakeBasic("Pictures Object", -4.82f, 185.09f, -44.51f, 90, 0, 79, 5, picturesMaterial, picturesMesh);
 		{
 			TriggerVolume::Sptr volume = picturesObject->Add<TriggerVolume>();
-			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0));
-			collider->SetPosition(glm::vec3(0.f));
-			volume->AddCollider(collider);
+			BoxCollider::Sptr colliderLeft = BoxCollider::Create(glm::vec3(0.78f, 4.09f, 2.74));
+			colliderLeft->SetPosition(glm::vec3(0.72f, 2.59f, 8.22f));
+			volume->AddCollider(colliderLeft);
+			BoxCollider::Sptr colliderRight = BoxCollider::Create(glm::vec3(0.7f, 3.14f, 2.81f));
+			colliderRight->SetPosition(glm::vec3(0.f, 2.77f, -6.01f));
+			volume->AddCollider(colliderRight);
 
 			InteractableObjectBehaviour::Sptr interactions = picturesObject->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handClownMaterial);
@@ -1469,7 +1477,7 @@ int main() {
 			plantObject->SetScale(glm::vec3(0.5, 0.5, 0.5));
 
 			TriggerVolume::Sptr volume = plantObject->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			SphereCollider::Sptr collider = SphereCollider::Create(1.2);
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
@@ -1575,8 +1583,8 @@ int main() {
 		GameObject::Sptr frankenstineObject = MakeBasic("Frankenstine Object", -1.424f, 249.87f, -49.97f, 90, -1, -87, 6, frankenstineMaterial, frankenstineMesh);
 		{
 			TriggerVolume::Sptr volume = frankenstineObject->Add<TriggerVolume>();
-			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.68, 0.75, 1.56));
-			collider->SetPosition(glm::vec3(-0.09, 4.74, 0.75));
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.68f, 0.5f, 2.0f));
+			collider->SetPosition(glm::vec3(-0.09f, 4.39f, 0.2f));
 			volume->AddCollider(collider);
 
 			InteractableObjectBehaviour::Sptr interactions = frankenstineObject->Add<InteractableObjectBehaviour>();
@@ -1601,8 +1609,8 @@ int main() {
 		GameObject::Sptr flasksObject = MakeBasic("Flasks Object", 3.13f, 242.4f, -46.7f, 90, 0, 0, 6, flasksMaterial, flasksMesh);
 		{
 			TriggerVolume::Sptr volume = flasksObject->Add<TriggerVolume>();
-			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.0, 0.88, 1.11));
-			collider->SetPosition(glm::vec3(0.33, 0.75, 0.0));
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.3f, 0.7f, 1.11f));
+			collider->SetPosition(glm::vec3(0.2, 0.54, 0.0));
 			collider->SetRotation(glm::vec3(0.0, -24.0, 0.0));
 			volume->AddCollider(collider);
 
@@ -1659,12 +1667,12 @@ int main() {
 		GameObject::Sptr boilerObject = MakeBasic("Boiler Object", -6.63f, 255.02f, -48.46f, 90, 0, -125, 6, boilerMaterial, boilerFrame0);
 		{
 			TriggerVolume::Sptr volume = boilerObject->Add<TriggerVolume>();
-			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.69, 1.0, 2.27));
-			collider->SetPosition(glm::vec3(0.f));
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.5f, 3.0f, 2.0f));
+			collider->SetPosition(glm::vec3(0.f, 1.5f, 0.f));
 			volume->AddCollider(collider);
 
 			RigidBody::Sptr physics = boilerObject->Add<RigidBody>(RigidBodyType::Kinematic);
-			physics->AddCollider(BoxCollider::Create(glm::vec3(1.24, 2.92, 1.878)));
+			physics->AddCollider(BoxCollider::Create(glm::vec3(1.0, 2.92, 1.4)));
 
 			MorphRenderComponent::Sptr morphRend = boilerObject->Add<MorphRenderComponent>(boilerFrame0);
 			MorphAnimationManager::Sptr morphManager = boilerObject->Add<MorphAnimationManager>();
@@ -1694,11 +1702,11 @@ int main() {
 
 		GameObject::Sptr alchemyCollider = scene->CreateGameObject("Alchemy Collider");
 		{
-			alchemyCollider->SetPosition(glm::vec3(4.14, 241.67f, -46.96f));
+			alchemyCollider->SetPosition(glm::vec3(4.02, 241.58f, -47.13f));
 			alchemyCollider->SetRotation(glm::vec3(0, 0, -24));
 
 			RigidBody::Sptr physics = alchemyCollider->Add<RigidBody>(RigidBodyType::Kinematic);
-			physics->AddCollider(BoxCollider::Create(glm::vec3(2.07, 1.83, 0.55)));;
+			physics->AddCollider(BoxCollider::Create(glm::vec3(3.0f, 1.80f, 0.3f)));;
 			
 			ObjectLinking::Sptr link = alchemyCollider->Add<ObjectLinking>(flasksObject);
 			flasksObject->Get<ObjectLinking>()->LinkObject(alchemyCollider);
@@ -1741,7 +1749,7 @@ int main() {
 			
 			TriggerVolume::Sptr volume = radio->Add<TriggerVolume>();
 			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
-			collider->SetPosition(glm::vec3(0.f));
+			collider->SetPosition(glm::vec3(0.f, -0.02f, 0.6f));
 			volume->AddCollider(collider);
 
 			RigidBody::Sptr physics = radio->Add<RigidBody>(RigidBodyType::Kinematic);
@@ -1812,7 +1820,7 @@ int main() {
 		GameObject::Sptr shroomba = MakeBasic("Bedroom Shroomba", 2.f, 2.f, 0.f, 0.0f, 0.0f, 0.0f, 1, shroombaMaterial, shroombaFrame0);
 		{
 			TriggerVolume::Sptr volume = shroomba->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			SphereCollider::Sptr collider = SphereCollider::Create(1.1);
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
@@ -1851,7 +1859,7 @@ int main() {
 			
 
 			TriggerVolume::Sptr volume = boybandPoster->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
+			BoxCollider::Sptr collider = BoxCollider::Create(glm::vec3(1.5, 1.9f, 2.2f));
 			collider->SetPosition(glm::vec3(0.f));
 			volume->AddCollider(collider);
 
@@ -1879,8 +1887,8 @@ int main() {
 			
 
 			TriggerVolume::Sptr volume = paintCan->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.5);
-			collider->SetPosition(glm::vec3(0.f));
+			SphereCollider::Sptr collider = SphereCollider::Create(1.2);
+			collider->SetPosition(glm::vec3(0.f, 0.f, 0.41f));
 			volume->AddCollider(collider);
 
 			RigidBody::Sptr physics = paintCan->Add<RigidBody>(RigidBodyType::Kinematic);
@@ -1913,7 +1921,7 @@ int main() {
 		GameObject::Sptr boundingPosZ = scene->CreateGameObject("boundingPosZ");
 		{
 	
-			boundingPosZ->SetPosition(glm::vec3(0, 0, 11));
+			boundingPosZ->SetPosition(glm::vec3(0, 0, 14));
 			boundingPosZ->SetRotation(glm::vec3(0, 0, 0));
 
 			RigidBody::Sptr physics = boundingPosZ->Add<RigidBody>(RigidBodyType::Kinematic);
@@ -1945,7 +1953,7 @@ int main() {
 		GameObject::Sptr boundingNegX = scene->CreateGameObject("boundingNegX");
 		{
 
-			boundingNegX->SetPosition(glm::vec3(-9.98, 0, 6));
+			boundingNegX->SetPosition(glm::vec3(-7.61, 0, 6));
 			boundingNegX->SetRotation(glm::vec3(0, 90, 0));
 
 			RigidBody::Sptr physics = boundingNegX->Add<RigidBody>(RigidBodyType::Kinematic);

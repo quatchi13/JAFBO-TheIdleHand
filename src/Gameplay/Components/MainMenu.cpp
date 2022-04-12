@@ -55,14 +55,12 @@ void MainMenu::Update(float deltaTime)
 		backgroundvolume--;
 		sound.setVolume(backgroundvolume);
 		backgroundCooldown = 10;
-		std::cout << "volume changed";
 	}
 	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_9) && backgroundvolume < 10 && !backgroundCooldown)
 	{
 		backgroundvolume++;
 		sound.setVolume(backgroundvolume);
 		backgroundCooldown = 10;
-		std::cout << "volume changed";
 	}
 
 

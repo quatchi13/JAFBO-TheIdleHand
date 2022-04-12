@@ -52,13 +52,13 @@ void WarpBehaviour::Update(float deltaTime) {
 			//bounding boxes
 			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetRotation(glm::vec3(0, 0, 0));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetRotation(glm::vec3(0, 0, 0));
-			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetPosition(glm::vec3(0, 0, 11));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetPosition(glm::vec3(0, 0, 14));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetPosition(glm::vec3(0, 0, -0.49));
 
 			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetRotation(glm::vec3(0, 90, 0));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetRotation(glm::vec3(0, 90, 0));
 			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetPosition(glm::vec3(5.87, 0, 6));
-			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetPosition(glm::vec3(-9.98, 0, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetPosition(glm::vec3(-7.61, 0, 6));
 
 			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetRotation(glm::vec3(90, 0, 0));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90, 0, 0));
@@ -73,7 +73,7 @@ void WarpBehaviour::Update(float deltaTime) {
 			UpdateListForNewRoom();
 
 			roomOne->SetPosition(glm::vec3(0, 0, -50));
-			roomTwo->SetPosition(glm::vec3(1.38, -5.100, 0));
+			roomTwo->SetPosition(glm::vec3(-1.750, -1.540, 0));
 			roomThree->SetPosition(glm::vec3(0, 100, -50));
 			roomFour->SetPosition(glm::vec3(0, 150, -50));
 			roomFive->SetPosition(glm::vec3(0, 200, -50));
@@ -86,11 +86,11 @@ void WarpBehaviour::Update(float deltaTime) {
 			GetGameObject()->GetScene()->Lights[0].Color = glm::vec3(1.f, 1.f, 1.f);
 			GetGameObject()->GetScene()->Lights[0].Range = 113.680;
 
-			GetGameObject()->GetScene()->Lights[1].Position = glm::vec3(11.380f, -11.860f, 8.748f);
+			GetGameObject()->GetScene()->Lights[1].Position = glm::vec3(8.7f, -10.740f, 8.748f);
 			GetGameObject()->GetScene()->Lights[1].Color = glm::vec3(0.9f, 0.85f, 0.65f);
 			GetGameObject()->GetScene()->Lights[1].Range = 6.400;
 
-			GetGameObject()->GetScene()->Lights[2].Position = glm::vec3(-8.054f, 2.130f, 6.310f);
+			GetGameObject()->GetScene()->Lights[2].Position = glm::vec3(-2.184f, 4.950f, 6.310f);
 			GetGameObject()->GetScene()->Lights[2].Color = glm::vec3(1.0f, 1.0f, 1.0f);
 			GetGameObject()->GetScene()->Lights[2].Range = 6.400f;
 
@@ -111,15 +111,15 @@ void WarpBehaviour::Update(float deltaTime) {
 			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetPosition(glm::vec3(0, 0, 11));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetPosition(glm::vec3(0, 0, -0.49));
 
-			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetRotation(glm::vec3(0, 90, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetRotation(glm::vec3(-9, 90, 0));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetRotation(glm::vec3(0, 90, 0));
-			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetPosition(glm::vec3(5.87, 0, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetPosition(glm::vec3(6.83, 0, 6));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetPosition(glm::vec3(-9.98, 0, 6));
 
 			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetRotation(glm::vec3(90, 0, 0));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90, 0, 0));
-			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(0, 5.91, 6));
-			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(0, -7, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(0, 7.05, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(0, -11.540, 6));
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_3))
@@ -181,19 +181,19 @@ void WarpBehaviour::Update(float deltaTime) {
 			roomOne->SetPosition(glm::vec3(0, 0, -50));
 			roomTwo->SetPosition(glm::vec3(0, 50, -50));
 			roomThree->SetPosition(glm::vec3(0, 100, -50));
-			roomFour->SetPosition(glm::vec3(0, 0, 0));
+			roomFour->SetPosition(glm::vec3(-4.17, 2.49, 0.21));
 			roomFive->SetPosition(glm::vec3(0, 200, -50));
 			roomSix->SetPosition(glm::vec3(0, 250, -50));
 
-			GetGameObject()->GetScene()->Lights[0].Position = glm::vec3(8.760f, -1.820f, 11.180f);
+			GetGameObject()->GetScene()->Lights[0].Position = glm::vec3(4.190f, 1.07f, 14.180f);
 			GetGameObject()->GetScene()->Lights[0].Color = glm::vec3(1.f, 1.f, 1.f);
 			GetGameObject()->GetScene()->Lights[0].Range = 27.280;
 
-			GetGameObject()->GetScene()->Lights[1].Position = glm::vec3(10.110f, 3.890f, 9.578f);
+			GetGameObject()->GetScene()->Lights[1].Position = glm::vec3(-3.710f, 3.890f, 14.748f);
 			GetGameObject()->GetScene()->Lights[1].Color = glm::vec3(1.f, 1.f, 1.f);
 			GetGameObject()->GetScene()->Lights[1].Range = 34.200;
 
-			GetGameObject()->GetScene()->Lights[2].Position = glm::vec3(-5.864f, 3.390f, 9.460f);
+			GetGameObject()->GetScene()->Lights[2].Position = glm::vec3(1.296f, 3.280f, 14.570f);
 			GetGameObject()->GetScene()->Lights[2].Color = glm::vec3(1.0f, 1.0f, 1.0f);
 			GetGameObject()->GetScene()->Lights[2].Range = 19.200;
 
@@ -215,13 +215,13 @@ void WarpBehaviour::Update(float deltaTime) {
 
 			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetRotation(glm::vec3(0, 90, 0));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetRotation(glm::vec3(0, 90, 0));
-			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetPosition(glm::vec3(5.87, 0, 6));
-			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetPosition(glm::vec3(-9.98, 0, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetPosition(glm::vec3(7.62, 0, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetPosition(glm::vec3(-13.51, 4.08, 5.9));
 
-			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetRotation(glm::vec3(90, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetRotation(glm::vec3(90, 0, -11.0));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90, 0, 0));
-			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(0, 5.91, 6));
-			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(0, -7, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(-2.380, 7.47, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(-3.46, -5.37, 6));
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_5))
@@ -233,21 +233,20 @@ void WarpBehaviour::Update(float deltaTime) {
 			roomTwo->SetPosition(glm::vec3(0, 50, -50));
 			roomThree->SetPosition(glm::vec3(0, 100, -50));
 			roomFour->SetPosition(glm::vec3(0, 150, -50));
-			roomFive->SetPosition(glm::vec3(0, 0, 0));
+			roomFive->SetPosition(glm::vec3(-1.62, -3.3, 0));
 			roomSix->SetPosition(glm::vec3(0, 250, -50));
 
-			GetGameObject()->GetScene()->Lights[0].Position = glm::vec3(-1.020f, -9.930f, 2.680f);
+			GetGameObject()->GetScene()->Lights[0].Position = glm::vec3(-2.53f, -13.56f, 2.680f);
 			GetGameObject()->GetScene()->Lights[0].Color = glm::vec3(1.f, 0.82f, 0.f);
-			GetGameObject()->GetScene()->Lights[0].Range = 11.880;
+			GetGameObject()->GetScene()->Lights[0].Range = 3.28;
 
-			GetGameObject()->GetScene()->Lights[1].Position = glm::vec3(-15.687f, 5.100f, 3.674f);
+			GetGameObject()->GetScene()->Lights[1].Position = glm::vec3(-6.07f, -0.43f, 5.894f);
 			GetGameObject()->GetScene()->Lights[1].Color = glm::vec3(1.f, 1.f, 1.f);
-			GetGameObject()->GetScene()->Lights[1].Range = 34.200;
+			GetGameObject()->GetScene()->Lights[1].Range = 27.100;
 
-			GetGameObject()->GetScene()->Lights[2].Position = glm::vec3(-4.017f, -11.777f, 6.780f);
+			GetGameObject()->GetScene()->Lights[2].Position = glm::vec3(-5.537f, -11.777f, 6.780f);
 			GetGameObject()->GetScene()->Lights[2].Color = glm::vec3(1.0f, 0.0f, 0.0f);
 			GetGameObject()->GetScene()->Lights[2].Range = 1.000;
-
 
 			//very important line that will actually have your changes take effect visually, MUST be AFTER the parameters change
 			GetGameObject()->GetScene()->SetupShaderAndLights();
@@ -260,19 +259,19 @@ void WarpBehaviour::Update(float deltaTime) {
 
 			//bounding boxes
 			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetRotation(glm::vec3(0, 0, 0));
-			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetRotation(glm::vec3(0, 0, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetRotation(glm::vec3(0, 0, -9));
 			GetGameObject()->GetScene()->FindObjectByName("boundingPosZ")->SetPosition(glm::vec3(0, 0, 11));
-			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetPosition(glm::vec3(0, 0, -0.49));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegZ")->SetPosition(glm::vec3(1.08, -3.3, -0.48));
 
-			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetRotation(glm::vec3(0, 90, 0));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetRotation(glm::vec3(5, 90, 0));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetRotation(glm::vec3(0, 90, 0));
-			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetPosition(glm::vec3(9.71, -2.68, 6));
-			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetPosition(glm::vec3(-12.98, 0, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosX")->SetPosition(glm::vec3(8.79, -7.1, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegX")->SetPosition(glm::vec3(-13.58, -1.37, 6));
 
-			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetRotation(glm::vec3(90, -3, -8));
-			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90, 0, 0));
-			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(-0.08, 9.96, 6));
-			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(-1.05, -11.31, 4.4));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetRotation(glm::vec3(90, -3, -15));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90, 4, -17));
+			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(-0.65, 6.97, 6));
+			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(-1.83, -14.33, 4.4));
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_6))
