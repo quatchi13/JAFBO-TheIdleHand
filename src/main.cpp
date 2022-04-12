@@ -889,9 +889,7 @@ int main() {
 		audioEngine->loadSound("trash", "sounds/Trash.wav", true);
 		audioEngine->loadSound("vanity", "sounds/Vanity.wav", true);
 
-		audioEngine->loadSound("Bang", "sounds/Bang.wav", true);
-		audioEngine->loadSound("Bing", "sounds/Bing.wav", true);
-		audioEngine->loadSound("Bong", "sounds/Bong.wav", true);
+		audioEngine->loadSound("open", "sounds/open.wav", true);
 
 		audioEngine->loadSound("twin", "sounds/twinBedroom.wav", true);
 		audioEngine->loadSound("master", "sounds/masterBedroom.wav", true);
@@ -899,6 +897,8 @@ int main() {
 		audioEngine->loadSound("kitchen", "sounds/kitchen.wav", true);
 		audioEngine->loadSound("living", "sounds/livingroom.wav", true);
 		audioEngine->loadSound("basement", "sounds/basement.wav", true);
+
+		
 
 
 		//audioEngine->playSoundByName("test");
@@ -1073,6 +1073,7 @@ int main() {
 			SimpleScreenBehaviour::Sptr feedbackScreen = extraScreen->Add<SimpleScreenBehaviour>();
 			feedbackScreen->targetObjectives = 45;
 			feedbackScreen->WinScreen = winMaterial;
+			feedbackScreen->active = true;
 		}
 
 		GameObject::Sptr screen = MakeBasicPlane("Screen", 5.87f, 5.79f, 6.9f, 80.351f, 0.0f, 142.00f, 54.0f, 10.0f, 0, menuMaterial);

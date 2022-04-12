@@ -44,19 +44,6 @@ void MainMenu::Update(float deltaTime)
 {
 
 	if (backgroundCooldown) { backgroundCooldown--; }
-	
-	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_8) && backgroundvolume > 0 && !backgroundCooldown)
-	{
-		backgroundvolume--;
-		sound.setVolume(backgroundvolume);
-		backgroundCooldown = 10;
-	}
-	if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_9) && backgroundvolume < 10 && !backgroundCooldown)
-	{
-		backgroundvolume++;
-		sound.setVolume(backgroundvolume);
-		backgroundCooldown = 10;
-	}
 
 
 
@@ -94,6 +81,13 @@ void MainMenu::Update(float deltaTime)
 				curIndex = 0;
 				isMoving = true;
 				cooldown = 30;
+				sound.setSound("open");
+				sound.setPosition(FMOD_VECTOR{ 0,0,0 });
+				sound.setVolume(1.5);
+				sound.play();
+
+				
+				
 			}
 			if (select == 1 && controls == 0 && credits == 0) {
 				//GetGameObject()->SetPosition(glm::vec3(20.03f, -5.14f, 6.9f));
