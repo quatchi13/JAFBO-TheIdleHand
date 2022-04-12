@@ -707,6 +707,8 @@ int main() {
 		Texture2D::Sptr chainsawTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/Chainsaw.png");
 		Texture2D::Sptr boilerTex = ResourceManager::CreateAsset<Texture2D>("textures/BasementTextures/boilerFixed.png");
 
+		Texture2D::Sptr teleportTex = ResourceManager::CreateAsset<Texture2D>("textures/teleport.png");
+
 		
 		// Here we'll load in the cubemap, as well as a special shader to handle drawing the skybox
 		TextureCube::Sptr testCubemap = ResourceManager::CreateAsset<TextureCube>("cubemaps/NightSky/NightSky.jpg");
@@ -851,6 +853,7 @@ int main() {
 		Material::Sptr chainsawMaterial = MakeMaterial("Chainsaw Material", basicShader, chainsawTex, 0.1f);
 		Material::Sptr boilerMaterial = MakeMaterial("Boiler Material", morphShader, boilerTex, 0.1f);
 
+		Material::Sptr teleportMaterial = MakeMaterial("Teleport Material", basicShader, teleportTex, 0.1f);
 
 
 		//Audio Setups
@@ -1092,6 +1095,11 @@ int main() {
 			interp->PauseOrResumeCurrentBehaviour();
 
 			ObjectLinking::Sptr oLink = screen->Add<ObjectLinking>();
+		}
+
+		GameObject::Sptr teleport = MakeBasicPlane("Teleport", 3.5, 3.5, 0.28, 0, 0.0f, 0, 3.0f, 3.0f, 0, teleportMaterial);
+		{
+			
 		}
 
 		GameObject::Sptr enterPrompt = MakeBasicPlane("Enter Prompt", 6.54f, 6.03f, 3.4f, 80.351f, 0.0f, 142.00f, 4.0f, 1.0f, 0, ePromptMaterial);
