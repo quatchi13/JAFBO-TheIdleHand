@@ -932,30 +932,111 @@ int main() {
 		GameObject::Sptr bedroomObject = MakeBasic("Bedroom Object", 0.f, 0.0f, 0.0f, 0.f, 0.0f, 0.0f, 1, bedroomMaterial, bedroomMesh);
 		{	
 			ObjectLinking::Sptr link = bedroomObject->Add<ObjectLinking>();
+
+			RigidBody::Sptr physics = bedroomObject->Add<RigidBody>(RigidBodyType::Kinematic);
+			
+			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(3.06f, 0.99f, 3.81f));
+			rigid->SetPosition(glm::vec3(3.87f, -6.27f, 3.7f));
+			physics->AddCollider(rigid);
+			
+			BoxCollider::Sptr rigidTwo = BoxCollider::Create(glm::vec3(4.26f, 2.17f, 1.0f));
+			rigidTwo->SetPosition(glm::vec3(-3.76f, -5.56f, 1.71f));
+			physics->AddCollider(rigidTwo);
+
+			BoxCollider::Sptr rigidThree = BoxCollider::Create(glm::vec3(1.0f, 1.0f, 1.58f));
+			rigidThree->SetPosition(glm::vec3(-6.68f, 2.04f, 1.6f));
+			physics->AddCollider(rigidThree);
+
+			BoxCollider::Sptr rigidFour = BoxCollider::Create(glm::vec3(3.98f, 2.44f, 1.57f));
+			rigidFour->SetPosition(glm::vec3(-3.81f, 6.02f, 1.01f));
+			physics->AddCollider(rigidFour);
+
+			BoxCollider::Sptr rigidFive = BoxCollider::Create(glm::vec3(1.0f, 1.0f, 1.41f));
+			rigidFive->SetPosition(glm::vec3(1.09f, 6.67f, 1.33f));
+			physics->AddCollider(rigidFive);
+
+			BoxCollider::Sptr rigidSix = BoxCollider::Create(glm::vec3(0.13f, 1.24f, 1.41f));
+			rigidSix->SetPosition(glm::vec3(5.39f, -1.57f, 3.81));
+			rigidSix->SetRotation(glm::vec3(0.0f, 7.0f, -57.0f));
+			physics->AddCollider(rigidSix);
+
 		} 
 		
 		GameObject::Sptr masterBedroomObject = MakeBasic("Master Bedroom Object", 0.0f, 50.0f, -50.0f, 0.f, 0.0f, -10.0f, 2, masterBedroomMaterial, roomTwoMesh);
 		{
 			ObjectLinking::Sptr link = masterBedroomObject->Add<ObjectLinking>();
 			masterBedroomObject->SetScale(glm::vec3(5.170f, 5.20f, 6.240f));
+
+			RigidBody::Sptr physics = masterBedroomObject->Add<RigidBody>(RigidBodyType::Kinematic);
+
+			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(2.98f, 1.0f, 1.78f));
+			rigid->SetPosition(glm::vec3(7.44f, -8.51f, 1.82f));
+			rigid->SetRotation(glm::vec3(0.0f, 0.0f, 21.0f));
+			physics->AddCollider(rigid);
 		}
 
 		GameObject::Sptr megaBathroomObject = MakeBasic("Bathroom Object", 0.0f, 100.0f, -50.0f, 0.f, 0.0f, -36.0f, 3, megaBathroomMaterial, megaBathroomMesh);
 		{
 			ObjectLinking::Sptr link = megaBathroomObject->Add<ObjectLinking>();
 			megaBathroomObject->SetScale(glm::vec3(1.5f, 1.5f, 1.5f));
+
+			RigidBody::Sptr physics = megaBathroomObject->Add<RigidBody>(RigidBodyType::Kinematic);
+
+			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(0.07f, 4.6f, 1.67f));
+			rigid->SetPosition(glm::vec3(-3.03f, -0.1f, 1.59f));
+			physics->AddCollider(rigid);
+
+			BoxCollider::Sptr rigidTwo = BoxCollider::Create(glm::vec3(2.27f, 1.49f, 2.56f));
+			rigidTwo->SetPosition(glm::vec3(6.39f, -5.88f, 2.76f));
+			physics->AddCollider(rigidTwo);
+
+			BoxCollider::Sptr rigidThree = BoxCollider::Create(glm::vec3(3.26f, 0.05f, 1.41f));
+			rigidThree->SetPosition(glm::vec3(-5.83, 5.09f, 1.88f));
+			physics->AddCollider(rigidThree);
 		}
 
 		GameObject::Sptr megaKitchenObject = MakeBasic("Kitchen Object", 0.0f, 150.0f, -50.0f, 0.0f, 0.0f, -9.0f, 4, megaKitchenMaterial, megaKitchenMesh);
 		{
 			megaKitchenObject->SetScale(glm::vec3(1.2, 1.2, 1.2));
 			ObjectLinking::Sptr link = megaKitchenObject->Add<ObjectLinking>();
+
+			RigidBody::Sptr physics = megaKitchenObject->Add<RigidBody>(RigidBodyType::Kinematic);
+
+			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(12.12f, 2.54f, 2.04f));
+			rigid->SetPosition(glm::vec3(1.28f, -7.35, 2.22f));
+			physics->AddCollider(rigid);
+
+			BoxCollider::Sptr rigidTwo = BoxCollider::Create(glm::vec3(1.96f, 3.05f, 2.35f));
+			rigidTwo->SetPosition(glm::vec3(4.51f, -9.81f, 9.63f));
+			physics->AddCollider(rigidTwo);
+
+			BoxCollider::Sptr rigidThree = BoxCollider::Create(glm::vec3(1.05f, 2.22f, 3.92));
+			rigidThree->SetPosition(glm::vec3(-10.15f, 5.23f, 3.7f));
+			physics->AddCollider(rigidThree);
 		}
 
 		GameObject::Sptr megaLivingroomObject = MakeBasic("Livingroom Object", 0.0f, 200.0f, -50.0f, 00.0f, 0.0f, -10.0f, 5, megaLivingroomMaterial, megaLivingroomMesh);
 		{
 			megaLivingroomObject->SetScale(glm::vec3(1.3, 1.3, 1.3));
 			ObjectLinking::Sptr link = megaLivingroomObject->Add<ObjectLinking>();
+
+			RigidBody::Sptr physics = megaLivingroomObject->Add<RigidBody>(RigidBodyType::Kinematic);
+
+			BoxCollider::Sptr rigid = BoxCollider::Create(glm::vec3(2.3f, 6.45f, 1.0f));
+			rigid->SetPosition(glm::vec3(6.98f, 0.21f, 0.48f));
+			physics->AddCollider(rigid);
+
+			BoxCollider::Sptr rigidTwo = BoxCollider::Create(glm::vec3(2.45f, 6.48f, 0.82));
+			rigidTwo->SetPosition(glm::vec3(-6.25f, 0.17f, 0.65f));
+			physics->AddCollider(rigidTwo);
+
+			BoxCollider::Sptr rigidThree = BoxCollider::Create(glm::vec3(0.44f, 5.32f, 1.57f));
+			rigidThree->SetPosition(glm::vec3(8.97f, 0.1f, 2.16f));
+			physics->AddCollider(rigidThree);
+
+			BoxCollider::Sptr rigidFour = BoxCollider::Create(glm::vec3(0.45f, 5.36f, 1.76f));
+			rigidFour->SetPosition(glm::vec3(-8.4f, 0.0f, 2.16f));
+			physics->AddCollider(rigidFour);
 		}
 
 		GameObject::Sptr megaBasementObject = MakeBasic("Basement Object", 0.0f, 250.0f, -50.0f, 00.0f, 0.0f, -24.0f, 6, megaBasementMaterial, megaBasementMesh);
