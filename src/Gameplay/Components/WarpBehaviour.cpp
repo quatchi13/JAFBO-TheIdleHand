@@ -4,10 +4,56 @@
 #include "Utils/JsonGlmHelpers.h"
 #include "Gameplay/Components/RenderComponent.h"
 #include "Gameplay/Components/ObjectLinking.h"
+#include "Utils/AudioSource.h"
+
 #include "Gameplay/Components/InterpolationBehaviour.h"
 
 void WarpBehaviour::Awake() {
 	InitList();
+
+	twin.setSound("twin");
+	twin.setPosition(FMOD_VECTOR{ 0,0,0 });
+	twin.play();
+	twin.setLooping(true);
+	twin.setVolume(0.2);
+
+	master.setSound("master");
+	master.setPosition(FMOD_VECTOR{ 0,0,0 });
+	master.setLooping(true);
+	master.setVolume(0);
+	master.play();
+
+	bath.setSound("bath");
+	bath.setPosition(FMOD_VECTOR{ 0,0,0 });
+	bath.setLooping(true);
+	bath.setVolume(0);
+	bath.play();
+
+	kitchen.setSound("kitchen");
+	kitchen.setPosition(FMOD_VECTOR{ 0,0,0 });
+	kitchen.setLooping(true);
+	kitchen.setVolume(0);
+	kitchen.play();
+
+	living.setSound("living");
+	living.setPosition(FMOD_VECTOR{ 0,0,0 });
+	living.setLooping(true);
+	living.setVolume(0);
+	living.play();
+	
+	basement.setSound("basement");
+	basement.setPosition(FMOD_VECTOR{ 0,0,0 });
+	basement.setLooping(true);
+	basement.setVolume(0);
+	basement.play();
+
+
+	master.setVolume(0);
+	bath.setVolume(0);
+	kitchen.setVolume(0);
+	living.setVolume(0);
+	basement.setVolume(0);
+
 }
 
 void WarpBehaviour::Update(float deltaTime) {
@@ -65,6 +111,13 @@ void WarpBehaviour::Update(float deltaTime) {
 			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(0, 5.91, 6));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(0, -7, 6));
 
+			
+			master.setVolume(0);
+			bath.setVolume(0);
+			kitchen.setVolume(0);
+			living.setVolume(0);
+			basement.setVolume(0);
+			twin.setVolume(0.2);
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_2))
@@ -120,6 +173,13 @@ void WarpBehaviour::Update(float deltaTime) {
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90, 0, 0));
 			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(0, 7.05, 6));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(0, -11.540, 6));
+
+			twin.setVolume(0);
+			bath.setVolume(0);
+			kitchen.setVolume(0);
+			living.setVolume(0);
+			basement.setVolume(0);
+			master.setVolume(0.2);
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_3))
@@ -171,6 +231,13 @@ void WarpBehaviour::Update(float deltaTime) {
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90, 0, -36));
 			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(4.47, 5.01, 7.58));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(-6.49, -3.89, 5.29));
+
+			master.setVolume(0);
+			kitchen.setVolume(0);
+			living.setVolume(0);
+			basement.setVolume(0);
+			twin.setVolume(0);
+			bath.setVolume(0.2);
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_4))
@@ -222,6 +289,13 @@ void WarpBehaviour::Update(float deltaTime) {
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90, 0, 0));
 			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(-2.380, 7.47, 6));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(-3.46, -5.37, 6));
+
+			master.setVolume(0);
+			living.setVolume(0);
+			basement.setVolume(0);
+			twin.setVolume(0);
+			bath.setVolume(0);
+			kitchen.setVolume(0.2);
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_5))
@@ -272,6 +346,13 @@ void WarpBehaviour::Update(float deltaTime) {
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90, 4, -17));
 			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(-0.65, 6.97, 6));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(-1.83, -14.33, 4.4));
+
+			master.setVolume(0);
+			basement.setVolume(0);
+			twin.setVolume(0);
+			bath.setVolume(0);
+			kitchen.setVolume(0);
+			living.setVolume(0.2);
 		}
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_6))
@@ -326,6 +407,14 @@ void WarpBehaviour::Update(float deltaTime) {
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetRotation(glm::vec3(90.f, 0.f, -26.f));
 			GetGameObject()->GetScene()->FindObjectByName("boundingPosY")->SetPosition(glm::vec3(1.28f, 6.94f, 6.f));
 			GetGameObject()->GetScene()->FindObjectByName("boundingNegY")->SetPosition(glm::vec3(-2.55f, -7.09f, 6.f));
+
+
+			master.setVolume(0);
+			twin.setVolume(0);
+			bath.setVolume(0);
+			kitchen.setVolume(0);
+			living.setVolume(0);
+			basement.setVolume(0.2);
 		}
 
 

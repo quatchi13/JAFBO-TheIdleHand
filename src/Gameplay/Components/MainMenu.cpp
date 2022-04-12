@@ -38,11 +38,6 @@ void MainMenu::OnLeavingTrigger(const Gameplay::Physics::TriggerVolume::Sptr& tr
 
 void MainMenu::Awake() {
 	_renderer = GetComponent<RenderComponent>();
-	sound.setSound("background");
-	sound.setPosition(FMOD_VECTOR{ 0,0,0 });
-	sound.play();
-	sound.setLooping(true);
-	sound.setVolume(backgroundvolume);
 }
 
 void MainMenu::Update(float deltaTime)
@@ -168,6 +163,16 @@ void MainMenu::RenderImGui() { }
 void MainMenu::SetRenderer(RenderComponent::Sptr render)
 {
 	_renderer = render;
+}
+
+AudioSource MainMenu::GetSound()
+{
+	return sound;
+}
+
+void MainMenu::ChangeSound(std::string name)
+{
+	sound.setSound(name);
 }
 
 nlohmann::json MainMenu::ToJson() const {

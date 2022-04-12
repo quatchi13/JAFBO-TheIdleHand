@@ -3,6 +3,7 @@
 #include <GLFW/glfw3.h>
 #include "Gameplay/Scene.h"
 #include "Utils/AudioEngine.h"
+#include "Utils/AudioSource.h"
 #include <ctime>
 #include <cstdlib>
 /// <summary>
@@ -22,8 +23,19 @@ public:
 	Gameplay::GameObject::Sptr roomFive;
 	Gameplay::GameObject::Sptr roomSix;
 
+	Gameplay::GameObject::Sptr menu;
+
 	AudioEngine* audioEngine = AudioEngine::instance();
+
+	AudioSource twin;
+	AudioSource master;
+	AudioSource bath;
+	AudioSource living;
+	AudioSource kitchen;
+	AudioSource basement;
+
 	int randomNumber;
+	
 
 	virtual void Awake() override;
 	virtual void Update(float deltaTime) override;
@@ -43,6 +55,8 @@ public:
 
 	MAKE_TYPENAME(WarpBehaviour);
 	 
+	AudioSource sound;
+
 protected:
 	bool _playerInTrigger = false;
 	int floorMax = 6;

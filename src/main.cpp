@@ -892,6 +892,15 @@ int main() {
 		audioEngine->loadSound("Bang", "sounds/Bang.wav", true);
 		audioEngine->loadSound("Bing", "sounds/Bing.wav", true);
 		audioEngine->loadSound("Bong", "sounds/Bong.wav", true);
+
+		audioEngine->loadSound("twin", "sounds/twinBedroom.wav", true);
+		audioEngine->loadSound("master", "sounds/masterBedroom.wav", true);
+		audioEngine->loadSound("bath", "sounds/bathroom.wav", true);
+		audioEngine->loadSound("kitchen", "sounds/kitchen.wav", true);
+		audioEngine->loadSound("living", "sounds/livingroom.wav", true);
+		audioEngine->loadSound("basement", "sounds/basement.wav", true);
+
+
 		//audioEngine->playSoundByName("test");
 
 		AudioSource sound;
@@ -1048,22 +1057,7 @@ int main() {
 			ObjectLinking::Sptr link = megaBasementObject->Add<ObjectLinking>();
 		}
 
-		GameObject::Sptr floorManager = scene->CreateGameObject("Floor Manager");
-		{
-			WarpBehaviour::Sptr warp = floorManager->Add<WarpBehaviour>();
-			warp->roomOne = bedroomObject;
-			warp->roomTwo = masterBedroomObject;
-			warp->roomThree = megaBathroomObject;
-			warp->roomFour = megaKitchenObject;
-			warp->roomFive = megaLivingroomObject;
-			warp->roomSix = megaBasementObject;
-			warp->PushLists(listMats);
-
-			TriggerVolume::Sptr volume = floorManager->Add<TriggerVolume>();
-			SphereCollider::Sptr collider = SphereCollider::Create(1.8);
-			collider->SetPosition(glm::vec3(3.5f, 3.5f, 0.f));
-			volume->AddCollider(collider);
-		}
+		
 		//global UI objects
 		GameObject::Sptr prompt = MakeBasicPlane("Prompt", -1.38f, 8.19f, -11.82f, 80.351f, 0.0f, 142.00f, 4.0f, 1.0f, 0, eMaterial);
 
@@ -1095,6 +1089,24 @@ int main() {
 			interp->PauseOrResumeCurrentBehaviour();
 
 			ObjectLinking::Sptr oLink = screen->Add<ObjectLinking>();
+		}
+
+		GameObject::Sptr floorManager = scene->CreateGameObject("Floor Manager");
+		{
+			WarpBehaviour::Sptr warp = floorManager->Add<WarpBehaviour>();
+			warp->roomOne = bedroomObject;
+			warp->roomTwo = masterBedroomObject;
+			warp->roomThree = megaBathroomObject;
+			warp->roomFour = megaKitchenObject;
+			warp->roomFive = megaLivingroomObject;
+			warp->roomSix = megaBasementObject;
+			warp->PushLists(listMats);
+			warp->menu = screen;
+
+			TriggerVolume::Sptr volume = floorManager->Add<TriggerVolume>();
+			SphereCollider::Sptr collider = SphereCollider::Create(1.8);
+			collider->SetPosition(glm::vec3(3.5f, 3.5f, 0.f));
+			volume->AddCollider(collider);
 		}
 
 		GameObject::Sptr teleport = MakeBasicPlane("Teleport", 3.5, 3.5, 0.28, 0, 0.0f, 0, 3.0f, 3.0f, 0, teleportMaterial);

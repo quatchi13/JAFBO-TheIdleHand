@@ -6,6 +6,7 @@
 #include <GLFW/glfw3.h>
 #include "Gameplay/Scene.h"
 #include "Utils/AudioSource.h"
+#include "Utils/AudioEngine.h"
 
 /// <summary>
 /// Provides an example behaviour that uses some of the trigger interface to change the material
@@ -26,6 +27,9 @@ public:
 	Gameplay::Material::Sptr        WinMaterial;
 
 	AudioSource sound;
+
+	AudioEngine* audioEngine = AudioEngine::instance();
+
 	int backgroundvolume = 5;
 	int backgroundCooldown = 0;
 	
@@ -45,6 +49,8 @@ public:
 	virtual void Update(float deltaTime) override;
 	virtual void RenderImGui() override;
 	virtual void SetRenderer(RenderComponent::Sptr);
+	AudioSource GetSound();
+	void ChangeSound(std::string name);
 	virtual nlohmann::json ToJson() const override;
 	static MainMenu::Sptr FromJson(const nlohmann::json& blob);
 	MAKE_TYPENAME(MainMenu);
