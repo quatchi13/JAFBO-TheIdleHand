@@ -2156,7 +2156,7 @@ int main() {
 		float dt = static_cast<float>(thisFrame - lastFrame);
 
 		// Showcasing how to use the imGui library!
-		bool isDebugWindowOpen = ImGui::Begin("Debugging");//false;
+		bool isDebugWindowOpen = false;//false;
 		if (isDebugWindowOpen) {
 			// Draws a button to control whether or not the game is currently playing
 			static char buttonLabel[64];
