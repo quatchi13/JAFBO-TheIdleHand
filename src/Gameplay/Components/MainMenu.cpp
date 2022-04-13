@@ -68,26 +68,37 @@ void MainMenu::Update(float deltaTime)
 			select = (select < 0) ? 3 : ((select > 3) ? 0 : select);
 			cooldown = (select != c) ? 30 : 0;
 		}
-
-		pointer->SetPosition(pointerPositions[select]); 
+		if (!cutScene) {
+			pointer->SetPosition(pointerPositions[select]);
+		}
 		GetGameObject()->Get<InterpolationBehaviour>()->AddBehaviourScript("interp_scripts/menu_behaviour.txt");
 
 		if (glfwGetKey(GetGameObject()->GetScene()->Window, GLFW_KEY_ENTER) && !cooldown) {
 			std::cout << "Enter";
 			if (select == 0 && controls == 0 && credits == 0) {
-				active = true;
 				pointer->SetPosition(pointerPositions[4]);
-				GetGameObject()->Get<InterpolationBehaviour>()->PauseOrResumeCurrentBehaviour();
-				curIndex = 0;
-				isMoving = true;
-				cooldown = 30;
-				sound.setSound("open");
-				sound.setPosition(FMOD_VECTOR{ 0,0,0 });
-				sound.setVolume(1.5);
-				sound.play();
+				select = 4;
+				if (cutScene) {
+					std::cout << "Cutscene over";
+					active = true;
+					pointer->SetPosition(pointerPositions[4]);
+					GetGameObject()->Get<InterpolationBehaviour>()->PauseOrResumeCurrentBehaviour();
+					curIndex = 0;
+					isMoving = true;
+					cooldown = 30;
+				}
+				else {
 
-				
-				
+					std::cout << "Cutscene start";
+					GetGameObject()->Get<RenderComponent>()->SetMaterial(StartMaterial);
+					cutScene = true;
+					sound.setSound("open");
+					sound.setPosition(FMOD_VECTOR{ 0,0,0 });
+					sound.setVolume(1.5);
+					sound.play();
+					cooldown = 30;
+
+				}
 			}
 			if (select == 1 && controls == 0 && credits == 0) {
 				//GetGameObject()->SetPosition(glm::vec3(20.03f, -5.14f, 6.9f));
@@ -125,7 +136,11 @@ void MainMenu::Update(float deltaTime)
 				GetGameObject()->Get<InterpolationBehaviour>()->ToggleBehaviour("CreditsToMenu", false);
 				GetGameObject()->Get<InterpolationBehaviour>()->PauseOrResumeCurrentBehaviour();
 			}
+			if (cutScene) {
+				pointer->SetPosition(pointerPositions[4]);
+			}
 		}
+
 
 	}
 

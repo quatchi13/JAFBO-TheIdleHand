@@ -25,6 +25,7 @@ public:
 	Gameplay::Material::Sptr        MenuMaterial;
 	Gameplay::Material::Sptr        PauseMaterial;
 	Gameplay::Material::Sptr        WinMaterial;
+	Gameplay::Material::Sptr        StartMaterial;
 
 	AudioSource sound;
 
@@ -41,6 +42,7 @@ public:
 	bool controls = false;
 	bool credits = false;
 	bool list = false;
+	bool cutScene = false;
 	int select = 0;
 	int objectives = 0;
 	virtual void OnEnteredTrigger(const std::shared_ptr<Gameplay::Physics::TriggerVolume>& trigger) override;

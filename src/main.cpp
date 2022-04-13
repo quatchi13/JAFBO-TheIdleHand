@@ -656,6 +656,7 @@ int main() {
 		Texture2D::Sptr    teslaInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/TeslaCoil.png");
 		Texture2D::Sptr    trashInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Trash.png");
 		Texture2D::Sptr    vanityInteractTex = ResourceManager::CreateAsset<Texture2D>("textures/Vanity.png");
+		Texture2D::Sptr    startTex = ResourceManager::CreateAsset<Texture2D>("textures/Start.png");
 
 
 		Texture2D::Sptr winTex = ResourceManager::CreateAsset<Texture2D>("textures/win.png");
@@ -806,7 +807,7 @@ int main() {
 		Material::Sptr teslaInteractMaterial = MakeMaterial("Tesla Coil Interact Material", basicShader, teslaInteractTex, 0.1f);
 		Material::Sptr trashInteractMaterial = MakeMaterial("Trash Interact Material", basicShader, trashInteractTex, 0.1f);
 		Material::Sptr vanityInteractMaterial = MakeMaterial("Vanity Interact Material", basicShader, vanityInteractTex, 0.1f);
-		
+		Material::Sptr startMaterial = MakeMaterial("Start Material", basicShader, startTex, 0.1f);
 
 		Material::Sptr winMaterial = MakeMaterial("Win Material", basicShader, winTex, 0.1f);
 		Material::Sptr ePromptMaterial = MakeMaterial("Enter Prompt Material", basicShader, ePrTex, 0.1f);
@@ -865,6 +866,8 @@ int main() {
 
 		audioEngine->loadSound("background", "sounds/bkgbop.wav", true);
 
+		audioEngine->loadSound("Shroomba", "sounds/Vacuum.wav", true);
+		audioEngine->loadSound("Radio", "sounds/Head.wav", true);
 		audioEngine->loadSound("books", "sounds/Books_crashing.wav", true);
 		audioEngine->loadSound("brush", "sounds/Brush_Strokes.wav", true);
 		audioEngine->loadSound("velcro", "sounds/Velcro.wav", true);
@@ -1080,6 +1083,7 @@ int main() {
 		{
 			MainMenu::Sptr menu = screen->Add<MainMenu>();
 			menu->MenuMaterial = menuMaterial;
+			menu->StartMaterial = startMaterial;
 			menu->PauseMaterial = pauseMaterial;
 			menu->pointer = pointer;
 			menu->fbScreen = extraScreen;
@@ -1546,7 +1550,7 @@ int main() {
 			megaLivingroomObject->Get<ObjectLinking>()->LinkObject(glassTableObject);
 		}
 
-		GameObject::Sptr picturesObject = MakeBasic("Pictures Object", -4.82f, 185.09f, -44.51f, 90, 0, 79, 5, picturesMaterial, picturesMesh);
+		GameObject::Sptr picturesObject = MakeBasic("Pictures Object", -3.1f, 188.09f, -44.51f, 90, 0, 79, 5, picturesMaterial, picturesMesh);
 		{
 			TriggerVolume::Sptr volume = picturesObject->Add<TriggerVolume>();
 			BoxCollider::Sptr colliderLeft = BoxCollider::Create(glm::vec3(0.78f, 4.09f, 2.74));
@@ -1861,7 +1865,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = radio->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handMusicMaterial);     
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("Radio");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(radioMaterial2, radio)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(radioInteractMaterial, extraScreen)));
@@ -1928,7 +1932,7 @@ int main() {
 
 			InteractableObjectBehaviour::Sptr interactions = shroomba->Add<InteractableObjectBehaviour>();
 			interactions->AddRewardMaterial(handShroomMaterial);
-			interactions->AddSoundEffect("velcro");
+			interactions->AddSoundEffect("Shroomba");
 
 			InteractionTForm tf(InteractionTForm::tformt::rot, glm::vec3(180.f, 0.f, 0.f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, shroomba)));
