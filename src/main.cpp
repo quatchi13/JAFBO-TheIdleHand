@@ -232,7 +232,7 @@ bool DrawLightImGui(const Scene::Sptr& scene, const char* title, int ix) {
 	return result;
 }
 
-
+Guid shaderRef;
 /// <summary>
 /// Creates a material that can be applied to objects
 /// </summary>
@@ -248,6 +248,7 @@ Material::Sptr MakeMaterial(std::string matName, Shader::Sptr matShader, Texture
 		mat->MatShader = matShader;
 		mat->Texture = matTex;
 		mat->Shininess = shine;
+		
 	}
 	return mat;
 }
@@ -449,7 +450,7 @@ int main() {
 	ComponentManager::RegisterType<ObjectLinking>();
 	ComponentManager::RegisterType<SimpleScreenBehaviour>();
 	ComponentManager::RegisterType<WarpBehaviour>();
-	//   
+	//  
 
 	// GL states, we'll enable depth testing and backface fulling
 	glEnable(GL_DEPTH_TEST);
@@ -459,6 +460,7 @@ int main() {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
+	
 	bool loadScene = false;
 	// For now we can use a toggle to generate our scene vs load from file
 	if (loadScene) {
@@ -481,6 +483,13 @@ int main() {
 			{ ShaderPartType::Vertex, "shaders/newshader.glsl" },
 			{ ShaderPartType::Fragment, "shaders/frag_blinn_phong_textured.glsl"}
 		});
+
+		// This shader handles screens, which should not be influenced by light
+		Shader::Sptr screenShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
+			{ ShaderPartType::Vertex, "shaders/newshader.glsl" },
+			{ ShaderPartType::Fragment, "shaders/lightlessFrag.glsl" }
+		});
+		shaderRef = screenShader->GetGUID();
 
 		//This shader handles morph animations (use at own risk!)
 		Shader::Sptr morphShader = ResourceManager::CreateAsset<Shader>(std::unordered_map<ShaderPartType, std::string>{
@@ -774,40 +783,40 @@ int main() {
 		Material::Sptr secretMaterial = MakeMaterial("Secret Material", basicShader, secretTex, 0.1f);
 
 
-		Material::Sptr ListMaterial = MakeMaterial("Bedroom List Material", basicShader, ListTex, 0.1f);
-		Material::Sptr bedroom_mListMaterial = MakeMaterial("Master B.Room List Material", basicShader, bedroom_mListTex, 0.1f);
-		Material::Sptr bathroomListMaterial = MakeMaterial("Bathroom List Material", basicShader, bathroomListTex, 0.1f);
-		Material::Sptr kitchenListMaterial = MakeMaterial("Kitchen List Material", basicShader, kitchenListTex, 0.1f);
-		Material::Sptr livingroomListMaterial = MakeMaterial("Living Room List Material", basicShader, livingroomListTex, 0.1f);
-		Material::Sptr basementListMaterial = MakeMaterial("Basement List Material", basicShader, basementListTex, 0.1f);
+		Material::Sptr ListMaterial = MakeMaterial("Bedroom List Material", screenShader, ListTex, 0.1f);
+		Material::Sptr bedroom_mListMaterial = MakeMaterial("Master B.Room List Material", screenShader, bedroom_mListTex, 0.1f);
+		Material::Sptr bathroomListMaterial = MakeMaterial("Bathroom List Material", screenShader, bathroomListTex, 0.1f);
+		Material::Sptr kitchenListMaterial = MakeMaterial("Kitchen List Material", screenShader, kitchenListTex, 0.1f);
+		Material::Sptr livingroomListMaterial = MakeMaterial("Living Room List Material", screenShader, livingroomListTex, 0.1f);
+		Material::Sptr basementListMaterial = MakeMaterial("Basement List Material", screenShader, basementListTex, 0.1f);
 		std::vector<Material::Sptr>listMats{ ListMaterial, bedroom_mListMaterial, bathroomListMaterial, kitchenListMaterial, livingroomListMaterial, basementListMaterial };
 
-		Material::Sptr radioInteractMaterial = MakeMaterial("Radio Interact Material", basicShader, radioInteractTex, 0.1f);
-		Material::Sptr posterInteractMaterial = MakeMaterial("Poster Interact Material", basicShader, posterInteractTex, 0.1f);
-		Material::Sptr paintInteractMaterial = MakeMaterial("Paint Interact Material", basicShader, paintInteractTex, 0.1f);
-		Material::Sptr booksInteractMaterial = MakeMaterial("Books Interact Material", basicShader, booksInteractTex, 0.1f);
-		Material::Sptr shroombaInteractMaterial = MakeMaterial("Shroomba Interact Material", basicShader, shroombaInteractTex, 0.1f);
-		Material::Sptr alchemyInteractMaterial = MakeMaterial("Alchemy Interact Material", basicShader, alchemyInteractTex, 0.1f);
-		Material::Sptr bedInteractMaterial = MakeMaterial("Bed Interact Material", basicShader, bedInteractTex, 0.1f);
-		Material::Sptr boilerInteractMaterial = MakeMaterial("Boiler Interact Material", basicShader, boilerInteractTex, 0.1f);
-		Material::Sptr cakeInteractMaterial = MakeMaterial("Cake Interact Material", basicShader, cakeInteractTex, 0.1f);
-		Material::Sptr chainsawInteractMaterial = MakeMaterial("Chainsaw Interact Material", basicShader, chainsawInteractTex, 0.1f);
-		Material::Sptr duckyInteractMaterial = MakeMaterial("Ducky Interact Material", basicShader, duckyInteractTex, 0.1f);
-		Material::Sptr flowerInteractMaterial = MakeMaterial("Flower Interact Material", basicShader, flowerInteractTex, 0.1f);
-		Material::Sptr frankInteractMaterial = MakeMaterial("Frankenstine Interact Material", basicShader, frankInteractTex, 0.1f);
-		Material::Sptr fruitInteractMaterial = MakeMaterial("Fruit Interact Material", basicShader, fruitInteractTex, 0.1f);
-		Material::Sptr jewleryInteractMaterial = MakeMaterial("Jewlery Interact Material", basicShader, jewleryInteractTex, 0.1f);
-		Material::Sptr mouseInteractMaterial = MakeMaterial("Mousetrap Interact Material", basicShader, mouseInteractTex, 0.1f);
-		Material::Sptr picturesInteractMaterial = MakeMaterial("Pictures Interact Material", basicShader, picturesInteractTex, 0.1f);
-		Material::Sptr plantInteractMaterial = MakeMaterial("Plant Interact Material", basicShader, plantInteractTex, 0.1f);
-		Material::Sptr remoteInteractMaterial = MakeMaterial("Remote Interact Material", basicShader, remoteInteractTex, 0.1f);
-		Material::Sptr toiletInteractMaterial = MakeMaterial("Toilet Interact Material", basicShader, toiletInteractTex, 0.1f);
-		Material::Sptr soapInteractMaterial = MakeMaterial("Soap Interact Material", basicShader, soapInteractTex, 0.1f);
-		Material::Sptr tableInteractMaterial = MakeMaterial("Table Interact Material", basicShader, tableInteractTex, 0.1f);
-		Material::Sptr teslaInteractMaterial = MakeMaterial("Tesla Coil Interact Material", basicShader, teslaInteractTex, 0.1f);
-		Material::Sptr trashInteractMaterial = MakeMaterial("Trash Interact Material", basicShader, trashInteractTex, 0.1f);
-		Material::Sptr vanityInteractMaterial = MakeMaterial("Vanity Interact Material", basicShader, vanityInteractTex, 0.1f);
-		Material::Sptr startMaterial = MakeMaterial("Start Material", basicShader, startTex, 0.1f);
+		Material::Sptr radioInteractMaterial = MakeMaterial("Radio Interact Material", screenShader, radioInteractTex, 0.1f);
+		Material::Sptr posterInteractMaterial = MakeMaterial("Poster Interact Material", screenShader, posterInteractTex, 0.1f);
+		Material::Sptr paintInteractMaterial = MakeMaterial("Paint Interact Material", screenShader, paintInteractTex, 0.1f);
+		Material::Sptr booksInteractMaterial = MakeMaterial("Books Interact Material", screenShader, booksInteractTex, 0.1f);
+		Material::Sptr shroombaInteractMaterial = MakeMaterial("Shroomba Interact Material", screenShader, shroombaInteractTex, 0.1f);
+		Material::Sptr alchemyInteractMaterial = MakeMaterial("Alchemy Interact Material", screenShader, alchemyInteractTex, 0.1f);
+		Material::Sptr bedInteractMaterial = MakeMaterial("Bed Interact Material", screenShader, bedInteractTex, 0.1f);
+		Material::Sptr boilerInteractMaterial = MakeMaterial("Boiler Interact Material", screenShader, boilerInteractTex, 0.1f);
+		Material::Sptr cakeInteractMaterial = MakeMaterial("Cake Interact Material", screenShader, cakeInteractTex, 0.1f);
+		Material::Sptr chainsawInteractMaterial = MakeMaterial("Chainsaw Interact Material", screenShader, chainsawInteractTex, 0.1f);
+		Material::Sptr duckyInteractMaterial = MakeMaterial("Ducky Interact Material", screenShader, duckyInteractTex, 0.1f);
+		Material::Sptr flowerInteractMaterial = MakeMaterial("Flower Interact Material", screenShader, flowerInteractTex, 0.1f);
+		Material::Sptr frankInteractMaterial = MakeMaterial("Frankenstine Interact Material", screenShader, frankInteractTex, 0.1f);
+		Material::Sptr fruitInteractMaterial = MakeMaterial("Fruit Interact Material", screenShader, fruitInteractTex, 0.1f);
+		Material::Sptr jewleryInteractMaterial = MakeMaterial("Jewlery Interact Material", screenShader, jewleryInteractTex, 0.1f);
+		Material::Sptr mouseInteractMaterial = MakeMaterial("Mousetrap Interact Material", screenShader, mouseInteractTex, 0.1f);
+		Material::Sptr picturesInteractMaterial = MakeMaterial("Pictures Interact Material", screenShader, picturesInteractTex, 0.1f);
+		Material::Sptr plantInteractMaterial = MakeMaterial("Plant Interact Material", screenShader, plantInteractTex, 0.1f);
+		Material::Sptr remoteInteractMaterial = MakeMaterial("Remote Interact Material", screenShader, remoteInteractTex, 0.1f);
+		Material::Sptr toiletInteractMaterial = MakeMaterial("Toilet Interact Material", screenShader, toiletInteractTex, 0.1f);
+		Material::Sptr soapInteractMaterial = MakeMaterial("Soap Interact Material", screenShader, soapInteractTex, 0.1f);
+		Material::Sptr tableInteractMaterial = MakeMaterial("Table Interact Material", screenShader, tableInteractTex, 0.1f);
+		Material::Sptr teslaInteractMaterial = MakeMaterial("Tesla Coil Interact Material", screenShader, teslaInteractTex, 0.1f);
+		Material::Sptr trashInteractMaterial = MakeMaterial("Trash Interact Material", screenShader, trashInteractTex, 0.1f);
+		Material::Sptr vanityInteractMaterial = MakeMaterial("Vanity Interact Material", screenShader, vanityInteractTex, 0.1f);
+		
 
 		Material::Sptr winMaterial = MakeMaterial("Win Material", basicShader, winTex, 0.1f);
 		Material::Sptr ePromptMaterial = MakeMaterial("Enter Prompt Material", basicShader, ePrTex, 0.1f);
@@ -1976,8 +1985,6 @@ int main() {
 			interactions->AddSoundEffect("velcro");
 
 			interactions->AddFeedbackBehaviour((InteractionFeedback(bbPosterMesh2, boybandPoster)));
-			InteractionTForm tf(InteractionTForm::tformt::pos, glm::vec3(2.01f, 0.69f, 0.1f));
-			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{tf}, homework)));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(posterInteractMaterial, extraScreen)));
 			InteractionTForm screenTF(InteractionTForm::tformt::pos, glm::vec3(5.87f, 5.79f, 6.9f));
 			interactions->AddFeedbackBehaviour((InteractionFeedback(std::vector<InteractionTForm>{screenTF}, extraScreen)));
@@ -2279,6 +2286,7 @@ int main() {
 
 				shader->Bind();
 				shader->SetUniform("u_CamPos", scene->MainCamera->GetGameObject()->GetPosition());
+				
 				currentMat->Apply();
 			}
 

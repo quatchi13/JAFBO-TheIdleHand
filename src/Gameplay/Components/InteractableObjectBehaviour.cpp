@@ -163,24 +163,29 @@ void InteractableObjectBehaviour::OnTriggerVolumeLeaving(const std::shared_ptr<G
 
 
 void InteractableObjectBehaviour::PerformFeedback() {
-	for (int i = 0; i < feedback.size(); i++) {
-		std::cout << feedback[i].b;
-		switch (feedback[i].b) {
+	int iterations = feedback.size();
+
+	for (int i = 0; i < iterations; i++) {
+		std::cout << "feedback type: " << feedback.begin()->b;
+		switch (feedback.begin()->b) {
 		case(TEX):
-			feedback[i].SwapMat();
+			feedback.begin()->SwapMat();
 			break;
 		case(MESH):
-			feedback[i].SwapMesh();
+			feedback.begin()->SwapMesh();
 			break;
 		case(TRANSFORM):
-			feedback[i].SwapTransforms();
+			feedback.begin()->SwapTransforms();
 			break;
 		case(ANIM):
-			feedback[i].SwapAnim();
+			feedback.begin()->SwapAnim();
 			break;
 		default:
-			(GetGameObject()->GetScene()->FindObjectByName("Floor Manager"))->Get<WarpBehaviour>()->CrossOffItem(feedback[i]._SWAPAINDEX);
+			(GetGameObject()->GetScene()->FindObjectByName("Floor Manager"))->Get<WarpBehaviour>()->CrossOffItem(feedback.begin()->_SWAPAINDEX);
 		}
+
+		feedback.erase(feedback.begin());
+		std::cout << "new size: " << feedback.size() << '\n';
 	}
 }
 
