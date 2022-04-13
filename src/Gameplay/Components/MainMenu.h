@@ -63,6 +63,6 @@ protected:
 	RenderComponent::Sptr _renderer;
 	bool isSwitching = false;
 	bool hasResumed = false;
-	std::vector<glm::vec3> pointerPositions{ glm::vec3(4.07f, 7.21f, 9.55f), glm::vec3(4.07f, 7.21f, 7.86f), glm::vec3(4.01f, 7.45f, 5.96f), glm::vec3(3.680f, 8.23f, 3.580f), glm::vec3(0.f, 0.0f, -20.f) };
+	std::vector<glm::vec3> pointerPositions{ glm::vec3(4.48f, 6.22f, 10.0f), glm::vec3(4.78f, 6.62f, 7.7f), glm::vec3(5.15f, 7.02f, 5.72f), glm::vec3(4.670f, 7.47f, 3.51f), glm::vec3(0.f, 0.0f, -20.f) };
 	int cooldown = 0;
 };
