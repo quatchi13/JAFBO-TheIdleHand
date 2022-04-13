@@ -818,6 +818,7 @@ int main() {
 		Material::Sptr vanityInteractMaterial = MakeMaterial("Vanity Interact Material", screenShader, vanityInteractTex, 0.1f);
 		
 
+		Material::Sptr startMaterial = MakeMaterial("Start Material", basicShader, startTex, 0.1f);
 		Material::Sptr winMaterial = MakeMaterial("Win Material", basicShader, winTex, 0.1f);
 		Material::Sptr ePromptMaterial = MakeMaterial("Enter Prompt Material", basicShader, ePrTex, 0.1f);
 		Material::Sptr eMaterial = MakeMaterial("Enter Prompt Material", basicShader, eTex, 0.1f);
