@@ -18,6 +18,10 @@ void SimpleScreenBehaviour::Update(float deltaTime) {
 			else {
 				GetGameObject()->Get<RenderComponent>()->SetMaterial(WinScreen);
 				active = false;
+				sound.setSound("end");
+				sound.setPosition(FMOD_VECTOR{ 0,0,0 });
+				sound.setVolume(1.5);
+				sound.play();
 			}
 		}
 	}

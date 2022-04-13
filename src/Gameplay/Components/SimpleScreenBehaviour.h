@@ -3,6 +3,8 @@
 
 #include <GLFW/glfw3.h>
 #include "Gameplay/Scene.h"
+#include "Utils/AudioSource.h"
+#include "Utils/AudioEngine.h"
 
 /// <summary>
 /// Showcases a very simple behaviour that rotates the parent gameobject at a fixed rate over time
@@ -14,6 +16,10 @@ public:
 	SimpleScreenBehaviour() = default;
 	Gameplay::Material::Sptr        ScreenImage;
 	Gameplay::Material::Sptr        WinScreen;
+
+	AudioSource sound;
+
+	AudioEngine* audioEngine = AudioEngine::instance();
 	
 	int objectivesAchieved = 0;
 	int targetObjectives = 0;

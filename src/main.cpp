@@ -893,6 +893,7 @@ int main() {
 		audioEngine->loadSound("vanity", "sounds/Vanity.wav", true);
 
 		audioEngine->loadSound("open", "sounds/open.wav", true);
+		audioEngine->loadSound("end", "sounds/Ending.wav", true);
 
 		audioEngine->loadSound("twin", "sounds/twinBedroom.wav", true);
 		audioEngine->loadSound("master", "sounds/masterBedroom.wav", true);
@@ -1074,9 +1075,10 @@ int main() {
 			interp->PauseOrResumeCurrentBehaviour();
 
 			SimpleScreenBehaviour::Sptr feedbackScreen = extraScreen->Add<SimpleScreenBehaviour>();
-			feedbackScreen->targetObjectives = 45;
+			feedbackScreen->targetObjectives = 25;
 			feedbackScreen->WinScreen = winMaterial;
 			feedbackScreen->active = true;
+			
 		}
 
 		GameObject::Sptr screen = MakeBasicPlane("Screen", 5.87f, 5.79f, 6.9f, 80.351f, 0.0f, 142.00f, 54.0f, 10.0f, 0, menuMaterial);
